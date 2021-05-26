@@ -59,42 +59,6 @@
 
     }
 
-
-    if ($('.mc-form').length) {
-        var mcURL = $('.mc-form').data('url');
-        $('.mc-form').ajaxChimp({
-            url: mcURL,
-            callback: function (resp) {
-                // appending response
-                $('.mc-form__response').append(function () {
-                    return '<p class="mc-message">' + resp.msg + '</p>';
-                })
-                // making things based on response
-                if (resp.result === 'success') {
-                    // Do stuff
-                    $('.mc-form').removeClass('errored').addClass('successed');
-                    $('.mc-form__response').removeClass('errored').addClass('successed');
-                    $('.mc-form').find('input').val('');
-
-                    $('.mc-form__response p').fadeOut(10000);
-
-                }
-                if (resp.result === 'error') {
-                    $('.mc-form').removeClass('successed').addClass('errored');
-                    $('.mc-form__response').removeClass('successed').addClass('errored');
-                    $('.mc-form').find('input').val('');
-
-                    $('.mc-form__response p').fadeOut(10000);
-
-                }
-            }
-        });
-
-    }
-
-
-
-
     if ($('.datepicker').length) {
         $('.datepicker').datepicker();
     }
@@ -117,44 +81,6 @@
         })
     }
 
-    if ($('.contact-form-validated').length) {
-        $('.contact-form-validated').validate({ // initialize the plugin
-            rules: {
-                fname: {
-                    required: true
-                },
-                lname: {
-                    required: true
-                },
-                name: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                service: {
-                    required: true
-                },
-                message: {
-                    required: true
-                },
-                subject: {
-                    required: true
-                }
-            },
-            submitHandler: function (form) {
-                // sending value with ajax request
-                $.post($(form).attr('action'), $(form).serialize(), function (response) {
-                    $(form).parent().find('.result').append(response);
-                    $(form).find('input[type="text"]').val('');
-                    $(form).find('input[type="email"]').val('');
-                    $(form).find('textarea').val('');
-                });
-                return false;
-            }
-        });
-    }
     if ($('.counter').length) {
         $('.counter').counterUp({
             delay: 10,

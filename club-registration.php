@@ -117,7 +117,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
-                        <form role="form" action="php/club-registration-confirm.php" method="POST" class="contact-one__form contact-form-validated">
+                        <form role="form" action="php/club-registration-confirm.php" method="POST" class="contact-one__form">
                             <div class="row">
                                 <div class="col-md-12">
                                     <p>Please note that the fields marked with * are mandatory</p>
@@ -164,10 +164,10 @@
                                     <label><small>Operator's Mobile number will be used as the user name to the login</small></label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="Operator's Mobile number *" name="phone" id="phone" required>
+                                    <input type="tel" placeholder="Operator's Mobile number *" pattern="[0-9]{10}" title="Only 10 numbers" name="phone" id="phone" required>
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="Operator's WhatsApp Number" name="whatsapp" id="whatsapp">
+                                    <input type="tel" placeholder="Operator's WhatsApp Number" pattern="[0-9]{10}" title="Only 10 numbers" name="whatsapp" id="whatsapp">
                                 </div><!-- /.col-md-6 -->
                                 
 
@@ -194,13 +194,14 @@
                                 <p>Enrollment Fee : 500</p>
                             </div> 
                             <div class="col-md-12" style="display:none;" id="rLtr">
+                                <div class="col-md-12">
+                                <label class="">Request Letter *</label>
+                            </div>
                                     <div class="col-md-12">
-                                    <label class="">Request Letter *</label>
-                                </div>
-                                    <div class="col-md-12">
-                                        <input type="file" class="custom-file-input" id="requestLetter" name="requestLetter" required/>
+                                        <input type="file" class="custom-file-input" id="requestLetter" name="requestLetter"/>
                                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                </div><!-- /.col-md-12 -->
+                                </div>
+                                <!-- /.col-md-12 -->
                             </div>
                             <div class="col-lg-12"><hr/></div>
                             <div class="col-md-6">
@@ -220,10 +221,10 @@
                                     <input type="text" placeholder="School / Club Address *" name="clubAddress" id="clubAddress" required>
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="School / Club Contact Number 1 *" name="clubPhone1" id="clubPhone1" required>
+                                    <input type="tel" placeholder="School / Club Contact Number 1 *" name="clubPhone1" pattern="[0-9]{10}" title="Only 10 numbers" id="clubPhone1" required>
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="School / Club Contact Number 2" name="clubPhone2" id="clubPhone2">
+                                    <input type="tel" placeholder="School / Club Contact Number 2" name="clubPhone2" pattern="[0-9]{10}" title="Only 10 numbers" id="clubPhone2">
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
                                     <input type="email" placeholder="School / Club Email Address 1" name="clubEmail1" id="clubEmail1">
@@ -239,7 +240,7 @@
                                     <input type="text" placeholder="Name *" name="inchargeName" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="Mobile Number *" name="inchargePhone" required>
+                                    <input type="tel" placeholder="Mobile Number *" name="inchargePhone" pattern="[0-9]{10}" title="Only 10 numbers" required>
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
                                     <input type="email" placeholder="Email" name="inchargeEmail">
