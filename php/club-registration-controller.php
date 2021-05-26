@@ -1,79 +1,72 @@
 <?php
-	//errors will not be shown
-	//error_reporting(0);
 	include_once('db.php');
+    include_once('smtpSettings.php');
+    session_start();
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
-        if(!empty($_POST['optradio']) && !empty($_POST['name']) && !empty($_POST['district']) && !empty($_POST['operatorName']) && !empty($_POST['operatorEmail']) && !empty($_POST['phone']) && !empty($_POST['operatorNic']) && !empty($_POST['regRadio']) && !empty($_POST['category']) && !empty($_POST['clubAddress']) && !empty($_POST['clubPhone1']) && !empty($_POST['inchargeName']) && !empty($_POST['inchargePhone'])){
-            if(preg_match('/[A-Za-z]+/',$_POST['name']) && preg_match('/[A-Za-z]+/',$_POST['operatorName']) && preg_match('^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$',$_POST['operatorNic']) && preg_match('/[A-Za-z]+/',$_POST['inchargeName'])){
-                $optradio   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['optradio'])));
-                $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
-                $district = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['district'])));
-                $operatorName = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['operatorName'])));
-                $operatorEmail = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['operatorEmail'])));
-                $phone = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['phone'])));
-                if(!empty($_POST['whatsapp'])){
-                    $whatsapp = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['whatsapp'])));
+        if(!empty($_POST['conditions'])){
+            $password = rand(100000, 999999);
+            $getCard = "SELECT * FROM club WHERE operatorMobile='".$_SESSION["phone"]."'";
+            $resultCard = mysqli_query($con, $getCard);
+            if(mysqli_num_rows($resultCard) == 0){
+                if($_SESSION["optradio"] == "School"){
+                    $_SESSION["optradio"] = 1;
                 } else {
-                    $whatsapp = "";
+                    $_SESSION["optradio"] = 2;
                 }
-                $operatorNic = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['operatorNic'])));
-                $regRadio = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['regRadio'])));
-                if(!empty($_POST['requestLetter'])){
-                    $requestLetter = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['requestLetter'])));
+                if($_SESSION["regRadio"] == "New"){
+                    $_SESSION["regRadio"] = 1;
                 } else {
-                    $requestLetter = "";
+                    $_SESSION["regRadio"] = 2;
                 }
-                $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
-                $clubAddress = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubAddress'])));
-                $clubPhone1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubPhone1'])));
-                if(!empty($_POST['clubPhone2'])){
-                    $clubPhone2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubPhone2'])));
-                } else {
-                    $clubPhone2 = "";
+                if($_SESSION["category"] == "Swimming"){
+                    $_SESSION["category"] = 1;
+                } else if($_SESSION["category"] == "Water Polo") {
+                    $_SESSION["category"] = 2;
+                } else if($_SESSION["category"] == "High Diving") {
+                    $_SESSION["category"] = 3;
+                } else if($_SESSION["category"] == "Free Swimming") {
+                    $_SESSION["category"] = 4;
                 }
-                if(!empty($_POST['clubEmail1'])){
-                    $clubEmail1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubEmail1'])));
-                } else {
-                    $clubEmail1 = "";
-                }
-                if(!empty($_POST['clubEmail2'])){
-                    $clubEmail2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubEmail2'])));
-                } else {
-                    $clubEmail2 = "";
-                }
-                $inchargeName = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['inchargeName'])));
-                $inchargePhone = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['inchargePhone'])));
-                if(!empty($_POST['inchargeEmail'])){
-                    $inchargeEmail = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['inchargeEmail'])));
-                } else {
-                    $inchargeEmail = "";
-                }
-                $password = rand(100000, 999999);
-                $getCard = "SELECT * FROM club WHERE operatorMobile='".$phone."'";
-                $resultCard = mysqli_query($con, $getCard);
-                if(mysqli_num_rows($resultCard) == 0){
-                    $addCard = "INSERT INTO club (clubType,clubName,district,operatorName,operatorEmail,operatorMobile,operatorPassword,operatorWhatsapp,operatorNic,regType,requestLetter,affiliationCat,postalAddress,clubContactOne,clubContactTwo,clubEmailOne,clubEmailTwo,inchargeName,inchargeMobile,inchargeEmail) VALUES('".$optradio."','".$name."','".$district."','".$operatorName."','".$operatorEmail."','".$phone."','".$password."','".$whatsapp."','".$operatorNic."','".$regRadio."','".$requestLetter."','".$category."','".$clubAddress."','".$clubPhone1."','".$clubPhone2."','".$clubEmail1."','".$clubEmail2."','".$inchargeName."','".$inchargePhone."','".$inchargeEmail."')";
-                    if(mysqli_query($con, $addCard)){
-                        //success
-                        header('Location:club-registration.html?er=su');
-                    } else {
-                        //query failed
-                        header('Location:club-registration.html?er=qf');
+                $addCard = "INSERT INTO club (clubType,clubName,district,operatorName,operatorEmail,operatorMobile,operatorPassword,operatorWhatsapp,operatorNic,regType,requestLetter,affiliationCat,postalAddress,clubContactOne,clubContactTwo,clubEmailOne,clubEmailTwo,inchargeName,inchargeMobile,inchargeEmail) VALUES('".$_SESSION["optradio"]."','".$_SESSION["name"]."','".$_SESSION["district"]."','".$_SESSION["operatorName"]."','".$_SESSION["operatorEmail"]."','".$_SESSION["phone"]."','".$password."','".$_SESSION["whatsapp"]."','".$_SESSION["operatorNic"]."','".$_SESSION["regRadio"]."','".$_SESSION["requestLetter"]."','".$_SESSION["category"]."','".$_SESSION["clubAddress"]."','".$_SESSION["clubPhone1"]."','".$_SESSION["clubPhone2"]."','".$_SESSION["clubEmail1"]."','".$_SESSION["clubEmail2"]."','".$_SESSION["inchargeName"]."','".$_SESSION["inchargePhone"]."','".$_SESSION["inchargeEmail"]."')";
+
+                    $to = $_SESSION["operatorEmail"];
+                    $mail->addAddress($to, $to);
+                    $mail->Subject = "Account Created Successfully at SLASU";
+                    $mail->Body ="<h1>Your account was created successfully at Sri Lanka Aquatic Sports Union.</h1><br/>
+                                <p>Use following credentails to login to the system.</p>
+                                <p> Link : http://localhost:1234/slasu/login.html <br/>
+                                <p> User Name : ".$_SESSION["phone"]."</P><br/>
+                                <p> Password : ".$password."</P><br/><br/><br/>
+                                <p>Please change your password after login to the system.</p><br/><br/><br/>
+                                <p>Thank You</p><br/>
+                                <p>Admin,</p><br/>
+                                <p>SLASU</p>";
+                    if (!$mail->send()) {
+                        session_destroy();
+                    header('Location:../club-registration.php?er=mf');
                     }
+                if(mysqli_query($con, $addCard)){
+                    //success
+                    session_destroy();
+                    header('Location:../club-registration.php?er=su');
                 } else {
-                    //card exists
-                    header('Location:club-registration.html?er=ce');
-                }   
+                    //query failed
+                    session_destroy();
+                    header('Location:../club-registration.php?er=qf');
+                }
             } else {
-                //wrong card number format
-                header('Location:club-registration.html?er=wf');
+                //card exists
+                session_destroy();
+                header('Location:../club-registration.php?er=ce');
             }
         } else {
             //empty fields redirect to cards
-            header('Location:club-registration.html?er=em');
+            session_destroy();
+            header('Location:../club-registration.php?er=em');
         }
     } else {
         //if submit button is not clicked
-        header('Location:register.html');	
+        session_destroy();
+        header('Location:../register.html');	
     }
 ?>

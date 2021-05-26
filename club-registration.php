@@ -119,6 +119,39 @@
                     <div class="col-xl-12">
                         <form role="form" action="php/club-registration-confirm.php" method="POST" class="contact-one__form">
                             <div class="row">
+                                <?php
+                                    if(isset($_GET['er'])){
+                                        if(!empty($_GET['er'])){
+                                            $error = $_GET['er'];
+                                            if($error == "em"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Required fields are empty, please fill and submit again.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            } else if ($error == "ce"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Account with same Operator Mobile already exists. Please use different Operator Mobile Number or contact Admin.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            } else if ($error == "qf"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Couldn\'t create account, please try again later.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            } else if ($error == "su"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:green;">Account created succesfully, please check operator\'s email to find the password for your login.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            } else if ($error == "mf"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Couldn\'t send email to you with password, please contact admin for more info.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            }
+                                        }
+                                    }
+                                ?>
                                 <div class="col-md-12">
                                     <p>Please note that the fields marked with * are mandatory</p>
                                     <div class="col-lg-12"><hr/></div>
@@ -129,12 +162,12 @@
                                     </div>
                                     <div class="form-check col-md-4">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" id="school" value="1" name="optradio" required>School
+                                        <input type="radio" class="form-check-input" id="school" value="School" name="optradio" required>School
                                     </label>
                                     </div>
                                     <div class="form-check col-md-4">
                                     <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" id="club" value="2" name="optradio" required>Club
+                                        <input type="radio" class="form-check-input" id="club" value="Club" name="optradio" required>Club
                                     </label>
                                     </div>
                                 </div>
@@ -146,9 +179,9 @@
                                     <label class="input-group-text" for="inputGroupSelect01">Select District *</label>
                                   <select class="custom-select" id="district" name="district" required>
                                     <option selected disabled>Choose...</option>
-                                    <option value="1">Colombo</option>
-                                    <option value="2">Galle</option>
-                                    <option value="3">Kandy</option>
+                                    <option value="Colombo">Colombo</option>
+                                    <option value="Galle">Galle</option>
+                                    <option value="Kandy">Kandy</option>
                                   </select>
                             </div><!-- /.col-md-12 -->
                             <div class="col-lg-12"><hr/></div>
@@ -181,12 +214,12 @@
                                     </div>
                                     <div class="form-check col-md-4">
                                     <label class="form-check-label">
-                                        <input type="radio" value="1" onclick="javascript:yesnoCheck();" class="form-check-input" id="newReg" name="regRadio" required>New Registration
+                                        <input type="radio" value="New" onclick="javascript:yesnoCheck();" class="form-check-input" id="newReg" name="regRadio" required>New Registration
                                     </label>
                                     </div>
                                     <div class="form-check col-md-4">
                                     <label class="form-check-label">
-                                        <input type="radio" value="2" onclick="javascript:yesnoCheck();" class="form-check-input" id="existingReg" name="regRadio" required>Existing
+                                        <input type="radio" value="Existing" onclick="javascript:yesnoCheck();" class="form-check-input" id="existingReg" name="regRadio" required>Existing
                                     </label>
                                     </div>
                                 </div>
@@ -208,8 +241,10 @@
                                 <label class="input-group-text" for="inputGroupSelect01">Affiliation Category *</label>
                               <select class="custom-select form-select form-control" id="category" name="category" required>
                                 <option selected disabled>Select Type...</option>
-                                <option value="1">A</option>
-                                <option value="2">B</option>
+                                <option value="Swimming">Swimming</option>
+                                <option value="Water Polo">Water Polo</option>
+                                <option value="High Diving">High Diving</option>
+                                <option value="Free Swimming">Free Swimming</option>
                               </select>
                         </div><!-- /.col-md-12 -->
                         <div class="col-md-6">
