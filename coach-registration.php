@@ -91,7 +91,7 @@
                 <ul class="list-unstyled thm-breadcrumb">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="register.html">Register</a></li>
-                    <li class="active">Athlete Registration</li>
+                    <li class="active"><a href="#">Coach Registration</a></li>
                 </ul><!-- /.list-unstyled -->
                 <h2 class="page-header__title">Registration</h2><!-- /.page-header__title -->
             </div><!-- /.container -->
@@ -104,25 +104,164 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
-                        <form action="assets/inc/sendemail.php" class="contact-one__form contact-form-validated">
+                        <form role="form" action="php/coach-registration-confirm.php" method="POST" class="contact-one__form">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <p>Name : Colombo Swimming Club</p>
-                                    <p>E-mail : olombo@gmail.com</p>
-                                    <p>Other entered details will also be here</p>
+                                <?php
+                                    if(isset($_GET['er'])){
+                                        if(!empty($_GET['er'])){
+                                            $error = $_GET['er'];
+                                            if($error == "em"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Required fields are empty, please fill and submit again.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            } else if ($error == "ce"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Record with same NIC already exists. If it\'s not you please contact Admin.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            } else if ($error == "qf"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Couldn\'t register user, please try again later.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            } else if ($error == "su"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:green;">Registered succesfully, please check with club operator for record.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            }
+                                        }
+                                    }
+                                ?>
+                                <div class="col-md-12">
+                                    <p>Please note that the fields marked with * are mandatory</p>
+                                    <div class="col-lg-12"><hr/></div>
+                                </div>
+                                <div class="col-md-6 btn-group">
+                                    <div class="form-check col-md-4">
+                                        <label class="form-check-label"><b>Select Type *</b></label>
                                     </div>
-                                <div class="col-lg-12"><hr/></div>
+                                    <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optradio" id="school" value="School" required>School
+                                    </label>
+                                    </div>
+                                    <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optradio" id="club" value="Club" required>Club
+                                    </label>
+                                    </div>
+                                </div>
                                 
-                                <div class="col-md-12 checkbox">
-                                    <label><input type="checkbox" value=""> I certify that above details are correct</label>
-                                  </div>
-                                  <div class="col-lg-12"><hr/></div>
-                                  <div class="col-md-12" style="text-align: center;">
-                                    <button type="submit" class="thm-btn contact-one__btn" style="margin: auto;">SUBMIT</button>
+                            <div class="col-md-12"><hr/></div>
+                            <div class="col-md-6" style="margin-top: 10px;">
+                                <label class="input-group-text" for="inputGroupSelect01">School / Club List *</label>
+                              <select class="custom-select" id="clubList" name="clubList" required>
+                                <option selected disabled>Choose...</option>
+                                <option value="1">Ananda</option>
+                                <option value="2">CCC</option>
+                                <option value="3">Kandy</option>
+                              </select>
+                        </div><!-- /.col-md-12 -->
+                            <div class="col-md-6">
+                                <label class="input-group-text" for="inputGroupSelect01">Affiliation Category *</label>
+                              <select class="custom-select form-select form-control" id="category" name="category" required>
+                                <option selected disabled>Select Type...</option>
+                                <option value="Swimming">Swimming</option>
+                                <option value="Water Polo">Water Polo</option>
+                                <option value="High Diving">High Diving</option>
+                                <option value="Free Swimming">Free Swimming</option>
+                              </select>
+                        </div><!-- /.col-md-12 -->
+                            <div class="col-md-12"><hr/></div>
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="Name in Full *" name="name" id="name" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+                                </div><!-- /.col-md-6 -->
+                                <div class="col-md-6" style="margin-bottom: 10px;">
+                                    <label class="input-group-text" for="inputGroupSelect01">Gender *</label>
+                                  <select class="custom-select" id="gender" name="gender" required>
+                                    <option selected disabled>Choose...</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                  </select>
+                            </div><!-- /.col-md-12 -->
+                                <div class="col-md-6">
+                                    <input type="tel" placeholder="Contact Number 1 *" name="phone1" id="phone1" pattern="[0-9]{10}" title="Only 10 numbers" required>
+                                </div><!-- /.col-md-6 -->
+                                <div class="col-md-6">
+                                    <input type="tel" placeholder="Contact Number 2" name="phone2" id="phone2" pattern="[0-9]{10}" title="Only 10 numbers">
+                                </div><!-- /.col-md-6 -->
+                                <div class="col-md-6">
+                                    <input type="tel" placeholder="WhatsApp Number" name="whatsapp" id="whatsapp" pattern="[0-9]{10}" title="Only 10 numbers">
+                                </div><!-- /.col-md-6 -->
+                                <div class="col-md-6">
+                                    <input type="email" placeholder="Email Address" name="emailAd" id="emailAd">
+                                </div><!-- /.col-md-6 -->
+                            <div class="col-lg-12"><hr/></div>
+                            <div class="col-xl-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" placeholder="Preffered Name for ID *" name="nameForId" id="nameForId" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+                                        </div><!-- /.col-md-6 -->
+                                        <div class="col-md-6">
+                                            <p>(Two Words Only. &nbsp; E.g. :- &nbsp;&nbsp; R.K.John Doe)</p>
+                                        </div><!-- /.col-md-6 -->
+                                        <div class="col-md-12">
+                                            <label class="">Upload Passport Size Photo for ID *</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="file" class="custom-file-input" id="photo" name="photo" required/>
+                                            <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
+                                    </div><!-- /.col-md-12 -->
+                            <div class="col-md-12">
+                                <label class="">Upload Application</label>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="file" class="custom-file-input" id="application" name="application" required/>
+                                <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
+                        </div><!-- /.col-md-12 -->
+                            <div class="col-lg-12"><hr/></div>
+                            <div class="col-md-12">
+                                <label class="">Date Of Birth *</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="date" name="dob" id="dob" required>
+                            </div><!-- /.col-md-12 -->
+                            
+                            <div class="col-md-6">
+                                <input type="text" placeholder="Home Address *" name="address" id="address" required>
+                            </div><!-- /.col-md-6 -->
+                            
+                            <div class="col-md-6">
+                                <input type="text" placeholder="Designation" name="designation" id="designation" pattern="[A-Za-z]+" title="Only Letters">
+                            </div><!-- /.col-md-12 -->
+                            
+                        <div class="col-md-6">
+                            <input type="text" placeholder="NIC Number *" name="nic" id="nic" required pattern="^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$" title="Should match NIC format">
+                        </div><!-- /.col-md-6 -->
+                        <div class="col-md-12">
+                            <label class="">Upload NIC *</label>
+                        </div>
+                        <div class="col-md-12">
+                            <input type="file" class="custom-file-input" id="nicPhoto" name="nicPhoto" required/>
+                            <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
+                    </div><!-- /.col-md-12 -->
+                    <div class="col-md-12">
+                        <textarea placeholder="Academic Qualifications in Aquatic Sports (Add all separated by commas)" name="qualification" id="qualification"></textarea>
+                    </div><!-- /.col-md-12 -->
+                                    <div class="col-lg-12"><hr/></div>
+                                    <div class="col-md-6">
+                                        <input type="text" placeholder="Passport Number" name="ppno" id="ppno" pattern="^(?!^0+$)[a-zA-Z0-9]{6,9}$" title="Should be a valid passport number">
+                                    </div><!-- /.col-md-6 -->
+                                    
+                                <div class="col-lg-12"><hr/></div>
+                                <div class="col-md-12" style="text-align: center;">
+                                    <input type="submit" name="submit" value="Next >>" id="submit" class="thm-btn contact-one__btn" style="margin: auto;"></input>
                                 </div><!-- /.col-md-12 -->
                             </div><!-- /.row -->
                         </form><!-- /.contact-one__form -->
-                        <div class="result"></div><!-- /.result -->
+                        
                     </div><!-- /.col-xl-8 -->
                 </div><!-- /.row -->
             </div><!-- /.container -->

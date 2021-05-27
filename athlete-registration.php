@@ -119,8 +119,36 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
-                        <form action="" class="contact-one__form contact-form-validated">
+                        <form role="form" action="php/athlete-registration-confirm.php" method="POST" class="contact-one__form">
                             <div class="row">
+                                <?php
+                                    if(isset($_GET['er'])){
+                                        if(!empty($_GET['er'])){
+                                            $error = $_GET['er'];
+                                            if($error == "em"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Required fields are empty, please fill and submit again.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            } else if ($error == "ce"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Record with same Phone1 already exists. If it\'s not you please contact Admin.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            } else if ($error == "qf"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Couldn\'t register user, please try again later.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            } else if ($error == "su"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:green;">Registered succesfully, please check with club operator for record.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            }
+                                        }
+                                    }
+                                ?>
                                 <div class="col-md-12">
                                     <p>Please note that the fields marked with * are mandatory</p>
                                     <div class="col-lg-12"><hr/></div>
@@ -131,17 +159,17 @@
                                     </div>
                                     <div class="form-check col-md-4">
                                     <label class="form-check-label">
-                                        <input type="radio" onclick="javascript:yesnoCheck();" class="form-check-input" id="school" name="optradio" required>School
+                                        <input type="radio" onclick="javascript:yesnoCheck();" class="form-check-input" id="school" name="optradio" value="School" required>School
                                     </label>
                                     </div>
                                     <div class="form-check col-md-4">
                                     <label class="form-check-label">
-                                        <input type="radio" onclick="javascript:yesnoCheck();" class="form-check-input" id="club" name="optradio" required>Club
+                                        <input type="radio" onclick="javascript:yesnoCheck();" class="form-check-input" id="club" name="optradio" value="Club" required>Club
                                     </label>
                                     </div>
                                     <div class="form-check col-md-4">
                                         <label class="form-check-label">
-                                            <input type="radio" onclick="javascript:yesnoCheck();" class="form-check-input" id="unattached" name="optradio" required>Unattached
+                                            <input type="radio" onclick="javascript:yesnoCheck();" class="form-check-input" id="unattached" name="optradio" value="Unattached" required>Unattached
                                         </label>
                                         </div>
                                 </div>
@@ -160,21 +188,22 @@
                                 <label class="input-group-text" for="inputGroupSelect01">Select Aquatic Category *</label>
                               <select class="custom-select" id="category" name="category" required>
                                 <option selected disabled>Choose...</option>
-                                <option value="1">Diving</option>
-                                <option value="2">Swimming</option>
-                                <option value="3">Water Polo</option>
+                                <option value="Swimming">Swimming</option>
+                                <option value="Water Polo">Water Polo</option>
+                                <option value="High Diving">High Diving</option>
+                                <option value="Free Swimming">Free Swimming</option>
                               </select>
                         </div><!-- /.col-md-12 -->
                             <div class="col-md-12"><hr/></div>
                                 <div class="col-md-6">
-                                    <input type="text" placeholder="Name in Full *" name="name" id="name" required pattern="[a-zA-Z.]{2}" title="Only Letters"> 
+                                    <input type="text" placeholder="Name in Full *" name="name" id="name" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters"> 
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6" style="margin-bottom: 10px;">
                                     <label class="input-group-text" for="inputGroupSelect01">Gender *</label>
                                   <select class="custom-select" id="gender" name="gender" required>
                                     <option selected disabled>Choose...</option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
                                   </select>
                             </div><!-- /.col-md-12 -->
                             <div class="col-md-12">
@@ -196,20 +225,20 @@
                                 <div class="col-md-6">
                                     <input type="tel" placeholder="WhatsApp Number" name="whatsapp" id="whatsapp">
                                 </div><!-- /.col-md-6 -->
-                                
+                                <div class="col-md-6" id="ifNo" style="display:none">
+                                    <input type="email"  placeholder="Email Address *" name="emailAd" id="emailAd">
+                                </div><!-- /.col-md-6 -->
                                 <div class="col-md-6" id="ifYes" style="display:none">
                                     <input type="email"  placeholder="Email Address" name="emailAd" id="emailAd">
                                 </div><!-- /.col-md-6 -->
 
-                                <div class="col-md-6" id="ifNo" style="display:none">
-                                    <input type="email"  placeholder="Email Address *" name="email" id="email" required>
-                                </div><!-- /.col-md-6 -->
+                                
                                 
                             <div class="col-xl-12">
                                 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input type="text" placeholder="Preffered Name for Certificate *" name="nameForId" id="nameForId" required pattern="[a-zA-Z.]{2}" title="Only Letters">
+                                            <input type="text" placeholder="Preffered Name for Certificate *" name="nameForId" id="nameForId" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
                                         </div><!-- /.col-md-6 -->
                                         <div class="col-md-6">
                                             <p>(Two Words Only. &nbsp; E.g. :- &nbsp;&nbsp; R.K.John Doe)</p>
@@ -226,9 +255,9 @@
                                 <label class="input-group-text" for="inputGroupSelect01">Select Birth Certificate Issued District *</label>
                               <select class="custom-select" id="district" name="district" required>
                                 <option selected disabled>Choose...</option>
-                                <option value="1">Colombo</option>
-                                <option value="2">Galle</option>
-                                <option value="3">Kandy</option>
+                                <option value="Colombo">Colombo</option>
+                                    <option value="Galle">Galle</option>
+                                    <option value="Kandy">Kandy</option>
                               </select>
                         </div><!-- /.col-md-12 -->
                         <div class="col-md-6">
@@ -258,7 +287,7 @@
                                     <div class="col-lg-12"><hr/></div>
                                     
                                 <div class="col-md-12" style="text-align: center;">
-                                    <button type="submit" class="thm-btn contact-one__btn" style="margin: auto;">Next >></button>
+                                    <input type="submit" name="submit" value="Next >>" id="submit" class="thm-btn contact-one__btn" style="margin: auto;"></input>
                                 </div><!-- /.col-md-12 -->
                             </div><!-- /.row -->
                         </form><!-- /.contact-one__form -->
