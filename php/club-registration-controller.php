@@ -1,6 +1,8 @@
 <?php
 	include_once('db.php');
-    session_start();
+    if(!isset($_SESSION[''])){
+        session_start();
+    }
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
         if(!empty($_POST['conditions'])){
             $password = rand(100000, 999999);
@@ -33,7 +35,7 @@
                     $subject = "Account Created Successfully at SLASU";
                     $message = "<h1>Your account was created successfully at Sri Lanka Aquatic Sports Union.</h1><br/>
                                 <p>Use following credentails to login to the system.</p>
-                                <p> Link : http://localhost:1234/slasu/login.html <br/>
+                                <p> Link : http://localhost:1234/slasu/login.php <br/>
                                 <p> User Name : ".$_SESSION["phone"]."</P><br/>
                                 <p> Password : ".$password."</P><br/><br/><br/>
                                 <p>Please change your password after login to the system.</p><br/><br/><br/>

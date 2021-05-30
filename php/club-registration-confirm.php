@@ -1,6 +1,8 @@
 <?php
 	include_once('db.php');
-    session_start();
+    if(!isset($_SESSION[''])){
+        session_start();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -48,7 +50,7 @@
             <div class="container">
                 <div class="topbar-one__left">
                     <a href="../contact.html">Contact Us</a>
-                    <a href="../login.html">Login</a>
+                    <a href="../login.php">Login</a>
                     <a href="../register.html">Register</a>
                 </div><!-- /.topbar-one__left -->
                 <div class="topbar-one__social">
@@ -267,7 +269,7 @@
                                 <h3 class="footer-widget__title">Members</h3><!-- /.footer-widget__title -->
                                 <ul class="footer-widget__links-list list-unstyled">
                                     <li><a href="../register.html">Register</a></li>
-                                    <li><a href="../login.html">Login</a></li>
+                                    <li><a href="../login.php">Login</a></li>
                                 </ul><!-- /.footer-widget__links-list -->
                             </div><!-- /.footer-widget__inner -->
                         </div><!-- /.footer-widget -->

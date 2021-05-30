@@ -115,16 +115,40 @@
                         </div><!-- /.about-two__image -->
                     </div><!-- /.col-lg-6 -->
                     <div class="col-xl-6">
-                        <form action="assets/inc/sendemail.php" class="contact-one__form contact-form-validated">
+                        <?php
+                                    if(isset($_GET['er'])){
+                                        if(!empty($_GET['er'])){
+                                            $error = $_GET['er'];
+                                            if($error == "em"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Required fields are empty, please fill and submit again.</span>
+                                                </div>';
+                                            } else if ($error == "ce"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">No User found for given credentails.</span>
+                                                </div>';
+                                            } else if ($error == "qf"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Couldn\'t register user, please try again later.</span>
+                                                </div>';
+                                            } else if ($error == "su"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:green;">Registered succesfully, please check with club operator for record.</span>
+                                                </div>';
+                                            }
+                                        }
+                                    }
+                                ?>
+                        <form action="php/login.php" role="form" method="post" class="contact-one__form contact-form-validated">
                             <div class="row" class="thm-btn contact-one__btn">
                                 <div class="col-md-12">
-                                    <input type="text" placeholder="User Name" name="username"> 
+                                    <input type="text" placeholder="User Name" name="username" id="username" required> 
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-12">
-                                    <input type="text" placeholder="Password" name="password">
+                                    <input type="text" placeholder="Password" name="password" id="password" required>
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-12" style="text-align: center;">
-                                    <button type="submit" class="thm-btn contact-one__btn" style="margin: auto;">Login</button>
+                                    <button type="submit" name="submit" id="submit" class="thm-btn contact-one__btn" style="margin: auto;">Login</button>
                                 </div><!-- /.col-md-12 -->
                             </div><!-- /.row -->
                         </form><!-- /.contact-one__form -->

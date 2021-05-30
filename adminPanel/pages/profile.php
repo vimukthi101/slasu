@@ -1,3 +1,10 @@
+<?php
+    include_once('../../php/db.php');
+    if(!isset($_SESSION[''])){
+        session_start();
+    }
+    if(isset($_SESSION["clubId"])){
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -7,7 +14,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title>Colombo Swimming Club</title>
+    <title style="text-transform:uppercase;"><?php echo $_SESSION["clubName"] ?></title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon.png">
     <!-- Custom CSS -->
@@ -89,7 +96,7 @@
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="profile.php"><i class="mdi mdi-account-network"></i>
                                     My Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="mdi mdi-logout"></i>
+                                <a class="dropdown-item" href="../../php/logout.php"><i class="mdi mdi-logout"></i>
                                         Log Out</a>
                             </ul>
                         </li>
@@ -134,7 +141,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../php/logout.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-logout"></i>
                                 <span class="hide-menu">Log Out</span>
@@ -292,3 +299,9 @@
 </body>
 
 </html>
+<?php
+} else {
+    session_destroy();
+    header('Location:../../login.php');
+}
+?>

@@ -1,6 +1,8 @@
 <?php
 	include_once('db.php');
-    session_start();
+    if(!isset($_SESSION[''])){
+        session_start();
+    }
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
         if(!empty($_POST['conditions'])){
             $getCard = "SELECT * FROM coach WHERE nic='".$_SESSION["nic"]."'";
