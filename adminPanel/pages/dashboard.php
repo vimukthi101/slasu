@@ -19,9 +19,53 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon.png">
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
+    <style type="text/css">
+        .card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+    </style>
+    <script>
+            function startTime() {
+                var today=new Date();
+                var day = today.getDate();
+                var month = today.getMonth();
+                var year = today.getFullYear();
+                var h=today.getHours();
+                var m=today.getMinutes();
+                var s=today.getSeconds();
+                m = checkTime(m);
+                s = checkTime(s);
+                document.getElementById('txt').innerHTML = "Date: " + day + "/" + month + "/" + year + " " + "Clock: " + h+":"+m+":"+s;
+                var t = setTimeout(function(){startTime()},500);
+            }
+
+            function checkTime(i) {
+                if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
+                return i;
+            }
+        </script>
 </head>
 
-<body>
+<body onload="startTime()">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -135,8 +179,22 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.php"
                                 aria-expanded="false">
-                                <i class="mdi mdi-av-timer"></i>
+                                <i class="mdi mdi-view-dashboard"></i>
                                 <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="athlete.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-human-child"></i>
+                                <span class="hide-menu">Athletes</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="coach.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-av-timer"></i>
+                                <span class="hide-menu">Coaches</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -204,67 +262,51 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- column -->
-                    <div class="col-12">
+                    <div class="col-2">
                         <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Registered Athletes</h4>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">NAME</th>
-                                            <th class="border-top-0">STATUS</th>
-                                            <th class="border-top-0">DATE</th>
-                                            <th class="border-top-0">PRICE</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-
-                                            <td class="txt-oflo">Elite admin</td>
-                                            <td><span class="label label-success label-rounded">SALE</span> </td>
-                                            <td class="txt-oflo">April 18, 2021</td>
-                                            <td><span class="font-medium">$24</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Real Homes WP Theme</td>
-                                            <td><span class="label label-info label-rounded">EXTENDED</span></td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="font-medium">$1250</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Ample Admin</td>
-                                            <td><span class="label label-purple label-rounded">Tax</span></td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="font-medium">$1250</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Medical Pro WP Theme</td>
-                                            <td><span class="label label-success label-rounded">Sale</span></td>
-                                            <td class="txt-oflo">April 20, 2021</td>
-                                            <td><span class="font-medium">-$24</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Hosting press html</td>
-                                            <td><span class="label label-success label-rounded">SALE</span></td>
-                                            <td class="txt-oflo">April 21, 2021</td>
-                                            <td><span class="font-medium">$24</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Digital Agency PSD</td>
-                                            <td><span class="label label-danger label-rounded">Tax</span> </td>
-                                            <td class="txt-oflo">April 23, 2021</td>
-                                            <td><span class="font-medium">-$14</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <div class="container">
+                                <h4 style="font-size: 100px;">24</h4>
+                                <p>Registered Athletes</p>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card">
+                            <div class="container">
+                                <h4 style="font-size: 100px;">24</h4>
+                                <p>Registered Coaches</p>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="card">
+                            <div class="container">
+                                <h4 style="font-size: 100px;">01</h4>
+                                <p>Pending Payments</p>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="container">
+                                <h4 style="font-size: 20px;" id="txt"></h4>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="container">
+                                <h4><b>John Doe</b></h4>
+                                <p>Architect & Engineer</p>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="container">
+                                <h4><b>John Doe</b></h4>
+                                <p>Architect & Engineer</p>
+                              </div>
                         </div>
                     </div>
                 </div>

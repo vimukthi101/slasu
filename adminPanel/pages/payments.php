@@ -19,6 +19,15 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon.png">
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
+        <style type="text/css">
+        .footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+    </style>
 </head>
 
 <body>
@@ -135,8 +144,22 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard.php"
                                 aria-expanded="false">
-                                <i class="mdi mdi-av-timer"></i>
+                                <i class="mdi mdi-view-dashboard"></i>
                                 <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="athlete.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-human-child"></i>
+                                <span class="hide-menu">Athletes</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="coach.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-av-timer"></i>
+                                <span class="hide-menu">Coaches</span>
                             </a>
                         </li>
                         <li class="sidebar-item">

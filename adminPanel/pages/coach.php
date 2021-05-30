@@ -19,7 +19,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon.png">
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
-    <style type="text/css">
+        <style type="text/css">
         .footer {
   position: fixed;
   left: 0;
@@ -88,7 +88,20 @@
                         <!-- Search -->
                         <!-- ============================================================== -->
                         <li class="nav-item search-box">
-
+                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
+                                <div class="d-flex align-items-center">
+                                    <i class="mdi mdi-magnify font-20 me-1"></i>
+                                    <div class="ms-1 d-none d-sm-block">
+                                        <span>Search</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <form class="app-search position-absolute">
+                                <input type="text" class="form-control" placeholder="Search &amp; enter">
+                                <a class="srh-btn">
+                                    <i class="ti-close"></i>
+                                </a>
+                            </form>
                         </li>
                     </ul>
                     <!-- ============================================================== -->
@@ -189,7 +202,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">Profile</h4>
+                        <h4 class="page-title" style="text-transform:uppercase;"><?php echo $_SESSION["clubName"] ?></h4>
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
@@ -198,7 +211,7 @@
                                     <li class="">
                                         <a href="dashboard.php">Home</a>
                                     </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Profile</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Dashboard</li>
                                 </ol>
                             </nav>
                         </div>
@@ -212,78 +225,66 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <!-- Row -->
                 <div class="row">
-                    <!-- Column -->
-                    <div class="col-lg-4 col-xlg-3">
+                    <!-- column -->
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <center class="mt-4"> <img src="../../assets/images/resources/testi-1-1.png"
-                                        class="rounded-circle" width="150" />
-                                    <h4 class="card-title mt-2">Hanna Gover</h4>
-                                    <h6 class="card-subtitle">Operator</h6>
-                                    
-                                </center>
+                                <h4 class="card-title">Registered Coaches</h4>
                             </div>
-                            
-                            
+                            <div class="table-responsive">
+                                <?php
+                                    $query = 'SELECT * FROM `coach` WHERE clubId='.$_SESSION["clubId"];
+                                    $result = mysqli_query($con, $query);
+                                    if(mysqli_num_rows($result) != 0){
+                                        echo '<table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0"></th>
+                                            <th class="border-top-0">NAME</th>
+                                            <th class="border-top-0">NIC</th>
+                                            <th class="border-top-0">MOBILE</th>
+                                            <th class="border-top-0">EMAIL</th>
+                                            <th class="border-top-0">CATEGORY</th>
+                                            <th class="border-top-0"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>';
+                                        while($row = mysqli_fetch_array($result)){
+                                            $athleteId = $row['coachId'];
+                                            $affiliationCat = $row['affiliationCat'];
+                                            $athleteName = $row['coachName'];
+                                            $nic = $row['nic'];
+                                            $email = $row['coachEmail'];
+                                            $phone1 = $row['coachMobileOne'];
+                                            if($affiliationCat == 1){
+                                                $affiliationCat = "Swimming";
+                                            } else if($affiliationCat == 2) {
+                                                $affiliationCat = "Water Polo";
+                                            } else if($affiliationCat == 3) {
+                                                $affiliationCat = "High Diving";
+                                            } else if($affiliationCat == 4) {
+                                                $affiliationCat = "Free Swimming";
+                                            }
+                                            echo '<tr>
+                                            <td class="txt-oflo"><input type="checkbox" id="editAthlete" name="editAthlete" value="'.$athleteId.'"></td>
+                                            <td class="txt-oflo">'.$athleteName.'</td>
+                                            <td class="txt-oflo">'.$nic.'</td>
+                                            <td class="txt-oflo">'.$phone1.'</td>
+                                            <td class="txt-oflo">'.$email.'</td>
+                                            <td class="txt-oflo">'.$affiliationCat.'</td>
+                                            <td class="txt-oflo"><input style="float:right;" type="submit" name="submit" value="Edit" id="submit" class="btn btn-success" style="margin: auto;"></input></td>
+                                        </tr>';
+                                        }
+                                        echo '</tbody></table>';
+                                    } else {
+                                        echo '<div class="col-12"><h4><center>No Coaches Registerd Yet</center></h4></div>';
+                                    }
+                                ?>
+                            </div>
                         </div>
                     </div>
-                    <!-- Column -->
-                    <!-- Column -->
-                    <div class="col-lg-8 col-xlg-9">
-                        <div class="card">
-                            <div class="card-body">
-                                <form class="form-horizontal form-material mx-2">
-                                    <div class="form-group">
-                                        <label class="col-md-12">Full Name</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="Johnathan Doe"
-                                                class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-email" class="col-md-12">Email</label>
-                                        <div class="col-md-12">
-                                            <input type="email" placeholder="johnathan@admin.com"
-                                                class="form-control form-control-line" name="example-email"
-                                                id="example-email">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Password</label>
-                                        <div class="col-md-12">
-                                            <input type="password" value="password"
-                                                class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <button class="btn btn-success text-white">Update Profile</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
                 </div>
-                <!-- Row -->
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
-            </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
