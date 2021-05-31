@@ -1,9 +1,60 @@
 <?php
-    include_once('../../php/db.php');
-    if(!isset($_SESSION[''])){
+	include_once('../../php/db.php');
+	if(!isset($_SESSION[''])){
         session_start();
     }
     if(isset($_SESSION["clubId"])){
+	    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) && isset($_POST['id'])){
+	        if(!empty($_POST['id'])){
+	        	$id = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['id'])));
+	            $getCard = "SELECT * FROM coach WHERE coachId='".$id."'";
+	            $resultCard = mysqli_query($con, $getCard);
+	            if(mysqli_num_rows($resultCard) != 0){
+	            	while($row = mysqli_fetch_array($resultCard)){
+	                    $affiliationCat = $row['affiliationCat'];
+	                    $athleteName = $row['coachName'];
+	                    $gender = $row['gender'];
+	                    $dob = $row['dob'];
+	                    $address = $row['homeAddress'];
+	                    $phone1 = $row['coachMobileOne'];
+	                    $phone2 = $row['coachMobileTwo'];
+	                    $whatsapp = $row['coachWhatsapp'];
+	                    $email = $row['coachEmail'];
+	                    $nameForCert = $row['coachNameForId'];
+	                    $application = $row['application'];
+	                    $designation = $row['designation'];
+	                    $qualifications = $row['qualifications'];
+	                    $photoForId = $row['photoForId'];
+	                    $ppNo = $row['ppNo'];
+	                    $nic = $row['nic'];
+	                    $nicPhoto = $row['nicPhoto'];
+	                    if($gender == 1){
+	                        $gender = "Male";
+	                    } else if($gender == 2) {
+	                        $gender = "Female";
+	                    } 
+	                    if($affiliationCat == 1){
+	                        $affiliationCat = "Swimming";
+	                    } else if($affiliationCat == 2) {
+	                        $affiliationCat = "Water Polo";
+	                    } else if($affiliationCat == 3) {
+	                        $affiliationCat = "High Diving";
+	                    } else if($affiliationCat == 4) {
+	                        $affiliationCat = "Free Swimming";
+	                    }
+	            	}
+	            } else {
+	                //card exists
+	                header('Location:coach.php');
+	            }
+	        } else {
+	            //empty fields redirect to cards
+	            header('Location:coach.php');
+	        }
+	    } else {
+	        //if submit button is not clicked
+	        header('Location:coach.php');	
+	    }
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -19,54 +70,18 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon.png">
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
-    <style type="text/css">
-        .card {
-  /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  background-color: rgb(174, 214, 241);
-}
-
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-/* Add some padding inside the card container */
-.container {
-  padding: 2px 16px;
-}
-
-.footer {
-  position: fixed;
+        <style type="text/css">
+        .footer {
+  position: inherit;
   left: 0;
   bottom: 0;
   width: 100%;
 }
-    </style>
-    <script>
-            function startTime() {
-                var today=new Date();
-                var day = today.getDate();
-                var month = today.getMonth();
-                var year = today.getFullYear();
-                var h=today.getHours();
-                var m=today.getMinutes();
-                var s=today.getSeconds();
-                m = checkTime(m);
-                s = checkTime(s);
-                document.getElementById('txt').innerHTML = "Date: " + day + "/" + month + "/" + year + "<br>" + "Clock: " + h+":"+m+":"+s;
-                var t = setTimeout(function(){startTime()},500);
-            }
 
-            function checkTime(i) {
-                if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
-                return i;
-            }
-        </script>
+    </style>
 </head>
 
-<body onload="startTime()">
+<body>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -120,6 +135,9 @@
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-start me-auto">
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
                         
                     </ul>
                     <!-- ============================================================== -->
@@ -220,16 +238,15 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        
+                        <h4 class="page-title" style="text-transform:uppercase;"><?php echo $_SESSION["clubName"] ?></h4>
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="">
-                                        <a href="dashboard.php">Home</a>
-                                    </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Dashboard</li>
+                                    <li class=""><a href="dashboard.php">Home</a></li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page"><a href="coach.php">Coaches</a></li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">View</li>
                                 </ol>
                             </nav>
                         </div>
@@ -245,94 +262,143 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- column -->
-                    <div class="col-4">
-                        <div class="col-9">
-                            <div class="card">
-                                <div class="container">
-                                    <br/>
-                                    <h4 class="page-title" style="text-transform:uppercase;color: black;"><?php echo $_SESSION["clubName"] ?></h4>
-                                    <?php
-                                        if($_SESSION["status"] == 1){
-                                            echo '<label class="label label-success" style="text-transform:uppercase;font-size: 15px;">Status : Active</label>';
-                                        } else {
-                                            echo '<label class="label label-danger" style="text-transform:uppercase;font-size: 15px;">Status : Inactive</label>';
-                                        }
-                                    ?>
-                                    <br/>
-                                  </div>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <div class="card">
-                                <div class="container">
-                                    <br/>
-                                    <h4 class="page-title" style="text-transform:uppercase;color: black;">Last Payment</h4>
-                                    <label class="label label-info" style="text-transform:uppercase;font-size: 15px;">1/5/2021</label>
-                                    <br/>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                        $athlete = 'SELECT count(*) FROM `athlete`';
-                        $athleteR = mysqli_query($con, $athlete);
-                        if(mysqli_num_rows($athleteR) != 0){
-                            while($rowA = mysqli_fetch_array($athleteR)){
-                                $countA = $rowA['count(*)'];
-                                if($countA < 9){
-                                    $countA = "0".$countA;
-                                }
-                            }
-                        }
-                        echo '<div class="col-3">
-                                <div class="card">
-                                    <div class="container" style="text-align: center;">
-                                        <h4 style="font-size: 130px;color: black;">'.$countA.'</h4>
-                                        <p>Registered Athletes</p>
-                                    </div>
-                                </div>
-                             </div>';
-                    ?>
-                    <?php
-                        $coach = 'SELECT count(*) FROM `coach`';
-                        $coachR = mysqli_query($con, $coach);
-                        if(mysqli_num_rows($coachR) != 0){
-                            while($rowR = mysqli_fetch_array($coachR)){
-                                $countR = $rowR['count(*)'];
-                                if($countR < 9){
-                                    $countR = "0".$countR;
-                                }
-                            }
-                        }
-                        echo '<div class="col-3">
-                                <div class="card">
-                                    <div class="container" style="text-align: center;">
-                                        <h4 style="font-size: 130px;color: black;">'.$countR.'</h4>
-                                        <p>Registered Coaches</p>
-                                      </div>
-                                </div>
-                            </div>';
-                    ?>
-                    
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="col-9">
-                            <div class="card">
-                                <div class="container">
-                                    <br/>
-                                    <h4 style="font-size: 20px;color: black;" id="txt"></h4>
-                                    <br/>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="container" style="text-align: center;color: black;">
-                                <h4 style="font-size: 130px;">01</h4>
-                                <p>Pending Payments</p>
-                              </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Coach Information</h4>
+                            </div>
+                            <div class="card-body row">
+		                        <?php
+		                         echo '<div class="form-group col-md-12">
+		                                    <label class="">Personal Information</label>
+		                                    <hr/>
+		                                </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="">Photo For ID</label>
+                                            <div class="">
+                                                <img src="data:image/jpeg;base64,'.base64_encode($photoForId).'"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="">Application</label>
+                                            <div class="">
+                                                <img src="data:image/jpeg;base64,'.base64_encode($application).'"/>
+                                            </div>
+                                        </div>
+		                         		<div class="form-group col-md-5">
+		                                    <label class="">Full Name</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$athleteName.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Name For ID</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$nameForCert.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Category</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$affiliationCat.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Designation</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$designation.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">qualifications</label>
+                                            <div class="">
+                                                <textarea class="form-control form-control-line" disabled>'.$qualifications.'</textarea>
+                                            </div>
+                                        </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Gender</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$gender.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">DOB</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$dob.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Address</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$address.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="">Contact Information</label>
+		                                    <hr/>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Primary Contact Number</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$phone1.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Secondary Contact Number</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$phone2.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">WhatsApp Number</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$whatsapp.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Email</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$email.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="">ID Information</label>
+		                                    <hr/>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">NIC</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$nic.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Passport Number</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$ppNo.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="">NIC Photo</label>
+		                                    <div class="">
+		                                    	<img src="data:image/jpeg;base64,'.base64_encode($nicPhoto).'"/>
+		                                    </div>
+		                                </div>
+		                                ';
+		                        ?>
+                        	</div>	
                         </div>
                     </div>
                 </div>

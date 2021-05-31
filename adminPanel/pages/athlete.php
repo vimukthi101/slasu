@@ -231,7 +231,21 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Registered Athletes</h4>
+                                <input style="float:right;" type="submit" name="submit" value="Send For Payment" id="submit" class="btn btn-warning" style="margin: auto;"></input>
                             </div>
+                            <?php
+                                if(isset($_GET['er'])){
+                                    if(!empty($_GET['er'])){
+                                        $error = $_GET['er'];
+                                        if($error == "su"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Athlete record deleted successfully.</span>
+                                                <div class="col-lg-12"></div>
+                                            </div>';
+                                        }
+                                    }
+                                }
+                            ?>
                             <div class="table-responsive">
                                 <?php
                                     $query = 'SELECT * FROM `athlete` WHERE clubId='.$_SESSION["clubId"];
@@ -246,6 +260,8 @@
                                             <th class="border-top-0">MOBILE</th>
                                             <th class="border-top-0">EMAIL</th>
                                             <th class="border-top-0">CATEGORY</th>
+                                            <th class="border-top-0"></th>
+                                            <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>
                                         </tr>
                                     </thead>
@@ -273,7 +289,27 @@
                                             <td class="txt-oflo">'.$phone1.'</td>
                                             <td class="txt-oflo">'.$email.'</td>
                                             <td class="txt-oflo">'.$affiliationCat.'</td>
-                                            <td class="txt-oflo"><input style="float:right;" type="submit" name="submit" value="Edit" id="submit" class="btn btn-success" style="margin: auto;"></input></td>
+                                            <td class="txt-oflo">
+                                                <form role="form" method="post" action="viewAthlete.php">
+                                                    <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>
+                                                    <input style="float:right;" type="submit" name="submit" value="View" id="submit" class="btn btn-info" style="margin: auto;">
+                                                    </input>
+                                                </form>
+                                            </td>
+                                            <td class="txt-oflo">
+                                                <form role="form" method="post" action="editAthlete.php">
+                                                    <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>
+                                                    <input style="float:right;" type="submit" name="submit" value="Edit" id="submit" class="btn btn-success" style="margin: auto;">
+                                                    </input>
+                                                </form>
+                                            </td>
+                                            <td class="txt-oflo">
+                                                <form role="form" method="post" action="deleteAthlete.php">
+                                                    <input type="hidden" name="delete" id="delete" value="'.$athleteId.'"></input>
+                                                    <input style="float:right;" onclick="return clicked();" type="submit" name="submit" value="Delete" id="submit" class="btn btn-danger" style="margin: auto;">
+                                                    </input>
+                                                </form>
+                                            </td>
                                         </tr>';
                                         }
                                         echo '</tbody></table>';
@@ -321,7 +357,15 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
-
+<script type="text/javascript">
+    function clicked() {
+       if (confirm('Do you want to delete the Athlete?')) {
+           yourformelement.submit();
+       } else {
+           return false;
+       }
+    }
+</script>
 </html>
 <?php
 } else {
