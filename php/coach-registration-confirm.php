@@ -3,6 +3,104 @@
     if(!isset($_SESSION[''])){
         session_start();
     }
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+        if(!empty($_POST['optradio']) && !empty($_POST['clubList']) && !empty($_POST['category']) && !empty($_POST['name']) && !empty($_POST['gender']) && !empty($_POST['phone1']) && !empty($_POST['nameForId']) && !empty($_FILES["photo"]["name"]) && !empty($_POST['dob']) && !empty($_POST['address']) && !empty($_POST['nic']) && !empty($_FILES["nicPhoto"]["name"])){
+                $allowTypes = array('jpg','png','jpeg'); 
+                if(!empty($_FILES["application"]["name"])){
+                    $fileNameApplication = basename($_FILES["application"]["name"]); 
+                    $fileTypeApplication = pathinfo($fileNameApplication, PATHINFO_EXTENSION);
+                    if(in_array($fileTypeApplication, $allowTypes)){
+                        $application = $_FILES['application']['tmp_name']; 
+                        $applicationContent = addslashes(file_get_contents($application));
+                    } else {
+                        session_destroy();
+                        header('Location:../coach-registration.php?er=wi');
+                    }
+                } else {
+                    $application = "";
+                }
+                $fileNamePhoto = basename($_FILES["photo"]["name"]); 
+                $fileTypePhoto = pathinfo($fileNamePhoto, PATHINFO_EXTENSION);
+                $fileNameNic = basename($_FILES["nicPhoto"]["name"]); 
+                $fileTypeNic = pathinfo($fileNameNic, PATHINFO_EXTENSION);
+                if(in_array($fileTypePhoto, $allowTypes) && in_array($fileTypeNic, $allowTypes)){ 
+                    $photo = $_FILES['photo']['tmp_name']; 
+                    $photoContent = addslashes(file_get_contents($photo));
+                    $nicPhoto = $_FILES['nicPhoto']['tmp_name']; 
+                    $nicPhotoContent = addslashes(file_get_contents($nicPhoto));
+                    $optradio   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['optradio'])));
+                    $clubList = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubList'])));
+                    $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
+                    $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
+                    $gender = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['gender'])));
+                    $phone1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['phone1'])));
+                    if(!empty($_POST['phone2'])){
+                        $phone2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['phone2'])));
+                    } else {
+                        $phone2 = "";
+                    }
+                    if(!empty($_POST['whatsapp'])){
+                        $whatsapp = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['whatsapp'])));
+                    } else {
+                        $whatsapp = "";
+                    }
+                    if(!empty($_POST['emailAd'])){
+                        $emailAd = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['emailAd'])));
+                    } else {
+                        $emailAd = "";
+                    }
+                    $nameForId = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['nameForId'])));
+                    $dob = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['dob'])));
+                    $address = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['address'])));
+                    $nic = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['nic'])));
+                    if(!empty($_POST['designation'])){
+                        $designation = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['designation'])));
+                    } else {
+                        $designation = "";
+                    }
+                    if(!empty($_POST['qualification'])){
+                        $qualification = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['qualification'])));
+                    } else {
+                        $qualification = "";
+                    }
+                    if(!empty($_POST['ppno'])){
+                        $ppno = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['ppno'])));
+                    } else {
+                        $ppno = "";
+                    }
+                    $_SESSION["optradio"] = $optradio;
+                    $_SESSION["clubList"] = $clubList;
+                    $_SESSION["category"] = $category;
+                    $_SESSION["name"] = $name;
+                    $_SESSION["gender"] = $gender;
+                    $_SESSION["phone1"] = $phone1;
+                    $_SESSION["phone2"] = $phone2;
+                    $_SESSION["whatsapp"] = $whatsapp;
+                    $_SESSION["emailAd"] = $emailAd;
+                    $_SESSION["nameForId"] = $nameForId;
+                    $_SESSION["photo"] = $photoContent;
+                    $_SESSION["application"] = $applicationContent;
+                    $_SESSION["dob"] = $dob;
+                    $_SESSION["address"] = $address;
+                    $_SESSION["nic"] = $nic;
+                    $_SESSION["designation"] = $designation;
+                    $_SESSION["nicPhoto"] = $nicPhotoContent;
+                    $_SESSION["qualification"] = $qualification;
+                    $_SESSION["ppno"] = $ppno;
+                } else {
+                    session_destroy();
+                    header('Location:../coach-registration.php?er=wi');
+                }
+        } else {
+            //empty fields
+            session_destroy();
+            header('Location:../coach-registration.php?er=em');
+        }
+    } else {
+        //if submit button is not clicked
+        session_destroy();
+        header('Location:../register.html');    
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -113,106 +211,28 @@
                         <form role="form" action="coach-registration-controller.php" method="POST" class="contact-one__form">
                             <div class="row">
                                 <div class="col-md-6">
-
 <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
-        if(!empty($_POST['optradio']) && !empty($_POST['clubList']) && !empty($_POST['category']) && !empty($_POST['name']) && !empty($_POST['gender']) && !empty($_POST['phone1']) && !empty($_POST['nameForId']) && !empty($_POST['photo']) && !empty($_POST['dob']) && !empty($_POST['address']) && !empty($_POST['nic']) && !empty($_POST['nicPhoto'])){
-                $optradio   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['optradio'])));
-                $clubList = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubList'])));
-                $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
-                $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
-                $gender = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['gender'])));
-                $phone1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['phone1'])));
-                if(!empty($_POST['phone2'])){
-                    $phone2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['phone2'])));
-                } else {
-                    $phone2 = "";
-                }
-                if(!empty($_POST['whatsapp'])){
-                    $whatsapp = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['whatsapp'])));
-                } else {
-                    $whatsapp = "";
-                }
-                if(!empty($_POST['emailAd'])){
-                    $emailAd = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['emailAd'])));
-                } else {
-                    $emailAd = "";
-                }
-                $nameForId = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['nameForId'])));
-                $photo = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['photo'])));
-                if(!empty($_POST['application'])){
-                    $application = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['application'])));
-                } else {
-                    $application = "";
-                }
-                $dob = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['dob'])));
-                $address = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['address'])));
-                $nic = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['nic'])));
-                if(!empty($_POST['designation'])){
-                    $designation = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['designation'])));
-                } else {
-                    $designation = "";
-                }
-                $nicPhoto = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['nicPhoto'])));
-                if(!empty($_POST['qualification'])){
-                    $qualification = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['qualification'])));
-                } else {
-                    $qualification = "";
-                }
-                if(!empty($_POST['ppno'])){
-                    $ppno = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['ppno'])));
-                } else {
-                    $ppno = "";
-                }
-                $_SESSION["optradio"] = $optradio;
-                $_SESSION["clubList"] = $clubList;
-                $_SESSION["category"] = $category;
-                $_SESSION["name"] = $name;
-                $_SESSION["gender"] = $gender;
-                $_SESSION["phone1"] = $phone1;
-                $_SESSION["phone2"] = $phone2;
-                $_SESSION["whatsapp"] = $whatsapp;
-                $_SESSION["emailAd"] = $emailAd;
-                $_SESSION["nameForId"] = $nameForId;
-                $_SESSION["photo"] = $photo;
-                $_SESSION["application"] = $application;
-                $_SESSION["dob"] = $dob;
-                $_SESSION["address"] = $address;
-                $_SESSION["nic"] = $nic;
-                $_SESSION["designation"] = $designation;
-                $_SESSION["nicPhoto"] = $nicPhoto;
-                $_SESSION["qualification"] = $qualification;
-                $_SESSION["ppno"] = $ppno;
-                echo '<p>optradio : '.$_SESSION["optradio"].'</p>
-                      <p>clubList : '.$_SESSION["clubList"].'</p>
-                      <p>category : '.$_SESSION["category"].'</p>
-                      <p>name : '.$_SESSION["name"].'</p>
-                      <p>gender : '.$_SESSION["gender"].'</p>
-                      <p>phone1 : '.$_SESSION["phone1"].'</p>
-                      <p>phone2 : '.$_SESSION["phone2"].'</p>
-                      <p>whatsapp : '.$_SESSION["whatsapp"].'</p>
-                      <p>emailAd : '.$_SESSION["emailAd"].'</p>
-                      <p>nameForId : '.$_SESSION["nameForId"].'</p>
-                      <p>photo : '.$_SESSION["photo"].'</p>
-                      <p>application : '.$_SESSION["application"].'</p>
-                      <p>dob : '.$_SESSION["dob"].'</p>
-                      <p>address : '.$_SESSION["address"].'</p>
-                      <p>nic : '.$_SESSION["nic"].'</p>
-                      <p>designation : '.$_SESSION["designation"].'</p>
-                      <p>nicPhoto : '.$_SESSION["nicPhoto"].'</p>
-                      <p>qualification : '.$_SESSION["qualification"].'</p>
-                      <p>ppno : '.$_SESSION["ppno"].'</p>';
-        } else {
-            //empty fields
-            session_destroy();
-            header('Location:../coach-registration.php?er=em');
-        }
-    } else {
-        //if submit button is not clicked
-        session_destroy();
-        header('Location:../register.html');	
-    }
+echo '<p>optradio : '.$_SESSION["optradio"].'</p>
+                          <p>clubList : '.$_SESSION["clubList"].'</p>
+                          <p>category : '.$_SESSION["category"].'</p>
+                          <p>name : '.$_SESSION["name"].'</p>
+                          <p>gender : '.$_SESSION["gender"].'</p>
+                          <p>phone1 : '.$_SESSION["phone1"].'</p>
+                          <p>phone2 : '.$_SESSION["phone2"].'</p>
+                          <p>whatsapp : '.$_SESSION["whatsapp"].'</p>
+                          <p>emailAd : '.$_SESSION["emailAd"].'</p>
+                          <p>nameForId : '.$_SESSION["nameForId"].'</p>
+                          <p>photo : '.$fileNamePhoto.'</p>
+                          <p>application : '.$fileNameApplication.'</p>
+                          <p>dob : '.$_SESSION["dob"].'</p>
+                          <p>address : '.$_SESSION["address"].'</p>
+                          <p>nic : '.$_SESSION["nic"].'</p>
+                          <p>designation : '.$_SESSION["designation"].'</p>
+                          <p>nicPhoto : '.$fileNameNic.'</p>
+                          <p>qualification : '.$_SESSION["qualification"].'</p>
+                          <p>ppno : '.$_SESSION["ppno"].'</p>'; 
 ?>
+
 </div>
 <div class="col-lg-12"><hr/></div>
                                 

@@ -117,7 +117,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
-                        <form role="form" action="php/club-registration-confirm.php" method="POST" class="contact-one__form">
+                        <form role="form" action="php/club-registration-confirm.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
                             <div class="row">
                                 <?php
                                     if(isset($_GET['er'])){
@@ -146,6 +146,11 @@
                                             } else if ($error == "mf"){
                                                 echo '<div class="col-md-12">
                                                     <span style="color:red;">Couldn\'t send email to you with password, please contact admin for more info.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            }  else if ($error == "wi"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Only jpg, jpeg, png is supported for uploaded files.</span>
                                                     <div class="col-lg-12"><hr/></div>
                                                 </div>';
                                             }

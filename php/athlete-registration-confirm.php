@@ -3,6 +3,94 @@
     if(!isset($_SESSION[''])){
         session_start();
     }
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+        if(!empty($_POST['optradio']) && !empty($_POST['category']) && !empty($_POST['name']) && !empty($_POST['gender']) && !empty($_POST['phone1']) && !empty($_POST['nameForId']) && !empty($_POST['bbno']) && !empty($_POST['dob']) && !empty($_POST['postal']) && !empty($_POST['district']) && !empty($_POST['bbdate']) && !empty($_FILES["bbPhoto"]["name"])){
+            $fileName = basename($_FILES["bbPhoto"]["name"]); 
+            $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+            $allowTypes = array('jpg','png','jpeg'); 
+            if(in_array($fileType, $allowTypes)){ 
+                $image = $_FILES['bbPhoto']['tmp_name']; 
+                $imgContent = addslashes(file_get_contents($image));
+                $optradio   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['optradio'])));
+                $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
+                $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
+                $gender = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['gender'])));
+                $phone1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['phone1'])));
+                $nameForId = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['nameForId'])));
+                $bbno = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['bbno'])));
+                $dob = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['dob'])));
+                $postal = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['postal'])));
+                $district = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['district'])));
+                $bbdate = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['bbdate'])));
+                if(!empty($_POST['clubList'])){
+                    $clubList = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubList'])));
+                } else {
+                    $clubList = "";
+                }
+                if(!empty($_POST['phone2'])){
+                    $phone2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['phone2'])));
+                } else {
+                    $phone2 = "";
+                }
+                if(!empty($_POST['whatsapp'])){
+                    $whatsapp = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['whatsapp'])));
+                } else {
+                    $whatsapp = "";
+                }
+                if(!empty($_POST['emailAd'])){
+                    $emailAd = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['emailAd'])));
+                } else {
+                    $emailAd = "";
+                }
+                if(!empty($_POST['postalId'])){
+                    $postalId = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['postalId'])));
+                } else {
+                    $postalId = "";
+                }
+                if(!empty($_POST['nic'])){
+                    $nic = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['nic'])));
+                } else {
+                    $nic = "";
+                }
+                if(!empty($_POST['ppno'])){
+                    $ppno = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['ppno'])));
+                } else {
+                    $ppno = "";
+                }
+                $_SESSION["optradio"] = $optradio;
+                $_SESSION["category"] = $category;
+                $_SESSION["name"] = $name;
+                $_SESSION["gender"] = $gender;
+                $_SESSION["phone1"] = $phone1;
+                $_SESSION["nameForId"] = $nameForId;
+                $_SESSION["bbno"] = $bbno;
+                $_SESSION["dob"] = $dob;
+                $_SESSION["postal"] = $postal;
+                $_SESSION["district"] = $district;
+                $_SESSION["bbdate"] = $bbdate;
+                $_SESSION["bbPhoto"] = $imgContent;
+                $_SESSION["clubList"] = $clubList;
+                $_SESSION["phone2"] = $phone2;
+                $_SESSION["whatsapp"] = $whatsapp;
+                $_SESSION["emailAd"] = $emailAd;
+                $_SESSION["postalId"] = $postalId;
+                $_SESSION["nic"] = $nic;
+                $_SESSION["ppno"] = $ppno;
+            }else{ 
+                //wrong format
+                session_destroy();
+                header('Location:../athlete-registration.php?er=wi');
+            } 
+        } else {
+            //empty fields
+            session_destroy();
+            header('Location:../athlete-registration.php?er=em');
+        }
+    } else {
+        //if submit button is not clicked
+        session_destroy();
+        header('Location:../register.html');    
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -113,77 +201,8 @@
                         <form role="form" action="athlete-registration-controller.php" method="POST" class="contact-one__form">
                             <div class="row">
                                 <div class="col-md-6">
-
 <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
-        if(!empty($_POST['optradio']) && !empty($_POST['category']) && !empty($_POST['name']) && !empty($_POST['gender']) && !empty($_POST['phone1']) && !empty($_POST['nameForId']) && !empty($_POST['bbno']) && !empty($_POST['dob']) && !empty($_POST['postal']) && !empty($_POST['district']) && !empty($_POST['bbdate']) && !empty($_POST['bbPhoto'])){
-                $optradio   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['optradio'])));
-                $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
-                $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
-                $gender = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['gender'])));
-                $phone1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['phone1'])));
-                $nameForId = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['nameForId'])));
-                $bbno = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['bbno'])));
-                $dob = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['dob'])));
-                $postal = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['postal'])));
-                $district = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['district'])));
-                $bbdate = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['bbdate'])));
-                $bbPhoto = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['bbPhoto'])));
-                if(!empty($_POST['clubList'])){
-                    $clubList = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubList'])));
-                } else {
-                    $clubList = "";
-                }
-                if(!empty($_POST['phone2'])){
-                    $phone2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['phone2'])));
-                } else {
-                    $phone2 = "";
-                }
-                if(!empty($_POST['whatsapp'])){
-                    $whatsapp = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['whatsapp'])));
-                } else {
-                    $whatsapp = "";
-                }
-                if(!empty($_POST['emailAd'])){
-                    $emailAd = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['emailAd'])));
-                } else {
-                    $emailAd = "";
-                }
-                if(!empty($_POST['postalId'])){
-                    $postalId = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['postalId'])));
-                } else {
-                    $postalId = "";
-                }
-                if(!empty($_POST['nic'])){
-                    $nic = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['nic'])));
-                } else {
-                    $nic = "";
-                }
-                if(!empty($_POST['ppno'])){
-                    $ppno = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['ppno'])));
-                } else {
-                    $ppno = "";
-                }
-                $_SESSION["optradio"] = $optradio;
-                $_SESSION["category"] = $category;
-                $_SESSION["name"] = $name;
-                $_SESSION["gender"] = $gender;
-                $_SESSION["phone1"] = $phone1;
-                $_SESSION["nameForId"] = $nameForId;
-                $_SESSION["bbno"] = $bbno;
-                $_SESSION["dob"] = $dob;
-                $_SESSION["postal"] = $postal;
-                $_SESSION["district"] = $district;
-                $_SESSION["bbdate"] = $bbdate;
-                $_SESSION["bbPhoto"] = $bbPhoto;
-                $_SESSION["clubList"] = $clubList;
-                $_SESSION["phone2"] = $phone2;
-                $_SESSION["whatsapp"] = $whatsapp;
-                $_SESSION["emailAd"] = $emailAd;
-                $_SESSION["postalId"] = $postalId;
-                $_SESSION["nic"] = $nic;
-                $_SESSION["ppno"] = $ppno;
-                echo '<p>optradio : '.$_SESSION["optradio"].'</p>
+                                    echo '<p>optradio : '.$_SESSION["optradio"].'</p>
                       <p>category : '.$_SESSION["category"].'</p>
                       <p>name : '.$_SESSION["name"].'</p>
                       <p>gender : '.$_SESSION["gender"].'</p>
@@ -194,7 +213,7 @@
                       <p>postal : '.$_SESSION["postal"].'</p>
                       <p>district : '.$_SESSION["district"].'</p>
                       <p>bbdate : '.$_SESSION["bbdate"].'</p>
-                      <p>bbPhoto : '.$_SESSION["bbPhoto"].'</p>
+                      <p>bbPhoto : '.$fileName.'</p>
                       <p>clubList : '.$_SESSION["clubList"].'</p>
                       <p>phone2 : '.$_SESSION["phone2"].'</p>
                       <p>whatsapp : '.$_SESSION["whatsapp"].'</p>
@@ -202,17 +221,8 @@
                       <p>postalId : '.$_SESSION["postalId"].'</p>
                       <p>nic : '.$_SESSION["nic"].'</p>
                       <p>ppno : '.$_SESSION["ppno"].'</p>';
-        } else {
-            //empty fields
-            session_destroy();
-            header('Location:../athlete-registration.php?er=em');
-        }
-    } else {
-        //if submit button is not clicked
-        session_destroy();
-        header('Location:../register.html');	
-    }
-?>
+                                ?>
+
 </div>
 <div class="col-lg-12"><hr/></div>
                                 

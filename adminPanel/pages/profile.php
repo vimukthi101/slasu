@@ -4,6 +4,58 @@
         session_start();
     }
     if(isset($_SESSION["clubId"])){
+        $getCard = "SELECT * FROM club WHERE clubId='".$_SESSION["clubId"]."'";
+        $resultCard = mysqli_query($con, $getCard);
+        if(mysqli_num_rows($resultCard) != 0){
+            while($row = mysqli_fetch_array($resultCard)){
+                $clubType = $row['clubType'];
+                $district = $row['district'];
+                $operatorName = $row['operatorName'];
+                $operatorEmail = $row['operatorEmail'];
+                $operatorMobile = $row['operatorMobile'];
+                $operatorWhatsapp = $row['operatorWhatsapp'];
+                $operatorNic = $row['operatorNic'];
+                $regType = $row['regType'];
+                $requestLetter = $row['requestLetter'];
+                $affiliationCat = $row['affiliationCat'];
+                $clubContactOne = $row['clubContactOne'];
+                $clubContactTwo = $row['clubContactTwo'];
+                $clubEmailOne = $row['clubEmailOne'];
+                $clubEmailTwo = $row['clubEmailTwo'];
+                $postalAddress = $row['postalAddress'];
+                $inchargeName = $row['inchargeName'];
+                $inchargeMobile = $row['inchargeMobile'];
+                $inchargeEmail = $row['inchargeEmail'];
+                $status = $row['status'];
+                if($clubType == 1){
+                    $clubType = "School";
+                } else if($clubType == 2) {
+                    $clubType = "Club";
+                }
+                if($regType == 1){
+                    $regType = "New Registration";
+                } else if($regType == 2) {
+                    $regType = "Existing Registration";
+                }
+                if($status == 1){
+                    $status = "Active";
+                } else if($status == 2) {
+                    $status = "Inactive";
+                }
+                if($affiliationCat == 1){
+                    $affiliationCat = "Swimming";
+                } else if($affiliationCat == 2) {
+                    $affiliationCat = "Water Polo";
+                } else if($affiliationCat == 3) {
+                    $affiliationCat = "High Diving";
+                } else if($affiliationCat == 4) {
+                    $affiliationCat = "Free Swimming";
+                }
+            }
+        } else {
+            //card exists
+            header('Location:dashboard.php');
+        }
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -21,7 +73,7 @@
     <link href="../dist/css/style.min.css" rel="stylesheet">
     <style type="text/css">
         .footer {
-  position: fixed;
+  position: inherit;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -221,15 +273,29 @@
                     <div class="col-lg-4 col-xlg-3">
                         <div class="card">
                             <div class="card-body">
-                                <center class="mt-4"> <img src="../../assets/images/resources/testi-1-1.png"
-                                        class="rounded-circle" width="150" />
-                                    <h4 class="card-title mt-2">Hanna Gover</h4>
-                                    <h6 class="card-subtitle">Operator</h6>
-                                    
-                                </center>
+                                <div class="form-group">
+                                    <label class="col-md-12">Request Letter</label>
+                                    <div class="col-md-12">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($requestLetter); ?>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Club Name</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $_SESSION["clubName"]; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Reg Status</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $status; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12" style="padding-bottom: 1px;"> 
+                                </div>
                             </div>
-                            
-                            
                         </div>
                     </div>
                     <!-- Column -->
@@ -237,36 +303,148 @@
                     <div class="col-lg-8 col-xlg-9">
                         <div class="card">
                             <div class="card-body">
-                                <form class="form-horizontal form-material mx-2">
-                                    <div class="form-group">
-                                        <label class="col-md-12">Full Name</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="Johnathan Doe"
-                                                class="form-control form-control-line">
-                                        </div>
+                                <div class="form-group col-md-12">
+                                    <label class="">Club Information</label>
+                                    <hr/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Type</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $clubType; ?>"
+                                            class="form-control form-control-line" disabled="">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="example-email" class="col-md-12">Email</label>
-                                        <div class="col-md-12">
-                                            <input type="email" placeholder="johnathan@admin.com"
-                                                class="form-control form-control-line" name="example-email"
-                                                id="example-email">
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Registration Type</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $regType; ?>"
+                                            class="form-control form-control-line" disabled="">
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Password</label>
-                                        <div class="col-md-12">
-                                            <input type="password" value="password"
-                                                class="form-control form-control-line">
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Affiliation Category</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $affiliationCat; ?>"
+                                            class="form-control form-control-line" disabled="">
                                     </div>
-                                    
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <button class="btn btn-success text-white">Update Profile</button>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">District</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $district; ?>"
+                                            class="form-control form-control-line" disabled="">
                                     </div>
-                                </form>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-xlg-12">
+                        <div class="card">
+                            <div class="card-body row">
+                                <div class="form-group col-md-12">
+                                    <label class="">Operator Information</label>
+                                    <hr/>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Operator Name</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $operatorName; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Operator Email</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $operatorEmail; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Operator Mobile</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $operatorMobile; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Operator WhatsApp</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $operatorWhatsapp; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Operator NIC</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $operatorNic; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="">Club Contact Information</label>
+                                    <hr/>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Club Address</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $postalAddress; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Club Contact Primary</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $clubContactOne; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Club Contact Secondary</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $clubContactTwo; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Club Email Primary</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $clubEmailOne; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Club Email Secondary</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $clubEmailTwo; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="">Incharge Information</label>
+                                    <hr/>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Incharge Name</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $inchargeName; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Incharge Mobile</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $inchargeMobile; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Incharge Email</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="<?php echo $inchargeEmail; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

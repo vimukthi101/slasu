@@ -3,6 +3,89 @@
     if(!isset($_SESSION[''])){
         session_start();
     }
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+        if(!empty($_POST['optradio']) && !empty($_POST['name']) && !empty($_POST['district']) && !empty($_POST['operatorName']) && !empty($_POST['operatorEmail']) && !empty($_POST['phone']) && !empty($_POST['operatorNic']) && !empty($_POST['regRadio']) && !empty($_POST['category']) && !empty($_POST['clubAddress']) && !empty($_POST['clubPhone1']) && !empty($_POST['inchargeName']) && !empty($_POST['inchargePhone'])){
+                $allowTypes = array('jpg','png','jpeg'); 
+                if(!empty($_FILES["requestLetter"]["name"])){
+                    $fileNameApplication = basename($_FILES["requestLetter"]["name"]); 
+                    $fileTypeApplication = pathinfo($fileNameApplication, PATHINFO_EXTENSION);
+                    if(in_array($fileTypeApplication, $allowTypes)){
+                        $requestLetter = $_FILES['requestLetter']['tmp_name']; 
+                        $applicationContent = addslashes(file_get_contents($requestLetter));
+                    } else {
+                        session_destroy();
+                        header('Location:../club-registration.php?er=wi');
+                    }
+                } else {
+                    $requestLetter = "";
+                }
+                $optradio   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['optradio'])));
+                $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
+                $district = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['district'])));
+                $operatorName = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['operatorName'])));
+                $operatorEmail = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['operatorEmail'])));
+                $phone = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['phone'])));
+                if(!empty($_POST['whatsapp'])){
+                    $whatsapp = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['whatsapp'])));
+                } else {
+                    $whatsapp = "";
+                }
+                $operatorNic = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['operatorNic'])));
+                $regRadio = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['regRadio'])));
+                $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
+                $clubAddress = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubAddress'])));
+                $clubPhone1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubPhone1'])));
+                if(!empty($_POST['clubPhone2'])){
+                    $clubPhone2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubPhone2'])));
+                } else {
+                    $clubPhone2 = "";
+                }
+                if(!empty($_POST['clubEmail1'])){
+                    $clubEmail1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubEmail1'])));
+                } else {
+                    $clubEmail1 = "";
+                }
+                if(!empty($_POST['clubEmail2'])){
+                    $clubEmail2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubEmail2'])));
+                } else {
+                    $clubEmail2 = "";
+                }
+                $inchargeName = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['inchargeName'])));
+                $inchargePhone = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['inchargePhone'])));
+                if(!empty($_POST['inchargeEmail'])){
+                    $inchargeEmail = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['inchargeEmail'])));
+                } else {
+                    $inchargeEmail = "";
+                }
+                $_SESSION["optradio"] = $optradio;
+                $_SESSION["name"] = $name;
+                $_SESSION["district"] = $district;
+                $_SESSION["operatorName"] = $operatorName;
+                $_SESSION["operatorEmail"] = $operatorEmail;
+                $_SESSION["phone"] = $phone;
+                $_SESSION["whatsapp"] = $whatsapp;
+                $_SESSION["operatorNic"] = $operatorNic;
+                $_SESSION["regRadio"] = $regRadio;
+                $_SESSION["requestLetter"] = $requestLetter;
+                $_SESSION["category"] = $category;
+                $_SESSION["clubAddress"] = $clubAddress;
+                $_SESSION["clubPhone1"] = $clubPhone1;
+                $_SESSION["clubPhone2"] = $clubPhone2;
+                $_SESSION["clubEmail1"] = $clubEmail1;
+                $_SESSION["clubEmail2"] = $clubEmail2;
+                $_SESSION["inchargeName"] = $inchargeName;
+                $_SESSION["inchargePhone"] = $inchargePhone;
+                $_SESSION["inchargeEmail"] = $inchargeEmail;
+        } else {
+            //empty fields
+            session_destroy();
+            header('Location:../club-registration.php?er=em');
+        }
+    } else {
+        //if submit button is not clicked
+        session_destroy();
+        header('Location:../register.html');    
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -115,71 +198,7 @@
                                 <div class="col-md-6">
 
 <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
-        if(!empty($_POST['optradio']) && !empty($_POST['name']) && !empty($_POST['district']) && !empty($_POST['operatorName']) && !empty($_POST['operatorEmail']) && !empty($_POST['phone']) && !empty($_POST['operatorNic']) && !empty($_POST['regRadio']) && !empty($_POST['category']) && !empty($_POST['clubAddress']) && !empty($_POST['clubPhone1']) && !empty($_POST['inchargeName']) && !empty($_POST['inchargePhone'])){
-                $optradio   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['optradio'])));
-                $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
-                $district = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['district'])));
-                $operatorName = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['operatorName'])));
-                $operatorEmail = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['operatorEmail'])));
-                $phone = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['phone'])));
-                if(!empty($_POST['whatsapp'])){
-                    $whatsapp = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['whatsapp'])));
-                } else {
-                    $whatsapp = "";
-                }
-                $operatorNic = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['operatorNic'])));
-                $regRadio = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['regRadio'])));
-                if(!empty($_POST['requestLetter'])){
-                    $requestLetter = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['requestLetter'])));
-                } else {
-                    $requestLetter = "";
-                }
-                $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
-                $clubAddress = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubAddress'])));
-                $clubPhone1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubPhone1'])));
-                if(!empty($_POST['clubPhone2'])){
-                    $clubPhone2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubPhone2'])));
-                } else {
-                    $clubPhone2 = "";
-                }
-                if(!empty($_POST['clubEmail1'])){
-                    $clubEmail1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubEmail1'])));
-                } else {
-                    $clubEmail1 = "";
-                }
-                if(!empty($_POST['clubEmail2'])){
-                    $clubEmail2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubEmail2'])));
-                } else {
-                    $clubEmail2 = "";
-                }
-                $inchargeName = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['inchargeName'])));
-                $inchargePhone = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['inchargePhone'])));
-                if(!empty($_POST['inchargeEmail'])){
-                    $inchargeEmail = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['inchargeEmail'])));
-                } else {
-                    $inchargeEmail = "";
-                }
-                $_SESSION["optradio"] = $optradio;
-                $_SESSION["name"] = $name;
-                $_SESSION["district"] = $district;
-                $_SESSION["operatorName"] = $operatorName;
-                $_SESSION["operatorEmail"] = $operatorEmail;
-                $_SESSION["phone"] = $phone;
-                $_SESSION["whatsapp"] = $whatsapp;
-                $_SESSION["operatorNic"] = $operatorNic;
-                $_SESSION["regRadio"] = $regRadio;
-                $_SESSION["requestLetter"] = $requestLetter;
-                $_SESSION["category"] = $category;
-                $_SESSION["clubAddress"] = $clubAddress;
-                $_SESSION["clubPhone1"] = $clubPhone1;
-                $_SESSION["clubPhone2"] = $clubPhone2;
-                $_SESSION["clubEmail1"] = $clubEmail1;
-                $_SESSION["clubEmail2"] = $clubEmail2;
-                $_SESSION["inchargeName"] = $inchargeName;
-                $_SESSION["inchargePhone"] = $inchargePhone;
-                $_SESSION["inchargeEmail"] = $inchargeEmail;
-                echo '<p>optradio : '.$_SESSION["optradio"].'</p>
+echo '<p>optradio : '.$_SESSION["optradio"].'</p>
                       <p>Name : '.$_SESSION["name"].'</p>
                       <p>district : '.$_SESSION["district"].'</p>
                       <p>operatorName : '.$_SESSION["operatorName"].'</p>
@@ -188,7 +207,7 @@
                       <p>whatsapp : '.$_SESSION["whatsapp"].'</p>
                       <p>operatorNic : '.$_SESSION["operatorNic"].'</p>
                       <p>regRadio : '.$_SESSION["regRadio"].'</p>
-                      <p>requestLetter : '.$_SESSION["requestLetter"].'</p>
+                      <p>requestLetter : '.$fileNameApplication.'</p>
                       <p>category : '.$_SESSION["category"].'</p>
                       <p>clubAddress : '.$_SESSION["clubAddress"].'</p>
                       <p>clubPhone1 : '.$_SESSION["clubPhone1"].'</p>
@@ -198,16 +217,6 @@
                       <p>inchargeName : '.$_SESSION["inchargeName"].'</p>
                       <p>inchargePhone : '.$_SESSION["inchargePhone"].'</p>
                       <p>inchargeEmail : '.$_SESSION["inchargeEmail"].'</p>';
-        } else {
-            //empty fields
-            session_destroy();
-            header('Location:../club-registration.php?er=em');
-        }
-    } else {
-        //if submit button is not clicked
-        session_destroy();
-        header('Location:../register.html');	
-    }
 ?>
 </div>
 <div class="col-lg-12"><hr/></div>
