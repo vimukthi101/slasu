@@ -118,6 +118,8 @@
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="profile.php"><i class="mdi mdi-account-network"></i>
                                     My Profile</a>
+                                    <a class="dropdown-item" href="changepwd.php"><i class="mdi mdi-key"></i>
+                                    Change Password</a>
                                 <a class="dropdown-item" href="../../php/logout.php"><i class="mdi mdi-logout"></i>
                                         Log Out</a>
                             </ul>
@@ -169,20 +171,6 @@
                                 <span class="hide-menu">Payment Status</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="profile.php"
-                                aria-expanded="false">
-                                <i class="mdi mdi-account-network"></i>
-                                <span class="hide-menu">Profile</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../php/logout.php"
-                                aria-expanded="false">
-                                <i class="mdi mdi-logout"></i>
-                                <span class="hide-menu">Log Out</span>
-                            </a>
-                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -217,7 +205,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -241,6 +228,21 @@
                                             echo '<div class="col-md-12">
                                                 <span style="color:red;margin-left:20px;">Athlete record deleted successfully.</span>
                                                 <div class="col-lg-12"></div>
+                                            </div>';
+                                        } else if($error == "er"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Couldn\'t save the changes, try again.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "us"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:green;margin-left:20px;">Updated succesfully.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "wi"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Only jpg,png,jpeg are supportrd for photo.</span>
+                                                <div class="col-lg-12"><hr/></div>
                                             </div>';
                                         }
                                     }

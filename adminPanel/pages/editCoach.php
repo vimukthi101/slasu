@@ -1,9 +1,60 @@
 <?php
-    include_once('../../php/db.php');
-    if(!isset($_SESSION[''])){
+	include_once('../../php/db.php');
+	if(!isset($_SESSION[''])){
         session_start();
     }
     if(isset($_SESSION["clubId"])){
+	    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) && isset($_POST['id'])){
+	        if(!empty($_POST['id'])){
+	        	$id = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['id'])));
+	            $getCard = "SELECT * FROM coach WHERE coachId='".$id."'";
+	            $resultCard = mysqli_query($con, $getCard);
+	            if(mysqli_num_rows($resultCard) != 0){
+	            	while($row = mysqli_fetch_array($resultCard)){
+	                    $affiliationCat = $row['affiliationCat'];
+	                    $athleteName = $row['coachName'];
+	                    $gender = $row['gender'];
+	                    $dob = $row['dob'];
+	                    $address = $row['homeAddress'];
+	                    $phone1 = $row['coachMobileOne'];
+	                    $phone2 = $row['coachMobileTwo'];
+	                    $whatsapp = $row['coachWhatsapp'];
+	                    $email = $row['coachEmail'];
+	                    $nameForCert = $row['coachNameForId'];
+	                    $application = $row['application'];
+	                    $designation = $row['designation'];
+	                    $qualifications = $row['qualifications'];
+	                    $photoForId = $row['photoForId'];
+	                    $ppNo = $row['ppNo'];
+	                    $nic = $row['nic'];
+	                    $nicPhoto = $row['nicPhoto'];
+	                    if($gender == 1){
+	                        $gender = "Male";
+	                    } else if($gender == 2) {
+	                        $gender = "Female";
+	                    } 
+	                    if($affiliationCat == 1){
+	                        $affiliationCat = "Swimming";
+	                    } else if($affiliationCat == 2) {
+	                        $affiliationCat = "Water Polo";
+	                    } else if($affiliationCat == 3) {
+	                        $affiliationCat = "High Diving";
+	                    } else if($affiliationCat == 4) {
+	                        $affiliationCat = "Free Swimming";
+	                    }
+	            	}
+	            } else {
+	                //card exists
+	                header('Location:coach.php');
+	            }
+	        } else {
+	            //empty fields redirect to cards
+	            header('Location:coach.php');
+	        }
+	    } else {
+	        //if submit button is not clicked
+	        header('Location:coach.php');	
+	    }
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -21,7 +72,7 @@
     <link href="../dist/css/style.min.css" rel="stylesheet">
         <style type="text/css">
         .footer {
-  position: fixed;
+  position: inherit;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -87,22 +138,7 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item search-box">
-                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
-                                <div class="d-flex align-items-center">
-                                    <i class="mdi mdi-magnify font-20 me-1"></i>
-                                    <div class="ms-1 d-none d-sm-block">
-                                        <span>Search</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter">
-                                <a class="srh-btn">
-                                    <i class="ti-close"></i>
-                                </a>
-                            </form>
-                        </li>
+                        
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -196,10 +232,9 @@
                         <div class="d-flex align-items-center justify-content-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="">
-                                        <a href="dashboard.php">Home</a>
-                                    </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Dashboard</li>
+                                    <li class=""><a href="dashboard.php">Home</a></li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page"><a href="coach.php">Coaches</a></li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Edit</li>
                                 </ol>
                             </nav>
                         </div>
@@ -214,112 +249,145 @@
             <!-- ============================================================== -->
             <div class="container-fluid">
                 <div class="row">
+                    <form role="form" action="coachEdit.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
                     <!-- column -->
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Registered Coaches</h4>
+                                <h4 class="card-title">Coach Information</h4>
                             </div>
-                            <?php
-                                if(isset($_GET['er'])){
-                                    if(!empty($_GET['er'])){
-                                        $error = $_GET['er'];
-                                        if($error == "su"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Coach record deleted successfully.</span>
-                                                <div class="col-lg-12"></div>
-                                            </div>';
-                                        } else if($error == "er"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Couldn\'t save the changes, try again.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        } else if ($error == "us"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:green;margin-left:20px;">Updated succesfully.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        } else if ($error == "wi"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Only jpg,png,jpeg are supportrd for photo.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        }
-                                    }
-                                }
-                            ?>
-                            <div class="table-responsive">
-                                <?php
-                                    $query = 'SELECT * FROM `coach` WHERE clubId='.$_SESSION["clubId"];
-                                    $result = mysqli_query($con, $query);
-                                    if(mysqli_num_rows($result) != 0){
-                                        echo '<table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">NAME</th>
-                                            <th class="border-top-0">NIC</th>
-                                            <th class="border-top-0">MOBILE</th>
-                                            <th class="border-top-0">EMAIL</th>
-                                            <th class="border-top-0">CATEGORY</th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>';
-                                        while($row = mysqli_fetch_array($result)){
-                                            $athleteId = $row['coachId'];
-                                            $affiliationCat = $row['affiliationCat'];
-                                            $athleteName = $row['coachName'];
-                                            $nic = $row['nic'];
-                                            $email = $row['coachEmail'];
-                                            $phone1 = $row['coachMobileOne'];
-                                            if($affiliationCat == 1){
-                                                $affiliationCat = "Swimming";
-                                            } else if($affiliationCat == 2) {
-                                                $affiliationCat = "Water Polo";
-                                            } else if($affiliationCat == 3) {
-                                                $affiliationCat = "High Diving";
-                                            } else if($affiliationCat == 4) {
-                                                $affiliationCat = "Free Swimming";
-                                            }
-                                            echo '<tr>
-                                            <td class="txt-oflo">'.$athleteName.'</td>
-                                            <td class="txt-oflo">'.$nic.'</td>
-                                            <td class="txt-oflo">'.$phone1.'</td>
-                                            <td class="txt-oflo">'.$email.'</td>
-                                            <td class="txt-oflo">'.$affiliationCat.'</td>
-                                            <td class="txt-oflo">
-                                                <form role="form" method="post" action="viewCoach.php">
-                                                    <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>
-                                                    <input style="float:right;" type="submit" name="submit" value="View" id="submit" class="btn btn-info" style="margin: auto;">
-                                                    </input>
-                                                </form>
-                                            </td>
-                                            <td class="txt-oflo">
-                                                <form role="form" method="post" action="editCoach.php">
-                                                    <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>
-                                                    <input style="float:right;" type="submit" name="submit" value="Edit" id="submit" class="btn btn-success" style="margin: auto;">
-                                                    </input>
-                                                </form>
-                                            </td>
-                                            <td class="txt-oflo">
-                                                <form role="form" method="post" action="deleteCoach.php">
-                                                    <input type="hidden" name="delete" id="delete" value="'.$athleteId.'"></input>
-                                                    <input style="float:right;" onclick="return clicked();" type="submit" name="submit" value="Delete" id="submit" class="btn btn-danger" style="margin: auto;">
-                                                    </input>
-                                                </form>
-                                            </td>
-                                        </tr>';
-                                        }
-                                        echo '</tbody></table>';
+                            <div class="card-body row">
+		                        <?php
+		                         echo '<div class="form-group col-md-12">
+		                                    <label class="">Personal Information</label>
+		                                    <hr/>
+		                                </div>
+                                        <div class="col-md-5">
+                                            <label class="">Upload Passport Size Photo for ID</label>
+                                        </div>
+                                        <div class="">
+                                            <input type="file" class="custom-file-input" id="photo" name="photo"/>
+                                            <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
+                                    </div><!-- /.col-md-12 -->
+                                        
+		                         		<div class="form-group col-md-5">
+		                                    <label class="">Full Name</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$athleteName.'"
+		                                            class="form-control form-control-line" name="name" id="name" required pattern="^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Name For ID</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$nameForCert.'"
+		                                            class="form-control form-control-line" name="nameForId" id="nameForId" required pattern="^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+		                                    </div>
+		                                </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Designation</label>
+                                            <div class="">
+                                                <input type="text" value="'.$designation.'"
+                                                    class="form-control form-control-line" name="designation" id="designation" pattern="[A-Za-z]+" title="Only Letters">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">DOB</label>
+                                            <div class="">
+                                                <input type="date" value="'.$dob.'"
+                                                    class="form-control form-control-line" name="dob" id="dob" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Address</label>
+                                            <div class="">
+                                                <input type="text" value="'.$address.'"
+                                                    class="form-control form-control-line" name="address" id="address" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                        <textarea placeholder="Academic Qualifications in Aquatic Sports (Add all separated by commas)" name="qualification" id="qualification">'.$qualifications.'</textarea>
+                    </div><!-- /.col-md-12 -->
+		                                <div class="col-md-6" style="margin-bottom: 10px;">
+                                    <label class="" for="inputGroupSelect01">Gender *</label><br/>
+                                  <select class="custom-select" id="gender" name="gender" required>';
+                                    if($gender == "Male"){
+                                        echo '<option selected value="Male">Male</option>
+                                    <option value="Female">Female</option></select>
+                            </div>';
                                     } else {
-                                        echo '<div class="col-12"><h4><center>No Coaches Registerd Yet</center></h4></div>';
+                                        echo '<option value="Male">Male</option>
+                                    <option selected value="Female">Female</option></select>
+                            </div>';
                                     }
-                                ?>
-                            </div>
-                        </div>
+		                                echo '
+		                                <div class="form-group col-md-12">
+		                                    <label class="">Contact Information</label>
+		                                    <hr/>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Primary Contact Number</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$phone1.'"
+		                                            class="form-control form-control-line" name="phone1" id="phone1" pattern="[0-9]{10}" title="Only 10 numbers" required>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Secondary Contact Number</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$phone2.'"
+		                                            class="form-control form-control-line" name="phone2" id="phone2" pattern="[0-9]{10}" title="Only 10 numbers">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">WhatsApp Number</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$whatsapp.'"
+		                                            class="form-control form-control-line" name="whatsapp" id="whatsapp" pattern="[0-9]{10}" title="Only 10 numbers">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Email</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$email.'"
+		                                            class="form-control form-control-line" name="emailAd" id="emailAd">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="">ID Information</label>
+		                                    <hr/>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">NIC</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$nic.'"
+		                                            class="form-control form-control-line" name="nic" id="nic" required pattern="^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$" title="Should match NIC format">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Passport Number</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$ppNo.'"
+		                                            class="form-control form-control-line" name="ppno" id="ppno" pattern="^(?!^0+$)[a-zA-Z0-9]{6,9}$" title="Should be a valid passport number">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="">NIC Photo</label>
+		                                    <div class="col-md-12">
+                            <input type="file" class="custom-file-input" id="nicPhoto" name="nicPhoto"/>
+                            <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div>
+		                                </div>                    <div class="col-lg-12"><hr/></div>
+                                    
+                                <div class="col-md-12" style="text-align: center;">
+                                    <input type="submit" name="submit" value="Edit" onclick="return clicked();" id="submit" class="btn btn-success" style="margin: auto;"></input>
+                                </div><!-- /.col-md-12 -->
+		                                ';
+		                        ?>
+                        	</div>	
+                        </div>
+                    </div></form>
+                    
                 </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -359,7 +427,7 @@
 </body>
 <script type="text/javascript">
     function clicked() {
-       if (confirm('Do you want to delete the Coach?')) {
+       if (confirm('Do you want to update the details?')) {
            yourformelement.submit();
        } else {
            return false;

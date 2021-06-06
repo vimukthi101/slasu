@@ -157,6 +157,8 @@
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="profile.php"><i class="mdi mdi-account-network"></i>
                                     My Profile</a>
+                                    <a class="dropdown-item" href="changepwd.php"><i class="mdi mdi-key"></i>
+                                    Change Password</a>
                                 <a class="dropdown-item" href="../../php/logout.php"><i class="mdi mdi-logout"></i>
                                         Log Out</a>
                             </ul>
@@ -208,20 +210,6 @@
                                 <span class="hide-menu">Payment Status</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="profile.php"
-                                aria-expanded="false">
-                                <i class="mdi mdi-account-network"></i>
-                                <span class="hide-menu">Profile</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../php/logout.php"
-                                aria-expanded="false">
-                                <i class="mdi mdi-logout"></i>
-                                <span class="hide-menu">Log Out</span>
-                            </a>
-                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -256,6 +244,26 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <?php
+                    if(isset($_GET['er'])){
+                        if(!empty($_GET['er'])){
+                            $error = $_GET['er'];
+                            if($error == "er"){
+                                echo '<div class="col-md-12">
+                                    <span style="color:red;margin-left:20px;">Couldn\'t save the changes, try again.</span>
+                                    <div class="col-lg-12"><hr/></div>
+                                </div>';
+                            } else if ($error == "su"){
+                                echo '<div class="col-md-12">
+                                    <span style="color:green;margin-left:20px;">Updated succesfully.</span>
+                                    <div class="col-lg-12"><hr/></div>
+                                </div>';
+                            }
+                        }
+                    }
+                ?>
             </div>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
@@ -339,6 +347,7 @@
                             </div>
                         </div>
                     </div>
+                    <form role="form" action="profileEdit.php" method="POST" class="contact-one__form">
                     <div class="col-lg-12 col-xlg-12">
                         <div class="card">
                             <div class="card-body row">
@@ -349,15 +358,15 @@
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Operator Name</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $operatorName; ?>"
-                                            class="form-control form-control-line" disabled="">
+                                        <input id="name" name="name" type="text" value="<?php echo $operatorName; ?>"
+                                            class="form-control form-control-line" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Operator Email</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $operatorEmail; ?>"
-                                            class="form-control form-control-line" disabled="">
+                                        <input id="email" name="email" type="email" value="<?php echo $operatorEmail; ?>"
+                                            class="form-control form-control-line" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
@@ -370,15 +379,15 @@
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Operator WhatsApp</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $operatorWhatsapp; ?>"
-                                            class="form-control form-control-line" disabled="">
+                                        <input id="wtzap" name="wtzap" type="tel" value="<?php echo $operatorWhatsapp; ?>"
+                                            class="form-control form-control-line" pattern="[0-9]{10}" title="Only 10 numbers">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Operator NIC</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $operatorNic; ?>"
-                                            class="form-control form-control-line" disabled="">
+                                        <input id="nic" name="nic" type="text" value="<?php echo $operatorNic; ?>"
+                                            class="form-control form-control-line" required pattern="^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$" title="Should match NIC format">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12">
@@ -388,36 +397,36 @@
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Club Address</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $postalAddress; ?>"
-                                            class="form-control form-control-line" disabled="">
+                                        <input id="adrs" name="adrs" type="text" value="<?php echo $postalAddress; ?>"
+                                            class="form-control form-control-line" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Club Contact Primary</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $clubContactOne; ?>"
-                                            class="form-control form-control-line" disabled="">
+                                        <input id="cp1" name="cp1" type="tel" value="<?php echo $clubContactOne; ?>"
+                                            class="form-control form-control-line" required pattern="[0-9]{10}" title="Only 10 numbers">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Club Contact Secondary</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $clubContactTwo; ?>"
-                                            class="form-control form-control-line" disabled="">
+                                        <input id="cp2" name="cp2" type="tel" value="<?php echo $clubContactTwo; ?>"
+                                            class="form-control form-control-line" pattern="[0-9]{10}" title="Only 10 numbers">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Club Email Primary</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $clubEmailOne; ?>"
-                                            class="form-control form-control-line" disabled="">
+                                        <input id="cemail1" name="cemail1" type="email" value="<?php echo $clubEmailOne; ?>"
+                                            class="form-control form-control-line" >
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Club Email Secondary</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $clubEmailTwo; ?>"
-                                            class="form-control form-control-line" disabled="">
+                                        <input id="cemail2" name="cemail2" type="email" value="<?php echo $clubEmailTwo; ?>"
+                                            class="form-control form-control-line" >
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12">
@@ -427,27 +436,31 @@
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Incharge Name</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $inchargeName; ?>"
-                                            class="form-control form-control-line" disabled="">
+                                        <input id="iname" name="iname" type="text" value="<?php echo $inchargeName; ?>"
+                                            class="form-control form-control-line" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Incharge Mobile</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $inchargeMobile; ?>"
-                                            class="form-control form-control-line" disabled="">
+                                        <input id="imobile" name="imobile" type="tel" value="<?php echo $inchargeMobile; ?>"
+                                            class="form-control form-control-line" pattern="[0-9]{10}" title="Only 10 numbers" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Incharge Email</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $inchargeEmail; ?>"
-                                            class="form-control form-control-line" disabled="">
+                                        <input id="iemail" name="iemail" type="email" value="<?php echo $inchargeEmail; ?>"
+                                            class="form-control form-control-line" >
                                     </div>
+                                </div>
+                                <div class="col-md-12" style="text-align: center;">
+                                    <input type="submit" name="submit" value="Edit" onclick="return clicked();" id="submit" class="btn btn-success" style="margin: auto;"></input>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </form>
                     <!-- Column -->
                 </div>
                 <!-- Row -->
@@ -498,7 +511,15 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
-
+<script type="text/javascript">
+    function clicked() {
+       if (confirm('Do you want to update the details?')) {
+           yourformelement.submit();
+       } else {
+           return false;
+       }
+    }
+</script>
 </html>
 <?php
 } else {

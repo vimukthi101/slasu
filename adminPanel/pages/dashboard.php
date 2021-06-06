@@ -136,6 +136,8 @@
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="profile.php"><i class="mdi mdi-account-network"></i>
                                     My Profile</a>
+                                    <a class="dropdown-item" href="changepwd.php"><i class="mdi mdi-key"></i>
+                                    Change Password</a>
                                 <a class="dropdown-item" href="../../php/logout.php"><i class="mdi mdi-logout"></i>
                                         Log Out</a>
                             </ul>
@@ -185,20 +187,6 @@
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash"></i>
                                 <span class="hide-menu">Payment Status</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="profile.php"
-                                aria-expanded="false">
-                                <i class="mdi mdi-account-network"></i>
-                                <span class="hide-menu">Profile</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="../../php/logout.php"
-                                aria-expanded="false">
-                                <i class="mdi mdi-logout"></i>
-                                <span class="hide-menu">Log Out</span>
                             </a>
                         </li>
                     </ul>

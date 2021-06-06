@@ -19,9 +19,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon.png">
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
-        <style type="text/css">
+    <style type="text/css">
         .footer {
-  position: fixed;
+  position: inherit;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -88,20 +88,7 @@
                         <!-- Search -->
                         <!-- ============================================================== -->
                         <li class="nav-item search-box">
-                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
-                                <div class="d-flex align-items-center">
-                                    <i class="mdi mdi-magnify font-20 me-1"></i>
-                                    <div class="ms-1 d-none d-sm-block">
-                                        <span>Search</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter">
-                                <a class="srh-btn">
-                                    <i class="ti-close"></i>
-                                </a>
-                            </form>
+
                         </li>
                     </ul>
                     <!-- ============================================================== -->
@@ -190,7 +177,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title" style="text-transform:uppercase;"><?php echo $_SESSION["clubName"] ?></h4>
+                        <h4 class="page-title">Change Password</h4>
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
@@ -199,12 +186,32 @@
                                     <li class="">
                                         <a href="dashboard.php">Home</a>
                                     </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Dashboard</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Change Password</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <?php
+                    if(isset($_GET['er'])){
+                        if(!empty($_GET['er'])){
+                            $error = $_GET['er'];
+                            if($error == "er"){
+                                echo '<div class="col-md-12">
+                                    <span style="color:red;margin-left:20px;">Couldn\'t update the password, try again.</span>
+                                    <div class="col-lg-12"><hr/></div>
+                                </div>';
+                            } else if($error == "de"){
+                                echo '<div class="col-md-12">
+                                    <span style="color:red;margin-left:20px;">Password and Confirm Password does not match.</span>
+                                    <div class="col-lg-12"><hr/></div>
+                                </div>';
+                            }
+                        }
+                    }
+                ?>
             </div>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
@@ -213,114 +220,50 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                <div class="row">
-                    <!-- column -->
-                    <div class="col-12">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                    <form role="form" action="changePwdEdit.php" method="POST" class="contact-one__form">
+                    <div class="col-lg-12 col-xlg-12">
                         <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Registered Coaches</h4>
-                            </div>
-                            <?php
-                                if(isset($_GET['er'])){
-                                    if(!empty($_GET['er'])){
-                                        $error = $_GET['er'];
-                                        if($error == "su"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Coach record deleted successfully.</span>
-                                                <div class="col-lg-12"></div>
-                                            </div>';
-                                        } else if($error == "er"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Couldn\'t save the changes, try again.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        } else if ($error == "us"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:green;margin-left:20px;">Updated succesfully.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        } else if ($error == "wi"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Only jpg,png,jpeg are supportrd for photo.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        }
-                                    }
-                                }
-                            ?>
-                            <div class="table-responsive">
-                                <?php
-                                    $query = 'SELECT * FROM `coach` WHERE clubId='.$_SESSION["clubId"];
-                                    $result = mysqli_query($con, $query);
-                                    if(mysqli_num_rows($result) != 0){
-                                        echo '<table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">NAME</th>
-                                            <th class="border-top-0">NIC</th>
-                                            <th class="border-top-0">MOBILE</th>
-                                            <th class="border-top-0">EMAIL</th>
-                                            <th class="border-top-0">CATEGORY</th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>';
-                                        while($row = mysqli_fetch_array($result)){
-                                            $athleteId = $row['coachId'];
-                                            $affiliationCat = $row['affiliationCat'];
-                                            $athleteName = $row['coachName'];
-                                            $nic = $row['nic'];
-                                            $email = $row['coachEmail'];
-                                            $phone1 = $row['coachMobileOne'];
-                                            if($affiliationCat == 1){
-                                                $affiliationCat = "Swimming";
-                                            } else if($affiliationCat == 2) {
-                                                $affiliationCat = "Water Polo";
-                                            } else if($affiliationCat == 3) {
-                                                $affiliationCat = "High Diving";
-                                            } else if($affiliationCat == 4) {
-                                                $affiliationCat = "Free Swimming";
-                                            }
-                                            echo '<tr>
-                                            <td class="txt-oflo">'.$athleteName.'</td>
-                                            <td class="txt-oflo">'.$nic.'</td>
-                                            <td class="txt-oflo">'.$phone1.'</td>
-                                            <td class="txt-oflo">'.$email.'</td>
-                                            <td class="txt-oflo">'.$affiliationCat.'</td>
-                                            <td class="txt-oflo">
-                                                <form role="form" method="post" action="viewCoach.php">
-                                                    <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>
-                                                    <input style="float:right;" type="submit" name="submit" value="View" id="submit" class="btn btn-info" style="margin: auto;">
-                                                    </input>
-                                                </form>
-                                            </td>
-                                            <td class="txt-oflo">
-                                                <form role="form" method="post" action="editCoach.php">
-                                                    <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>
-                                                    <input style="float:right;" type="submit" name="submit" value="Edit" id="submit" class="btn btn-success" style="margin: auto;">
-                                                    </input>
-                                                </form>
-                                            </td>
-                                            <td class="txt-oflo">
-                                                <form role="form" method="post" action="deleteCoach.php">
-                                                    <input type="hidden" name="delete" id="delete" value="'.$athleteId.'"></input>
-                                                    <input style="float:right;" onclick="return clicked();" type="submit" name="submit" value="Delete" id="submit" class="btn btn-danger" style="margin: auto;">
-                                                    </input>
-                                                </form>
-                                            </td>
-                                        </tr>';
-                                        }
-                                        echo '</tbody></table>';
-                                    } else {
-                                        echo '<div class="col-12"><h4><center>No Coaches Registerd Yet</center></h4></div>';
-                                    }
-                                ?>
+                            <div class="card-body row">
+                                <div class="form-group col-md-12">
+                                    <label class="">Password Information</label>
+                                    <hr/>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12">New Password</label>
+                                    <div class="col-md-12">
+                                        <input id="pwd" name="pwd" type="password" class="form-control form-control-line" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12">Confirm Password</label>
+                                    <div class="col-md-12">
+                                        <input id="cpwd" name="cpwd" type="password" class="form-control form-control-line" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="text-align: center;">
+                                    <input type="submit" name="submit" value="Change Password" onclick="return clicked();" id="submit" class="btn btn-success" style="margin: auto;"></input>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </form>
+                    <!-- Column -->
                 </div>
+                <!-- Row -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
@@ -358,8 +301,19 @@
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
 <script type="text/javascript">
+    $(function () {
+        $("#submit").click(function () {
+            var password = $("#pwd").val();
+            var confirmPassword = $("#cpwd").val();
+            if (password != confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        });
+    });
     function clicked() {
-       if (confirm('Do you want to delete the Coach?')) {
+       if (confirm('Do you want to update the password?')) {
            yourformelement.submit();
        } else {
            return false;

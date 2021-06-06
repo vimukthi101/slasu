@@ -193,7 +193,7 @@
                                 
                                 <div class="col-md-12"><h4>Account Operator's Contact Details</h4></div>
                                 <div class="col-md-6">
-                                    <input type="text" placeholder="Operator's Name *" name="operatorName" id="operatorName" required required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+                                    <input type="text" placeholder="Operator's Name *" name="operatorName" id="operatorName" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
                                     <input type="email" placeholder="Operator's Email Address *" name="operatorEmail" id="operatorEmail" required>
