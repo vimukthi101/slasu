@@ -90,9 +90,9 @@
             <div class="container">
                 <ul class="list-unstyled thm-breadcrumb">
                     <li><a href="index.html">Home</a></li>
-                    <li class="active"><a href="#">Login</a></li>
+                    <li class="active"><a href="login.php">Login</a></li>
                 </ul><!-- /.list-unstyled -->
-                <h2 class="page-header__title">Login</h2><!-- /.page-header__title -->
+                <h2 class="page-header__title">Admin Login</h2><!-- /.page-header__title -->
             </div><!-- /.container -->
         </section><!-- /.page-header -->
 
@@ -103,18 +103,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-6">
-                        <div class="about-two__image wow fadeInRight" data-wow-duration="1500ms">
-                            <div class="contact-one__content">
-                                <h4>Don't Have An Account</h4>
-                                <p><a href="register.html">Register From Here</a></p><br/>
-                                <h4>Forgot Your Password</h4>
-                                <p><a href="register.html">Reset From Here</a></p><br/>
-                                <h4>For Any Other Issue</h4>
-                                <p><a href="contact.html">Contact Us</a></p><br/>
-                                <h4>Admin Login</h4>
-                                <p><a href="admin-login.php">Login</a></p>
-                            </div><!-- /.contact-one__content -->
-                        </div><!-- /.about-two__image -->
+
                     </div><!-- /.col-lg-6 -->
                     <div class="col-xl-6">
                         <?php
@@ -141,7 +130,7 @@
                                         }
                                     }
                                 ?>
-                        <form action="php/login.php" role="form" method="post" class="contact-one__form contact-form-validated">
+                        <form action="php/admin-login.php" role="form" method="post" class="contact-one__form contact-form-validated">
                             <div class="row" class="thm-btn contact-one__btn">
                                 <div class="col-md-12">
                                     <input type="text" placeholder="User Name" name="username" id="username" required> 
