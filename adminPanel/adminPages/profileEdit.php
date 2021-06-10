@@ -4,40 +4,25 @@
         session_start();
     }
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
-        if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['nic']) && !empty($_POST['adrs']) && !empty($_POST['cp1']) && !empty($_POST['iname']) && !empty($_POST['imobile'])){
-                $email   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['email'])));
-                $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
+        if(!empty($_POST['fname']) && !empty($_POST['nic'])){
+                $fname   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['fname'])));
                 $nic = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['nic'])));
-                $adrs = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['adrs'])));
-                $cp1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['cp1'])));
+                if(!empty($_POST['sname'])){
+                    $sname = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['sname'])));
+                } else {
+                    $sname = "";
+                }
                 if(!empty($_POST['wtzap'])){
                     $wtzap = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['wtzap'])));
                 } else {
                     $wtzap = "";
                 }
-                if(!empty($_POST['cp2'])){
-                    $cp2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['cp2'])));
+                if(!empty($_POST['email'])){
+                    $email = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['email'])));
                 } else {
-                    $cp2 = "";
+                    $email = "";
                 }
-                if(!empty($_POST['cemail1'])){
-                    $cemail1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['cemail1'])));
-                } else {
-                    $cemail1 = "";
-                }
-                if(!empty($_POST['cemail2'])){
-                    $cemail2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['cemail2'])));
-                } else {
-                    $cemail2 = "";
-                }
-                $iname = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['iname'])));
-                $imobile = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['imobile'])));
-                if(!empty($_POST['iemail'])){
-                    $iemail = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['iemail'])));
-                } else {
-                    $iemail = "";
-                }
-                $updateEmployeeAll = "UPDATE `club` SET `operatorName`='".$name."',`operatorEmail`='".$email."',`operatorWhatsapp`='".$wtzap."',`operatorNic`='".$nic."',`postalAddress`='".$adrs."',`clubContactOne`='".$cp1."',`clubContactTwo`='".$cp2."',`clubEmailOne`='".$cemail1."',`clubEmailTwo`='".$cemail2."',`inchargeName`='".$iname."',`inchargeMobile`='".$imobile."',`inchargeEmail`='".$iemail."' WHERE clubId=".$_SESSION["clubId"];
+                $updateEmployeeAll = "UPDATE `admin` SET `firstName`='".$fname."',`secondName`='".$sname."',`email`='".$email."',`mobile`='".$wtzap."',`nic`='".$nic."' WHERE adminId=".$_SESSION["adminId"];
                 if(mysqli_query($con, $updateEmployeeAll)){ 
                     header('Location:profile.php?er=su');
                 } else {

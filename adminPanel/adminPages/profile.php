@@ -8,49 +8,13 @@
         $resultCard = mysqli_query($con, $getCard);
         if(mysqli_num_rows($resultCard) != 0){
             while($row = mysqli_fetch_array($resultCard)){
-                $clubType = $row['clubType'];
-                $district = $row['district'];
-                $operatorName = $row['operatorName'];
-                $operatorEmail = $row['operatorEmail'];
-                $operatorMobile = $row['operatorMobile'];
-                $operatorWhatsapp = $row['operatorWhatsapp'];
-                $operatorNic = $row['operatorNic'];
-                $regType = $row['regType'];
-                $requestLetter = $row['requestLetter'];
-                $affiliationCat = $row['affiliationCat'];
-                $clubContactOne = $row['clubContactOne'];
-                $clubContactTwo = $row['clubContactTwo'];
-                $clubEmailOne = $row['clubEmailOne'];
-                $clubEmailTwo = $row['clubEmailTwo'];
-                $postalAddress = $row['postalAddress'];
-                $inchargeName = $row['inchargeName'];
-                $inchargeMobile = $row['inchargeMobile'];
-                $inchargeEmail = $row['inchargeEmail'];
-                $status = $row['status'];
-                if($clubType == 1){
-                    $clubType = "School";
-                } else if($clubType == 2) {
-                    $clubType = "Club";
-                }
-                if($regType == 1){
-                    $regType = "New Registration";
-                } else if($regType == 2) {
-                    $regType = "Existing Registration";
-                }
-                if($status == 1){
-                    $status = "Active";
-                } else if($status == 2) {
-                    $status = "Inactive";
-                }
-                if($affiliationCat == 1){
-                    $affiliationCat = "Swimming";
-                } else if($affiliationCat == 2) {
-                    $affiliationCat = "Water Polo";
-                } else if($affiliationCat == 3) {
-                    $affiliationCat = "High Diving";
-                } else if($affiliationCat == 4) {
-                    $affiliationCat = "Free Swimming";
-                }
+                $firstName = $row['firstName'];
+                $secondName = $row['secondName'];
+                $userName = $row['userName'];
+                $email = $row['email'];
+                $mobile = $row['mobile'];
+                $nic = $row['nic'];
+                $role = $row['role'];
             }
         } else {
             //card exists
@@ -284,181 +248,61 @@
                 <!-- ============================================================== -->
                 <!-- Row -->
                 <div class="row">
-                    <!-- Column -->
-                    <div class="col-lg-4 col-xlg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label class="col-md-12">Request Letter</label>
-                                    <div class="col-md-12">
-                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($requestLetter); ?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Club Name</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $_SESSION["clubName"]; ?>"
-                                            class="form-control form-control-line" disabled="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Reg Status</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $status; ?>"
-                                            class="form-control form-control-line" disabled="">
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12" style="padding-bottom: 1px;"> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <!-- Column -->
-                    <div class="col-lg-8 col-xlg-9">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-group col-md-12">
-                                    <label class="">Club Information</label>
-                                    <hr/>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Type</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $clubType; ?>"
-                                            class="form-control form-control-line" disabled="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Registration Type</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $regType; ?>"
-                                            class="form-control form-control-line" disabled="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Affiliation Category</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $affiliationCat; ?>"
-                                            class="form-control form-control-line" disabled="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">District</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $district; ?>"
-                                            class="form-control form-control-line" disabled="">
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
                     <form role="form" action="profileEdit.php" method="POST" class="contact-one__form">
                     <div class="col-lg-12 col-xlg-12">
                         <div class="card">
                             <div class="card-body row">
                                 <div class="form-group col-md-12">
-                                    <label class="">Operator Information</label>
+                                    <label class="">Admin Information</label>
                                     <hr/>
                                 </div>
                                 <div class="form-group col-md-5">
-                                    <label class="col-md-12">Operator Name</label>
+                                    <label class="col-md-12">Role</label>
                                     <div class="col-md-12">
-                                        <input id="name" name="name" type="text" value="<?php echo $operatorName; ?>"
-                                            class="form-control form-control-line" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <label class="col-md-12">Operator Email</label>
-                                    <div class="col-md-12">
-                                        <input id="email" name="email" type="email" value="<?php echo $operatorEmail; ?>"
-                                            class="form-control form-control-line" required>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <label class="col-md-12">Operator Mobile</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $operatorMobile; ?>"
+                                        <input type="text" placeholder="<?php echo $role; ?>"
                                             class="form-control form-control-line" disabled="">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
-                                    <label class="col-md-12">Operator WhatsApp</label>
+                                    <label class="col-md-12">Admin First Name</label>
                                     <div class="col-md-12">
-                                        <input id="wtzap" name="wtzap" type="tel" value="<?php echo $operatorWhatsapp; ?>"
-                                            class="form-control form-control-line" pattern="[0-9]{10}" title="Only 10 numbers">
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <label class="col-md-12">Operator NIC</label>
-                                    <div class="col-md-12">
-                                        <input id="nic" name="nic" type="text" value="<?php echo $operatorNic; ?>"
-                                            class="form-control form-control-line" required pattern="^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$" title="Should match NIC format">
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label class="">Club Contact Information</label>
-                                    <hr/>
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <label class="col-md-12">Club Address</label>
-                                    <div class="col-md-12">
-                                        <input id="adrs" name="adrs" type="text" value="<?php echo $postalAddress; ?>"
-                                            class="form-control form-control-line" required>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <label class="col-md-12">Club Contact Primary</label>
-                                    <div class="col-md-12">
-                                        <input id="cp1" name="cp1" type="tel" value="<?php echo $clubContactOne; ?>"
-                                            class="form-control form-control-line" required pattern="[0-9]{10}" title="Only 10 numbers">
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <label class="col-md-12">Club Contact Secondary</label>
-                                    <div class="col-md-12">
-                                        <input id="cp2" name="cp2" type="tel" value="<?php echo $clubContactTwo; ?>"
-                                            class="form-control form-control-line" pattern="[0-9]{10}" title="Only 10 numbers">
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <label class="col-md-12">Club Email Primary</label>
-                                    <div class="col-md-12">
-                                        <input id="cemail1" name="cemail1" type="email" value="<?php echo $clubEmailOne; ?>"
-                                            class="form-control form-control-line" >
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <label class="col-md-12">Club Email Secondary</label>
-                                    <div class="col-md-12">
-                                        <input id="cemail2" name="cemail2" type="email" value="<?php echo $clubEmailTwo; ?>"
-                                            class="form-control form-control-line" >
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label class="">Incharge Information</label>
-                                    <hr/>
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <label class="col-md-12">Incharge Name</label>
-                                    <div class="col-md-12">
-                                        <input id="iname" name="iname" type="text" value="<?php echo $inchargeName; ?>"
+                                        <input id="fname" name="fname" type="text" value="<?php echo $firstName; ?>"
                                             class="form-control form-control-line" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
-                                    <label class="col-md-12">Incharge Mobile</label>
+                                    <label class="col-md-12">Admin Second Name</label>
                                     <div class="col-md-12">
-                                        <input id="imobile" name="imobile" type="tel" value="<?php echo $inchargeMobile; ?>"
-                                            class="form-control form-control-line" pattern="[0-9]{10}" title="Only 10 numbers" required>
+                                        <input id="sname" name="sname" type="text" value="<?php echo $secondName; ?>"
+                                            class="form-control form-control-line" pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
-                                    <label class="col-md-12">Incharge Email</label>
+                                    <label class="col-md-12">User Name</label>
                                     <div class="col-md-12">
-                                        <input id="iemail" name="iemail" type="email" value="<?php echo $inchargeEmail; ?>"
-                                            class="form-control form-control-line" >
+                                        <input type="text" placeholder="<?php echo $userName; ?>"
+                                            class="form-control form-control-line" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Admin Mobile</label>
+                                    <div class="col-md-12">
+                                        <input id="wtzap" name="wtzap" type="tel" value="<?php echo $mobile; ?>"
+                                            class="form-control form-control-line" pattern="[0-9]{10}" title="Only 10 numbers">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Admin EMail</label>
+                                    <div class="col-md-12">
+                                        <input id="email" name="email" type="email" value="<?php echo $email; ?>"
+                                            class="form-control form-control-line">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label class="col-md-12">Admin NIC</label>
+                                    <div class="col-md-12">
+                                        <input id="nic" name="nic" type="text" value="<?php echo $nic; ?>"
+                                            class="form-control form-control-line" required pattern="^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$" title="Should match NIC format">
                                     </div>
                                 </div>
                                 <div class="col-md-12" style="text-align: center;">

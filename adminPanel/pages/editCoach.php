@@ -262,11 +262,11 @@
 		                                    <label class="">Personal Information</label>
 		                                    <hr/>
 		                                </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-12">
                                             <label class="">Upload Passport Size Photo for ID</label>
                                         </div>
-                                        <div class="">
-                                            <input type="file" class="custom-file-input" id="photo" name="photo"/>
+                                        <div class="col-md-12">
+                                            <input type="file" class="custom-file-input form-control" id="photo" name="photo"/>
                                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                                     </div><!-- /.col-md-12 -->
                                         
@@ -306,11 +306,14 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                        <textarea placeholder="Academic Qualifications in Aquatic Sports (Add all separated by commas)" name="qualification" id="qualification">'.$qualifications.'</textarea>
+                                        <label>Academic Qualifications in Aquatic Sports (Add all separated by commas)</label>
+                                        <div class="col-md-5">
+                        <textarea name="qualification" id="qualification" class="form-control">'.$qualifications.'</textarea>
+                        </div>
                     </div><!-- /.col-md-12 -->
-		                                <div class="col-md-6" style="margin-bottom: 10px;">
+		                                <div class="col-md-5" style="margin-bottom: 10px;">
                                     <label class="" for="inputGroupSelect01">Gender *</label><br/>
-                                  <select class="custom-select" id="gender" name="gender" required>';
+                                  <select class="form-control form-select" id="gender" name="gender" required>';
                                     if($gender == "Male"){
                                         echo '<option selected value="Male">Male</option>
                                     <option value="Female">Female</option></select>
@@ -373,13 +376,14 @@
 		                                </div>
 		                                <div class="form-group col-md-12">
 		                                    <label class="">NIC Photo</label>
-		                                    <div class="col-md-12">
-                            <input type="file" class="custom-file-input" id="nicPhoto" name="nicPhoto"/>
+		                                    <div class="col-md-5">
+                            <input type="file" class="custom-file-input form-control" id="nicPhoto" name="nicPhoto"/>
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div>
 		                                </div>                    <div class="col-lg-12"><hr/></div>
                                     
                                 <div class="col-md-12" style="text-align: center;">
+                                <input type="text" value="'.$id.'" name="athleteId" id="athleteId" required hidden>
                                     <input type="submit" name="submit" value="Edit" onclick="return clicked();" id="submit" class="btn btn-success" style="margin: auto;"></input>
                                 </div><!-- /.col-md-12 -->
 		                                ';

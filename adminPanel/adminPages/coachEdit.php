@@ -4,10 +4,11 @@
         session_start();
     }
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
-        if(!empty($_POST['name']) && !empty($_POST['gender']) && !empty($_POST['phone1']) && !empty($_POST['nameForId']) && !empty($_POST['dob']) && !empty($_POST['address']) && !empty($_POST['nic'])){
+        if(!empty($_POST['name']) && !empty($_POST['athleteId']) && !empty($_POST['gender']) && !empty($_POST['phone1']) && !empty($_POST['nameForId']) && !empty($_POST['dob']) && !empty($_POST['address']) && !empty($_POST['nic'])){
             $su1 = 0;
             $su2 = 0;
             $su3 = 0;
+            $athleteId = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['athleteId'])));
             $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
             $gender = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['gender'])));
             if($gender == "Male"){
@@ -57,7 +58,7 @@
                 if(in_array($fileTypeBB, $allowTypes)){ 
                     $imageBB = $_FILES['photo']['tmp_name']; 
                     $imgContentBB = addslashes(file_get_contents($imageBB));
-                    $query1 = "UPDATE `coach` SET `photoForId`='".$imgContentBB."' WHERE clubId=".$_SESSION["clubId"];
+                    $query1 = "UPDATE `coach` SET `photoForId`='".$imgContentBB."' WHERE coachId=".$athleteId;
                     if(!mysqli_query($con, $query1)){
                         $su1 = 1;
                     }
@@ -71,7 +72,7 @@
                 if(in_array($fileTypeNic, $allowTypes)){ 
                     $imageNic = $_FILES['nicPhoto']['tmp_name']; 
                     $imgContentNic = addslashes(file_get_contents($imageNic));
-                    $query2 = "UPDATE `coach` SET `nicPhoto`='".$imgContentNic."' WHERE clubId=".$_SESSION["clubId"];
+                    $query2 = "UPDATE `coach` SET `nicPhoto`='".$imgContentNic."' WHERE coachId=".$athleteId;
                     if(!mysqli_query($con, $query2)){
                         $su2 = 1;
                     }
@@ -79,7 +80,7 @@
                     header('Location:coach.php?er=wi');
                 } 
             }
-            $query3 = "UPDATE `coach` SET `coachName`='".$name."',`gender`='".$gender."',`coachMobileOne`='".$phone1."',`coachMobileTwo`='".$phone2."',`coachWhatsapp`='".$whatsapp."',`coachEmail`='".$emailAd."',`coachNameForId`='".$nameForId."',`dob`='".$dob."',`homeAddress`='".$address."',`designation`='".$designation."',`nic`='".$nic."',`qualifications`='".$qualification."',`ppNo`='".$ppno."' WHERE clubId=".$_SESSION["clubId"];
+            $query3 = "UPDATE `coach` SET `coachName`='".$name."',`gender`='".$gender."',`coachMobileOne`='".$phone1."',`coachMobileTwo`='".$phone2."',`coachWhatsapp`='".$whatsapp."',`coachEmail`='".$emailAd."',`coachNameForId`='".$nameForId."',`dob`='".$dob."',`homeAddress`='".$address."',`designation`='".$designation."',`nic`='".$nic."',`qualifications`='".$qualification."',`ppNo`='".$ppno."' WHERE coachId=".$athleteId;
             if(!mysqli_query($con, $query3)){ 
                 $su3 = 1;
             } 

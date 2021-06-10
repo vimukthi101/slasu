@@ -7,32 +7,47 @@
 	    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) && isset($_POST['id'])){
 	        if(!empty($_POST['id'])){
 	        	$id = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['id'])));
-	            $getCard = "SELECT * FROM athlete WHERE athleteId='".$id."'";
+	            $getCard = "SELECT * FROM club WHERE clubId='".$id."'";
 	            $resultCard = mysqli_query($con, $getCard);
 	            if(mysqli_num_rows($resultCard) != 0){
 	            	while($row = mysqli_fetch_array($resultCard)){
+	                    $clubType = $row['clubType'];
+	                    $clubName = $row['clubName'];
+	                    $district = $row['district'];
+	                    $operatorName = $row['operatorName'];
+	                    $operatorEmail = $row['operatorEmail'];
+	                    $operatorMobile = $row['operatorMobile'];
+	                    $operatorWhatsapp = $row['operatorWhatsapp'];
+	                    $operatorNic = $row['operatorNic'];
+	                    $regType = $row['regType'];
+	                    $requestLetter = $row['requestLetter'];
 	                    $affiliationCat = $row['affiliationCat'];
-	                    $athleteName = $row['athleteName'];
-	                    $gender = $row['gender'];
-	                    $dob = $row['dob'];
-	                    $address = $row['address'];
-	                    $phone1 = $row['phone1'];
-	                    $phone2 = $row['phone2'];
-	                    $whatsapp = $row['whatsapp'];
-	                    $email = $row['email'];
-	                    $nameForCert = $row['nameForCert'];
-	                    $bbNo = $row['bbNo'];
-	                    $bbDistrict = $row['bbDistrict'];
-	                    $bbDate = $row['bbDate'];
-	                    $bbPhoto = $row['bbPhoto'];
-	                    $postalId = $row['postalId'];
-	                    $nic = $row['nic'];
-	                    $ppNo = $row['ppNo'];
-	                    if($gender == 1){
-	                        $gender = "Male";
-	                    } else if($gender == 2) {
-	                        $gender = "Female";
+	                    $postalAddress = $row['postalAddress'];
+	                    $clubContactOne = $row['clubContactOne'];
+	                    $clubContactTwo = $row['clubContactTwo'];
+	                    $clubEmailOne = $row['clubEmailOne'];
+	                    $clubEmailTwo = $row['clubEmailTwo'];
+	                    $inchargeName = $row['inchargeName'];
+                        $inchargeMobile = $row['inchargeMobile'];
+                        $inchargeEmail = $row['inchargeEmail'];
+                        $status = $row['status'];
+	                    if($clubType == 1){
+	                        $clubType = "School";
+	                    } else if($clubType == 2) {
+	                        $clubType = "Club";
 	                    } 
+                        if($status == 1){
+                            $status = "Inactive";
+                        } else if($status == 2) {
+                            $status = "Active";
+                        } else if($status == 3) {
+                            $status = "Disabled";
+                        } 
+                        if($regType == 1){
+                            $regType = "New Registration";
+                        } else if($regType == 2) {
+                            $regType = "Existing";
+                        } 
 	                    if($affiliationCat == 1){
 	                        $affiliationCat = "Swimming";
 	                    } else if($affiliationCat == 2) {
@@ -240,15 +255,14 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class=""><a href="dashboard.php">Home</a></li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page"><a href="athlete.php">Athletes</a></li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Edit</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page"><a href="athlete.php">Clubs</a></li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">View</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
-
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -258,139 +272,187 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- column -->
-                    <form role="form" action="athleteEdit.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
                     <div class="col-12">
+                        <form role="form" action="club-registration-confirm.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Athlete Information</h4>
+                                <h4 class="card-title">Club Information</h4>
                             </div>
                             <div class="card-body row">
 		                        <?php
 		                         echo '<div class="form-group col-md-12">
-		                                    <label class="">Personal Information</label>
+		                                    <label class="">Club Information</label>
 		                                    <hr/>
 		                                </div>
 		                         		<div class="form-group col-md-5">
-		                                    <label class="">Full Name</label>
+		                                    <label class="">Club Name</label>
 		                                    <div class="">
-		                                        <input type="text" value="'.$athleteName.'" class="form-control form-control-line" name="name" id="name" required pattern="^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+		                                        <input type="text" value="'.$clubName.'"
+		                                            class="form-control form-control-line" id="name" name="name" required pattern="^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
-		                                    <label class="">Name For Certificate</label>
+		                                    <label class="">Status</label>
 		                                    <div class="">
-		                                        <input type="text" value="'.$nameForCert.'" class="form-control form-control-line" name="nameForId" id="nameForId" required pattern="^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+                                              <select class="form-select form-control" id="status" name="status" required>
+                                                <option selected value="'.$status.'">'.$status.'</option>
+                                                <option value="Active">Active</option>
+                                                <option value="Inactive">Inactive</option>
+                                                <option value="Disabled">Disabled</option>
+                                              </select>
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
-		                                    <label class="">Address</label>
+		                                    <label class="">Type</label>
 		                                    <div class="">
-		                                        <input type="text" value="'.$address.'" class="form-control form-control-line" name="postal" id="postal" required>
+		                                        <input type="text" placeholder="'.$clubType.'"
+		                                            class="form-control form-control-line" disabled>
 		                                    </div>
 		                                </div>
-                                        <div class="col-md-5" style="margin-bottom: 10px;">
-                                    <label class="" for="inputGroupSelect01">Gender *</label><br/>
-                                  <select class="form-select form-control" id="gender" name="gender" required>';
-                                    if($gender == "Male"){
-                                        echo '<option selected value="Male">Male</option>
-                                    <option value="Female">Female</option></select>
-                            </div>';
-                                    } else {
-                                        echo '<option value="Male">Male</option>
-                                    <option selected value="Female">Female</option></select>
-                            </div>';
-                                    }
-		                                echo '<div class="form-group col-md-12">
-                                <label class="">Date Of Birth *</label>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="date" name="dob" value="'.$dob.'" id="dob" required class="form-control form-control-line">
-                            </div>
-                                        <div class="form-group col-md-12">
-		                                    <label class="">Contact Information</label>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Affiliation Category</label>
+		                                    <div class="">
+		                                        <select class="form-select form-control" id="category" name="category" required>
+                                                    <option selected value="'.$affiliationCat.'">'.$affiliationCat.'</option>
+                                                    <option value="Swimming">Swimming</option>
+                                                    <option value="Water Polo">Water Polo</option>
+                                                    <option value="High Diving">High Diving</option>
+                                                    <option value="Free Swimming">Free Swimming</option>
+                                                  </select>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Registration Type</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$regType.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">District</label>
+		                                    <div class="">
+		                                        <select class="form-select form-control" id="district" name="district" required>
+                                                    <option selected value="'.$district.'">'.$district.'</option>
+                                                    <option value="Colombo">Colombo</option>
+                                                    <option value="Galle">Galle</option>
+                                                    <option value="Kandy">Kandy</option>
+                                                  </select>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-12">
+		                                    <label class="">Club Contact Information</label>
 		                                    <hr/>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Postal Address</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$postalAddress.'"
+		                                            class="form-control form-control-line" name="clubAddress" id="clubAddress" required> 
+		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Primary Contact Number</label>
 		                                    <div class="">
-		                                        <input type="tel" value="'.$phone1.'" class="form-control form-control-line" name="phone1" id="phone1" required>
+		                                        <input type="tel" value="'.$clubContactOne.'"
+		                                            class="form-control form-control-line" name="clubPhone1" pattern="[0-9]{10}" title="Only 10 numbers" id="clubPhone1" required>
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Secondary Contact Number</label>
 		                                    <div class="">
-		                                        <input type="tel" value="'.$phone2.'" class="form-control form-control-line" name="phone2" id="phone2">
+		                                        <input type="tel" placeholder="'.$clubContactTwo.'"
+		                                            class="form-control form-control-line" name="clubPhone2" pattern="[0-9]{10}" title="Only 10 numbers" id="clubPhone2">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
-		                                    <label class="">WhatsApp Number</label>
+		                                    <label class="">Email One</label>
 		                                    <div class="">
-		                                        <input type="tel" value="'.$whatsapp.'" class="form-control form-control-line" name="whatsapp" id="whatsapp">
+		                                        <input type="email" value="'.$clubEmailOne.'"
+		                                            class="form-control form-control-line" name="clubEmail1" id="clubEmail1">
 		                                    </div>
 		                                </div>
-		                                <div class="form-group col-md-5">
-		                                    <label class="">Email</label>
-		                                    <div class="">
-		                                        <input type="text" value="'.$email.'" class="form-control form-control-line" name="emailAd" id="emailAd">
-		                                    </div>
-		                                </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Email Two</label>
+                                            <div class="">
+                                                <input type="email" value="'.$clubEmailTwo.'"
+                                                    class="form-control form-control-line" name="clubEmail2" id="clubEmail2">
+                                            </div>
+                                        </div>
 		                                <div class="form-group col-md-12">
-		                                    <label class="">ID Information</label>
+		                                    <label class="">Operator Information</label>
 		                                    <hr/>
 		                                </div>
 		                                <div class="form-group col-md-5">
-		                                    <label class="">Postal ID</label>
+		                                    <label class="">Operator Name</label>
 		                                    <div class="">
-		                                        <input type="text" value="'.$postalId.'" class="form-control form-control-line" name="postalId" id="postalId">
+		                                        <input type="text" value="'.$operatorName.'"
+		                                            class="form-control form-control-line" name="operatorName" id="operatorName" required pattern="^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
-		                                    <label class="">NIC</label>
+		                                    <label class="">Operator Email</label>
 		                                    <div class="">
-		                                        <input type="text" value="'.$nic.'" class="form-control form-control-line" name="nic" id="nic" pattern="^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$" title="Should match NIC format">
+		                                        <input type="email" value="'.$operatorEmail.'"
+		                                            class="form-control form-control-line" name="operatorEmail" id="operatorEmail" required>
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
-		                                    <label class="">Passport Number</label>
+		                                    <label class="">Operator Mobile</label>
 		                                    <div class="">
-		                                        <input type="text" value="'.$ppNo.'" class="form-control form-control-line" name="ppno" id="ppno" pattern="^(?!^0+$)[a-zA-Z0-9]{6,9}$" title="Should be a valid passport number">
+		                                        <input type="text" placeholder="'.$operatorMobile.'"
+		                                            class="form-control form-control-line" disabled>
 		                                    </div>
 		                                </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Operator WhatsApp</label>
+                                            <div class="">
+                                                <input type="tel" value="'.$operatorWhatsapp.'"
+                                                    class="form-control form-control-line" pattern="[0-9]{10}" title="Only 10 numbers" name="whatsapp" id="whatsapp">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Operator NIC</label>
+                                            <div class="">
+                                                <input type="text" value="'.$operatorNic.'"
+                                                    class="form-control form-control-line" name="operatorNic" id="operatorNic" required pattern="^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$" title="Should match NIC format">
+                                            </div>
+                                        </div>
 		                                <div class="form-group col-md-12">
-		                                    <label class="">Birth Certificate Information</label>
+		                                    <label class="">Incharge Information</label>
 		                                    <hr/>
 		                                </div>
 		                                <div class="form-group col-md-5">
-		                                    <label class="">Birth Certificate Number</label>
+		                                    <label class="">Incharge Name</label>
 		                                    <div class="">
-		                                        <input type="text" value="'.$bbNo.'" class="form-control form-control-line" name="bbno" id="bbno" require>
+		                                        <input type="text" value="'.$inchargeName.'"
+		                                            class="form-control form-control-line" name="inchargeName" required pattern="^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
 		                                    </div>
 		                                </div>
-		                                <div class="col-md-6">
-                                <label class="" for="inputGroupSelect01">Select Birth Certificate Issued District *</label><br/>
-                              <select class="form-select form-control" id="district" name="district" required>
-                                <option selected value='.$bbDistrict.'>'.$bbDistrict.'</option>
-                                <option value="Colombo">Colombo</option>
-                                    <option value="Galle">Galle</option>
-                                    <option value="Kandy">Kandy</option>
-                              </select>
-                        </div><!-- /.col-md-12 -->
 		                                <div class="form-group col-md-5">
-		                                    <label class="">Birth Certificate Issued Date</label>
+		                                    <label class="">Incharge Mobile</label>
 		                                    <div class="">
-		                                        <input type="text" value="'.$bbDate.'" class="form-control form-control-line" name="bbdate" id="bbdate" required>
+		                                        <input type="tel" value="'.$inchargeMobile.'"
+		                                            class="form-control form-control-line" name="inchargePhone" pattern="[0-9]{10}" title="Only 10 numbers" required>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Incharge Email</label>
+		                                    <div class="">
+		                                        <input type="email" value="'.$inchargeEmail.'"
+		                                            class="form-control form-control-line" name="inchargeEmail">
 		                                    </div>
 		                                </div>
 		                                <div class="col-md-12">
-                            <label class="">Upload Birth Certficate *</label>
-                        </div>
-                        <div class="col-md-5">
-                            <input type="file" class="custom-file-input form-control" id="bbPhoto" name="bbPhoto"/>
-                            <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
-                    </div><!-- /.col-md-12 -->
-                    <div class="col-lg-12"><hr/></div>
-                                    <input type="text" value="'.$id.'" name="athleteId" id="athleteId" required hidden>
+                                                <label class="">Upload Request Letter *</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="file" class="custom-file-input form-control" id="application" name="application"/>
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
+                                        </div><!-- /.col-md-12 -->
+                                        <div class="col-lg-12"><hr/></div>
+                                    
                                 <div class="col-md-12" style="text-align: center;">
+                                <input type="text" value="'.$id.'" name="clubId" id="clubId" hidden>
                                     <input type="submit" name="submit" value="Edit" onclick="return clicked();" id="submit" class="btn btn-success" style="margin: auto;"></input>
                                 </div><!-- /.col-md-12 -->
 		                                ';
@@ -398,7 +460,6 @@
                         	</div>	
                         </div></form>
                     </div>
-
                 </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->

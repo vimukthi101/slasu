@@ -66,7 +66,7 @@
                 $_SESSION["whatsapp"] = $whatsapp;
                 $_SESSION["operatorNic"] = $operatorNic;
                 $_SESSION["regRadio"] = $regRadio;
-                $_SESSION["requestLetter"] = $requestLetter;
+                $_SESSION["requestLetter"] = $applicationContent;
                 $_SESSION["category"] = $category;
                 $_SESSION["clubAddress"] = $clubAddress;
                 $_SESSION["clubPhone1"] = $clubPhone1;

@@ -8,7 +8,7 @@
             $pwd   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['pwd'])));
             $cpwd = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['cpwd'])));
             if(strcmp($pwd, $cpwd) == 0){
-                $updateEmployeeAll = "UPDATE `club` SET `operatorPassword`='".$pwd."' WHERE clubId=".$_SESSION["clubId"];
+                $updateEmployeeAll = "UPDATE `admin` SET `password`='".$pwd."' WHERE adminId=".$_SESSION["adminId"];
                 if(mysqli_query($con, $updateEmployeeAll)){ 
                     header('Location:../../php/logout.php');
                 } else {

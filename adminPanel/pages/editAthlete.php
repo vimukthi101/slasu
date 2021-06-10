@@ -281,9 +281,9 @@
 		                                        <input type="text" value="'.$address.'" class="form-control form-control-line" name="postal" id="postal" required>
 		                                    </div>
 		                                </div>
-                                        <div class="col-md-6" style="margin-bottom: 10px;">
+                                        <div class="col-md-5" style="margin-bottom: 10px;">
                                     <label class="" for="inputGroupSelect01">Gender *</label><br/>
-                                  <select class="custom-select" id="gender" name="gender" required>';
+                                  <select class="form-control form-select" id="gender" name="gender" required>';
                                     if($gender == "Male"){
                                         echo '<option selected value="Male">Male</option>
                                     <option value="Female">Female</option></select>
@@ -293,11 +293,11 @@
                                     <option selected value="Female">Female</option></select>
                             </div>';
                                     }
-		                                echo '<div class="form-group col-md-5">
+		                                echo '<div class="form-group col-md-12">
                                 <label class="">Date Of Birth *</label>
                             </div>
-                            <div class="">
-                                <input type="date" name="dob" value="'.$dob.'" id="dob" required>
+                            <div class="col-md-5">
+                                <input type="date" name="dob" value="'.$dob.'" id="dob" required class="form-control">
                             </div>
                                         <div class="form-group col-md-12">
 		                                    <label class="">Contact Information</label>
@@ -359,9 +359,9 @@
 		                                        <input type="text" value="'.$bbNo.'" class="form-control form-control-line" name="bbno" id="bbno" require>
 		                                    </div>
 		                                </div>
-		                                <div class="col-md-6">
+		                                <div class="col-md-5">
                                 <label class="" for="inputGroupSelect01">Select Birth Certificate Issued District *</label><br/>
-                              <select class="custom-select" id="district" name="district" required>
+                              <select class="form-control form-select" id="district" name="district" required>
                                 <option selected value='.$bbDistrict.'>'.$bbDistrict.'</option>
                                 <option value="Colombo">Colombo</option>
                                     <option value="Galle">Galle</option>
@@ -377,13 +377,14 @@
 		                                <div class="col-md-12">
                             <label class="">Upload Birth Certficate *</label>
                         </div>
-                        <div class="col-md-12">
-                            <input type="file" class="custom-file-input" id="bbPhoto" name="bbPhoto"/>
+                        <div class="col-md-5">
+                            <input type="file" class="custom-file-input form-control" id="bbPhoto" name="bbPhoto"/>
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div><!-- /.col-md-12 -->
                     <div class="col-lg-12"><hr/></div>
                                     
                                 <div class="col-md-12" style="text-align: center;">
+                                <input type="text" value="'.$id.'" name="athleteId" id="athleteId" required hidden>
                                     <input type="submit" name="submit" value="Edit" onclick="return clicked();" id="submit" class="btn btn-success" style="margin: auto;"></input>
                                 </div><!-- /.col-md-12 -->
 		                                ';

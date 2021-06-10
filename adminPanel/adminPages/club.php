@@ -233,7 +233,7 @@
                                         $error = $_GET['er'];
                                         if($error == "su"){
                                             echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Club record deleted successfully.</span>
+                                                <span style="color:green;margin-left:20px;">Club record deleted successfully.</span>
                                                 <div class="col-lg-12"></div>
                                             </div>';
                                         } else if($error == "er"){
@@ -251,6 +251,11 @@
                                                 <span style="color:red;margin-left:20px;">Only jpg,png,jpeg are supportrd for photo.</span>
                                                 <div class="col-lg-12"><hr/></div>
                                             </div>';
+                                        } else if ($error == "wi"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Couldn\'t delete the club or it\'s Athletes or Coaches.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
                                         }
                                     }
                                 }
@@ -263,7 +268,6 @@
                                         echo '<table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0"></th>
                                             <th class="border-top-0">CLUB NAME</th>
                                             <th class="border-top-0">CATEGORY</th>
                                             <th class="border-top-0">OPERATOR NAME</th>
@@ -294,7 +298,6 @@
                                                 $affiliationCat = "Free Swimming";
                                             }
                                             echo '<tr>
-                                            <td class="txt-oflo"><input type="checkbox" id="editAthlete" name="editAthlete" value="'.$clubId.'"></td>
                                             <td class="txt-oflo">'.$clubName.'</td>
                                             <td class="txt-oflo">'.$affiliationCat.'</td>
                                             <td class="txt-oflo">'.$athleteName.'</td>
@@ -371,7 +374,7 @@
 </body>
 <script type="text/javascript">
     function clicked() {
-       if (confirm('Do you want to delete the Athlete?')) {
+       if (confirm('Do you want to delete the Club? All Athletes and Coaches from this Club will also get deleted.')) {
            yourformelement.submit();
        } else {
            return false;
