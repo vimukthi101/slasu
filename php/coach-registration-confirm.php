@@ -211,26 +211,26 @@
                         <form role="form" action="coach-registration-controller.php" method="POST" class="contact-one__form">
                             <div class="row">
                                 <div class="col-md-6">
-<?php
-echo '<p>optradio : '.$_SESSION["optradio"].'</p>
-                          <p>clubList : '.$_SESSION["clubList"].'</p>
-                          <p>category : '.$_SESSION["category"].'</p>
-                          <p>name : '.$_SESSION["name"].'</p>
-                          <p>gender : '.$_SESSION["gender"].'</p>
-                          <p>phone1 : '.$_SESSION["phone1"].'</p>
-                          <p>phone2 : '.$_SESSION["phone2"].'</p>
-                          <p>whatsapp : '.$_SESSION["whatsapp"].'</p>
-                          <p>emailAd : '.$_SESSION["emailAd"].'</p>
-                          <p>nameForId : '.$_SESSION["nameForId"].'</p>
-                          <p>photo : '.$fileNamePhoto.'</p>
-                          <p>application : '.$fileNameApplication.'</p>
-                          <p>dob : '.$_SESSION["dob"].'</p>
-                          <p>address : '.$_SESSION["address"].'</p>
-                          <p>nic : '.$_SESSION["nic"].'</p>
-                          <p>designation : '.$_SESSION["designation"].'</p>
-                          <p>nicPhoto : '.$fileNameNic.'</p>
-                          <p>qualification : '.$_SESSION["qualification"].'</p>
-                          <p>ppno : '.$_SESSION["ppno"].'</p>'; 
+                    <?php
+                    echo '<p>Club Type : '.$_SESSION["optradio"].'</p>
+                          <p>Club Name : '.$_SESSION["clubList"].'</p>
+                          <p>Category : '.$_SESSION["category"].'</p>
+                          <p>Name : '.$_SESSION["name"].'</p>
+                          <p>Gender : '.$_SESSION["gender"].'</p>
+                          <p>Primary Phone : '.$_SESSION["phone1"].'</p>
+                          <p>Secondary Phone : '.$_SESSION["phone2"].'</p>
+                          <p>WhatsApp : '.$_SESSION["whatsapp"].'</p>
+                          <p>Email Address : '.$_SESSION["emailAd"].'</p>
+                          <p>Name For ID : '.$_SESSION["nameForId"].'</p>
+                          <p>Photo : '.$fileNamePhoto.'</p>
+                          <p>Application : '.$fileNameApplication.'</p>
+                          <p>Date Of Birth : '.$_SESSION["dob"].'</p>
+                          <p>Address : '.$_SESSION["address"].'</p>
+                          <p>NIC : '.$_SESSION["nic"].'</p>
+                          <p>Designation : '.$_SESSION["designation"].'</p>
+                          <p>Nic Photo : '.$fileNameNic.'</p>
+                          <p>Qualification : '.$_SESSION["qualification"].'</p>
+                          <p>Passport Number : '.$_SESSION["ppno"].'</p>'; 
 ?>
 
 </div>

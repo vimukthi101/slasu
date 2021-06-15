@@ -251,9 +251,19 @@
                                                 <span style="color:red;margin-left:20px;">Only jpg,png,jpeg are supportrd for photo.</span>
                                                 <div class="col-lg-12"><hr/></div>
                                             </div>';
-                                        } else if ($error == "wi"){
+                                        } else if ($error == "de"){
                                             echo '<div class="col-md-12">
                                                 <span style="color:red;margin-left:20px;">Couldn\'t delete the club or it\'s Athletes or Coaches.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "du"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Disabled Succesfully.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "au"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:green;margin-left:20px;">Activated Succesfully.</span>
                                                 <div class="col-lg-12"><hr/></div>
                                             </div>';
                                         }
@@ -277,6 +287,7 @@
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>
+                                            <th class="border-top-0"></th>
                                         </tr>
                                     </thead>
                                     <tbody>';
@@ -288,6 +299,7 @@
                                             $operatorMobile = $row['operatorMobile'];
                                             $clubContactOne = $row['clubContactOne'];
                                             $district = $row['district'];
+                                            $status = $row['status'];
                                             if($affiliationCat == 1){
                                                 $affiliationCat = "Swimming";
                                             } else if($affiliationCat == 2) {
@@ -303,8 +315,25 @@
                                             <td class="txt-oflo">'.$athleteName.'</td>
                                             <td class="txt-oflo">'.$operatorMobile.'</td>
                                             <td class="txt-oflo">'.$clubContactOne.'</td>
-                                            <td class="txt-oflo">'.$district.'</td>
-                                            <td class="txt-oflo">
+                                            <td class="txt-oflo">'.$district.'</td>';
+                                            if($status != 2){
+                                                echo '<td class="txt-oflo">
+                                                    <form role="form" method="post" action="activate.php">
+                                                        <input type="hidden" name="id" id="id" value="'.$clubId.'"></input>
+                                                        <input style="float:right;" type="submit" name="submit" value="Activate" id="submit" class="btn btn-success" style="margin: auto;">
+                                                        </input>
+                                                    </form>
+                                                </td>';
+                                            } else {
+                                                echo '<td class="txt-oflo">
+                                                    <form role="form" method="post" action="disable.php">
+                                                        <input type="hidden" name="id" id="id" value="'.$clubId.'"></input>
+                                                        <input style="float:right;" type="submit" name="submit" value="Disable" id="submit" class="btn btn-warning" style="margin: auto;">
+                                                        </input>
+                                                    </form>
+                                                </td>';
+                                            }
+                                            echo '<td class="txt-oflo">
                                                 <form role="form" method="post" action="viewClub.php">
                                                     <input type="hidden" name="id" id="id" value="'.$clubId.'"></input>
                                                     <input style="float:right;" type="submit" name="submit" value="View" id="submit" class="btn btn-info" style="margin: auto;">

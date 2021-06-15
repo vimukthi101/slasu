@@ -32,6 +32,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <script src="assets/js/jquery.min.js"></script>
     <script type="text/javascript">
 
         function yesnoCheck() {
@@ -47,6 +48,35 @@
         }
         
         </script>
+            <script>
+        $(document).ready(function() {
+            $("input[name='optradio']").click(function() {
+                getSelectOptions($('input:radio[name=optradio]:checked').val());
+            });
+        });
+
+        function getSelectOptions(radioVal) {
+            $.ajax({
+                type: 'POST',
+                url: 'php/getClubList.php',
+                data: {'radioval': radioVal},
+                success: function(data) {
+                    updateSelect(data)
+                }
+            });
+        }
+
+        function updateSelect(data) {
+            var json = $.parseJSON(data);
+            console.log(json);
+            var selectHTML;
+            $.each(json, function(key, value) {
+                console.log(value);
+                selectHTML += "<option value=" + value + ">" + value + "</option>";
+            });
+            $('#clubList').html(selectHTML);
+        }
+    </script>
 </head>
 
 <body>
@@ -420,7 +450,6 @@
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
 
     <!-- Template JS -->
-    <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/bootstrap-datepicker.min.js"></script>
     <script src="assets/js/bootstrap-select.min.js"></script>

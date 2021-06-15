@@ -12,6 +12,7 @@
                     if(in_array($fileTypeApplication, $allowTypes)){
                         $requestLetter = $_FILES['requestLetter']['tmp_name']; 
                         $applicationContent = addslashes(file_get_contents($requestLetter));
+                        $_SESSION["requestLetter"] = $applicationContent;
                     } else {
                         session_destroy();
                         header('Location:../club-registration.php?er=wi');
@@ -66,7 +67,6 @@
                 $_SESSION["whatsapp"] = $whatsapp;
                 $_SESSION["operatorNic"] = $operatorNic;
                 $_SESSION["regRadio"] = $regRadio;
-                $_SESSION["requestLetter"] = $applicationContent;
                 $_SESSION["category"] = $category;
                 $_SESSION["clubAddress"] = $clubAddress;
                 $_SESSION["clubPhone1"] = $clubPhone1;
@@ -198,25 +198,24 @@
                                 <div class="col-md-6">
 
 <?php
-echo '<p>optradio : '.$_SESSION["optradio"].'</p>
+echo '<p>Club Type : '.$_SESSION["optradio"].'</p>
                       <p>Name : '.$_SESSION["name"].'</p>
-                      <p>district : '.$_SESSION["district"].'</p>
-                      <p>operatorName : '.$_SESSION["operatorName"].'</p>
-                      <p>operatorEmail : '.$_SESSION["operatorEmail"].'</p>
-                      <p>phone : '.$_SESSION["phone"].'</p>
-                      <p>whatsapp : '.$_SESSION["whatsapp"].'</p>
-                      <p>operatorNic : '.$_SESSION["operatorNic"].'</p>
-                      <p>regRadio : '.$_SESSION["regRadio"].'</p>
-                      <p>requestLetter : '.$fileNameApplication.'</p>
-                      <p>category : '.$_SESSION["category"].'</p>
-                      <p>clubAddress : '.$_SESSION["clubAddress"].'</p>
-                      <p>clubPhone1 : '.$_SESSION["clubPhone1"].'</p>
-                      <p>clubPhone2 : '.$_SESSION["clubPhone2"].'</p>
-                      <p>clubEmail1 : '.$_SESSION["clubEmail1"].'</p>
-                      <p>clubEmail2 : '.$_SESSION["clubEmail2"].'</p>
-                      <p>inchargeName : '.$_SESSION["inchargeName"].'</p>
-                      <p>inchargePhone : '.$_SESSION["inchargePhone"].'</p>
-                      <p>inchargeEmail : '.$_SESSION["inchargeEmail"].'</p>';
+                      <p>District : '.$_SESSION["district"].'</p>
+                      <p>Operator Name : '.$_SESSION["operatorName"].'</p>
+                      <p>Operator Email : '.$_SESSION["operatorEmail"].'</p>
+                      <p>Phone : '.$_SESSION["phone"].'</p>
+                      <p>WhatsApp : '.$_SESSION["whatsapp"].'</p>
+                      <p>Operator NIC : '.$_SESSION["operatorNic"].'</p>
+                      <p>Registration Type : '.$_SESSION["regRadio"].'</p>
+                      <p>Category : '.$_SESSION["category"].'</p>
+                      <p>Club Address : '.$_SESSION["clubAddress"].'</p>
+                      <p>Club Primary Phone : '.$_SESSION["clubPhone1"].'</p>
+                      <p>Club Secondary Phone : '.$_SESSION["clubPhone2"].'</p>
+                      <p>Club Primary Email : '.$_SESSION["clubEmail1"].'</p>
+                      <p>club Secondary Email : '.$_SESSION["clubEmail2"].'</p>
+                      <p>Incharge Name : '.$_SESSION["inchargeName"].'</p>
+                      <p>Incharge Phone : '.$_SESSION["inchargePhone"].'</p>
+                      <p>Incharge Email : '.$_SESSION["inchargeEmail"].'</p>';
 ?>
 </div>
 <div class="col-lg-12"><hr/></div>

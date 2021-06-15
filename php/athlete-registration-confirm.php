@@ -202,25 +202,25 @@
                             <div class="row">
                                 <div class="col-md-6">
 <?php
-                                    echo '<p>optradio : '.$_SESSION["optradio"].'</p>
-                      <p>category : '.$_SESSION["category"].'</p>
-                      <p>name : '.$_SESSION["name"].'</p>
-                      <p>gender : '.$_SESSION["gender"].'</p>
-                      <p>phone1 : '.$_SESSION["phone1"].'</p>
-                      <p>nameForId : '.$_SESSION["nameForId"].'</p>
-                      <p>bbno : '.$_SESSION["bbno"].'</p>
-                      <p>dob : '.$_SESSION["dob"].'</p>
-                      <p>postal : '.$_SESSION["postal"].'</p>
-                      <p>district : '.$_SESSION["district"].'</p>
-                      <p>bbdate : '.$_SESSION["bbdate"].'</p>
-                      <p>bbPhoto : '.$fileName.'</p>
-                      <p>clubList : '.$_SESSION["clubList"].'</p>
-                      <p>phone2 : '.$_SESSION["phone2"].'</p>
-                      <p>whatsapp : '.$_SESSION["whatsapp"].'</p>
-                      <p>emailAd : '.$_SESSION["emailAd"].'</p>
-                      <p>postalId : '.$_SESSION["postalId"].'</p>
-                      <p>nic : '.$_SESSION["nic"].'</p>
-                      <p>ppno : '.$_SESSION["ppno"].'</p>';
+                                    echo '<p>Club Type : '.$_SESSION["optradio"].'</p>
+                      <p>Category : '.$_SESSION["category"].'</p>
+                      <p>Name : '.$_SESSION["name"].'</p>
+                      <p>Gender : '.$_SESSION["gender"].'</p>
+                      <p>Primary Phone : '.$_SESSION["phone1"].'</p>
+                      <p>Name For ID : '.$_SESSION["nameForId"].'</p>
+                      <p>Birth Certificate No : '.$_SESSION["bbno"].'</p>
+                      <p>Date of Birth : '.$_SESSION["dob"].'</p>
+                      <p>Postal Address : '.$_SESSION["postal"].'</p>
+                      <p>District : '.$_SESSION["district"].'</p>
+                      <p>Birth Certificate Issued Date : '.$_SESSION["bbdate"].'</p>
+                      <p>Birth Certificate Photo : '.$fileName.'</p>
+                      <p>Club Name : '.$_SESSION["clubList"].'</p>
+                      <p>Phone : '.$_SESSION["phone2"].'</p>
+                      <p>WhatsApp : '.$_SESSION["whatsapp"].'</p>
+                      <p>Email : '.$_SESSION["emailAd"].'</p>
+                      <p>Postal ID : '.$_SESSION["postalId"].'</p>
+                      <p>NIC : '.$_SESSION["nic"].'</p>
+                      <p>Passport Number : '.$_SESSION["ppno"].'</p>';
                                 ?>
 
 </div>

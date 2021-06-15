@@ -27,11 +27,23 @@
                 } else {
                     $_SESSION["gender"] = 2;
                 }
-                $addCard = "INSERT INTO coach (regType,clubId,affiliationCat,coachName,gender,coachMobileOne,coachMobileTwo,coachWhatsapp,coachEmail,coachNameForId,photoForId,application,dob,homeAddress,designation,nic,nicPhoto,qualifications,ppNo) VALUES('".$_SESSION["optradio"]."','".$_SESSION["clubList"]."','".$_SESSION["category"]."','".$_SESSION["name"]."','".$_SESSION["gender"]."','".$_SESSION["phone1"]."','".$_SESSION["phone2"]."','".$_SESSION["whatsapp"]."','".$_SESSION["emailAd"]."','".$_SESSION["nameForId"]."','".$_SESSION["photo"]."','".$_SESSION["application"]."','".$_SESSION["dob"]."','".$_SESSION["address"]."','".$_SESSION["designation"]."','".$_SESSION["nic"]."','".$_SESSION["nicPhoto"]."','".$_SESSION["qualification"]."','".$_SESSION["ppno"]."')";
-                if(mysqli_query($con, $addCard)){
-                    //success
-                    session_destroy();
-                    header('Location:../coach-registration.php?er=su');
+                $getClubName = "SELECT clubId from club WHERE clubName='".$_SESSION["clubList"]."'";
+                $coachR = mysqli_query($con, $getClubName);
+                $rowCount = mysqli_num_rows($coachR);
+                if($rowCount != 0){
+                    while($rowR = mysqli_fetch_array($coachR)){
+                        $clubId = $rowR['clubId'];
+                    }
+                    $addCard = "INSERT INTO coach (regType,clubId,affiliationCat,coachName,gender,coachMobileOne,coachMobileTwo,coachWhatsapp,coachEmail,coachNameForId,photoForId,application,dob,homeAddress,designation,nic,nicPhoto,qualifications,ppNo) VALUES('".$_SESSION["optradio"]."','".$clubId."','".$_SESSION["category"]."','".$_SESSION["name"]."','".$_SESSION["gender"]."','".$_SESSION["phone1"]."','".$_SESSION["phone2"]."','".$_SESSION["whatsapp"]."','".$_SESSION["emailAd"]."','".$_SESSION["nameForId"]."','".$_SESSION["photo"]."','".$_SESSION["application"]."','".$_SESSION["dob"]."','".$_SESSION["address"]."','".$_SESSION["designation"]."','".$_SESSION["nic"]."','".$_SESSION["nicPhoto"]."','".$_SESSION["qualification"]."','".$_SESSION["ppno"]."')";
+                    if(mysqli_query($con, $addCard)){
+                        //success
+                        session_destroy();
+                        header('Location:../coach-registration.php?er=su');
+                    } else {
+                        //query failed
+                        session_destroy();
+                        header('Location:../coach-registration.php?er=qf');
+                    }
                 } else {
                     //query failed
                     session_destroy();
