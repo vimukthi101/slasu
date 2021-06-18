@@ -187,6 +187,13 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-key"></i>
+                                <span class="hide-menu">Admins</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="club.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-home "></i>

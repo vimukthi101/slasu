@@ -187,6 +187,13 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-key"></i>
+                                <span class="hide-menu">Admins</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="club.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-home "></i>
@@ -271,13 +278,13 @@
                                         <div class="form-group col-md-6">
                                             <label class="">Photo For ID</label>
                                             <div class="">
-                                                <img src="data:image/jpeg;base64,'.base64_encode($photoForId).'"/>
+                                                <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($photoForId).'"/>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="">Application</label>
                                             <div class="">
-                                                <img src="data:image/jpeg;base64,'.base64_encode($application).'"/>
+                                                <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($application).'"/>
                                             </div>
                                         </div>
 		                         		<div class="form-group col-md-5">
@@ -388,7 +395,7 @@
 		                                <div class="form-group col-md-12">
 		                                    <label class="">NIC Photo</label>
 		                                    <div class="">
-		                                    	<img src="data:image/jpeg;base64,'.base64_encode($nicPhoto).'"/>
+		                                    	<img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($nicPhoto).'"/>
 		                                    </div>
 		                                </div>
 		                                ';

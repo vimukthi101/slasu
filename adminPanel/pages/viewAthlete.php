@@ -388,7 +388,7 @@
 		                                <div class="form-group col-md-12">
 		                                    <label class="">Birth Certificate</label>
 		                                    <div class="">
-		                                    	<img src="data:image/jpeg;base64,'.base64_encode($bbPhoto).'"/>
+		                                    	<img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($bbPhoto).'"/>
 		                                    </div>
 		                                </div>
 		                                ';

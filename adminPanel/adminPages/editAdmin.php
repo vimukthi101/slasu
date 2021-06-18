@@ -1,9 +1,36 @@
 <?php
-    include_once('../../php/db.php');
-    if(!isset($_SESSION[''])){
+	include_once('../../php/db.php');
+	if(!isset($_SESSION[''])){
         session_start();
     }
     if(isset($_SESSION["adminId"])){
+	    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) && isset($_POST['id'])){
+	        if(!empty($_POST['id'])){
+	        	$id = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['id'])));
+	            $getCard = "SELECT * FROM admin WHERE adminId='".$id."'";
+	            $resultCard = mysqli_query($con, $getCard);
+	            if(mysqli_num_rows($resultCard) != 0){
+	            	while($row = mysqli_fetch_array($resultCard)){
+	                    $adminId = $row['adminId'];
+                        $firstName = $row['firstName'];
+                        $secondName = $row['secondName'];
+                        $nic = $row['nic'];
+                        $email = $row['email'];
+                        $mobile = $row['mobile'];
+                        $role = $row['role'];
+	            	}
+	            } else {
+	                //card exists
+	                header('Location:admin.php');
+	            }
+	        } else {
+	            //empty fields redirect to cards
+	            header('Location:admin.php');
+	        }
+	    } else {
+	        //if submit button is not clicked
+	        header('Location:admin.php');	
+	    }
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -14,14 +41,14 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title style="text-transform:uppercase;"><?php echo $_SESSION["clubName"] ?></title>
+    <title style="text-transform:uppercase;"><?php echo $_SESSION["firstName"] ?></title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon.png">
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
         <style type="text/css">
         .footer {
-  position: fixed;
+  position: inherit;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -87,22 +114,7 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item search-box">
-                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
-                                <div class="d-flex align-items-center">
-                                    <i class="mdi mdi-magnify font-20 me-1"></i>
-                                    <div class="ms-1 d-none d-sm-block">
-                                        <span>Search</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter">
-                                <a class="srh-btn">
-                                    <i class="ti-close"></i>
-                                </a>
-                            </form>
-                        </li>
+                        
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -204,22 +216,22 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title" style="text-transform:uppercase;"><?php echo $_SESSION["clubName"] ?></h4>
+                        
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="">
-                                        <a href="dashboard.php">Home</a>
-                                    </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Payment Status</li>
+                                    <li class=""><a href="dashboard.php">Home</a></li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page"><a href="athlete.php">Athletes</a></li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Edit</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -229,69 +241,59 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- column -->
+                    <form role="form" action="adminEdit.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Payment Status</h4>
+                                <h4 class="card-title">Admin Information</h4>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">NAME</th>
-                                            <th class="border-top-0">STATUS</th>
-                                            <th class="border-top-0">DATE</th>
-                                            <th class="border-top-0">PRICE</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-
-                                            <td class="txt-oflo">Elite admin</td>
-                                            <td><span class="label label-success label-rounded">SALE</span> </td>
-                                            <td class="txt-oflo">April 18, 2021</td>
-                                            <td><span class="font-medium">$24</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Real Homes WP Theme</td>
-                                            <td><span class="label label-info label-rounded">EXTENDED</span></td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="font-medium">$1250</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Ample Admin</td>
-                                            <td><span class="label label-purple label-rounded">Tax</span></td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="font-medium">$1250</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Medical Pro WP Theme</td>
-                                            <td><span class="label label-success label-rounded">Sale</span></td>
-                                            <td class="txt-oflo">April 20, 2021</td>
-                                            <td><span class="font-medium">-$24</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Hosting press html</td>
-                                            <td><span class="label label-success label-rounded">SALE</span></td>
-                                            <td class="txt-oflo">April 21, 2021</td>
-                                            <td><span class="font-medium">$24</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Digital Agency PSD</td>
-                                            <td><span class="label label-danger label-rounded">Tax</span> </td>
-                                            <td class="txt-oflo">April 23, 2021</td>
-                                            <td><span class="font-medium">-$14</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                            <div class="card-body row">
+		                        <?php
+		                         echo '<div class="form-group col-md-12">
+		                                    <label class="">Personal Information</label>
+		                                    <hr/>
+		                                </div>
+		                         		<div class="form-group col-md-5">
+		                                    <label class="">First Name</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$firstName.'" class="form-control form-control-line" name="firstName" id="firstName" required pattern="^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Second Name</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$secondName.'" class="form-control form-control-line" name="secondName" id="secondName" pattern="^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Contact Number</label>
+		                                    <div class="">
+		                                        <input type="tel" value="'.$mobile.'" class="form-control form-control-line" name="mobile" id="mobile">
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Email</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$email.'" class="form-control form-control-line" name="email" id="email" required>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">NIC</label>
+		                                    <div class="">
+		                                        <input type="text" value="'.$nic.'" class="form-control form-control-line" name="nic" id="nic" pattern="^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$" title="Should match NIC format" required>
+		                                    </div>
+		                                </div>
+                    <div class="col-lg-12"><hr/></div>
+                                    <input type="text" value="'.$adminId.'" name="athleteId" id="athleteId" required hidden>
+                                <div class="col-md-12" style="text-align: center;">
+                                    <input type="submit" name="submit" value="Edit" onclick="return clicked();" id="submit" class="btn btn-success" style="margin: auto;"></input>
+                                </div><!-- /.col-md-12 -->
+		                                ';
+		                        ?>
+                        	</div>	
+                        </div></form>
                     </div>
+
                 </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -329,7 +331,15 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
-
+<script type="text/javascript">
+    function clicked() {
+       if (confirm('Do you want to update the details?')) {
+           yourformelement.submit();
+       } else {
+           return false;
+       }
+    }
+</script>
 </html>
 <?php
 } else {

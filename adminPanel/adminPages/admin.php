@@ -14,7 +14,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title style="text-transform:uppercase;"><?php echo $_SESSION["clubName"] ?></title>
+    <title style="text-transform:uppercase;"><?php echo $_SESSION["firstName"] ?></title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon.png">
     <!-- Custom CSS -->
@@ -204,7 +204,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title" style="text-transform:uppercase;"><?php echo $_SESSION["clubName"] ?></h4>
+                        
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
@@ -213,13 +213,12 @@
                                     <li class="">
                                         <a href="dashboard.php">Home</a>
                                     </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Payment Status</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Admin</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
-            </div>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -232,63 +231,125 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Payment Status</h4>
+                                <h4 class="card-title">Registered Admins</h4>
+                                <?php
+                                if($_SESSION["role"] == "sadmin"){
+                                   echo '<form role="form" method="post" action="createAdmin.php">
+                                             <input style="float:right;" type="submit" name="submit" value="Create Admin" id="submit" class="btn btn-warning" style="margin: auto;"></input>
+                                         </form>';
+                                     }
+                                ?>
                             </div>
+                            <?php
+                                if(isset($_GET['er'])){
+                                    if(!empty($_GET['er'])){
+                                        $error = $_GET['er'];
+                                        if($error == "su"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Admin record deleted successfully.</span>
+                                                <div class="col-lg-12"></div>
+                                            </div>';
+                                        } else if($error == "er"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Couldn\'t save the changes, try again.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "us"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:green;margin-left:20px;">Updated succesfully.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "mf"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:orange;margin-left:20px;">Couldn\'t send the email with password.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "cs"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:green;margin-left:20px;">Admin record added successfully.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        }
+                                    }
+                                }
+                            ?>
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <?php
+                                    $query = 'SELECT * FROM `admin`';
+                                    $result = mysqli_query($con, $query);
+                                    if(mysqli_num_rows($result) != 0){
+                                        echo '<table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0">NAME</th>
-                                            <th class="border-top-0">STATUS</th>
-                                            <th class="border-top-0">DATE</th>
-                                            <th class="border-top-0">PRICE</th>
-                                        </tr>
+                                            <th class="border-top-0"></th>
+                                            <th class="border-top-0">FIRST NAME</th>
+                                            <th class="border-top-0">SECOND NAME</th>
+                                            <th class="border-top-0">MOBILE</th>
+                                            <th class="border-top-0">EMAIL</th>
+                                            <th class="border-top-0">NIC</th>
+                                            <th class="border-top-0">ROLE</th>';
+                                            if($_SESSION["role"] == "sadmin"){
+                                                echo '<th class="border-top-0"></th><th class="border-top-0"></th><th class="border-top-0"></th>';
+                                            }
+                                        echo '</tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-
-                                            <td class="txt-oflo">Elite admin</td>
-                                            <td><span class="label label-success label-rounded">SALE</span> </td>
-                                            <td class="txt-oflo">April 18, 2021</td>
-                                            <td><span class="font-medium">$24</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Real Homes WP Theme</td>
-                                            <td><span class="label label-info label-rounded">EXTENDED</span></td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="font-medium">$1250</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Ample Admin</td>
-                                            <td><span class="label label-purple label-rounded">Tax</span></td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="font-medium">$1250</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Medical Pro WP Theme</td>
-                                            <td><span class="label label-success label-rounded">Sale</span></td>
-                                            <td class="txt-oflo">April 20, 2021</td>
-                                            <td><span class="font-medium">-$24</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Hosting press html</td>
-                                            <td><span class="label label-success label-rounded">SALE</span></td>
-                                            <td class="txt-oflo">April 21, 2021</td>
-                                            <td><span class="font-medium">$24</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Digital Agency PSD</td>
-                                            <td><span class="label label-danger label-rounded">Tax</span> </td>
-                                            <td class="txt-oflo">April 23, 2021</td>
-                                            <td><span class="font-medium">-$14</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                    <tbody>';
+                                        while($row = mysqli_fetch_array($result)){
+                                            $adminId = $row['adminId'];
+                                            $firstName = $row['firstName'];
+                                            $secondName = $row['secondName'];
+                                            $nic = $row['nic'];
+                                            $email = $row['email'];
+                                            $mobile = $row['mobile'];
+                                            $role = $row['role'];
+                                            echo '<tr>
+                                            <td class="txt-oflo"><input type="checkbox" id="editAthlete" name="editAthlete" value="'.$adminId.'"></td>
+                                            <td class="txt-oflo">'.$firstName.'</td>
+                                            <td class="txt-oflo">'.$secondName.'</td>
+                                            <td class="txt-oflo">'.$mobile.'</td>
+                                            <td class="txt-oflo">'.$email.'</td>
+                                            <td class="txt-oflo">'.$nic.'</td>
+                                            <td class="txt-oflo">'.$role.'</td>';
+                                            if($_SESSION["role"] == "sadmin"){
+                                                if ($role == "admin"){
+                                                echo '<td class="txt-oflo">
+                                                <form role="form" method="post" action="makeSAdmin.php">
+                                                    <input type="hidden" name="id" id="id" value="'.$adminId.'"></input>
+                                                    <input style="float:right;" type="submit"  onclick="return sadmin();" name="submit" value="Make Super Admin" id="submit" class="btn btn-info" style="margin: auto;">
+                                                    </input>
+                                                </form>
+                                            </td>';
+                                            } else {
+                                                echo '<td class="txt-oflo">
+                                                <form role="form" method="post" action="makeAdmin.php">
+                                                    <input type="hidden" name="id" id="id" value="'.$adminId.'"></input>
+                                                    <input style="float:right;" type="submit"  onclick="return admin();" name="submit" value="Make Admin" id="submit" class="btn btn-info" style="margin: auto;">
+                                                    </input>
+                                                </form>
+                                            </td>';
+                                            }
+                                                echo '<td class="txt-oflo">
+                                                <form role="form" method="post" action="editAdmin.php">
+                                                    <input type="hidden" name="id" id="id" value="'.$adminId.'"></input>
+                                                    <input style="float:right;" type="submit" name="submit" value="Edit" id="submit" class="btn btn-success" style="margin: auto;">
+                                                    </input>
+                                                </form>
+                                            </td><td class="txt-oflo">
+                                                            <form role="form" method="post" action="deleteAdmin.php">
+                                                                <input type="hidden" name="delete" id="delete" value="'.$adminId.'"></input>
+                                                                <input style="float:right;" onclick="return clicked();" type="submit" name="submit" value="Delete" id="submit" class="btn btn-danger" style="margin: auto;">
+                                                                </input>
+                                                            </form>
+                                                        </td>
+                                                    </tr>';
+                                            }
+                                            
+                                        }
+                                        echo '</tbody></table>';
+                                    } else {
+                                        echo '<div class="col-12"><h4><center>No Admins Registerd Yet</center></h4></div>';
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -329,7 +390,33 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
-
+<script type="text/javascript">
+    function clicked() {
+       if (confirm('Do you want to delete the Admin?')) {
+           yourformelement.submit();
+       } else {
+           return false;
+       }
+    }
+</script>
+<script type="text/javascript">
+    function sadmin() {
+       if (confirm('Do you want to make him Super Admin?')) {
+           yourformelement.submit();
+       } else {
+           return false;
+       }
+    }
+</script>
+<script type="text/javascript">
+    function admin() {
+       if (confirm('Do you want to make him Admin?')) {
+           yourformelement.submit();
+       } else {
+           return false;
+       }
+    }
+</script>
 </html>
 <?php
 } else {
