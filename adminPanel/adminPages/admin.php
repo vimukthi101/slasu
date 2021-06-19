@@ -273,83 +273,41 @@
                                     }
                                 }
                             ?>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="card">
+                                        <div class="card-body">                                                
+                                            <label class="" for="inputGroupSelect01">Admin Type</label>
+                                            <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
+                                                <option selected disabled>Choose...</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="sadmin">Super Admin</option>
+                                            </select>
+                                            <input type="hidden" name="hidden_country" id="hidden_country" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="table-responsive">
-                                <?php
-                                    $query = 'SELECT * FROM `admin`';
-                                    $result = mysqli_query($con, $query);
-                                    if(mysqli_num_rows($result) != 0){
-                                        echo '<table class="table table-hover">
+                                <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0"></th>
                                             <th class="border-top-0">FIRST NAME</th>
                                             <th class="border-top-0">SECOND NAME</th>
                                             <th class="border-top-0">MOBILE</th>
                                             <th class="border-top-0">EMAIL</th>
                                             <th class="border-top-0">NIC</th>
-                                            <th class="border-top-0">ROLE</th>';
-                                            if($_SESSION["role"] == "sadmin"){
-                                                echo '<th class="border-top-0"></th><th class="border-top-0"></th><th class="border-top-0"></th>';
-                                            }
-                                        echo '</tr>
+                                            <th class="border-top-0">ROLE</th>
+                                            <?php
+                                                if($_SESSION["role"] == "sadmin"){
+                                                    echo '<th class="border-top-0"></th><th class="border-top-0"></th><th class="border-top-0"></th>';
+                                                }
+                                            ?>
+                                        </tr>
                                     </thead>
-                                    <tbody>';
-                                        while($row = mysqli_fetch_array($result)){
-                                            $adminId = $row['adminId'];
-                                            $firstName = $row['firstName'];
-                                            $secondName = $row['secondName'];
-                                            $nic = $row['nic'];
-                                            $email = $row['email'];
-                                            $mobile = $row['mobile'];
-                                            $role = $row['role'];
-                                            echo '<tr>
-                                            <td class="txt-oflo"><input type="checkbox" id="editAthlete" name="editAthlete" value="'.$adminId.'"></td>
-                                            <td class="txt-oflo">'.$firstName.'</td>
-                                            <td class="txt-oflo">'.$secondName.'</td>
-                                            <td class="txt-oflo">'.$mobile.'</td>
-                                            <td class="txt-oflo">'.$email.'</td>
-                                            <td class="txt-oflo">'.$nic.'</td>
-                                            <td class="txt-oflo">'.$role.'</td>';
-                                            if($_SESSION["role"] == "sadmin"){
-                                                if ($role == "admin"){
-                                                echo '<td class="txt-oflo">
-                                                <form role="form" method="post" action="makeSAdmin.php">
-                                                    <input type="hidden" name="id" id="id" value="'.$adminId.'"></input>
-                                                    <input style="float:right;" type="submit"  onclick="return sadmin();" name="submit" value="Make Super Admin" id="submit" class="btn btn-info" style="margin: auto;">
-                                                    </input>
-                                                </form>
-                                            </td>';
-                                            } else {
-                                                echo '<td class="txt-oflo">
-                                                <form role="form" method="post" action="makeAdmin.php">
-                                                    <input type="hidden" name="id" id="id" value="'.$adminId.'"></input>
-                                                    <input style="float:right;" type="submit"  onclick="return admin();" name="submit" value="Make Admin" id="submit" class="btn btn-info" style="margin: auto;">
-                                                    </input>
-                                                </form>
-                                            </td>';
-                                            }
-                                                echo '<td class="txt-oflo">
-                                                <form role="form" method="post" action="editAdmin.php">
-                                                    <input type="hidden" name="id" id="id" value="'.$adminId.'"></input>
-                                                    <input style="float:right;" type="submit" name="submit" value="Edit" id="submit" class="btn btn-success" style="margin: auto;">
-                                                    </input>
-                                                </form>
-                                            </td><td class="txt-oflo">
-                                                            <form role="form" method="post" action="deleteAdmin.php">
-                                                                <input type="hidden" name="delete" id="delete" value="'.$adminId.'"></input>
-                                                                <input style="float:right;" onclick="return clicked();" type="submit" name="submit" value="Delete" id="submit" class="btn btn-danger" style="margin: auto;">
-                                                                </input>
-                                                            </form>
-                                                        </td>
-                                                    </tr>';
-                                            }
-                                            
-                                        }
-                                        echo '</tbody></table>';
-                                    } else {
-                                        echo '<div class="col-12"><h4><center>No Admins Registerd Yet</center></h4></div>';
-                                    }
-                                ?>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -416,6 +374,32 @@
            return false;
        }
     }
+</script>
+<script>
+$(document).ready(function(){
+
+ load_data();
+ 
+ function load_data(query='')
+ {
+  $.ajax({
+   url:"fetchAdmin.php",
+   method:"POST",
+   data:{query:query},
+   success:function(data)
+   {
+    $('tbody').html(data);
+   }
+  })
+ }
+
+ $('#multi_search_filter').change(function(){
+  $('#hidden_country').val($('#multi_search_filter').val());
+  var query = $('#hidden_country').val();
+  load_data(query);
+ });
+ 
+});
 </script>
 </html>
 <?php

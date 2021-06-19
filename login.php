@@ -129,16 +129,12 @@
                                                 echo '<div class="col-md-12">
                                                     <span style="color:red;">No User found for given credentails.</span>
                                                 </div>';
-                                            } else if ($error == "qf"){
+                                            } else if ($error == "na"){
                                                 echo '<div class="col-md-12">
-                                                    <span style="color:red;">Couldn\'t register user, please try again later.</span>
-                                                </div>';
-                                            } else if ($error == "su"){
-                                                echo '<div class="col-md-12">
-                                                    <span style="color:green;">Registered succesfully, please check with club operator for record.</span>
+                                                    <span style="color:green;">Account is not activated yet, Please contact admin.</span>
                                                 </div>';
                                             }
-                                        }
+                                        }   
                                     }
                                 ?>
                         <form action="php/login.php" role="form" method="post" class="contact-one__form contact-form-validated">

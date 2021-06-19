@@ -18,7 +18,12 @@
 	            	$_SESSION["clubId"] = $clubId;
                     $_SESSION["status"] = $status;
             	}
-            	header('Location:../adminPanel/pages/dashboard.php');
+                if($status == 2){
+                    header('Location:../adminPanel/pages/dashboard.php');
+                } else {
+                    session_destroy();
+                    header('Location:../login.php?er=na');
+                }
             } else {
                 //card exists
                 header('Location:../login.php?er=ce');

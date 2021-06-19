@@ -48,7 +48,7 @@
         }
         
         </script>
-            <script>
+        <script>
         $(document).ready(function() {
             $("input[name='optradio']").click(function() {
                 getSelectOptions($('input:radio[name=optradio]:checked').val());

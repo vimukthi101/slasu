@@ -277,12 +277,25 @@
                                     }
                                 }
                             ?>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="card">
+                                        <div class="card-body">                                                
+                                            <label class="" for="inputGroupSelect01">Aquatic Category</label>
+                                            <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
+                                                <option selected disabled>Choose...</option>
+                                                <option value="1">Swimming</option>
+                                                <option value="2">Water Polo</option>
+                                                <option value="3">High Diving</option>
+                                                <option value="4">Free Swimming</option>
+                                            </select>
+                                            <input type="hidden" name="hidden_country" id="hidden_country" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="table-responsive">
-                                <?php
-                                    $query = 'SELECT * FROM `club`';
-                                    $result = mysqli_query($con, $query);
-                                    if(mysqli_num_rows($result) != 0){
-                                        echo '<table class="table table-hover">
+                               <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">CLUB NAME</th>
@@ -297,77 +310,9 @@
                                             <th class="border-top-0"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>';
-                                        while($row = mysqli_fetch_array($result)){
-                                            $clubName = $row['clubName'];
-                                            $clubId = $row['clubId'];
-                                            $affiliationCat = $row['affiliationCat'];
-                                            $athleteName = $row['operatorName'];
-                                            $operatorMobile = $row['operatorMobile'];
-                                            $clubContactOne = $row['clubContactOne'];
-                                            $district = $row['district'];
-                                            $status = $row['status'];
-                                            if($affiliationCat == 1){
-                                                $affiliationCat = "Swimming";
-                                            } else if($affiliationCat == 2) {
-                                                $affiliationCat = "Water Polo";
-                                            } else if($affiliationCat == 3) {
-                                                $affiliationCat = "High Diving";
-                                            } else if($affiliationCat == 4) {
-                                                $affiliationCat = "Free Swimming";
-                                            }
-                                            echo '<tr>
-                                            <td class="txt-oflo">'.$clubName.'</td>
-                                            <td class="txt-oflo">'.$affiliationCat.'</td>
-                                            <td class="txt-oflo">'.$athleteName.'</td>
-                                            <td class="txt-oflo">'.$operatorMobile.'</td>
-                                            <td class="txt-oflo">'.$clubContactOne.'</td>
-                                            <td class="txt-oflo">'.$district.'</td>';
-                                            if($status != 2){
-                                                echo '<td class="txt-oflo">
-                                                    <form role="form" method="post" action="activate.php">
-                                                        <input type="hidden" name="id" id="id" value="'.$clubId.'"></input>
-                                                        <input style="float:right;" type="submit" name="submit" value="Activate" id="submit" class="btn btn-success" style="margin: auto;">
-                                                        </input>
-                                                    </form>
-                                                </td>';
-                                            } else {
-                                                echo '<td class="txt-oflo">
-                                                    <form role="form" method="post" action="disable.php">
-                                                        <input type="hidden" name="id" id="id" value="'.$clubId.'"></input>
-                                                        <input style="float:right;" type="submit" name="submit" value="Disable" id="submit" class="btn btn-warning" style="margin: auto;">
-                                                        </input>
-                                                    </form>
-                                                </td>';
-                                            }
-                                            echo '<td class="txt-oflo">
-                                                <form role="form" method="post" action="viewClub.php">
-                                                    <input type="hidden" name="id" id="id" value="'.$clubId.'"></input>
-                                                    <input style="float:right;" type="submit" name="submit" value="View" id="submit" class="btn btn-info" style="margin: auto;">
-                                                    </input>
-                                                </form>
-                                            </td>
-                                            <td class="txt-oflo">
-                                                <form role="form" method="post" action="editClub.php">
-                                                    <input type="hidden" name="id" id="id" value="'.$clubId.'"></input>
-                                                    <input style="float:right;" type="submit" name="submit" value="Edit" id="submit" class="btn btn-success" style="margin: auto;">
-                                                    </input>
-                                                </form>
-                                            </td>
-                                            <td class="txt-oflo">
-                                                <form role="form" method="post" action="deleteClub.php">
-                                                    <input type="hidden" name="delete" id="delete" value="'.$clubId.'"></input>
-                                                    <input style="float:right;" onclick="return clicked();" type="submit" name="submit" value="Delete" id="submit" class="btn btn-danger" style="margin: auto;">
-                                                    </input>
-                                                </form>
-                                            </td>
-                                        </tr>';
-                                        }
-                                        echo '</tbody></table>';
-                                    } else {
-                                        echo '<div class="col-12"><h4><center>No Clubs Registerd Yet</center></h4></div>';
-                                    }
-                                ?>
+                                    <tbody>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -416,6 +361,32 @@
            return false;
        }
     }
+</script>
+<script>
+$(document).ready(function(){
+
+ load_data();
+ 
+ function load_data(query='')
+ {
+  $.ajax({
+   url:"fetchCubList.php",
+   method:"POST",
+   data:{query:query},
+   success:function(data)
+   {
+    $('tbody').html(data);
+   }
+  })
+ }
+
+ $('#multi_search_filter').change(function(){
+  $('#hidden_country').val($('#multi_search_filter').val());
+  var query = $('#hidden_country').val();
+  load_data(query);
+ });
+ 
+});
 </script>
 </html>
 <?php
