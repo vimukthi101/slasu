@@ -31,6 +31,8 @@
                 $addCard = "INSERT INTO club (clubType,clubName,district,operatorName,operatorEmail,operatorMobile,operatorPassword,operatorWhatsapp,operatorNic,regType,requestLetter,affiliationCat,postalAddress,clubContactOne,clubContactTwo,clubEmailOne,clubEmailTwo,inchargeName,inchargeMobile,inchargeEmail) VALUES('".$_SESSION["optradio"]."','".$_SESSION["name"]."','".$_SESSION["district"]."','".$_SESSION["operatorName"]."','".$_SESSION["operatorEmail"]."','".$_SESSION["phone"]."','".$password."','".$_SESSION["whatsapp"]."','".$_SESSION["operatorNic"]."','".$_SESSION["regRadio"]."','".$_SESSION["requestLetter"]."','".$_SESSION["category"]."','".$_SESSION["clubAddress"]."','".$_SESSION["clubPhone1"]."','".$_SESSION["clubPhone2"]."','".$_SESSION["clubEmail1"]."','".$_SESSION["clubEmail2"]."','".$_SESSION["inchargeName"]."','".$_SESSION["inchargePhone"]."','".$_SESSION["inchargeEmail"]."')";
                 if(mysqli_query($con, $addCard)){
                     //success
+                    $from = "info@thestory.host";
+                    $headers = "From:" . $from;
                     $to = $_SESSION["operatorEmail"];
                     $subject = "Account Created Successfully at SLASU";
 $message = "Hi ".$_SESSION["operatorName"].",
@@ -48,7 +50,7 @@ Please change your password after login to the system.
 Thank You
 Admin,
 SLASU";
-                    if (mail($to, $subject, $message)){
+                    if (mail($to, $subject, $message, $headers)){
                         session_destroy();
                         header('Location:../club-registration.php?er=su');
                     } else {

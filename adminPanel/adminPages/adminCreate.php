@@ -28,7 +28,9 @@
                 $query = "INSERT INTO `admin`(`firstName`, `secondName`, `userName`, `email`, `mobile`, `nic`, `password`, `role`) VALUES ('".$firstName."','".$secondName."','".$uName."','".$email."','".$mobile."','".$nic."','".$password."','admin')";
                 if(mysqli_query($con, $query)){ 
                 //success
+                    $from = "info@thestory.host";
                     $subject = "Admin Account Created Successfully at SLASU";
+                    $headers = "From:" . $from;
 $message = "Hi ".$firstName.",
 
 Your account was created successfully at Sri Lanka Aquatic Sports Union.
@@ -44,7 +46,7 @@ Please change your password after login to the system.
 Thank You
 Super Admin,
 SLASU";
-                    if (mail($email, $subject, $message)){
+                    if (mail($email, $subject, $message, $headers)){
                         header('Location:admin.php?er=cs');
                     } else {
                         header('Location:admin.php?er=mf');
