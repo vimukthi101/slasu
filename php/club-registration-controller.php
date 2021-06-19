@@ -33,15 +33,21 @@
                     //success
                     $to = $_SESSION["operatorEmail"];
                     $subject = "Account Created Successfully at SLASU";
-                    $message = "<h1>Your account was created successfully at Sri Lanka Aquatic Sports Union.</h1><br/>
-                                <p>Use following credentails to login to the system.</p>
-                                <p> Link : http://localhost:1234/slasu/login.php <br/>
-                                <p> User Name : ".$_SESSION["phone"]."</P><br/>
-                                <p> Password : ".$password."</P><br/><br/><br/>
-                                <p>Please change your password after login to the system.</p><br/><br/><br/>
-                                <p>Thank You</p><br/>
-                                <p>Admin,</p><br/>
-                                <p>SLASU</p>";
+$message = "Hi ".$_SESSION["operatorName"].",
+
+Your account was created successfully at Sri Lanka Aquatic Sports Union.
+
+Use following credentails to login to the system.
+
+Link : http://localhost:1234/slasu/login.php
+User Name : ".$_SESSION["phone"]."
+Password : ".$password."
+
+Please change your password after login to the system.
+
+Thank You
+Admin,
+SLASU";
                     if (mail($to, $subject, $message)){
                         session_destroy();
                         header('Location:../club-registration.php?er=su');

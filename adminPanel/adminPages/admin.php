@@ -269,6 +269,11 @@
                                                 <span style="color:green;margin-left:20px;">Admin record added successfully.</span>
                                                 <div class="col-lg-12"><hr/></div>
                                             </div>';
+                                        } else if ($error == "ae"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Email or username already exists.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
                                         }
                                     }
                                 }
