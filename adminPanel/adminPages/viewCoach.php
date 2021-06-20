@@ -269,6 +269,68 @@
                             <div class="card-body">
                                 <h4 class="card-title">Coach Information</h4>
                             </div>
+                            <div class="row">
+                                <div class="col-8 align-self-center">
+                            
+                                </div>
+                                <div class="col-2 align-self-center">
+                                    <div>
+                                        <form role="form" action="exportToPdf-Coach.php" method="POST">
+                                            <input type="submit" class="form-control btn btn-success" value="Export To PDF">
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-2 align-self-center">
+                            
+                                </div>
+                            </div>
+                            <?php
+                            $html = '<div class="form-group col-md-4">
+                                                <label class="">Application</label>
+                                                <div class="">
+                                                    <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($application).'"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                            <label class="">Personal Information</label>
+                                            <hr/>
+                                        </div>
+                                            <div class="form-group col-md-4">
+                                                <label class="">Photo For ID</label>
+                                                <div class="">
+                                                    <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($photoForId).'"/>
+                                                </div>
+                                            </div>
+                                            <label class="">Full Name : '.$athleteName.'</label><br/><br/>
+                                            <label class="">Name For ID : '.$nameForCert.'</label><br/><br/>
+                                            <label class="">Category : '.$affiliationCat.'</label><br/><br/>
+                                            <label class="">Designation : '.$designation.'</label><br/><br/>
+                                            <label class="">qualifications : '.$qualifications.'</label><br/><br/>
+                                            <label class="">Gender : '.$gender.'</label><br/><br/>
+                                            <label class="">DOB : '.$dob.'</label><br/><br/>
+                                            <label class="">Address : '.$address.'</label><br/><br/>
+                                        <div class="form-group col-md-12">
+                                            <label class="">Contact Information</label>
+                                            <hr/>
+                                        </div>
+                                            <label class="">Primary Contact Number : '.$phone1.'</label><br/><br/>
+                                            <label class="">Secondary Contact Number : '.$phone2.'</label><br/><br/>
+                                            <label class="">WhatsApp Number : '.$whatsapp.'</label><br/><br/>
+                                            <label class="">Email : '.$email.'</label><br/><br/>
+                                        <div class="form-group col-md-12">
+                                            <label class="">ID Information</label>
+                                            <hr/>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                                <label class="">NIC Photo</label>
+                                                <div class="">
+                                                    <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($nicPhoto).'"/>
+                                                </div>
+                                            </div>
+                                            <label class="">NIC : '.$nic.'</label><br/><br/>
+                                            <label class="">Passport Number : '.$ppNo.'</label>';
+                                        $_SESSION['html'] = $html;
+                            ?>
                             <div class="card-body row">
 		                        <?php
 		                         echo '<div class="form-group col-md-12">

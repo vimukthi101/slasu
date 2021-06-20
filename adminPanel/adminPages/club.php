@@ -234,7 +234,67 @@
                                 <h4 class="card-title">Registered Clubs</h4>
                                 
                             </div>
+                            <div class="row">
+                                <div class="col-9 align-self-center">
+                            
+                                </div>
+                                <div class="col-2 align-self-center">
+                                    <div>
+                                        <form role="form" action="exportToPdf-allClub.php" method="POST">
+                                            <input type="submit" class="form-control btn btn-success" value="Export To PDF">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             <?php
+                                $query = 'SELECT * FROM `club`';
+                                $result = mysqli_query($con, $query);
+                                $html = '<table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0">CLUB NAME</th>
+                                            <th class="border-top-0">CATEGORY</th>
+                                            <th class="border-top-0">OPERATOR NAME</th>
+                                            <th class="border-top-0">OPERAOTR MOBILE</th>
+                                            <th class="border-top-0">OPERAOTR WHATSAPP</th>
+                                            <th class="border-top-0">CLUB CONTACT</th>
+                                            <th class="border-top-0">DISTRICT</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>';
+                                if(mysqli_num_rows($result) != 0){
+                                  while($row = mysqli_fetch_array($result)){
+                                    $clubName = $row['clubName'];
+                                    $clubId = $row['clubId'];
+                                    $affiliationCat = $row['affiliationCat'];
+                                    $athleteName = $row['operatorName'];
+                                    $operatorMobile = $row['operatorMobile'];
+                                    $operatorWhatsapp = $row['operatorWhatsapp'];
+                                    $clubContactOne = $row['clubContactOne'];
+                                    $district = $row['district'];
+                                    $status = $row['status'];
+                                    if($affiliationCat == 1){
+                                        $affiliationCat = "Swimming";
+                                    } else if($affiliationCat == 2) {
+                                        $affiliationCat = "Water Polo";
+                                    } else if($affiliationCat == 3) {
+                                        $affiliationCat = "High Diving";
+                                    } else if($affiliationCat == 4) {
+                                        $affiliationCat = "Free Swimming";
+                                    }
+                                    $html .= '<br/><tr>
+                                                <td class="txt-oflo">'.$clubName.'</td>
+                                                <td class="txt-oflo">'.$affiliationCat.'</td>
+                                                <td class="txt-oflo">'.$athleteName.'</td>
+                                                <td class="txt-oflo">'.$operatorMobile.'</td>
+                                                <td class="txt-oflo">'.$operatorWhatsapp.'</td>
+                                                <td class="txt-oflo">'.$clubContactOne.'</td>
+                                                <td class="txt-oflo">'.$district.'</td></tr>';
+                                  }
+                                }
+                                $html .= '</tbody>
+                                </table>';
+                                $_SESSION['html'] = $html;
                                 if(isset($_GET['er'])){
                                     if(!empty($_GET['er'])){
                                         $error = $_GET['er'];

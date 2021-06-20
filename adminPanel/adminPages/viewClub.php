@@ -284,6 +284,65 @@
                             <div class="card-body">
                                 <h4 class="card-title">Club Information</h4>
                             </div>
+                            <div class="row">
+                                <div class="col-8 align-self-center">
+                            
+                                </div>
+                                <div class="col-2 align-self-center">
+                                    <div>
+                                        <form role="form" action="exportToPdf-Club.php" method="POST">
+                                            <input type="submit" class="form-control btn btn-success" value="Export To PDF">
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-2 align-self-center">
+                            
+                                </div>
+                            </div>
+                            <?php
+                                        $html = '<div class="form-group col-md-12">
+                                          <label class="">Request Letter</label>
+                                            <div class="">
+                                                <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($requestLetter).'"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="">Club Information</label>
+                                            <hr/>
+                                        </div>
+                                            <label class="">Club Name : '.$clubName.'</label><br/><br/>
+                                            <label class="">Status : '.$status.'</label><br/><br/>
+                                            <label class="">Type : '.$clubType.'</label><br/><br/>
+                                            <label class="">Affiliation Category : '.$affiliationCat.'</label><br/><br/>
+                                            <label class="">Registration Type : '.$regType.'</label><br/><br/>
+                                            <label class="">District : '.$district.'</label><br/><br/>
+                                        <div class="form-group col-md-6">
+                                            <label class="">Club Contact Information</label>
+                                            <hr/>
+                                        </div>
+                                            <label class="">Postal Address : '.$postalAddress.'</label><br/><br/>
+                                            <label class="">Primary Contact Number : '.$clubContactOne.'</label><br/><br/>
+                                            <label class="">Secondary Contact Number : '.$clubContactTwo.'</label><br/><br/>
+                                            <label class="">Email One : '.$clubEmailOne.'</label><br/><br/>
+                                            <label class="">Email Two : '.$clubEmailTwo.'</label><br/><br/>
+                                        <div class="form-group col-md-6">
+                                            <label class="">Operator Information</label>
+                                            <hr/>
+                                        </div>
+                                            <label class="">Operator Name : '.$operatorName.'</label><br/><br/>
+                                            <label class="">Operator Email : '.$operatorEmail.'</label><br/><br/>
+                                            <label class="">Operator Mobile : '.$operatorMobile.'</label><br/><br/>
+                                            <label class="">Operator WhatsApp : '.$operatorWhatsapp.'</label><br/><br/>
+                                            <label class="">Operator NIC : '.$operatorNic.'</label><br/><br/>
+                                        <div class="form-group col-md-12">
+                                            <label class="">Incharge Information</label>
+                                            <hr/>
+                                        </div>
+                                            <label class="">Incharge Name : '.$inchargeName.'</label><br/><br/>
+                                            <label class="">Incharge Mobile : '.$inchargeMobile.'</label><br/><br/>
+                                            <label class="">Incharge Email : '.$inchargeEmail.'</label>';
+                                        $_SESSION['html'] = $html;
+                                        ?>
                             <div class="card-body row">
 		                        <?php
 		                         echo '<div class="form-group col-md-12">
@@ -443,7 +502,7 @@
 		                                </div>
 		                                ';
 		                        ?>
-                        	</div>	
+                            </div>  
                         </div>
                     </div>
                 </div>

@@ -269,6 +269,62 @@
                             <div class="card-body">
                                 <h4 class="card-title">Athlete Information</h4>
                             </div>
+                            <div class="row">
+                                <div class="col-8 align-self-center">
+                            
+                                </div>
+                                <div class="col-2 align-self-center">
+                                    <div>
+                                        <form role="form" action="exportToPdf-Athlete.php" method="POST">
+                                            <input type="submit" class="form-control btn btn-success" value="Export To PDF">
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-2 align-self-center">
+                            
+                                </div>
+                            </div>
+                            <?php
+                            $html = '<div class="form-group col-md-12">
+                                            <label class="">Birth Certificate</label>
+                                            <div class="">
+                                                <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($bbPhoto).'"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label class="">Personal Information</label>
+                                            <hr/>
+                                        </div>
+                                            <label class="">Full Name : '.$athleteName.'</label><br/><br/>
+                                            <label class="">Name For Certificate : '.$nameForCert.'</label><br/><br/>
+                                            <label class="">Category : '.$affiliationCat.'</label><br/><br/>
+                                            <label class="">Gender : '.$gender.'</label><br/><br/>
+                                            <label class="">DOB : '.$dob.'</label><br/><br/>
+                                            <label class="">Address : '.$address.'</label><br/><br/>
+                                        <div class="form-group col-md-12">
+                                            <label class="">Contact Information</label>
+                                            <hr/>
+                                        </div>
+                                            <label class="">Primary Contact Number : '.$phone1.'</label><br/><br/>
+                                            <label class="">Secondary Contact Number : '.$phone2.'</label><br/><br/>
+                                            <label class="">WhatsApp Number : '.$whatsapp.'</label><br/><br/>
+                                            <label class="">Email : '.$email.'</label><br/><br/>
+                                        <div class="form-group col-md-12">
+                                            <label class="">ID Information</label>
+                                            <hr/>
+                                        </div>
+                                            <label class="">Postal ID : '.$postalId.'</label><br/><br/>
+                                            <label class="">NIC : '.$nic.'</label><br/><br/>
+                                            <label class="">Passport Number : '.$ppNo.'</label><br/><br/>
+                                        <div class="form-group col-md-12">
+                                            <label class="">Birth Certificate Information</label>
+                                            <hr/>
+                                        </div>
+                                            <label class="">Birth Certificate Number : '.$bbNo.'</label><br/><br/>
+                                            <label class="">Birth Certificate Issued District : '.$bbDistrict.'</label><br/><br/>
+                                            <label class="">Birth Certificate Issued Date : '.$bbDate.'</label>';
+                                            $_SESSION['html'] = $html;
+                            ?>
                             <div class="card-body row">
 		                        <?php
 		                         echo '<div class="form-group col-md-12">

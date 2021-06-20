@@ -234,7 +234,70 @@
                             <div class="card-body">
                                 <h4 class="card-title">Registered Coaches</h4>
                             </div>
+                            <div class="row">
+                                <div class="col-9 align-self-center">
+                            
+                                </div>
+                                <div class="col-2 align-self-center">
+                                    <div>
+                                        <form role="form" action="exportToPdf-allCoach.php" method="POST">
+                                            <input type="submit" class="form-control btn btn-success" value="Export To PDF">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             <?php
+                                $query = 'SELECT * FROM `coach`';
+                                $result = mysqli_query($con, $query);
+                                $html = '<table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0">NAME</th>
+                                            <th class="border-top-0">CLUB</th>
+                                            <th class="border-top-0">NIC</th>
+                                            <th class="border-top-0">MOBILE</th>
+                                            <th class="border-top-0">EMAIL</th>
+                                            <th class="border-top-0">CATEGORY</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>';
+                                if(mysqli_num_rows($result) != 0){
+                                  while($row = mysqli_fetch_array($result)){
+                                    $athleteId = $row['coachId'];
+                                    $clubId = $row['clubId'];
+                                    $affiliationCat = $row['affiliationCat'];
+                                    $athleteName = $row['coachName'];
+                                    $nic = $row['nic'];
+                                    $email = $row['coachEmail'];
+                                    $phone1 = $row['coachMobileOne'];
+                                    if($affiliationCat == 1){
+                                        $affiliationCat = "Swimming";
+                                    } else if($affiliationCat == 2) {
+                                        $affiliationCat = "Water Polo";
+                                    } else if($affiliationCat == 3) {
+                                        $affiliationCat = "High Diving";
+                                    } else if($affiliationCat == 4) {
+                                        $affiliationCat = "Free Swimming";
+                                    }
+                                    $queryClub = "SELECT clubName FROM `club` WHERE clubId='".$clubId."'";
+                                    $resultClub = mysqli_query($con, $queryClub);
+                                    if(mysqli_num_rows($resultClub) != 0){
+                                        while($rowClub = mysqli_fetch_array($resultClub)){
+                                            $clubName = $rowClub['clubName'];
+                                        }
+                                    }
+                                    $html .= '<br/><tr>
+                                                <td class="txt-oflo">'.$athleteName.'</td>
+                                                <td class="txt-oflo">'.$clubName.'</td>
+                                                <td class="txt-oflo">'.$nic.'</td>
+                                                <td class="txt-oflo">'.$phone1.'</td>
+                                                <td class="txt-oflo">'.$email.'</td>
+                                                <td class="txt-oflo">'.$affiliationCat.'</td></tr>';
+                                  }
+                                }
+                                $html .= '</tbody>
+                                </table>';
+                                $_SESSION['html'] = $html;
                                 if(isset($_GET['er'])){
                                     if(!empty($_GET['er'])){
                                         $error = $_GET['er'];
