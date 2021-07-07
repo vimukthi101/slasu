@@ -254,11 +254,12 @@
                                         <div class="card-body">                                                
                                             <label class="" for="inputGroupSelect01">Aquatic Category</label>
                                             <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
-                                                <option selected disabled>Choose...</option>
+                                                <option selected disabled>Select Type...</option>
                                                 <option value="1">Swimming</option>
-                                                <option value="2">Water Polo</option>
-                                                <option value="3">High Diving</option>
-                                                <option value="4">Free Swimming</option>
+                                                <option value="2">Artistic Swimming</option>
+                                                <option value="3">Water Polo</option>
+                                                <option value="4">Diving</option>
+                                                <option value="5">All</option>
                                             </select>
                                             <input type="hidden" name="hidden_country" id="hidden_country" />
                                         </div>
@@ -270,6 +271,7 @@
                                     <thead>
                                         <tr>
                                             <th class="border-top-0"></th>
+                                            <th class="border-top-0">ID</th>
                                             <th class="border-top-0">NAME</th>
                                             <th class="border-top-0">NIC</th>
                                             <th class="border-top-0">MOBILE</th>

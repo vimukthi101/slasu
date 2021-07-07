@@ -48,15 +48,17 @@
                         } else if($regType == 2) {
                             $regType = "Existing";
                         } 
-	                    if($affiliationCat == 1){
-	                        $affiliationCat = "Swimming";
-	                    } else if($affiliationCat == 2) {
-	                        $affiliationCat = "Water Polo";
-	                    } else if($affiliationCat == 3) {
-	                        $affiliationCat = "High Diving";
-	                    } else if($affiliationCat == 4) {
-	                        $affiliationCat = "Free Swimming";
-	                    }
+                        if($affiliationCat == 1){
+                            $affiliationCat = "Swimming";
+                        } else if($affiliationCat == 2) {
+                            $affiliationCat = "Artistic Swimming";
+                        } else if($affiliationCat == 3) {
+                            $affiliationCat = "Water Polo";
+                        } else if($affiliationCat == 4) {
+                            $affiliationCat = "Diving";
+                        } else if($affiliationCat == 5) {
+                            $affiliationCat = "All";
+                        }
 	            	}
 	            } else {
 	                //card exists
@@ -322,9 +324,10 @@
 		                                        <select class="form-select form-control" id="category" name="category" required>
                                                     <option selected value="'.$affiliationCat.'">'.$affiliationCat.'</option>
                                                     <option value="Swimming">Swimming</option>
+                                                    <option value="Artistic Swimming">Artistic Swimming</option>
                                                     <option value="Water Polo">Water Polo</option>
-                                                    <option value="High Diving">High Diving</option>
-                                                    <option value="Free Swimming">Free Swimming</option>
+                                                    <option value="Diving">Diving</option>
+                                                    <option value="All">All</option>
                                                   </select>
 		                                    </div>
 		                                </div>
@@ -340,9 +343,31 @@
 		                                    <div class="">
 		                                        <select class="form-select form-control" id="district" name="district" required>
                                                     <option selected value="'.$district.'">'.$district.'</option>
+                                                    <option value="Ampara">Ampara</option>
+                                                    <option value="Anuradhapura">Anuradhapura</option>
+                                                    <option value="Badulla">Badulla</option>
+                                                    <option value="Batticaloa">Batticaloa</option>
                                                     <option value="Colombo">Colombo</option>
                                                     <option value="Galle">Galle</option>
+                                                    <option value="Gampaha">Gampaha</option>
+                                                    <option value="Hambantota">Hambantota</option>
+                                                    <option value="Jaffna">Jaffna</option>
+                                                    <option value="Kalutara">Kalutara</option>
                                                     <option value="Kandy">Kandy</option>
+                                                    <option value="Kegalle">Kegalle</option>
+                                                    <option value="Kilinochchi">Kilinochchi</option>
+                                                    <option value="Kurunegala">Kurunegala</option>
+                                                    <option value="Mannar">Mannar</option>
+                                                    <option value="Matale">Matale</option>
+                                                    <option value="Matara">Matara</option>
+                                                    <option value="Monaragala">Monaragala</option>
+                                                    <option value="Mullaitivu">Mullaitivu</option>
+                                                    <option value="Nuwara Eliya">Nuwara Eliya</option>
+                                                    <option value="Polonnaruwa">Polonnaruwa</option>
+                                                    <option value="Puttalam">Puttalam</option>
+                                                    <option value="Ratnapura">Ratnapura</option>
+                                                    <option value="Trincomalee">Trincomalee</option>
+                                                    <option value="Vavuniya">Vavuniya</option>
                                                   </select>
 		                                    </div>
 		                                </div>

@@ -213,20 +213,17 @@
                             <div class="col-md-6" style="margin-top: 10px;display:none" id="ifAll">
                                 <label class="input-group-text" for="inputGroupSelect01">School / Club List *</label>
                               <select class="custom-select" id="clubList" name="clubList" required>
-                                <option selected disabled>Choose...</option>
-                                <option value="1">Ananda</option>
-                                <option value="2">CCC</option>
-                                <option value="3">Kandy</option>
                               </select>
                         </div><!-- /.col-md-12 -->
                             <div class="col-md-6" style="margin-top: 10px;">
                                 <label class="input-group-text" for="inputGroupSelect01">Select Aquatic Category *</label>
                               <select class="custom-select" id="category" name="category" required>
-                                <option selected disabled>Choose...</option>
+                                <option selected disabled>Select Type...</option>
                                 <option value="Swimming">Swimming</option>
+                                <option value="Artistic Swimming">Artistic Swimming</option>
                                 <option value="Water Polo">Water Polo</option>
-                                <option value="High Diving">High Diving</option>
-                                <option value="Free Swimming">Free Swimming</option>
+                                <option value="Diving">Diving</option>
+                                <option value="All">All</option>
                               </select>
                         </div><!-- /.col-md-12 -->
                             <div class="col-md-12"><hr/></div>
@@ -290,9 +287,31 @@
                                 <label class="input-group-text" for="inputGroupSelect01">Select Birth Certificate Issued District *</label>
                               <select class="custom-select" id="district" name="district" required>
                                 <option selected disabled>Choose...</option>
+                                <option value="Ampara">Ampara</option>
+                                <option value="Anuradhapura">Anuradhapura</option>
+                                <option value="Badulla">Badulla</option>
+                                <option value="Batticaloa">Batticaloa</option>
                                 <option value="Colombo">Colombo</option>
-                                    <option value="Galle">Galle</option>
-                                    <option value="Kandy">Kandy</option>
+                                <option value="Galle">Galle</option>
+                                <option value="Gampaha">Gampaha</option>
+                                <option value="Hambantota">Hambantota</option>
+                                <option value="Jaffna">Jaffna</option>
+                                <option value="Kalutara">Kalutara</option>
+                                <option value="Kandy">Kandy</option>
+                                <option value="Kegalle">Kegalle</option>
+                                <option value="Kilinochchi">Kilinochchi</option>
+                                <option value="Kurunegala">Kurunegala</option>
+                                <option value="Mannar">Mannar</option>
+                                <option value="Matale">Matale</option>
+                                <option value="Matara">Matara</option>
+                                <option value="Monaragala">Monaragala</option>
+                                <option value="Mullaitivu">Mullaitivu</option>
+                                <option value="Nuwara Eliya">Nuwara Eliya</option>
+                                <option value="Polonnaruwa">Polonnaruwa</option>
+                                <option value="Puttalam">Puttalam</option>
+                                <option value="Ratnapura">Ratnapura</option>
+                                <option value="Trincomalee">Trincomalee</option>
+                                <option value="Vavuniya">Vavuniya</option>
                               </select>
                         </div><!-- /.col-md-12 -->
                         <div class="col-md-6">

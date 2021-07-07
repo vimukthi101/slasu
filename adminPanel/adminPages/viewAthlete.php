@@ -13,6 +13,8 @@
 	            	while($row = mysqli_fetch_array($resultCard)){
 	                    $affiliationCat = $row['affiliationCat'];
 	                    $athleteName = $row['athleteName'];
+                        $athleteCode = $row['athleteCode'];
+                                    $clubIdCode = $athleteCode.$id;
 	                    $gender = $row['gender'];
 	                    $dob = $row['dob'];
 	                    $address = $row['address'];
@@ -34,14 +36,16 @@
 	                        $gender = "Female";
 	                    } 
 	                    if($affiliationCat == 1){
-	                        $affiliationCat = "Swimming";
-	                    } else if($affiliationCat == 2) {
-	                        $affiliationCat = "Water Polo";
-	                    } else if($affiliationCat == 3) {
-	                        $affiliationCat = "High Diving";
-	                    } else if($affiliationCat == 4) {
-	                        $affiliationCat = "Free Swimming";
-	                    }
+                            $affiliationCat = "Swimming";
+                        } else if($affiliationCat == 2) {
+                            $affiliationCat = "Artistic Swimming";
+                        } else if($affiliationCat == 3) {
+                            $affiliationCat = "Water Polo";
+                        } else if($affiliationCat == 4) {
+                            $affiliationCat = "Diving";
+                        } else if($affiliationCat == 5) {
+                            $affiliationCat = "All";
+                        }
 	            	}
 	            } else {
 	                //card exists
@@ -295,6 +299,7 @@
                                             <label class="">Personal Information</label>
                                             <hr/>
                                         </div>
+                                        <label class="">ID : '.$clubIdCode.'</label><br/><br/>
                                             <label class="">Full Name : '.$athleteName.'</label><br/><br/>
                                             <label class="">Name For Certificate : '.$nameForCert.'</label><br/><br/>
                                             <label class="">Category : '.$affiliationCat.'</label><br/><br/>
@@ -331,6 +336,13 @@
 		                                    <label class="">Personal Information</label>
 		                                    <hr/>
 		                                </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">ID</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$clubIdCode.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
 		                         		<div class="form-group col-md-5">
 		                                    <label class="">Full Name</label>
 		                                    <div class="">

@@ -4,11 +4,12 @@
         if(!empty($_POST['username']) && !empty($_POST['password'])){
         	$username = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['username'])));
         	$password = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['password'])));
-            $getCard = "SELECT clubName, clubId, status FROM club WHERE operatorMobile='".$username."' and operatorPassword='".$password."'";
+            $getCard = "SELECT clubCode,clubName, clubId, status FROM club WHERE operatorMobile='".$username."' and operatorPassword='".$password."'";
             $resultCard = mysqli_query($con, $getCard);
             if(mysqli_num_rows($resultCard) != 0){
             	while($statusRow = mysqli_fetch_array($resultCard)){
             		$clubName = $statusRow['clubName'];
+                    $clubCode = $statusRow['clubCode'];
             		$operatorMobile = $statusRow['operatorMobile'];
             		$clubId = $statusRow['clubId'];
                     $status = $statusRow['status'];
@@ -17,6 +18,8 @@
 	            	$_SESSION["operatorMobile"] = $operatorMobile;
 	            	$_SESSION["clubId"] = $clubId;
                     $_SESSION["status"] = $status;
+                    $_SESSION["clubCode"] = $clubCode;
+                    $_SESSION["clubIdCode"] = $clubCode.$clubId;
             	}
                 if($status == 2){
                     header('Location:../adminPanel/pages/dashboard.php');

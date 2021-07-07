@@ -284,7 +284,7 @@
                                 <div class="card">
                                     <div class="container" style="text-align: center;">
                                         <h4 style="font-size: 130px;color: black;">'.$countA.'</h4>
-                                        <p>Registered Clubs</p>
+                                        <p>Registered Schools/ Clubs</p>
                                     </div>
                                 </div>
                              </div>';

@@ -231,7 +231,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Registered Clubs</h4>
+                                <h4 class="card-title">Registered Schools/ Clubs</h4>
                                 
                             </div>
                             <div class="row">
@@ -252,6 +252,7 @@
                                 $html = '<table class="table table-striped">
                                     <thead>
                                         <tr>
+                                            <th class="border-top-0">CLUB ID</th>
                                             <th class="border-top-0">CLUB NAME</th>
                                             <th class="border-top-0">CATEGORY</th>
                                             <th class="border-top-0">OPERATOR NAME</th>
@@ -266,6 +267,8 @@
                                   while($row = mysqli_fetch_array($result)){
                                     $clubName = $row['clubName'];
                                     $clubId = $row['clubId'];
+                                    $clubCode = $row['clubCode'];
+                                    $clubIdCode = $clubCode.$clubId;
                                     $affiliationCat = $row['affiliationCat'];
                                     $athleteName = $row['operatorName'];
                                     $operatorMobile = $row['operatorMobile'];
@@ -276,13 +279,16 @@
                                     if($affiliationCat == 1){
                                         $affiliationCat = "Swimming";
                                     } else if($affiliationCat == 2) {
-                                        $affiliationCat = "Water Polo";
+                                        $affiliationCat = "Artistic Swimming";
                                     } else if($affiliationCat == 3) {
-                                        $affiliationCat = "High Diving";
+                                        $affiliationCat = "Water Polo";
                                     } else if($affiliationCat == 4) {
-                                        $affiliationCat = "Free Swimming";
+                                        $affiliationCat = "Diving";
+                                    } else if($affiliationCat == 5) {
+                                        $affiliationCat = "All";
                                     }
                                     $html .= '<br/><tr>
+                                                <td class="txt-oflo">'.$clubIdCode.'</td>
                                                 <td class="txt-oflo">'.$clubName.'</td>
                                                 <td class="txt-oflo">'.$affiliationCat.'</td>
                                                 <td class="txt-oflo">'.$athleteName.'</td>
@@ -343,13 +349,28 @@
                                         <div class="card-body">                                                
                                             <label class="" for="inputGroupSelect01">Aquatic Category</label>
                                             <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
-                                                <option selected disabled>Choose...</option>
+                                                <option selected disabled>Select Type...</option>
                                                 <option value="1">Swimming</option>
-                                                <option value="2">Water Polo</option>
-                                                <option value="3">High Diving</option>
-                                                <option value="4">Free Swimming</option>
+                                                <option value="2">Artistic Swimming</option>
+                                                <option value="3">Water Polo</option>
+                                                <option value="4">Diving</option>
+                                                <option value="5">All</option>
                                             </select>
                                             <input type="hidden" name="hidden_country" id="hidden_country" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="card">
+                                        <div class="card-body">                                                
+                                            <label class="" for="inputGroupStatus">Registration Status</label>
+                                            <select class="custom-select form-control" name="multi_status_filter" id="multi_status_filter">
+                                                <option selected disabled>Choose...</option>
+                                                <option value="1">Pending</option>
+                                                <option value="2">Active</option>
+                                                <option value="3">Disabled</option>
+                                            </select>
+                                            <input type="hidden" name="hidden_status" id="hidden_status" />
                                         </div>
                                     </div>
                                 </div>
@@ -358,6 +379,7 @@
                                <table class="table table-hover">
                                     <thead>
                                         <tr>
+                                            <th class="border-top-0">CLUB ID</th>
                                             <th class="border-top-0">CLUB NAME</th>
                                             <th class="border-top-0">CATEGORY</th>
                                             <th class="border-top-0">OPERATOR NAME</th>
@@ -443,6 +465,32 @@ $(document).ready(function(){
  $('#multi_search_filter').change(function(){
   $('#hidden_country').val($('#multi_search_filter').val());
   var query = $('#hidden_country').val();
+  load_data(query);
+ });
+ 
+});
+</script>
+<script>
+$(document).ready(function(){
+
+ load_data();
+ 
+ function load_data(query='')
+ {
+  $.ajax({
+   url:"fetchCubListStatus.php",
+   method:"POST",
+   data:{query:query},
+   success:function(data)
+   {
+    $('tbody').html(data);
+   }
+  })
+ }
+
+ $('#multi_status_filter').change(function(){
+  $('#hidden_status').val($('#multi_status_filter').val());
+  var query = $('#hidden_status').val();
   load_data(query);
  });
  

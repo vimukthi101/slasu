@@ -18,6 +18,8 @@ $output = '';
 if(mysqli_num_rows($result) != 0){
   while($row = mysqli_fetch_array($result)){
     $athleteId = $row['athleteId'];
+    $athleteCode = $row['athleteCode'];
+    $clubIdCode = $athleteCode.$athleteId;
     $affiliationCat = $row['affiliationCat'];
     $athleteName = $row['athleteName'];
     $nic = $row['nic'];
@@ -26,14 +28,17 @@ if(mysqli_num_rows($result) != 0){
     if($affiliationCat == 1){
         $affiliationCat = "Swimming";
     } else if($affiliationCat == 2) {
-        $affiliationCat = "Water Polo";
+        $affiliationCat = "Artistic Swimming";
     } else if($affiliationCat == 3) {
-        $affiliationCat = "High Diving";
+        $affiliationCat = "Water Polo";
     } else if($affiliationCat == 4) {
-        $affiliationCat = "Free Swimming";
+        $affiliationCat = "Diving";
+    } else if($affiliationCat == 5) {
+        $affiliationCat = "All";
     }
     $output .= '<tr>
                 <td class="txt-oflo"><input type="checkbox" id="editAthlete" name="editAthlete" value="'.$athleteId.'"></td>
+                <td class="txt-oflo">'.$clubIdCode.'</td>
                 <td class="txt-oflo">'.$athleteName.'</td>
                 <td class="txt-oflo">'.$nic.'</td>
                 <td class="txt-oflo">'.$phone1.'</td>

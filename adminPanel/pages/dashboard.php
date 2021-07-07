@@ -239,6 +239,7 @@
                                 <div class="container">
                                     <br/>
                                     <h4 class="page-title" style="text-transform:uppercase;color: black;"><?php echo $_SESSION["clubName"] ?></h4>
+                                    <h4 class="page-title" style="text-transform:uppercase;color: black;"><?php echo $_SESSION["clubIdCode"] ?></h4>
                                     <?php
                                         if($_SESSION["status"] == 2){
                                             echo '<label class="label label-success" style="text-transform:uppercase;font-size: 15px;">Status : Active</label>';

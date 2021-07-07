@@ -34,14 +34,16 @@
 	                        $gender = "Female";
 	                    } 
 	                    if($affiliationCat == 1){
-	                        $affiliationCat = "Swimming";
-	                    } else if($affiliationCat == 2) {
-	                        $affiliationCat = "Water Polo";
-	                    } else if($affiliationCat == 3) {
-	                        $affiliationCat = "High Diving";
-	                    } else if($affiliationCat == 4) {
-	                        $affiliationCat = "Free Swimming";
-	                    }
+                            $affiliationCat = "Swimming";
+                        } else if($affiliationCat == 2) {
+                            $affiliationCat = "Artistic Swimming";
+                        } else if($affiliationCat == 3) {
+                            $affiliationCat = "Water Polo";
+                        } else if($affiliationCat == 4) {
+                            $affiliationCat = "Diving";
+                        } else if($affiliationCat == 5) {
+                            $affiliationCat = "All";
+                        }
 	            	}
 	            } else {
 	                //card exists

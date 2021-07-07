@@ -16,14 +16,16 @@
                 $status = 3;
             }
             $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
-            if($category == "Swimming"){
-                $category = 1;
-            } else if($category == "Water Polo") {
-                $category = 2;
-            } else if($category == "High Diving") {
-               $category= 3;
-            } else if($category == "Free Swimming") {
-                $category = 4;
+            if($_SESSION["category"] == "Swimming"){
+                $_SESSION["category"] = 1;
+            } else if($_SESSION["category"] == "Artistic Swimming") {
+                $_SESSION["category"] = 2;
+            } else if($_SESSION["category"] == "Water Polo") {
+                $_SESSION["category"] = 3;
+            } else if($_SESSION["category"] == "Diving") {
+                $_SESSION["category"] = 4;
+            } else if($_SESSION["category"] == "All") {
+                $_SESSION["category"] = 5;
             }
             $district = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['district'])));
             $clubPhone1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubPhone1'])));

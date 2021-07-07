@@ -9,7 +9,7 @@ if(!isset($_SESSION[''])){
 
 if($_POST["query"] != '') {
  $search_text = $_POST["query"];
- $query = 'SELECT * FROM `club` WHERE affiliationCat="'.$search_text.'"';
+ $query = 'SELECT * FROM `club` WHERE status="'.$search_text.'"';
 } else {
  $query = 'SELECT * FROM `club`';
 }
@@ -39,7 +39,7 @@ if(mysqli_num_rows($result) != 0){
         $affiliationCat = "All";
     }
     $output .= '<tr>
-                <td class="txt-oflo">'.$clubIdCode.'</td>
+    <td class="txt-oflo">'.$clubIdCode.'</td>
                 <td class="txt-oflo">'.$clubName.'</td>
                 <td class="txt-oflo">'.$affiliationCat.'</td>
                 <td class="txt-oflo">'.$athleteName.'</td>

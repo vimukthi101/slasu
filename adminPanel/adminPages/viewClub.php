@@ -11,6 +11,8 @@
 	            $resultCard = mysqli_query($con, $getCard);
 	            if(mysqli_num_rows($resultCard) != 0){
 	            	while($row = mysqli_fetch_array($resultCard)){
+                        $clubCode = $row['clubCode'];
+                        $clubIdCode = $clubCode.$id;
 	                    $clubType = $row['clubType'];
 	                    $clubName = $row['clubName'];
 	                    $district = $row['district'];
@@ -49,14 +51,16 @@
                             $regType = "Existing";
                         } 
 	                    if($affiliationCat == 1){
-	                        $affiliationCat = "Swimming";
-	                    } else if($affiliationCat == 2) {
-	                        $affiliationCat = "Water Polo";
-	                    } else if($affiliationCat == 3) {
-	                        $affiliationCat = "High Diving";
-	                    } else if($affiliationCat == 4) {
-	                        $affiliationCat = "Free Swimming";
-	                    }
+                            $affiliationCat = "Swimming";
+                        } else if($affiliationCat == 2) {
+                            $affiliationCat = "Artistic Swimming";
+                        } else if($affiliationCat == 3) {
+                            $affiliationCat = "Water Polo";
+                        } else if($affiliationCat == 4) {
+                            $affiliationCat = "Diving";
+                        } else if($affiliationCat == 5) {
+                            $affiliationCat = "All";
+                        }
 	            	}
 	            } else {
 	                //card exists
@@ -282,7 +286,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Club Information</h4>
+                                <h4 class="card-title">School/ Club Information</h4>
                             </div>
                             <div class="row">
                                 <div class="col-8 align-self-center">
@@ -303,13 +307,14 @@
                                         $html = '<div class="form-group col-md-12">
                                           <label class="">Request Letter</label>
                                             <div class="">
-                                                <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($requestLetter).'"/>
+                                                <img width="180" height="180" src="data:image/jpeg;base64,'.base64_encode($requestLetter).'"/>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label class="">Club Information</label>
                                             <hr/>
                                         </div>
+                                            <label class="">Club Id : '.$clubIdCode.'</label><br/><br/>
                                             <label class="">Club Name : '.$clubName.'</label><br/><br/>
                                             <label class="">Status : '.$status.'</label><br/><br/>
                                             <label class="">Type : '.$clubType.'</label><br/><br/>
@@ -349,6 +354,13 @@
 		                                    <label class="">Club Information</label>
 		                                    <hr/>
 		                                </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Club ID</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$clubIdCode.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
 		                         		<div class="form-group col-md-5">
 		                                    <label class="">Club Name</label>
 		                                    <div class="">

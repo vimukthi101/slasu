@@ -252,6 +252,7 @@
                                 $html = '<table class="table table-striped">
                                     <thead>
                                         <tr>
+                                        <th class="border-top-0">ID</th>
                                             <th class="border-top-0">NAME</th>
                                             <th class="border-top-0">CLUB</th>
                                             <th class="border-top-0">NIC</th>
@@ -265,6 +266,8 @@
                                   while($row = mysqli_fetch_array($result)){
                                     $athleteId = $row['coachId'];
                                     $clubId = $row['clubId'];
+                                    $coachCode = $row['coachCode'];
+                                    $clubIdCode = $coachCode.$athleteId;
                                     $affiliationCat = $row['affiliationCat'];
                                     $athleteName = $row['coachName'];
                                     $nic = $row['nic'];
@@ -273,11 +276,13 @@
                                     if($affiliationCat == 1){
                                         $affiliationCat = "Swimming";
                                     } else if($affiliationCat == 2) {
-                                        $affiliationCat = "Water Polo";
+                                        $affiliationCat = "Artistic Swimming";
                                     } else if($affiliationCat == 3) {
-                                        $affiliationCat = "High Diving";
+                                        $affiliationCat = "Water Polo";
                                     } else if($affiliationCat == 4) {
-                                        $affiliationCat = "Free Swimming";
+                                        $affiliationCat = "Diving";
+                                    } else if($affiliationCat == 5) {
+                                        $affiliationCat = "All";
                                     }
                                     $queryClub = "SELECT clubName FROM `club` WHERE clubId='".$clubId."'";
                                     $resultClub = mysqli_query($con, $queryClub);
@@ -287,6 +292,7 @@
                                         }
                                     }
                                     $html .= '<br/><tr>
+                                    <td class="txt-oflo">'.$clubIdCode.'</td>
                                                 <td class="txt-oflo">'.$athleteName.'</td>
                                                 <td class="txt-oflo">'.$clubName.'</td>
                                                 <td class="txt-oflo">'.$nic.'</td>
@@ -331,11 +337,12 @@
                                         <div class="card-body">                                                
                                             <label class="" for="inputGroupSelect01">Aquatic Category</label>
                                             <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
-                                                <option selected disabled>Choose...</option>
+                                                <option selected disabled>Select Type...</option>
                                                 <option value="1">Swimming</option>
-                                                <option value="2">Water Polo</option>
-                                                <option value="3">High Diving</option>
-                                                <option value="4">Free Swimming</option>
+                                                <option value="2">Artistic Swimming</option>
+                                                <option value="3">Water Polo</option>
+                                                <option value="4">Diving</option>
+                                                <option value="5">All</option>
                                             </select>
                                             <input type="hidden" name="hidden_country" id="hidden_country" />
                                         </div>
@@ -369,6 +376,7 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
+                                            <th class="border-top-0">ID</th>
                                             <th class="border-top-0">NAME</th>
                                             <th class="border-top-0">CLUB</th>
                                             <th class="border-top-0">NIC</th>

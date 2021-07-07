@@ -19,6 +19,8 @@ if(mysqli_num_rows($result) != 0){
   while($row = mysqli_fetch_array($result)){
     $athleteId = $row['athleteId'];
     $clubId = $row['clubId'];
+    $athleteCode = $row['athleteCode'];
+                                    $clubIdCode = $athleteCode.$athleteId;
     $affiliationCat = $row['affiliationCat'];
     $athleteName = $row['athleteName'];
     $nic = $row['nic'];
@@ -27,11 +29,13 @@ if(mysqli_num_rows($result) != 0){
     if($affiliationCat == 1){
         $affiliationCat = "Swimming";
     } else if($affiliationCat == 2) {
-        $affiliationCat = "Water Polo";
+        $affiliationCat = "Artistic Swimming";
     } else if($affiliationCat == 3) {
-        $affiliationCat = "High Diving";
+        $affiliationCat = "Water Polo";
     } else if($affiliationCat == 4) {
-        $affiliationCat = "Free Swimming";
+        $affiliationCat = "Diving";
+    } else if($affiliationCat == 5) {
+        $affiliationCat = "All";
     }
     $queryClub = "SELECT clubName FROM `club` WHERE clubId='".$clubId."'";
     $resultClub = mysqli_query($con, $queryClub);
@@ -41,6 +45,7 @@ if(mysqli_num_rows($result) != 0){
         }
     }
     $output .= '<tr>
+    <td class="txt-oflo">'.$clubIdCode.'</td>
                 <td class="txt-oflo">'.$clubName.'</td>
                 <td class="txt-oflo">'.$athleteName.'</td>
                 <td class="txt-oflo">'.$nic.'</td>

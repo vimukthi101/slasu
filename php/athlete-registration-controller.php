@@ -17,12 +17,14 @@
                 }
                 if($_SESSION["category"] == "Swimming"){
                     $_SESSION["category"] = 1;
-                } else if($_SESSION["category"] == "Water Polo") {
+                } else if($_SESSION["category"] == "Artistic Swimming") {
                     $_SESSION["category"] = 2;
-                } else if($_SESSION["category"] == "High Diving") {
+                } else if($_SESSION["category"] == "Water Polo") {
                     $_SESSION["category"] = 3;
-                } else if($_SESSION["category"] == "Free Swimming") {
+                } else if($_SESSION["category"] == "Diving") {
                     $_SESSION["category"] = 4;
+                } else if($_SESSION["category"] == "All") {
+                    $_SESSION["category"] = 5;
                 }
                 if($_SESSION["gender"] == "Male"){
                     $_SESSION["gender"] = 1;

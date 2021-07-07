@@ -11,8 +11,10 @@
             if(mysqli_num_rows($resultCard) == 0){
                 if($_SESSION["optradio"] == "School"){
                     $_SESSION["optradio"] = 1;
+                    $_SESSION["clubCode"] = "SLASU/S/00";
                 } else {
                     $_SESSION["optradio"] = 2;
+                    $_SESSION["clubCode"] = "SLASU/CL/00";
                 }
                 if($_SESSION["regRadio"] == "New"){
                     $_SESSION["regRadio"] = 1;
@@ -21,14 +23,16 @@
                 }
                 if($_SESSION["category"] == "Swimming"){
                     $_SESSION["category"] = 1;
-                } else if($_SESSION["category"] == "Water Polo") {
+                } else if($_SESSION["category"] == "Artistic Swimming") {
                     $_SESSION["category"] = 2;
-                } else if($_SESSION["category"] == "High Diving") {
+                } else if($_SESSION["category"] == "Water Polo") {
                     $_SESSION["category"] = 3;
-                } else if($_SESSION["category"] == "Free Swimming") {
+                } else if($_SESSION["category"] == "Diving") {
                     $_SESSION["category"] = 4;
+                } else if($_SESSION["category"] == "All") {
+                    $_SESSION["category"] = 5;
                 }
-                $addCard = "INSERT INTO club (clubType,clubName,district,operatorName,operatorEmail,operatorMobile,operatorPassword,operatorWhatsapp,operatorNic,regType,requestLetter,affiliationCat,postalAddress,clubContactOne,clubContactTwo,clubEmailOne,clubEmailTwo,inchargeName,inchargeMobile,inchargeEmail) VALUES('".$_SESSION["optradio"]."','".$_SESSION["name"]."','".$_SESSION["district"]."','".$_SESSION["operatorName"]."','".$_SESSION["operatorEmail"]."','".$_SESSION["phone"]."','".$password."','".$_SESSION["whatsapp"]."','".$_SESSION["operatorNic"]."','".$_SESSION["regRadio"]."','".$_SESSION["requestLetter"]."','".$_SESSION["category"]."','".$_SESSION["clubAddress"]."','".$_SESSION["clubPhone1"]."','".$_SESSION["clubPhone2"]."','".$_SESSION["clubEmail1"]."','".$_SESSION["clubEmail2"]."','".$_SESSION["inchargeName"]."','".$_SESSION["inchargePhone"]."','".$_SESSION["inchargeEmail"]."')";
+                $addCard = "INSERT INTO club (clubCode,clubType,clubName,district,operatorName,operatorEmail,operatorMobile,operatorPassword,operatorWhatsapp,operatorNic,regType,requestLetter,affiliationCat,postalAddress,clubContactOne,clubContactTwo,clubEmailOne,clubEmailTwo,inchargeName,inchargeMobile,inchargeEmail) VALUES('".$_SESSION["clubCode"]."','".$_SESSION["optradio"]."','".$_SESSION["name"]."','".$_SESSION["district"]."','".$_SESSION["operatorName"]."','".$_SESSION["operatorEmail"]."','".$_SESSION["phone"]."','".$password."','".$_SESSION["whatsapp"]."','".$_SESSION["operatorNic"]."','".$_SESSION["regRadio"]."','".$_SESSION["requestLetter"]."','".$_SESSION["category"]."','".$_SESSION["clubAddress"]."','".$_SESSION["clubPhone1"]."','".$_SESSION["clubPhone2"]."','".$_SESSION["clubEmail1"]."','".$_SESSION["clubEmail2"]."','".$_SESSION["inchargeName"]."','".$_SESSION["inchargePhone"]."','".$_SESSION["inchargeEmail"]."')";
                 if(mysqli_query($con, $addCard)){
                     //success
                     $from = "info@thestory.host";

@@ -14,6 +14,8 @@
 	                    $affiliationCat = $row['affiliationCat'];
 	                    $athleteName = $row['coachName'];
 	                    $gender = $row['gender'];
+                        $athleteCode = $row['coachCode'];
+                        $clubIdCode = $athleteCode.$id;
 	                    $dob = $row['dob'];
 	                    $address = $row['homeAddress'];
 	                    $phone1 = $row['coachMobileOne'];
@@ -34,14 +36,16 @@
 	                        $gender = "Female";
 	                    } 
 	                    if($affiliationCat == 1){
-	                        $affiliationCat = "Swimming";
-	                    } else if($affiliationCat == 2) {
-	                        $affiliationCat = "Water Polo";
-	                    } else if($affiliationCat == 3) {
-	                        $affiliationCat = "High Diving";
-	                    } else if($affiliationCat == 4) {
-	                        $affiliationCat = "Free Swimming";
-	                    }
+                            $affiliationCat = "Swimming";
+                        } else if($affiliationCat == 2) {
+                            $affiliationCat = "Artistic Swimming";
+                        } else if($affiliationCat == 3) {
+                            $affiliationCat = "Water Polo";
+                        } else if($affiliationCat == 4) {
+                            $affiliationCat = "Diving";
+                        } else if($affiliationCat == 5) {
+                            $affiliationCat = "All";
+                        }
 	            	}
 	            } else {
 	                //card exists
@@ -271,6 +275,13 @@
                                             <label class="">Application</label>
                                             <div class="">
                                                 <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($application).'"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">ID</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$clubIdCode.'"
+                                                    class="form-control form-control-line" disabled>
                                             </div>
                                         </div>
 		                         		<div class="form-group col-md-5">

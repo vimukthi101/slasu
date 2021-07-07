@@ -200,9 +200,10 @@
                               <select class="custom-select form-select form-control" id="category" name="category" required>
                                 <option selected disabled>Select Type...</option>
                                 <option value="Swimming">Swimming</option>
+                                <option value="Artistic Swimming">Artistic Swimming</option>
                                 <option value="Water Polo">Water Polo</option>
-                                <option value="High Diving">High Diving</option>
-                                <option value="Free Swimming">Free Swimming</option>
+                                <option value="Diving">Diving</option>
+                                <option value="All">All</option>
                               </select>
                         </div><!-- /.col-md-12 -->
                             <div class="col-md-12"><hr/></div>
