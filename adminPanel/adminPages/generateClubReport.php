@@ -213,7 +213,7 @@
                                     <li class="">
                                         <a href="dashboard.php">Home</a>
                                     </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Club</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Reports</li>
                                 </ol>
                             </nav>
                         </div>
@@ -228,118 +228,222 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- column -->
-                    <div class="col-12">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Registered Schools/ Clubs</h4>
-                                
+                                <h4 class="card-title">Generate Reports</h4>
                             </div>
-                            <div class="row">
-                                <div class="col-9 align-self-center">
-                            
-                                </div>
-                                <div class="col-2 align-self-center">
-                                    <div>
-                                        <input type="button" class="form-control btn btn-success" onclick="location.href='generateClubReport.php';" value="Generate Report">
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                                if(isset($_GET['er'])){
-                                    if(!empty($_GET['er'])){
-                                        $error = $_GET['er'];
-                                        if($error == "su"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:green;margin-left:20px;">Club record deleted successfully.</span>
-                                                <div class="col-lg-12"></div>
-                                            </div>';
-                                        } else if($error == "er"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Couldn\'t save the changes, try again.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        } else if ($error == "us"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:green;margin-left:20px;">Updated succesfully.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        } else if ($error == "wi"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Only jpg,png,jpeg are supportrd for photo.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        } else if ($error == "de"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Couldn\'t delete the club or it\'s Athletes or Coaches.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        } else if ($error == "du"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Disabled Succesfully.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        } else if ($error == "au"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:green;margin-left:20px;">Activated Succesfully.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        }
-                                    }
-                                }
-                            ?>
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="card">
-                                        <div class="card-body">                                                
-                                            <label class="" for="inputGroupSelect01">Aquatic Category</label>
-                                            <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
-                                                <option selected disabled>Select Type...</option>
-                                                <option value="1">Swimming</option>
-                                                <option value="2">Artistic Swimming</option>
-                                                <option value="3">Water Polo</option>
-                                                <option value="4">Diving</option>
-                                                <option value="5">All</option>
-                                            </select>
-                                            <input type="hidden" name="hidden_country" id="hidden_country" />
+                            <form role="form" action="exportToPdf-allClub.php" method="POST">
+                                <div class="row">    
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <label class="form-check-label">Report Format</label>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <label class="form-check-label">
+                                                    <input type="radio" value="excel" class="form-check-input" id="excel" name="regRadio" required>Excel</label>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <label class="form-check-label">
+                                                    <input type="radio" value="pdf" class="form-check-input" id="pdf" name="regRadio" required>PDF</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-5">
-                                    <div class="card">
-                                        <div class="card-body">                                                
-                                            <label class="" for="inputGroupStatus">Registration Status</label>
-                                            <select class="custom-select form-control" name="multi_status_filter" id="multi_status_filter">
-                                                <option selected disabled>Choose...</option>
-                                                <option value="1">Pending</option>
-                                                <option value="2">Active</option>
-                                                <option value="3">Disabled</option>
-                                            </select>
-                                            <input type="hidden" name="hidden_status" id="hidden_status" />
+                                <div class="row">    
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <label class="form-check-label">Report Fields</label>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="clubCode">
+                                                <label class="form-check-label" for="clubCode">Club Code</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="clubType">
+                                                <label class="form-check-label" for="clubCode">Club Type</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="clubName">
+                                                <label class="form-check-label" for="clubCode">Club Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="district">
+                                                <label class="form-check-label" for="clubCode">District</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="operatorName">
+                                                <label class="form-check-label" for="clubCode">Operator Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="operatorEmail">
+                                                <label class="form-check-label" for="clubCode">Operator Email</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="operatorMobile">
+                                                <label class="form-check-label" for="clubCode">Operator Mobile</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="operatorWhatsapp">
+                                                <label class="form-check-label" for="clubCode">Operator WhatsApp</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="operatorNic">
+                                                <label class="form-check-label" for="clubCode">Operator NIC</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="regType">
+                                                <label class="form-check-label" for="clubCode">Registration Type</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="requestLetter">
+                                                <label class="form-check-label" for="clubCode">Request Letter</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="affiliationCat">
+                                                <label class="form-check-label" for="clubCode">Affiliation Category</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="postalAddress">
+                                                <label class="form-check-label" for="clubCode">Postal Address</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="clubContactOne">
+                                                <label class="form-check-label" for="clubCode">Club Contact One</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="clubContactTwo">
+                                                <label class="form-check-label" for="clubCode">Club Contact Two</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="clubEmailOne">
+                                                <label class="form-check-label" for="clubCode">Club Email One</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="clubEmailTwo">
+                                                <label class="form-check-label" for="clubCode">Club Email Two</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="inchargeName">
+                                                <label class="form-check-label" for="clubCode">Incharge Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="inchargeMobile">
+                                                <label class="form-check-label" for="clubCode">Incharge Mobile</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">    
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="inchargeEmail">
+                                                <label class="form-check-label" for="clubCode">Incharge Email</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="status">
+                                                <label class="form-check-label" for="clubCode">Status</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="submit" name="submit" value="Download" id="submit" class="form-control btn-success" style="margin: auto;"></input>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="table-responsive">
-                               <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">CLUB ID</th>
-                                            <th class="border-top-0">CLUB NAME</th>
-                                            <th class="border-top-0">CATEGORY</th>
-                                            <th class="border-top-0">OPERATOR NAME</th>
-                                            <th class="border-top-0">OPERAOTR MOBILE</th>
-                                            <th class="border-top-0">CLUB CONTACT</th>
-                                            <th class="border-top-0">DISTRICT</th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -379,67 +483,6 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
-<script type="text/javascript">
-    function clicked() {
-       if (confirm('Do you want to delete the Club? All Athletes and Coaches from this Club will also get deleted.')) {
-           yourformelement.submit();
-       } else {
-           return false;
-       }
-    }
-</script>
-<script>
-$(document).ready(function(){
-
- load_data();
- 
- function load_data(query='')
- {
-  $.ajax({
-   url:"fetchCubList.php",
-   method:"POST",
-   data:{query:query},
-   success:function(data)
-   {
-    $('tbody').html(data);
-   }
-  })
- }
-
- $('#multi_search_filter').change(function(){
-  $('#hidden_country').val($('#multi_search_filter').val());
-  var query = $('#hidden_country').val();
-  load_data(query);
- });
- 
-});
-</script>
-<script>
-$(document).ready(function(){
-
- load_data();
- 
- function load_data(query='')
- {
-  $.ajax({
-   url:"fetchCubListStatus.php",
-   method:"POST",
-   data:{query:query},
-   success:function(data)
-   {
-    $('tbody').html(data);
-   }
-  })
- }
-
- $('#multi_status_filter').change(function(){
-  $('#hidden_status').val($('#multi_status_filter').val());
-  var query = $('#hidden_status').val();
-  load_data(query);
- });
- 
-});
-</script>
 </html>
 <?php
 } else {
