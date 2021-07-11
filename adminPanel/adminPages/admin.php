@@ -250,9 +250,7 @@
                                 ?>
                                 <div class="col-2 align-self-center">
                                     <div>
-                                        <form role="form" action="exportToPdf-allAdmin.php" method="POST">
-                                            <input type="submit" class="form-control btn btn-success" value="Export To PDF">
-                                        </form>
+                                        <input type="button" class="form-control btn btn-success" onclick="location.href='generateAdminReport.php';" value="Generate Report">
                                     </div>
                                 </div>
                                 <div class="col-1 align-self-center">
@@ -260,41 +258,6 @@
                                 </div>
                             </div>
                             <?php
-                                $query = 'SELECT * FROM `admin`';
-                                $result = mysqli_query($con, $query);
-                                $html = '<table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">FIRST NAME</th>
-                                            <th class="border-top-0">SECOND NAME</th>
-                                            <th class="border-top-0">MOBILE</th>
-                                            <th class="border-top-0">EMAIL</th>
-                                            <th class="border-top-0">NIC</th>
-                                            <th class="border-top-0">ROLE</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>';
-                                if(mysqli_num_rows($result) != 0){
-                                  while($row = mysqli_fetch_array($result)){
-                                        $adminId = $row['adminId'];
-                                        $firstName = $row['firstName'];
-                                        $secondName = $row['secondName'];
-                                        $nic = $row['nic'];
-                                        $email = $row['email'];
-                                        $mobile = $row['mobile'];
-                                        $role = $row['role'];
-                                    $html .= '<br/><tr>
-                                                <td class="txt-oflo">'.$firstName.'</td>
-                                                <td class="txt-oflo">'.$secondName.'</td>
-                                                <td class="txt-oflo">'.$mobile.'</td>
-                                                <td class="txt-oflo">'.$email.'</td>
-                                                <td class="txt-oflo">'.$nic.'</td>
-                                                <td class="txt-oflo">'.$role.'</td></tr>';
-                                  }
-                                }
-                                $html .= '</tbody>
-                                </table>';
-                                $_SESSION['html'] = $html;
                                 if(isset($_GET['er'])){
                                     if(!empty($_GET['er'])){
                                         $error = $_GET['er'];

@@ -213,13 +213,12 @@
                                     <li class="">
                                         <a href="dashboard.php">Home</a>
                                     </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Coach</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Reports</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
-            </div>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -229,110 +228,102 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- column -->
-                    <div class="col-12">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Registered Coaches</h4>
+                                <h4 class="card-title">Generate Reports</h4>
                             </div>
-                            <div class="row">
-                                <div class="col-9 align-self-center">
-                            
-                                </div>
-                                <div class="col-2 align-self-center">
-                                    <div>
-                                        <input type="button" class="form-control btn btn-success" onclick="location.href='generateCoachReport.php';" value="Generate Report">
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                                if(isset($_GET['er'])){
-                                    if(!empty($_GET['er'])){
-                                        $error = $_GET['er'];
-                                        if($error == "su"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Coach record deleted successfully.</span>
-                                                <div class="col-lg-12"></div>
-                                            </div>';
-                                        } else if($error == "er"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Couldn\'t save the changes, try again.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        } else if ($error == "us"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:green;margin-left:20px;">Updated succesfully.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        } else if ($error == "wi"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Only jpg,png,jpeg are supportrd for photo.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        }
-                                    }
-                                }
-                            ?>
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="card">
-                                        <div class="card-body">                                                
-                                            <label class="" for="inputGroupSelect01">Aquatic Category</label>
-                                            <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
-                                                <option selected disabled>Select Type...</option>
-                                                <option value="1">Swimming</option>
-                                                <option value="2">Artistic Swimming</option>
-                                                <option value="3">Water Polo</option>
-                                                <option value="4">Diving</option>
-                                                <option value="5">All</option>
-                                            </select>
-                                            <input type="hidden" name="hidden_country" id="hidden_country" />
+                            <form role="form" action="exportToPdf-allAdmin.php" method="POST">
+                                <div class="row">    
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <label class="form-check-label">Report Format</label>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <label class="form-check-label">
+                                                    <input type="radio" value="excel" class="form-check-input" id="excel" name="regRadio" required>Excel</label>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <label class="form-check-label">
+                                                    <input type="radio" value="pdf" class="form-check-input" id="pdf" name="regRadio" required>PDF</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-5">
-                                    <div class="card">
-                                        <div class="card-body">                                                
-                                            <label class="" for="inputGroupSelect01">Club</label>
-                                            <select class="custom-select form-control" name="multi_search_filter_club" id="multi_search_filter_club">
-                                                <option selected disabled>Choose...</option>
-                                                <?php
-                                                    $query = "SELECT clubId, clubName FROM `club`";
-                                                    $coachR = mysqli_query($con, $query);
-                                                    $rowCount = mysqli_num_rows($coachR);
-                                                    if($rowCount != 0){
-                                                        while($rowR = mysqli_fetch_array($coachR)){
-                                                            $clubId = $rowR['clubId'];
-                                                            $clubName = $rowR['clubName'];
-                                                            echo '<option value="'.$clubId.'">'.$clubName.'</option>';
-                                                        }
-                                                    }
-                                                ?>
-                                            </select>
-                                            <input type="hidden" name="hidden_club" id="hidden_club" />
+                                <div class="row">    
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <label class="form-check-label">Report Fields</label>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="firstName">
+                                                <label class="form-check-label" for="clubCode">First Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="secondName">
+                                                <label class="form-check-label" for="clubCode">Second Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="email">
+                                                <label class="form-check-label" for="clubCode">Email</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="mobile">
+                                                <label class="form-check-label" for="clubCode">Mobile</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="nic">
+                                                <label class="form-check-label" for="clubCode">NIC</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="role">
+                                                <label class="form-check-label" for="clubCode">Role</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="submit" name="submit" value="Download" id="submit" class="form-control btn-success" style="margin: auto;"></input>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">ID</th>
-                                            <th class="border-top-0">NAME</th>
-                                            <th class="border-top-0">CLUB</th>
-                                            <th class="border-top-0">NIC</th>
-                                            <th class="border-top-0">MOBILE</th>
-                                            <th class="border-top-0">EMAIL</th>
-                                            <th class="border-top-0">CATEGORY</th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -372,67 +363,6 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
-<script type="text/javascript">
-    function clicked() {
-       if (confirm('Do you want to delete the Coach?')) {
-           yourformelement.submit();
-       } else {
-           return false;
-       }
-    }
-</script>
-<script>
-$(document).ready(function(){
-
- load_data();
- 
- function load_data(query='')
- {
-  $.ajax({
-   url:"fetchCoach.php",
-   method:"POST",
-   data:{query:query},
-   success:function(data)
-   {
-    $('tbody').html(data);
-   }
-  })
- }
-
- $('#multi_search_filter').change(function(){
-  $('#hidden_country').val($('#multi_search_filter').val());
-  var query = $('#hidden_country').val();
-  load_data(query);
- });
- 
-});
-</script>
-<script>
-$(document).ready(function(){
-
- load_data_club();
- 
- function load_data_club(query='')
- {
-  $.ajax({
-   url:"fetchClubCoach.php",
-   method:"POST",
-   data:{query:query},
-   success:function(data)
-   {
-    $('tbody').html(data);
-   }
-  })
- }
-
- $('#multi_search_filter_club').change(function(){
-  $('#hidden_club').val($('#multi_search_filter_club').val());
-  var query = $('#hidden_club').val();
-  load_data_club(query);
- });
- 
-});
-</script>
 </html>
 <?php
 } else {
