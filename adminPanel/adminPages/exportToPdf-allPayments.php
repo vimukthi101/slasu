@@ -44,6 +44,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 				 			$subjectVal .= 'SLASU/A/00'.$array[$x].'<br/>';
 				 		}
 				 		$html .= '<td class="border-top-0">'.$subjectVal.'</td>';
+				 	} else if($aDoor[$i] == "status"){
+			 		    if($fromList == 1){
+			 		    	$html .= '<td class="border-top-0">Send For Payment</td>';
+					    } else if($fromList == 2) {
+					    	$html .= '<td class="border-top-0">Approved</td>';
+					    } else if($fromList == 3) {
+					    	$html .= '<td class="border-top-0">Rejected</td>';
+					    } else if($fromList == 4) {
+					    	$html .= '<td class="border-top-0">To Be Renewed</td>';
+					    }
+				 		$html .= '<td class="border-top-0">'.$clubName.'</td>';
 				 	} else {
 				 		$html .= '<td class="border-top-0">'.$fromList.'</td>';
 				 	}

@@ -235,9 +235,20 @@
                                 <h4 class="card-title">Payment Status</h4>
                             </div>
                             <div class="row">
-                                <div class="col-9 align-self-center">
+                                <div class="col-7 align-self-center">
                             
                                 </div>
+                                <?php
+                                    if($_SESSION["role"] == "sadmin"){
+                                       echo '<div class="col-2 align-self-center">
+                                        <div>
+                                            <form role="form" method="post" action="masterReset.php">
+                                                 <input style="float:right;" type="submit" onclick="return clicked();" name="submit" value="Master Reset" id="submit" class="btn btn-danger" style="margin: auto;"></input>
+                                             </form>
+                                        </div>
+                                    </div>';
+                                    }
+                                ?>
                                 <div class="col-2 align-self-center">
                                     <div>
                                         <input type="button" class="form-control btn btn-success" onclick="location.href='generatePaymentReport.php';" value="Generate Report">
@@ -250,12 +261,17 @@
                                         $error = $_GET['er'];
                                         if($error == "su"){
                                             echo '<div class="col-md-12">
-                                                <span style="color:green;margin-left:20px;">Payment updated successfully.</span>
+                                                <span style="color:green;margin-left:20px;">Payment Updated Successfully.</span>
                                                 <div class="col-lg-12"></div>
                                             </div>';
                                         } else if($error == "er"){
                                             echo '<div class="col-md-12">
                                                 <span style="color:red;margin-left:20px;">Couldn\'t save the changes, try again.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if($error == "msu"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Master Reset Successful.</span>
                                                 <div class="col-lg-12"><hr/></div>
                                             </div>';
                                         }
@@ -271,7 +287,8 @@
                                                 <option selected disabled>Select Type...</option>
                                                 <option value="1">Send For Payment</option>
                                                 <option value="2">Approved</option>
-                                                <option value="3">Rejected</option>                                            
+                                                <option value="3">Rejected</option>   
+                                                <option value="4">To Be Renewed</option>                                            
                                             </select>
                                             <input type="hidden" name="hidden_country" id="hidden_country" />
                                         </div>
@@ -336,6 +353,15 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
+<script type="text/javascript">
+    function clicked() {
+       if (confirm('Do you want to Master Reset?')) {
+           yourformelement.submit();
+       } else {
+           return false;
+       }
+    }
+</script>
 <script>
 $(document).ready(function(){
 

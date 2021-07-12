@@ -54,7 +54,9 @@
                             $paymentStatus = "Approved";
                         } else if($paymentStatus == 3) {
                             $paymentStatus = "Rejected";
-                        } else {
+                        } else if($paymentStatus == 4) {
+                            $paymentStatus = "To Be Renewed";
+                        }else {
                             $paymentStatus = "Not Paid";
                         }
 	            	}

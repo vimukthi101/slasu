@@ -32,6 +32,8 @@
                             $status = "Approved";
                         } else if($status == 3) {
                             $status = "Rejected";
+                        } else if($paymentStatus == 4) {
+                            $status = "To Be Renewed";
                         }
                         $queryP = 'SELECT * FROM `club` WHERE clubId='.$clubId;
                         $resultP = mysqli_query($con, $queryP);

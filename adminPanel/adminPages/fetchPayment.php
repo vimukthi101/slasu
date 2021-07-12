@@ -11,7 +11,7 @@ if($_POST["query"] != '') {
  $search_text = $_POST["query"];
  $query = 'SELECT * FROM `payment` WHERE status="'.$search_text.'"';
 } else {
- $query = 'SELECT * FROM `payment`';
+ $query = 'SELECT * FROM `payment` WHERE status IN (1,2,3)';
 }
 $result = mysqli_query($con, $query);
 $output = '';
@@ -31,6 +31,8 @@ if(mysqli_num_rows($result) != 0){
         $status = "Approved";
     } else if($status == 3) {
         $status = "Rejected";
+    } else if($status == 4) {
+        $status = "To Be Renewed";
     }
     $queryP = 'SELECT * FROM `club` WHERE clubId='.$clubId;
     $resultP = mysqli_query($con, $queryP);

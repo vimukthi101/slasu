@@ -263,15 +263,17 @@
                                 <div class="container">
                                     <br/>
                                     <?php
-                                        $pDate = 'SELECT date FROM `payment` order by date desc limit 1';
+                                        $pDate = 'SELECT date FROM `payment` WHERE status=1 order by date desc limit 1';
                                         $dateR = mysqli_query($con, $pDate);
                                         if(mysqli_num_rows($dateR) != 0){
                                             while($rowDateP = mysqli_fetch_array($dateR)){
                                                 $datePayment = $rowDateP['date'];
                                             }
+                                        } else {
+                                            $datePayment = "No Pending Payments";
                                         }
                                     ?>
-                                    <h4 class="page-title" style="text-transform:uppercase;color: black;">Last Payment</h4>
+                                    <h4 class="page-title" style="text-transform:uppercase;color: black;">Last Pending Payment</h4>
                                     <label class="label label-info" style="text-transform:uppercase;font-size: 15px;"><?php echo $datePayment; ?></label>
                                     <br/>
                                   </div>
@@ -334,7 +336,7 @@
                         </div>
                     </div>
                     <?php
-                        $pay = 'SELECT count(*) FROM `payment`';
+                        $pay = 'SELECT count(*) FROM `payment` WHERE status=1';
                         $payR = mysqli_query($con, $pay);
                         if(mysqli_num_rows($payR) != 0){
                             while($rowPay = mysqli_fetch_array($payR)){
@@ -348,7 +350,7 @@
                                 <div class="card">
                                     <div class="container" style="text-align: center;">
                                         <h4 style="font-size: 130px;color: black;">'.$countPay.'</h4>
-                                        <p>All Payments</p>
+                                        <p>All Pending Payments</p>
                                       </div>
                                 </div>
                             </div>';

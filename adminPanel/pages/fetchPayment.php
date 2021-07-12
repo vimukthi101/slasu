@@ -30,6 +30,8 @@ if(mysqli_num_rows($result) != 0){
         $status = "Approved";
     } else if($status == 3) {
         $status = "Rejected";
+    } else if($status == 4) {
+        $status = "To Be Renewed";
     }
     $output .= '<tr>
                 <td class="txt-oflo">'.$clubIdCode.'</td>

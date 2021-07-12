@@ -229,7 +229,8 @@
                                                 <option selected disabled>Select Type...</option>
                                                 <option value="1">Send For Payment</option>
                                                 <option value="2">Approved</option>
-                                                <option value="3">Rejected</option>                                            
+                                                <option value="3">Rejected</option> 
+                                                <option value="4">To Be Renewed</option>                                            
                                             </select>
                                             <input type="hidden" name="hidden_country" id="hidden_country" />
                                         </div>
