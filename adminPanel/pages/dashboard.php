@@ -255,8 +255,17 @@
                             <div class="card">
                                 <div class="container">
                                     <br/>
+                                    <?php
+                                        $pDate = 'SELECT date FROM `payment` where clubId='.$_SESSION["clubId"].' order by date desc limit 1';
+                                        $dateR = mysqli_query($con, $pDate);
+                                        if(mysqli_num_rows($dateR) != 0){
+                                            while($rowDateP = mysqli_fetch_array($dateR)){
+                                                $datePayment = $rowDateP['date'];
+                                            }
+                                        }
+                                    ?>
                                     <h4 class="page-title" style="text-transform:uppercase;color: black;">Last Payment</h4>
-                                    <label class="label label-info" style="text-transform:uppercase;font-size: 15px;">1/5/2021</label>
+                                    <label class="label label-info" style="text-transform:uppercase;font-size: 15px;"><?php echo $datePayment; ?></label>
                                     <br/>
                                   </div>
                             </div>
@@ -316,14 +325,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="card">
-                            <div class="container" style="text-align: center;color: black;">
-                                <h4 style="font-size: 130px;">01</h4>
-                                <p>Pending Payments</p>
-                              </div>
-                        </div>
-                    </div>
+                    <?php
+                        $pay = 'SELECT count(*) FROM `payment` where clubId='.$_SESSION["clubId"];
+                        $payR = mysqli_query($con, $pay);
+                        if(mysqli_num_rows($payR) != 0){
+                            while($rowPay = mysqli_fetch_array($payR)){
+                                $countPay = $rowPay['count(*)'];
+                                if($countPay < 9){
+                                    $countPay = "0".$countPay;
+                                }
+                            }
+                        }
+                        echo '<div class="col-3">
+                                <div class="card">
+                                    <div class="container" style="text-align: center;">
+                                        <h4 style="font-size: 130px;color: black;">'.$countPay.'</h4>
+                                        <p>All Payments</p>
+                                      </div>
+                                </div>
+                            </div>';
+                    ?>
                 </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->

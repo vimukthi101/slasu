@@ -25,6 +25,16 @@ if(mysqli_num_rows($result) != 0){
     $nic = $row['nic'];
     $email = $row['email'];
     $phone1 = $row['phone1'];
+    $paymentStatus = $row['paymentStatus'];
+    if($paymentStatus == 1){
+        $paymentStatus = "Send For Payment";
+    } else if($paymentStatus == 2) {
+        $paymentStatus = "Approved";
+    } else if($paymentStatus == 3) {
+        $paymentStatus = "Rejected";
+    } else {
+        $paymentStatus = "Not Paid";
+    }
     if($affiliationCat == 1){
         $affiliationCat = "Swimming";
     } else if($affiliationCat == 2) {
@@ -37,13 +47,14 @@ if(mysqli_num_rows($result) != 0){
         $affiliationCat = "All";
     }
     $output .= '<tr>
-                <td class="txt-oflo"><input type="checkbox" id="editAthlete" name="editAthlete" value="'.$athleteId.'"></td>
+                <td class="txt-oflo"><input type="checkbox" id="editAthlete[]" name="editAthlete[]" value="'.$athleteId.'"></td>
                 <td class="txt-oflo">'.$clubIdCode.'</td>
                 <td class="txt-oflo">'.$athleteName.'</td>
                 <td class="txt-oflo">'.$nic.'</td>
                 <td class="txt-oflo">'.$phone1.'</td>
                 <td class="txt-oflo">'.$email.'</td>
                 <td class="txt-oflo">'.$affiliationCat.'</td>
+                <td class="txt-oflo">'.$paymentStatus.'</td>
                 <td class="txt-oflo">
                     <form role="form" method="post" action="viewAthlete.php">
                         <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>

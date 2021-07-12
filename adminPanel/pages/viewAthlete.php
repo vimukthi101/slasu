@@ -30,6 +30,17 @@
 	                    $postalId = $row['postalId'];
 	                    $nic = $row['nic'];
 	                    $ppNo = $row['ppNo'];
+                        $paymentStatus = $row['paymentStatus'];
+                        $paymentRef = "SLASU/P/00".$row['paymentRef'];
+                        if($paymentStatus == 1){
+                            $paymentStatus = "Send For Payment";
+                        } else if($paymentStatus == 2) {
+                            $paymentStatus = "Approved";
+                        } else if($paymentStatus == 3) {
+                            $paymentStatus = "Rejected";
+                        } else {
+                            $paymentStatus = "Not Paid";
+                        }
 	                    if($gender == 1){
 	                        $gender = "Male";
 	                    } else if($gender == 2) {
@@ -402,6 +413,24 @@
 		                                    	<img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($bbPhoto).'"/>
 		                                    </div>
 		                                </div>
+                                        <div class="form-group col-md-12">
+                                            <label class="">Payment Information</label>
+                                            <hr/>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Payment Status</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$paymentStatus.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Payment Reference</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$paymentRef.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
 		                                ';
 		                        ?>
                         	</div>	

@@ -3,7 +3,8 @@
     if(!isset($_SESSION[''])){
         session_start();
     }
-    if(isset($_SESSION["adminId"])){
+    if(isset($_SESSION["clubId"])){
+        if(!empty($_POST['editAthlete'])){
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -14,7 +15,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title style="text-transform:uppercase;"><?php echo $_SESSION["firstName"] ?></title>
+    <title style="text-transform:uppercase;"><?php echo $_SESSION["clubName"] ?></title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon.png">
     <!-- Custom CSS -->
@@ -151,20 +152,6 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin.php"
-                                aria-expanded="false">
-                                <i class="mdi mdi-key"></i>
-                                <span class="hide-menu">Admins</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="club.php"
-                                aria-expanded="false">
-                                <i class="mdi mdi-home "></i>
-                                <span class="hide-menu">Clubs</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="athlete.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-human-child"></i>
@@ -204,7 +191,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        
+                        <h4 class="page-title" style="text-transform:uppercase;"><?php echo $_SESSION["clubName"] ?></h4>
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
@@ -213,64 +200,124 @@
                                     <li class="">
                                         <a href="dashboard.php">Home</a>
                                     </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Payment Status</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Athlete</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
-            </div>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
+            <form role="form" action="sendForPaymentController.php" method="POST">
             <div class="container-fluid">
                 <div class="row">
                     <!-- column -->
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Payment Status</h4>
+                                <h4 class="card-title">Send For Payment</h4>
+                            </div>
+                            <?php
+                                if(isset($_GET['er'])){
+                                    if(!empty($_GET['er'])){
+                                        $error = $_GET['er'];
+                                        if($error == "su"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Athlete record deleted successfully.</span>
+                                                <div class="col-lg-12"></div>
+                                            </div>';
+                                        } else if($error == "er"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Couldn\'t save the changes, try again.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "us"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:green;margin-left:20px;">Updated succesfully.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "wi"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Only jpg,png,jpeg are supportrd for photo.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        }
+                                    }
+                                }
+                            ?>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="card">
+                                        <div class="card-body">                                                
+                                            <label class="">Payment Amount</label>
+                                            <div class="">
+                                                <input type="number" step="any" class="form-control form-control-line" name="money" id="money" required title="Only Numbers">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-5">
                                     <div class="card">
                                         <div class="card-body">                                                
-                                            <label class="" for="inputGroupSelect01">Status</label>
-                                            <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
-                                                <option selected disabled>Select Type...</option>
-                                                <option value="1">Send For Payment</option>
-                                                <option value="2">Approved</option>
-                                                <option value="3">Rejected</option>                                            
-                                            </select>
-                                            <input type="hidden" name="hidden_country" id="hidden_country" />
+                                            <label class="">Additional Notes</label>
+                                            <div class="">
+                                                <textarea class="form-control" name="notes" id="notes"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">PAYMENT REF</th>
-                                            <th class="border-top-0">CLUB NAME</th>
-                                            <th class="border-top-0">AMOUNT</th>
-                                            <th class="border-top-0">NOTES</th>
-                                            <th class="border-top-0">DATE</th>
-                                            <th class="border-top-0">STATUS</th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="card">
+                                        <div class="card-body">                                                
+                                            <label class="">Athletes List</label>
+                                            <div>
+                                            <?php
+                                                if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+                                                    if(!empty($_POST['editAthlete'])) {
+                                                        $array = $_POST['editAthlete'];
+                                                        $_SESSION['athleteArray'] = $array;
+                                                        for($i=0;$i<count($array);$i++){
+                                                            echo '<label class="">SLASU/A/00'.$array[$i].'</label><br/>';
+                                                        }
+                                                    }
+                                                }
+                                            ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5">
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    
+                                </div>
+                                <div class="col-4">
+                                    <div class="card">
+                                        <div class="card-body">                                                
+                                            <input type="submit" name="submit" value="Send For Payment" id="submit" class="btn btn-warning" style="margin: auto;"></input>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </form>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
@@ -307,34 +354,12 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
-<script>
-$(document).ready(function(){
 
- load_data();
- 
- function load_data(query='')
- {
-  $.ajax({
-   url:"fetchPayment.php",
-   method:"POST",
-   data:{query:query},
-   success:function(data)
-   {
-    $('tbody').html(data);
-   }
-  })
- }
-
- $('#multi_search_filter').change(function(){
-  $('#hidden_country').val($('#multi_search_filter').val());
-  var query = $('#hidden_country').val();
-  load_data(query);
- });
- 
-});
-</script>
 </html>
 <?php
+    } else {
+        header('Location:athlete.php');
+    }
 } else {
     session_destroy();
     header('Location:../../login.php');

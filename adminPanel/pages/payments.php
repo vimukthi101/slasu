@@ -220,59 +220,35 @@
                             <div class="card-body">
                                 <h4 class="card-title">Payment Status</h4>
                             </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="card">
+                                        <div class="card-body">                                                
+                                            <label class="" for="inputGroupSelect01">Status</label>
+                                            <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
+                                                <option selected disabled>Select Type...</option>
+                                                <option value="1">Send For Payment</option>
+                                                <option value="2">Approved</option>
+                                                <option value="3">Rejected</option>                                            
+                                            </select>
+                                            <input type="hidden" name="hidden_country" id="hidden_country" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0">NAME</th>
-                                            <th class="border-top-0">STATUS</th>
+                                            <th class="border-top-0">PAYMENT REF</th>
+                                            <th class="border-top-0">AMOUNT</th>
+                                            <th class="border-top-0">NOTES</th>
                                             <th class="border-top-0">DATE</th>
-                                            <th class="border-top-0">PRICE</th>
+                                            <th class="border-top-0">STATUS</th>
+                                            <th class="border-top-0"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-
-                                            <td class="txt-oflo">Elite admin</td>
-                                            <td><span class="label label-success label-rounded">SALE</span> </td>
-                                            <td class="txt-oflo">April 18, 2021</td>
-                                            <td><span class="font-medium">$24</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Real Homes WP Theme</td>
-                                            <td><span class="label label-info label-rounded">EXTENDED</span></td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="font-medium">$1250</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Ample Admin</td>
-                                            <td><span class="label label-purple label-rounded">Tax</span></td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="font-medium">$1250</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Medical Pro WP Theme</td>
-                                            <td><span class="label label-success label-rounded">Sale</span></td>
-                                            <td class="txt-oflo">April 20, 2021</td>
-                                            <td><span class="font-medium">-$24</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Hosting press html</td>
-                                            <td><span class="label label-success label-rounded">SALE</span></td>
-                                            <td class="txt-oflo">April 21, 2021</td>
-                                            <td><span class="font-medium">$24</span></td>
-                                        </tr>
-                                        <tr>
-
-                                            <td class="txt-oflo">Digital Agency PSD</td>
-                                            <td><span class="label label-danger label-rounded">Tax</span> </td>
-                                            <td class="txt-oflo">April 23, 2021</td>
-                                            <td><span class="font-medium">-$14</span></td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -315,7 +291,32 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
+<script>
+$(document).ready(function(){
 
+ load_data();
+ 
+ function load_data(query='')
+ {
+  $.ajax({
+   url:"fetchPayment.php",
+   method:"POST",
+   data:{query:query},
+   success:function(data)
+   {
+    $('tbody').html(data);
+   }
+  })
+ }
+
+ $('#multi_search_filter').change(function(){
+  $('#hidden_country').val($('#multi_search_filter').val());
+  var query = $('#hidden_country').val();
+  load_data(query);
+ });
+ 
+});
+</script>
 </html>
 <?php
 } else {

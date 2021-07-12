@@ -211,6 +211,7 @@
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
+            <form role="form" action="sendForPayment.php" method="POST">
             <div class="container-fluid">
                 <div class="row">
                     <!-- column -->
@@ -277,6 +278,7 @@
                                             <th class="border-top-0">MOBILE</th>
                                             <th class="border-top-0">EMAIL</th>
                                             <th class="border-top-0">CATEGORY</th>
+                                            <th class="border-top-0">PAYMENT</th>
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>
@@ -289,6 +291,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </form>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
