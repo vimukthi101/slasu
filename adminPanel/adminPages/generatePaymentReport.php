@@ -213,13 +213,12 @@
                                     <li class="">
                                         <a href="dashboard.php">Home</a>
                                     </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Payment Status</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Reports</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
-            </div>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -229,74 +228,118 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- column -->
-                    <div class="col-12">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Payment Status</h4>
+                                <h4 class="card-title">Generate Reports</h4>
                             </div>
-                            <div class="row">
-                                <div class="col-9 align-self-center">
-                            
-                                </div>
-                                <div class="col-2 align-self-center">
-                                    <div>
-                                        <input type="button" class="form-control btn btn-success" onclick="location.href='generatePaymentReport.php';" value="Generate Report">
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                                if(isset($_GET['er'])){
-                                    if(!empty($_GET['er'])){
-                                        $error = $_GET['er'];
-                                        if($error == "su"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:green;margin-left:20px;">Payment updated successfully.</span>
-                                                <div class="col-lg-12"></div>
-                                            </div>';
-                                        } else if($error == "er"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Couldn\'t save the changes, try again.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        }
-                                    }
-                                }
-                            ?>
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="card">
-                                        <div class="card-body">                                                
-                                            <label class="" for="inputGroupSelect01">Status</label>
-                                            <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
-                                                <option selected disabled>Select Type...</option>
-                                                <option value="1">Send For Payment</option>
-                                                <option value="2">Approved</option>
-                                                <option value="3">Rejected</option>                                            
-                                            </select>
-                                            <input type="hidden" name="hidden_country" id="hidden_country" />
+                            <form role="form" action="exportToPdf-allPayments.php" method="POST">
+                                <div class="row">    
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <label class="form-check-label">Report Format</label>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <label class="form-check-label">
+                                                    <input type="radio" value="excel" class="form-check-input" id="excel" name="regRadio" required>Excel</label>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <label class="form-check-label">
+                                                    <input type="radio" value="pdf" class="form-check-input" id="pdf" name="regRadio" required>PDF</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">PAYMENT REF</th>
-                                            <th class="border-top-0">CLUB NAME</th>
-                                            <th class="border-top-0">AMOUNT</th>
-                                            <th class="border-top-0">NOTES</th>
-                                            <th class="border-top-0">DATE</th>
-                                            <th class="border-top-0">STATUS</th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
+                                <div class="row">    
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <label class="form-check-label">Report Fields</label>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="paymentCode">
+                                                <label class="form-check-label" for="clubCode">Payment Code</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="clubId">
+                                                <label class="form-check-label" for="clubCode">Club Name</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="amount">
+                                                <label class="form-check-label" for="clubCode">Amount</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="notes">
+                                                <label class="form-check-label" for="clubCode">Notes</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="athleteList">
+                                                <label class="form-check-label" for="clubCode">Athlete List</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="date">
+                                                <label class="form-check-label" for="clubCode">Date</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="adminComment">
+                                                <label class="form-check-label" for="clubCode">Admin Comment</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="status">
+                                                <label class="form-check-label" for="clubCode">Status</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="submit" name="submit" value="Download" id="submit" class="form-control btn-success" style="margin: auto;"></input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -336,32 +379,6 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
-<script>
-$(document).ready(function(){
-
- load_data();
- 
- function load_data(query='')
- {
-  $.ajax({
-   url:"fetchPayment.php",
-   method:"POST",
-   data:{query:query},
-   success:function(data)
-   {
-    $('tbody').html(data);
-   }
-  })
- }
-
- $('#multi_search_filter').change(function(){
-  $('#hidden_country').val($('#multi_search_filter').val());
-  var query = $('#hidden_country').val();
-  load_data(query);
- });
- 
-});
-</script>
 </html>
 <?php
 } else {

@@ -1,9 +1,58 @@
 <?php
-    include_once('../../php/db.php');
-    if(!isset($_SESSION[''])){
+	include_once('../../php/db.php');
+	if(!isset($_SESSION[''])){
         session_start();
     }
     if(isset($_SESSION["adminId"])){
+	    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) && isset($_POST['id'])){
+	        if(!empty($_POST['id'])){
+	        	$id = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['id'])));
+	            $getCard = "SELECT * FROM payment WHERE paymentId='".$id."'";
+	            $resultCard = mysqli_query($con, $getCard);
+	            if(mysqli_num_rows($resultCard) != 0){
+	            	while($row = mysqli_fetch_array($resultCard)){
+	                    $athleteId = $row['paymentId'];
+                        $athleteCode = $row['paymentCode'];
+                        $clubId = $row['clubId'];
+                        $clubIdCode = $athleteCode.$athleteId;
+                        $amount = $row['amount'];
+                        $notes = $row['notes'];
+                        $date = $row['date'];
+                        $status = $row['status'];
+                        $athleteList = $row['athleteList'];
+                        $adminComment = $row['adminComment'];
+                        $array = explode(",",$athleteList);
+                        $subjectVal = "";
+                        for($x=0;$x<count($array);$x++){
+                            $subjectVal .= 'SLASU/A/00'.$array[$x].',';
+                        }
+                        if($status == 1){
+                            $status = "Send For Payment";
+                        } else if($status == 2) {
+                            $status = "Approved";
+                        } else if($status == 3) {
+                            $status = "Rejected";
+                        }
+                        $queryP = 'SELECT * FROM `club` WHERE clubId='.$clubId;
+                        $resultP = mysqli_query($con, $queryP);
+                        if(mysqli_num_rows($resultP) != 0){
+                            while($rowP = mysqli_fetch_array($resultP)){
+                                $clubName = $rowP['clubName'];
+                            }
+                        }
+	            	}
+	            } else {
+	                //card exists
+	                header('Location:payment.php');
+	            }
+	        } else {
+	            //empty fields redirect to cards
+	            header('Location:payment.php');
+	        }
+	    } else {
+	        //if submit button is not clicked
+	        header('Location:payment.php');	
+	    }
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -21,7 +70,7 @@
     <link href="../dist/css/style.min.css" rel="stylesheet">
         <style type="text/css">
         .footer {
-  position: fixed;
+  position: inherit;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -87,22 +136,7 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item search-box">
-                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
-                                <div class="d-flex align-items-center">
-                                    <i class="mdi mdi-magnify font-20 me-1"></i>
-                                    <div class="ms-1 d-none d-sm-block">
-                                        <span>Search</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter">
-                                <a class="srh-btn">
-                                    <i class="ti-close"></i>
-                                </a>
-                            </form>
-                        </li>
+                        
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -210,10 +244,9 @@
                         <div class="d-flex align-items-center justify-content-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="">
-                                        <a href="dashboard.php">Home</a>
-                                    </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Payment Status</li>
+                                    <li class=""><a href="dashboard.php">Home</a></li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page"><a href="payments.php">Payment Status</a></li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">View</li>
                                 </ol>
                             </nav>
                         </div>
@@ -232,71 +265,77 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Payment Status</h4>
+                                <h4 class="card-title">Payment Information</h4>
                             </div>
-                            <div class="row">
-                                <div class="col-9 align-self-center">
-                            
-                                </div>
-                                <div class="col-2 align-self-center">
-                                    <div>
-                                        <input type="button" class="form-control btn btn-success" onclick="location.href='generatePaymentReport.php';" value="Generate Report">
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                                if(isset($_GET['er'])){
-                                    if(!empty($_GET['er'])){
-                                        $error = $_GET['er'];
-                                        if($error == "su"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:green;margin-left:20px;">Payment updated successfully.</span>
-                                                <div class="col-lg-12"></div>
-                                            </div>';
-                                        } else if($error == "er"){
-                                            echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Couldn\'t save the changes, try again.</span>
-                                                <div class="col-lg-12"><hr/></div>
-                                            </div>';
-                                        }
-                                    }
-                                }
-                            ?>
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="card">
-                                        <div class="card-body">                                                
-                                            <label class="" for="inputGroupSelect01">Status</label>
-                                            <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
-                                                <option selected disabled>Select Type...</option>
-                                                <option value="1">Send For Payment</option>
-                                                <option value="2">Approved</option>
-                                                <option value="3">Rejected</option>                                            
-                                            </select>
-                                            <input type="hidden" name="hidden_country" id="hidden_country" />
+                            <div class="card-body row">
+		                        <?php
+		                         echo '<div class="form-group col-md-12">
+		                                    <label class="">Payment Information</label>
+		                                    <hr/>
+		                                </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Payment REF</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$clubIdCode.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">PAYMENT REF</th>
-                                            <th class="border-top-0">CLUB NAME</th>
-                                            <th class="border-top-0">AMOUNT</th>
-                                            <th class="border-top-0">NOTES</th>
-                                            <th class="border-top-0">DATE</th>
-                                            <th class="border-top-0">STATUS</th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            </div>
+		                         		<div class="form-group col-md-5">
+		                                    <label class="">Club Name</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$clubName.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Amount</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$amount.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Notes</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$notes.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Date</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$date.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Current Status</label>
+		                                    <div class="">
+		                                        <input type="text" placeholder="'.$status.'"
+		                                            class="form-control form-control-line" disabled>
+		                                    </div>
+		                                </div>
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Athlete List</label>
+		                                    <div class="">
+		                                        <textarea class="form-control form-control-line" disabled>'.$subjectVal.'</textarea>
+		                                    </div>
+		                                </div>
+                                        <form role="form" action="approvePayment.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
+		                                <div class="form-group col-md-5">
+		                                    <label class="">Admin Comment</label>
+		                                    <div class="">
+		                                        <textarea class="form-control form-control-line" id="comment" name="comment">'.$adminComment.'</textarea>
+		                                    </div>
+		                                </div>
+                                        <div class="col-lg-12"><hr/></div>
+                                        <div class="col-md-6" style="text-align: center;">
+                                                <input type="text" value="'.$id.'" name="athleteId" id="athleteId" required hidden>
+                                                <input type="submit" name="submit" value="Approve" onclick="return clicked();" id="submit" class="btn btn-success" style="margin: auto;"></input>
+                                        </div>
+                                        </form>';
+		                        ?>
+                        	</div>	
                         </div>
                     </div>
                 </div>
@@ -336,31 +375,14 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
-<script>
-$(document).ready(function(){
-
- load_data();
- 
- function load_data(query='')
- {
-  $.ajax({
-   url:"fetchPayment.php",
-   method:"POST",
-   data:{query:query},
-   success:function(data)
-   {
-    $('tbody').html(data);
-   }
-  })
- }
-
- $('#multi_search_filter').change(function(){
-  $('#hidden_country').val($('#multi_search_filter').val());
-  var query = $('#hidden_country').val();
-  load_data(query);
- });
- 
-});
+<script type="text/javascript">
+    function clicked() {
+       if (confirm('Do you want to update the details?')) {
+           yourformelement.submit();
+       } else {
+           return false;
+       }
+    }
 </script>
 </html>
 <?php

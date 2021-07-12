@@ -47,20 +47,29 @@ if(mysqli_num_rows($result) != 0){
                 <td class="txt-oflo">'.$date.'</td>
                 <td class="txt-oflo">'.$status.'</td>
                 <td class="txt-oflo">
-                    <form role="form" method="post" action="">
+                    <form role="form" method="post" action="viewPayment.php">
                         <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>
                         <input style="float:right;" type="submit" name="submit" value="View" id="submit" class="btn btn-info" style="margin: auto;">
                         </input>
                     </form>
+                </td>';
+    if($status == "Send For Payment"){
+        $output .= '<td class="txt-oflo">
+                    <form role="form" method="post" action="editPayment.php">
+                        <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>
+                        <input style="float:right;" type="submit" name="submit" value="Approve" id="submit" class="btn btn-success" style="margin: auto;">
+                        </input>
+                    </form>
                 </td>
                 <td class="txt-oflo">
-                    <form role="form" method="post" action="">
+                    <form role="form" method="post" action="editPaymentTwo.php">
                         <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>
-                        <input style="float:right;" type="submit" name="submit" value="Edit" id="submit" class="btn btn-success" style="margin: auto;">
+                        <input style="float:right;" type="submit" name="submit" value="Reject" id="submit" class="btn btn-warning" style="margin: auto;">
                         </input>
                     </form>
                 </td>
             </tr>';
+    }
   }
 } else {
  $output .= '
