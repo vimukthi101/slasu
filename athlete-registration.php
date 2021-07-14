@@ -177,7 +177,7 @@
                                                 </div>';
                                             } else if ($error == "wi"){
                                                 echo '<div class="col-md-12">
-                                                    <span style="color:red;">Only jpg, jpeg, png is supported for uploaded file.</span>
+                                                    <span style="color:red;">Only PDF is supported for Birth Certificate.</span>
                                                     <div class="col-lg-12"><hr/></div>
                                                 </div>';
                                             }
@@ -324,7 +324,7 @@
                             <label class="">Upload Birth Certficate *</label>
                         </div>
                         <div class="col-md-12">
-                            <input type="file" class="custom-file-input" id="bbPhoto" name="bbPhoto" required/>
+                            <input type="file" accept="application/pdf" class="custom-file-input" id="bbPhoto" name="bbPhoto" required/>
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div><!-- /.col-md-12 -->
                     <div class="col-lg-12"><hr/></div>

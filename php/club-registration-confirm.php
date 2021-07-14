@@ -5,16 +5,18 @@
     }
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
         if(!empty($_POST['optradio']) && !empty($_POST['name']) && !empty($_POST['district']) && !empty($_POST['operatorName']) && !empty($_POST['operatorEmail']) && !empty($_POST['phone']) && !empty($_POST['operatorNic']) && !empty($_POST['regRadio']) && !empty($_POST['category']) && !empty($_POST['clubAddress']) && !empty($_POST['clubPhone1']) && !empty($_POST['inchargeName']) && !empty($_POST['inchargePhone'])){
-                $allowTypes = array('jpg','png','jpeg'); 
+                $allowTypes = array('application/pdf'); 
                 if(!empty($_FILES["requestLetter"]["name"])){
-                    $fileNameApplication = basename($_FILES["requestLetter"]["name"]); 
-                    $fileTypeApplication = pathinfo($fileNameApplication, PATHINFO_EXTENSION);
-                    if(in_array($fileTypeApplication, $allowTypes)){
-                        $requestLetter = $_FILES['requestLetter']['tmp_name']; 
-                        $applicationContent = addslashes(file_get_contents($requestLetter));
+                    $fileName = $_FILES['requestLetter']['name'];
+                    $tmpName  = $_FILES['requestLetter']['tmp_name'];
+                    $fileType = $_FILES['requestLetter']['type'];
+                    if(in_array($fileType, $allowTypes)){
+                        $fp      = fopen($tmpName, 'r');
+                        $content = fread($fp, filesize($tmpName));
+                        $applicationContent = addslashes($content);
+                        fclose($fp);
                         $_SESSION["requestLetter"] = $applicationContent;
                     } else {
-                        session_destroy();
                         header('Location:../club-registration.php?er=wi');
                     }
                 } else {

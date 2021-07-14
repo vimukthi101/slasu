@@ -65,13 +65,16 @@
                 $inchargeEmail = "";
             }
             if(!empty($_FILES["application"]["name"])){
-                $fileName = basename($_FILES["application"]["name"]); 
-                $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-                $allowTypes = array('jpg','png','jpeg'); 
+                $fileName = $_FILES['application']['name'];
+                $tmpName  = $_FILES['application']['tmp_name'];
+                $fileType = $_FILES['application']['type'];
+                $allowTypes = array('application/pdf'); 
                 if(in_array($fileType, $allowTypes)){ 
-                    $image = $_FILES['application']['tmp_name']; 
-                    $imgContent = addslashes(file_get_contents($image));
-                    $query = "UPDATE `club` SET `clubName`='".$name."',`status`='".$status."',`affiliationCat`='".$category."',`district`='".$district."',`postalAddress`='".$clubAddress."',`clubContactOne`='".$clubPhone1."',`clubContactTwo`='".$clubPhone2."',`clubEmailOne`='".$clubEmail1."',`clubEmailTwo`='".$clubEmail2."',`operatorName`='".$operatorName."',`operatorEmail`='".$operatorEmail."',`operatorWhatsapp`='".$whatsapp."',`operatorNic`='".$operatorNic."',`inchargeName`='".$inchargeName."',`inchargeMobile`='".$inchargePhone."',`inchargeEmail`='".$inchargeEmail."',`requestLetter`='".$imgContent."' WHERE clubId=".$clubId;
+                    $fp = fopen($tmpName, 'r');
+                    $content = fread($fp, filesize($tmpName));
+                    $applicationContent = addslashes($content);
+                    fclose($fp);
+                    $query = "UPDATE `club` SET `clubName`='".$name."',`status`='".$status."',`affiliationCat`='".$category."',`district`='".$district."',`postalAddress`='".$clubAddress."',`clubContactOne`='".$clubPhone1."',`clubContactTwo`='".$clubPhone2."',`clubEmailOne`='".$clubEmail1."',`clubEmailTwo`='".$clubEmail2."',`operatorName`='".$operatorName."',`operatorEmail`='".$operatorEmail."',`operatorWhatsapp`='".$whatsapp."',`operatorNic`='".$operatorNic."',`inchargeName`='".$inchargeName."',`inchargeMobile`='".$inchargePhone."',`inchargeEmail`='".$inchargeEmail."',`requestLetter`='".$applicationContent."' WHERE clubId=".$clubId;
                 }else{ 
                     header('Location:club.php?er=wi');
                 } 

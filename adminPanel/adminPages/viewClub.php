@@ -86,15 +86,15 @@
                     }
 	            } else {
 	                //card exists
-	                header('Location:athlete.php');
+	                header('Location:club.php');
 	            }
 	        } else {
 	            //empty fields redirect to cards
-	            header('Location:athlete.php');
+	            header('Location:club.php');
 	        }
 	    } else {
 	        //if submit button is not clicked
-	        header('Location:athlete.php');	
+	        header('Location:club.php');	
 	    }
 ?>
 <!DOCTYPE html>
@@ -329,7 +329,7 @@
                                         $html = '<div class="form-group col-md-12">
                                           <label class="">Request Letter</label>
                                             <div class="">
-                                                <img width="180" height="180" src="data:image/jpeg;base64,'.base64_encode($requestLetter).'"/>
+                                                <a href="http://localhost:1234/slasu/adminPanel/adminPages/download.php?id='.$id.'">Download The Application</a>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
@@ -537,7 +537,7 @@
 		                                <div class="form-group col-md-12">
 		                                    <label class="">Request Letter</label>
 		                                    <div class="">
-		                                    	<img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($requestLetter).'"/>
+		                                    	<a href="download.php?id='.$id.'">Download The Application</a>
 		                                    </div>
 		                                </div>
                                         <div class="form-group col-md-12">

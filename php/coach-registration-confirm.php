@@ -5,25 +5,29 @@
     }
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
         if(!empty($_POST['optradio']) && !empty($_POST['clubList']) && !empty($_POST['category']) && !empty($_POST['name']) && !empty($_POST['gender']) && !empty($_POST['phone1']) && !empty($_POST['nameForId']) && !empty($_FILES["photo"]["name"]) && !empty($_POST['dob']) && !empty($_POST['address']) && !empty($_POST['nic']) && !empty($_FILES["nicPhoto"]["name"])){
-                $allowTypes = array('jpg','png','jpeg'); 
+                $allowTypes = array('application/pdf'); 
                 if(!empty($_FILES["application"]["name"])){
-                    $fileNameApplication = basename($_FILES["application"]["name"]); 
-                    $fileTypeApplication = pathinfo($fileNameApplication, PATHINFO_EXTENSION);
-                    if(in_array($fileTypeApplication, $allowTypes)){
-                        $application = $_FILES['application']['tmp_name']; 
-                        $applicationContent = addslashes(file_get_contents($application));
+                    $fileName = $_FILES['application']['name'];
+                    $tmpName  = $_FILES['application']['tmp_name'];
+                    $fileType = $_FILES['application']['type'];
+                    if(in_array($fileType, $allowTypes)){
+                        $fp      = fopen($tmpName, 'r');
+                        $content = fread($fp, filesize($tmpName));
+                        $applicationContent = addslashes($content);
+                        fclose($fp);
+                        $_SESSION["application"] = $applicationContent;
                     } else {
-                        session_destroy();
-                        header('Location:../coach-registration.php?er=wi');
+                        header('Location:../coach-registration.php?er=pdf');
                     }
                 } else {
-                    $application = "";
+                    $requestLetter = "";
                 }
                 $fileNamePhoto = basename($_FILES["photo"]["name"]); 
                 $fileTypePhoto = pathinfo($fileNamePhoto, PATHINFO_EXTENSION);
                 $fileNameNic = basename($_FILES["nicPhoto"]["name"]); 
                 $fileTypeNic = pathinfo($fileNameNic, PATHINFO_EXTENSION);
-                if(in_array($fileTypePhoto, $allowTypes) && in_array($fileTypeNic, $allowTypes)){ 
+                $allowTypesPhoto = array('png', 'jpg', 'jpeg'); 
+                if(in_array($fileTypePhoto, $allowTypesPhoto) && in_array($fileTypeNic, $allowTypesPhoto)){ 
                     $photo = $_FILES['photo']['tmp_name']; 
                     $photoContent = addslashes(file_get_contents($photo));
                     $nicPhoto = $_FILES['nicPhoto']['tmp_name']; 
@@ -79,7 +83,6 @@
                     $_SESSION["emailAd"] = $emailAd;
                     $_SESSION["nameForId"] = $nameForId;
                     $_SESSION["photo"] = $photoContent;
-                    $_SESSION["application"] = $applicationContent;
                     $_SESSION["dob"] = $dob;
                     $_SESSION["address"] = $address;
                     $_SESSION["nic"] = $nic;
@@ -223,7 +226,7 @@
                           <p>Email Address : '.$_SESSION["emailAd"].'</p>
                           <p>Name For ID : '.$_SESSION["nameForId"].'</p>
                           <p>Photo : '.$fileNamePhoto.'</p>
-                          <p>Application : '.$fileNameApplication.'</p>
+                          <p>Application : '.$fileName.'</p>
                           <p>Date Of Birth : '.$_SESSION["dob"].'</p>
                           <p>Address : '.$_SESSION["address"].'</p>
                           <p>NIC : '.$_SESSION["nic"].'</p>

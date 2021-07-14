@@ -162,7 +162,12 @@
                                                 </div>';
                                             } else if ($error == "wi"){
                                                 echo '<div class="col-md-12">
-                                                    <span style="color:red;">Only jpg, jpeg, png is supported for uploaded files.</span>
+                                                    <span style="color:red;">Only jpg, jpeg, png is supported for NIC and ID photo.</span>
+                                                    <div class="col-lg-12"><hr/></div>
+                                                </div>';
+                                            } else if ($error == "pdf"){
+                                                echo '<div class="col-md-12">
+                                                    <span style="color:red;">Only PDF is supported for Application.</span>
                                                     <div class="col-lg-12"><hr/></div>
                                                 </div>';
                                             }
@@ -243,14 +248,14 @@
                                             <label class="">Upload Passport Size Photo for ID *</label>
                                         </div>
                                         <div class="col-md-12">
-                                            <input type="file" class="custom-file-input" id="photo" name="photo" required/>
+                                            <input type="file" accept="image/png, image/jpg, image/jpeg" class="custom-file-input" id="photo" name="photo" required/>
                                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                                     </div><!-- /.col-md-12 -->
                             <div class="col-md-12">
                                 <label class="">Upload Application</label>
                             </div>
                             <div class="col-md-12">
-                                <input type="file" class="custom-file-input" id="application" name="application" required/>
+                                <input type="file" accept="application/pdf" class="custom-file-input" id="application" name="application" required/>
                                 <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                         </div><!-- /.col-md-12 -->
                             <div class="col-lg-12"><hr/></div>
@@ -276,7 +281,7 @@
                             <label class="">Upload NIC *</label>
                         </div>
                         <div class="col-md-12">
-                            <input type="file" class="custom-file-input" id="nicPhoto" name="nicPhoto" required/>
+                            <input type="file" accept="image/png, image/jpg, image/jpeg" class="custom-file-input" id="nicPhoto" name="nicPhoto" required/>
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div><!-- /.col-md-12 -->
                     <div class="col-md-12">

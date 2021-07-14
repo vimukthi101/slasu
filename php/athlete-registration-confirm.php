@@ -5,12 +5,20 @@
     }
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
         if(!empty($_POST['optradio']) && !empty($_POST['category']) && !empty($_POST['name']) && !empty($_POST['gender']) && !empty($_POST['phone1']) && !empty($_POST['nameForId']) && !empty($_POST['bbno']) && !empty($_POST['dob']) && !empty($_POST['postal']) && !empty($_POST['district']) && !empty($_POST['bbdate']) && !empty($_FILES["bbPhoto"]["name"])){
-            $fileName = basename($_FILES["bbPhoto"]["name"]); 
-            $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-            $allowTypes = array('jpg','png','jpeg'); 
-            if(in_array($fileType, $allowTypes)){ 
-                $image = $_FILES['bbPhoto']['tmp_name']; 
-                $imgContent = addslashes(file_get_contents($image));
+            $allowTypes = array('application/pdf'); 
+            if(!empty($_FILES["bbPhoto"]["name"])){
+                $fileName = $_FILES['bbPhoto']['name'];
+                $fileType = $_FILES['bbPhoto']['type'];
+                $tmpName  = $_FILES['bbPhoto']['tmp_name'];
+                if(in_array($fileType, $allowTypes)){
+                    $fp      = fopen($tmpName, 'r');
+                    $content = fread($fp, filesize($tmpName));
+                    $applicationContent = addslashes($content);
+                    fclose($fp);
+                    $_SESSION["bbPhoto"] = $applicationContent;
+                } else {
+                    header('Location:../athlete-registration.php?er=wi');
+                }
                 $optradio   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['optradio'])));
                 $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
                 $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
@@ -68,7 +76,6 @@
                 $_SESSION["postal"] = $postal;
                 $_SESSION["district"] = $district;
                 $_SESSION["bbdate"] = $bbdate;
-                $_SESSION["bbPhoto"] = $imgContent;
                 $_SESSION["clubList"] = $clubList;
                 $_SESSION["phone2"] = $phone2;
                 $_SESSION["whatsapp"] = $whatsapp;
@@ -78,12 +85,10 @@
                 $_SESSION["ppno"] = $ppno;
             }else{ 
                 //wrong format
-                session_destroy();
                 header('Location:../athlete-registration.php?er=wi');
             } 
         } else {
             //empty fields
-            session_destroy();
             header('Location:../athlete-registration.php?er=em');
         }
     } else {

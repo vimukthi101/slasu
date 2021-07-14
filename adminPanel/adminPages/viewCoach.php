@@ -292,7 +292,7 @@
                             $html = '<div class="form-group col-md-4">
                                                 <label class="">Application</label>
                                                 <div class="">
-                                                    <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($application).'"/>
+                                                    <a href="http://localhost:1234/slasu/adminPanel/adminPages/downloadCoach.php?id='.$id.'">Download The Application</a>
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-12">
@@ -351,7 +351,7 @@
                                         <div class="form-group col-md-6">
                                             <label class="">Application</label>
                                             <div class="">
-                                                <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($application).'"/>
+                                                <a href="downloadCoach.php?id='.$id.'">Download The Application</a>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-5">

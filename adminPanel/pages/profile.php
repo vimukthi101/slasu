@@ -286,7 +286,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12">Request Letter</label>
                                     <div class="col-md-12">
-                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($requestLetter); ?>"/>
+                                        <a href="../adminPages/download.php?id=<?php echo $_SESSION["clubId"]; ?>">Download The Application</a>
                                     </div>
                                 </div>
                                 <div class="form-group">

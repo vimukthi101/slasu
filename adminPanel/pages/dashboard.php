@@ -262,6 +262,8 @@
                                             while($rowDateP = mysqli_fetch_array($dateR)){
                                                 $datePayment = $rowDateP['date'];
                                             }
+                                        } else {
+                                            $datePayment = "No Payments Done";
                                         }
                                     ?>
                                     <h4 class="page-title" style="text-transform:uppercase;color: black;">Last Payment</h4>

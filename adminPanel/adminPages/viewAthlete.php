@@ -305,7 +305,7 @@
                             $html = '<div class="form-group col-md-12">
                                             <label class="">Birth Certificate</label>
                                             <div class="">
-                                                <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($bbPhoto).'"/>
+                                                <a href="http://localhost:1234/slasu/adminPanel/adminPages/downloadAthlete.php?id='.$id.'">Download The Application</a>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
@@ -489,7 +489,7 @@
 		                                <div class="form-group col-md-12">
 		                                    <label class="">Birth Certificate</label>
 		                                    <div class="">
-		                                    	<img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($bbPhoto).'"/>
+		                                    	<a href="downloadAthlete.php?id='.$id.'">Download The Application</a>
 		                                    </div>
 		                                </div>
                                         <div class="form-group col-md-12">

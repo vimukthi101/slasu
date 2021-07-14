@@ -394,7 +394,7 @@
                             <label class="">Upload Birth Certficate *</label>
                         </div>
                         <div class="col-md-5">
-                            <input type="file" class="custom-file-input form-control" id="bbPhoto" name="bbPhoto"/>
+                            <input type="file" accept="application/pdf" class="custom-file-input form-control" id="bbPhoto" name="bbPhoto"/>
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div><!-- /.col-md-12 -->
                     <div class="col-lg-12"><hr/></div>

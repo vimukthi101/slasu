@@ -265,7 +265,7 @@
                                             </div>';
                                         } else if ($error == "wi"){
                                             echo '<div class="col-md-12">
-                                                <span style="color:red;margin-left:20px;">Only jpg,png,jpeg are supportrd for photo.</span>
+                                                <span style="color:red;margin-left:20px;">Only PDF is supported for Birth Certificate.</span>
                                                 <div class="col-lg-12"><hr/></div>
                                             </div>';
                                         }

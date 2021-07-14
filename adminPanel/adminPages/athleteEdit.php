@@ -50,17 +50,20 @@
             } else {
                 $ppno = "";
             }
+            $allowTypes = array('application/pdf'); 
             if(!empty($_FILES["bbPhoto"]["name"])){
-                $fileName = basename($_FILES["bbPhoto"]["name"]); 
-                $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-                $allowTypes = array('jpg','png','jpeg'); 
-                if(in_array($fileType, $allowTypes)){ 
-                    $image = $_FILES['bbPhoto']['tmp_name']; 
-                    $imgContent = addslashes(file_get_contents($image));
-                    $query = "UPDATE `athlete` SET `athleteName`='".$name."',`gender`='".$gender."',`dob`='".$dob."',`address`='".$postal."',`phone1`='".$phone1."',`phone2`='".$phone2."',`whatsapp`='".$whatsapp."',`email`='".$emailAd."',`nameForCert`='".$nameForId."',`bbNo`='".$bbno."',`bbDistrict`='".$district."',`bbDate`='".$bbdate."',`bbPhoto`='".$imgContent."',`postalId`='".$postalId."',`nic`='".$nic."',`ppNo`='".$ppno."' WHERE athleteId=".$athleteId;
-                }else{ 
+                $fileName = $_FILES['bbPhoto']['name'];
+                $tmpName  = $_FILES['bbPhoto']['tmp_name'];
+                $fileType = $_FILES['bbPhoto']['type'];
+                if(in_array($fileType, $allowTypes)){
+                    $fp      = fopen($tmpName, 'r');
+                    $content = fread($fp, filesize($tmpName));
+                    $applicationContent = addslashes($content);
+                    fclose($fp);
+                    $query = "UPDATE `athlete` SET `athleteName`='".$name."',`gender`='".$gender."',`dob`='".$dob."',`address`='".$postal."',`phone1`='".$phone1."',`phone2`='".$phone2."',`whatsapp`='".$whatsapp."',`email`='".$emailAd."',`nameForCert`='".$nameForId."',`bbNo`='".$bbno."',`bbDistrict`='".$district."',`bbDate`='".$bbdate."',`bbPhoto`='".$applicationContent."',`postalId`='".$postalId."',`nic`='".$nic."',`ppNo`='".$ppno."' WHERE athleteId=".$athleteId;
+                } else {
                     header('Location:athlete.php?er=wi');
-                } 
+                }
             } else {
                 $query = "UPDATE `athlete` SET `athleteName`='".$name."',`gender`='".$gender."',`dob`='".$dob."',`address`='".$postal."',`phone1`='".$phone1."',`phone2`='".$phone2."',`whatsapp`='".$whatsapp."',`email`='".$emailAd."',`nameForCert`='".$nameForId."',`bbNo`='".$bbno."',`bbDistrict`='".$district."',`bbDate`='".$bbdate."',`postalId`='".$postalId."',`nic`='".$nic."',`ppNo`='".$ppno."' WHERE athleteId=".$athleteId;
             }

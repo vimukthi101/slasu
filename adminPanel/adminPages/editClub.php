@@ -478,7 +478,7 @@
                                                 <label class="">Upload Request Letter *</label>
                                             </div>
                                             <div class="col-md-5">
-                                                <input type="file" class="custom-file-input form-control" id="application" name="application"/>
+                                                <input type="file" accept="application/pdf" class="custom-file-input form-control" id="application" name="application"/>
                                                 <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                                         </div><!-- /.col-md-12 -->
                                         <div class="col-lg-12"><hr/></div>

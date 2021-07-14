@@ -150,7 +150,7 @@
                                                 </div>';
                                             }  else if ($error == "wi"){
                                                 echo '<div class="col-md-12">
-                                                    <span style="color:red;">Only jpg, jpeg, png is supported for uploaded files.</span>
+                                                    <span style="color:red;">Only PDF is supported for uploaded files.</span>
                                                     <div class="col-lg-12"><hr/></div>
                                                 </div>';
                                             }
@@ -258,7 +258,7 @@
                                 <label class="">Request Letter *</label>
                             </div>
                                     <div class="col-md-12">
-                                        <input type="file" class="custom-file-input" id="requestLetter" name="requestLetter"/>
+                                        <input type="file" accept="application/pdf" class="custom-file-input" id="requestLetter" name="requestLetter"/>
                                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                 </div>
                                 <!-- /.col-md-12 -->
