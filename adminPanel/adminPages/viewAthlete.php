@@ -305,7 +305,7 @@
                             $html = '<div class="form-group col-md-12">
                                             <label class="">Birth Certificate</label>
                                             <div class="">
-                                                <a href="http://localhost:1234/slasu/adminPanel/adminPages/downloadAthlete.php?id='.$id.'">Download The Application</a>
+                                                <a href="http://localhost:1234/slasu/adminPanel/adminPages/downloadAthlete.php?id='.$id.'">Download Birth Certificate</a>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">

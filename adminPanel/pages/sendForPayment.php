@@ -22,7 +22,7 @@
     <link href="../dist/css/style.min.css" rel="stylesheet">
         <style type="text/css">
         .footer {
-  position: fixed;
+  position: inherit;
   left: 0;
   bottom: 0;
   width: 100%;

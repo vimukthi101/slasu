@@ -47,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 		                    $html .= '<td class="border-top-0">Existing</td>';
 		                } 
 				 	} else if($aDoor[$i] == "requestLetter"){
-				 		$html .= '<td class="border-top-0"><img width="180" height="180" src="data:image/jpeg;base64,'.base64_encode($fromList).'"/></td>';
+				 		$html .= '<td class="border-top-0"><a href="http://localhost:1234/slasu/adminPanel/adminPages/download.php?id='.$clubId.'">Download The Application</a></td>';
 				 	} else if($aDoor[$i] == "affiliationCat"){
  		                if($fromList == 1){
 		                    $html .= '<td class="border-top-0">Swimming</td>';

@@ -21,7 +21,7 @@
     <link href="../dist/css/style.min.css" rel="stylesheet">
         <style type="text/css">
         .footer {
-  position: fixed;
+  position: inherit;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -87,7 +87,7 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item search-box">
+                        <!-- <li class="nav-item search-box">
                             <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
                                 <div class="d-flex align-items-center">
                                     <i class="mdi mdi-magnify font-20 me-1"></i>
@@ -102,7 +102,7 @@
                                     <i class="ti-close"></i>
                                 </a>
                             </form>
-                        </li>
+                        </li> -->
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->

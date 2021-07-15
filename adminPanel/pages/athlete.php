@@ -21,7 +21,7 @@
     <link href="../dist/css/style.min.css" rel="stylesheet">
         <style type="text/css">
         .footer {
-  position: fixed;
+  position: inherit;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -87,7 +87,7 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item search-box">
+                        <!-- <li class="nav-item search-box">
                             <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
                                 <div class="d-flex align-items-center">
                                     <i class="mdi mdi-magnify font-20 me-1"></i>
@@ -96,13 +96,13 @@
                                     </div>
                                 </div>
                             </a>
-                            <form class="app-search position-absolute">
+                            <div class="app-search position-absolute">
                                 <input type="text" class="form-control" placeholder="Search &amp; enter">
                                 <a class="srh-btn">
                                     <i class="ti-close"></i>
                                 </a>
-                            </form>
-                        </li>
+                            </div>
+                        </li> -->
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -284,7 +284,7 @@
                                             <th class="border-top-0"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="result">
                                     </tbody>
                                 </table>
                             </div>
@@ -364,7 +364,6 @@ $(document).ready(function(){
  
 });
 </script>
-
 </html>
 <?php
 } else {
