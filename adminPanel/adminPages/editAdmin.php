@@ -268,7 +268,7 @@
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Contact Number</label>
 		                                    <div class="">
-		                                        <input type="tel" value="'.$mobile.'" class="form-control form-control-line" name="mobile" id="mobile">
+		                                        <input type="tel" value="'.$mobile.'" class="form-control form-control-line" maxlength="10" name="mobile" id="mobile">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">

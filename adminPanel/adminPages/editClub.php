@@ -385,14 +385,14 @@
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Primary Contact Number</label>
 		                                    <div class="">
-		                                        <input type="tel" value="'.$clubContactOne.'"
+		                                        <input type="tel" maxlength="10" value="'.$clubContactOne.'"
 		                                            class="form-control form-control-line" name="clubPhone1" pattern="[0-9]{10}" title="Only 10 numbers" id="clubPhone1" required>
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Secondary Contact Number</label>
 		                                    <div class="">
-		                                        <input type="tel" placeholder="'.$clubContactTwo.'"
+		                                        <input type="tel" maxlength="10" placeholder="'.$clubContactTwo.'"
 		                                            class="form-control form-control-line" name="clubPhone2" pattern="[0-9]{10}" title="Only 10 numbers" id="clubPhone2">
 		                                    </div>
 		                                </div>
@@ -437,8 +437,8 @@
 		                                </div>
                                         <div class="form-group col-md-5">
                                             <label class="">Operator WhatsApp</label>
-                                            <div class="">
-                                                <input type="tel" value="'.$operatorWhatsapp.'"
+                                            <div class=""> 
+                                                <input type="tel" maxlength="10" value="'.$operatorWhatsapp.'"
                                                     class="form-control form-control-line" pattern="[0-9]{10}" title="Only 10 numbers" name="whatsapp" id="whatsapp">
                                             </div>
                                         </div>
@@ -463,7 +463,7 @@
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Incharge Mobile</label>
 		                                    <div class="">
-		                                        <input type="tel" value="'.$inchargeMobile.'"
+		                                        <input type="tel" maxlength="10" value="'.$inchargeMobile.'"
 		                                            class="form-control form-control-line" name="inchargePhone" pattern="[0-9]{10}" title="Only 10 numbers" required>
 		                                    </div>
 		                                </div>

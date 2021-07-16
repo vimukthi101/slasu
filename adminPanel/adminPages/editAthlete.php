@@ -322,19 +322,19 @@
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Primary Contact Number</label>
 		                                    <div class="">
-		                                        <input type="tel" value="'.$phone1.'" class="form-control form-control-line" name="phone1" id="phone1" required>
+		                                        <input type="tel" value="'.$phone1.'" maxlength="10" class="form-control form-control-line" name="phone1" id="phone1" required>
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Secondary Contact Number</label>
 		                                    <div class="">
-		                                        <input type="tel" value="'.$phone2.'" class="form-control form-control-line" name="phone2" id="phone2">
+		                                        <input type="tel" value="'.$phone2.'" maxlength="10" class="form-control form-control-line" name="phone2" id="phone2">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
 		                                    <label class="">WhatsApp Number</label>
 		                                    <div class="">
-		                                        <input type="tel" value="'.$whatsapp.'" class="form-control form-control-line" name="whatsapp" id="whatsapp">
+		                                        <input type="tel" value="'.$whatsapp.'" maxlength="10" class="form-control form-control-line" name="whatsapp" id="whatsapp">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">

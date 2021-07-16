@@ -268,7 +268,7 @@
                                             <label class="">Upload Passport Size Photo for ID</label>
                                         </div>
                                         <div class="col-md-12">
-                                            <input type="file" class="custom-file-input form-control" id="photo" name="photo"/>
+                                            <input type="file" accept="image/png, image/jpg, image/jpeg" class="custom-file-input form-control" id="photo" name="photo"/>
                                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                                     </div><!-- /.col-md-12 -->
                                         
@@ -334,21 +334,21 @@
 		                                    <label class="">Primary Contact Number</label>
 		                                    <div class="">
 		                                        <input type="text" value="'.$phone1.'"
-		                                            class="form-control form-control-line" name="phone1" id="phone1" pattern="[0-9]{10}" title="Only 10 numbers" required>
+		                                            class="form-control form-control-line" maxlength="10" name="phone1" id="phone1" pattern="[0-9]{10}" title="Only 10 numbers" required>
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Secondary Contact Number</label>
 		                                    <div class="">
 		                                        <input type="text" value="'.$phone2.'"
-		                                            class="form-control form-control-line" name="phone2" id="phone2" pattern="[0-9]{10}" title="Only 10 numbers">
+		                                            class="form-control form-control-line" maxlength="10" name="phone2" id="phone2" pattern="[0-9]{10}" title="Only 10 numbers">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
 		                                    <label class="">WhatsApp Number</label>
 		                                    <div class="">
 		                                        <input type="text" value="'.$whatsapp.'"
-		                                            class="form-control form-control-line" name="whatsapp" id="whatsapp" pattern="[0-9]{10}" title="Only 10 numbers">
+		                                            class="form-control form-control-line" maxlength="10" name="whatsapp" id="whatsapp" pattern="[0-9]{10}" title="Only 10 numbers">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
@@ -379,10 +379,10 @@
 		                                <div class="form-group col-md-12">
 		                                    <label class="">NIC Photo</label>
 		                                    <div class="col-md-5">
-                            <input type="file" class="custom-file-input form-control" id="nicPhoto" name="nicPhoto"/>
+                            <input type="file" accept="image/png, image/jpg, image/jpeg" class="custom-file-input form-control" id="nicPhoto" name="nicPhoto"/>
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div>
-		                                </div>                    <div class="col-lg-12"><hr/></div>
+		                                </div>    <div class="col-lg-12"><hr/></div>
                                     
                                 <div class="col-md-12" style="text-align: center;">
                                 <input type="text" value="'.$id.'" name="athleteId" id="athleteId" required hidden>
@@ -440,6 +440,7 @@
        }
     }
 </script>
+
 </html>
 <?php
 } else {

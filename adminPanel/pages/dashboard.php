@@ -328,7 +328,7 @@
                         </div>
                     </div>
                     <?php
-                        $pay = 'SELECT count(*) FROM `payment` where clubId='.$_SESSION["clubId"];
+                        $pay = 'SELECT count(*) FROM `payment` where status != "4" AND clubId='.$_SESSION["clubId"];
                         $payR = mysqli_query($con, $pay);
                         if(mysqli_num_rows($payR) != 0){
                             while($rowPay = mysqli_fetch_array($payR)){

@@ -22,7 +22,7 @@ if(isset($_SESSION["clubId"])){
             header('Location:athlete.php?er=er');
         }
 	} else {
-		header('Location:athlete.php');
+		header('Location:athlete.php?er=nd');
 	}
 } else {
     session_destroy();

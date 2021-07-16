@@ -245,6 +245,11 @@
                                                 <span style="color:red;margin-left:20px;">Only jpg,png,jpeg are supportrd for photo.</span>
                                                 <div class="col-lg-12"><hr/></div>
                                             </div>';
+                                        } else if ($error == "nd"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Select at least one Atlete for payment.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
                                         }
                                     }
                                 }
@@ -287,6 +292,8 @@
                                                         for($i=0;$i<count($array);$i++){
                                                             echo '<label class="">SLASU/A/00'.$array[$i].'</label><br/>';
                                                         }
+                                                    } else {
+                                                        header('Location:athlete.php?er=nd');
                                                     }
                                                 }
                                             ?>

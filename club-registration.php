@@ -44,7 +44,7 @@
             }
         }
         
-        </script>
+    </script>
 </head>
 
 <body>
@@ -130,7 +130,7 @@
                                                 </div>';
                                             } else if ($error == "ce"){
                                                 echo '<div class="col-md-12">
-                                                    <span style="color:red;">Account with same Operator Mobile already exists. Please use different Operator Mobile Number or contact Admin.</span>
+                                                    <span style="color:red;">Account with same Operator Mobile or Same Club name already exists. Please use different Operator Mobile Number or contact Admin.</span>
                                                     <div class="col-lg-12"><hr/></div>
                                                 </div>';
                                             } else if ($error == "qf"){
@@ -224,10 +224,10 @@
                                     <label><small>Operator's Mobile number will be used as the user name to the login</small></label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="Operator's Mobile number *" pattern="[0-9]{10}" title="Only 10 numbers" name="phone" id="phone" required>
+                                    <input type="tel" placeholder="Operator's Mobile number *" maxlength="10" pattern="[0-9]{10}" title="Only 10 numbers" name="phone" id="phone" required>
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="Operator's WhatsApp Number" pattern="[0-9]{10}" title="Only 10 numbers" name="whatsapp" id="whatsapp">
+                                    <input type="tel" placeholder="Operator's WhatsApp Number" maxlength="10" pattern="[0-9]{10}" title="Only 10 numbers" name="whatsapp" id="whatsapp">
                                 </div><!-- /.col-md-6 -->
                                 
 
@@ -255,7 +255,7 @@
                             </div> 
                             <div class="col-md-12" style="display:none;" id="rLtr">
                                 <div class="col-md-12">
-                                <label class="">Request Letter *</label>
+                                <label class="">Request Letter (Attach a PDF file) *</label>
                             </div>
                                     <div class="col-md-12">
                                         <input type="file" accept="application/pdf" class="custom-file-input" id="requestLetter" name="requestLetter"/>
@@ -263,6 +263,8 @@
                                 </div>
                                 <!-- /.col-md-12 -->
                             </div>
+                                                <div class="col-md-12" id="file-upload-filename">
+                        </div>
                             <div class="col-lg-12"><hr/></div>
                             <div class="col-md-6">
                                 <label class="input-group-text" for="inputGroupSelect01">Affiliation Category *</label>
@@ -284,10 +286,10 @@
                                     <input type="text" placeholder="School / Club Address *" name="clubAddress" id="clubAddress" required>
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="School / Club Contact Number 1 *" name="clubPhone1" pattern="[0-9]{10}" title="Only 10 numbers" id="clubPhone1" required>
+                                    <input type="tel" placeholder="School / Club Contact Number 1 *" maxlength="10" name="clubPhone1" pattern="[0-9]{10}" title="Only 10 numbers" id="clubPhone1" required>
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="School / Club Contact Number 2" name="clubPhone2" pattern="[0-9]{10}" title="Only 10 numbers" id="clubPhone2">
+                                    <input type="tel" placeholder="School / Club Contact Number 2" maxlength="10" name="clubPhone2" pattern="[0-9]{10}" title="Only 10 numbers" id="clubPhone2">
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
                                     <input type="email" placeholder="School / Club Email Address 1" name="clubEmail1" id="clubEmail1">
@@ -303,7 +305,7 @@
                                     <input type="text" placeholder="Name *" name="inchargeName" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="Mobile Number *" name="inchargePhone" pattern="[0-9]{10}" title="Only 10 numbers" required>
+                                    <input type="tel" placeholder="Mobile Number *" name="inchargePhone" maxlength="10" pattern="[0-9]{10}" title="Only 10 numbers" required>
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
                                     <input type="email" placeholder="Email" name="inchargeEmail">
@@ -456,5 +458,22 @@
     <!-- Custom Scripts -->
     <script src="assets/js/theme.js"></script>
 </body>
+<script type="text/javascript">
+    var input = document.getElementById( 'requestLetter' );
+    var infoArea = document.getElementById( 'file-upload-filename' );
 
+    input.addEventListener( 'change', showFileName );
+
+    function showFileName( event ) {
+      
+      // the change event gives us the input it occurred in 
+      var input = event.srcElement;
+      
+      // the input has an array of files in the `files` property, each one has a name that you can use. We're just using the name here.
+      var fileName = input.files[0].name;
+      
+      // use fileName however fits your app best, i.e. add it into a div
+      infoArea.textContent = 'Attached File Name: ' + fileName;
+    }
+</script>
 </html>

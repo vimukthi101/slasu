@@ -6,7 +6,7 @@
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
         if(!empty($_POST['conditions'])){
             $password = rand(100000, 999999);
-            $getCard = "SELECT * FROM club WHERE operatorMobile='".$_SESSION["phone"]."'";
+            $getCard = "SELECT * FROM club WHERE operatorMobile='".$_SESSION["phone"]."' OR clubName='".$_SESSION["name"]."'";
             $resultCard = mysqli_query($con, $getCard);
             if(mysqli_num_rows($resultCard) == 0){
                 if($_SESSION["optradio"] == "School"){

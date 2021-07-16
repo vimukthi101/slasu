@@ -374,14 +374,14 @@
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Operator Mobile</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="<?php echo $operatorMobile; ?>"
+                                        <input type="text" maxlength="10" placeholder="<?php echo $operatorMobile; ?>"
                                             class="form-control form-control-line" disabled="">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Operator WhatsApp</label>
                                     <div class="col-md-12">
-                                        <input id="wtzap" name="wtzap" type="tel" value="<?php echo $operatorWhatsapp; ?>"
+                                        <input id="wtzap" maxlength="10" name="wtzap" type="tel" value="<?php echo $operatorWhatsapp; ?>"
                                             class="form-control form-control-line" pattern="[0-9]{10}" title="Only 10 numbers">
                                     </div>
                                 </div>
@@ -406,14 +406,14 @@
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Club Contact Primary</label>
                                     <div class="col-md-12">
-                                        <input id="cp1" name="cp1" type="tel" value="<?php echo $clubContactOne; ?>"
+                                        <input id="cp1" maxlength="10" name="cp1" type="tel" value="<?php echo $clubContactOne; ?>"
                                             class="form-control form-control-line" required pattern="[0-9]{10}" title="Only 10 numbers">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Club Contact Secondary</label>
                                     <div class="col-md-12">
-                                        <input id="cp2" name="cp2" type="tel" value="<?php echo $clubContactTwo; ?>"
+                                        <input id="cp2" maxlength="10" name="cp2" type="tel" value="<?php echo $clubContactTwo; ?>"
                                             class="form-control form-control-line" pattern="[0-9]{10}" title="Only 10 numbers">
                                     </div>
                                 </div>
@@ -445,7 +445,7 @@
                                 <div class="form-group col-md-5">
                                     <label class="col-md-12">Incharge Mobile</label>
                                     <div class="col-md-12">
-                                        <input id="imobile" name="imobile" type="tel" value="<?php echo $inchargeMobile; ?>"
+                                        <input id="imobile" maxlength="10" name="imobile" type="tel" value="<?php echo $inchargeMobile; ?>"
                                             class="form-control form-control-line" pattern="[0-9]{10}" title="Only 10 numbers" required>
                                     </div>
                                 </div>

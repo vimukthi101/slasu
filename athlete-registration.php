@@ -249,13 +249,13 @@
                                 <input type="text" placeholder="Postal Address *" name="postal" id="postal" required>
                             </div><!-- /.col-md-6 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="Contact Number 1 *" name="phone1" id="phone1" required>
+                                    <input type="tel" placeholder="Contact Number 1 *" maxlength="10" name="phone1" id="phone1" required>
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="Contact Number 2" name="phone2" id="phone2">
+                                    <input type="tel" placeholder="Contact Number 2" maxlength="10" name="phone2" id="phone2">
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="WhatsApp Number" name="whatsapp" id="whatsapp">
+                                    <input type="tel" placeholder="WhatsApp Number" maxlength="10" name="whatsapp" id="whatsapp">
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6" id="ifNo" style="display:none">
                                     <input type="email"  placeholder="Email Address *" name="emailAd" id="emailAd">
@@ -321,12 +321,14 @@
                             <label class="">Birth Certificate Issued Date *</label>
                         </div>
                         <div class="col-md-12">
-                            <label class="">Upload Birth Certficate *</label>
+                            <label class="">Upload Birth Certficate (Attach a PDF file)*</label>
                         </div>
                         <div class="col-md-12">
                             <input type="file" accept="application/pdf" class="custom-file-input" id="bbPhoto" name="bbPhoto" required/>
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div><!-- /.col-md-12 -->
+                    <div class="col-md-12" id="file-upload-filename">
+                        </div>
                     <div class="col-lg-12"><hr/></div>
                     <div class="col-md-6">
                         <input type="text" placeholder="Postal ID Number" name="postalId" id="postalId">
@@ -486,5 +488,22 @@
     <!-- Custom Scripts -->
     <script src="assets/js/theme.js"></script>
 </body>
+<script type="text/javascript">
+    var input = document.getElementById( 'bbPhoto' );
+    var infoArea = document.getElementById( 'file-upload-filename' );
 
+    input.addEventListener( 'change', showFileName );
+
+    function showFileName( event ) {
+      
+      // the change event gives us the input it occurred in 
+      var input = event.srcElement;
+      
+      // the input has an array of files in the `files` property, each one has a name that you can use. We're just using the name here.
+      var fileName = input.files[0].name;
+      
+      // use fileName however fits your app best, i.e. add it into a div
+      infoArea.textContent = 'Attached File Name: ' + fileName;
+    }
+</script>
 </html>

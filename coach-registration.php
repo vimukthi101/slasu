@@ -224,13 +224,13 @@
                                   </select>
                             </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="Contact Number 1 *" name="phone1" id="phone1" pattern="[0-9]{10}" title="Only 10 numbers" required>
+                                    <input type="tel" placeholder="Contact Number 1 *" maxlength="10" name="phone1" id="phone1" pattern="[0-9]{10}" title="Only 10 numbers" required>
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="Contact Number 2" name="phone2" id="phone2" pattern="[0-9]{10}" title="Only 10 numbers">
+                                    <input type="tel" placeholder="Contact Number 2" maxlength="10" name="phone2" id="phone2" pattern="[0-9]{10}" title="Only 10 numbers">
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6">
-                                    <input type="tel" placeholder="WhatsApp Number" name="whatsapp" id="whatsapp" pattern="[0-9]{10}" title="Only 10 numbers">
+                                    <input type="tel" placeholder="WhatsApp Number" maxlength="10" name="whatsapp" id="whatsapp" pattern="[0-9]{10}" title="Only 10 numbers">
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6">
                                     <input type="email" placeholder="Email Address" name="emailAd" id="emailAd">
@@ -245,19 +245,23 @@
                                             <p>(Two Words Only. &nbsp; E.g. :- &nbsp;&nbsp; R.K.John Doe)</p>
                                         </div><!-- /.col-md-6 -->
                                         <div class="col-md-12">
-                                            <label class="">Upload Passport Size Photo for ID *</label>
+                                            <label class="">Upload Passport Size Photo for ID (Attach a png, jpg or jpeg)*</label>
                                         </div>
                                         <div class="col-md-12">
                                             <input type="file" accept="image/png, image/jpg, image/jpeg" class="custom-file-input" id="photo" name="photo" required/>
                                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                                     </div><!-- /.col-md-12 -->
+                                    <div class="col-md-12" id="file-upload-filename2">
+                        </div>
                             <div class="col-md-12">
-                                <label class="">Upload Application</label>
+                                <label class="">Upload Application (Attach a PDF file)</label>
                             </div>
                             <div class="col-md-12">
                                 <input type="file" accept="application/pdf" class="custom-file-input" id="application" name="application" required/>
                                 <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                         </div><!-- /.col-md-12 -->
+                                                                        <div class="col-md-12" id="file-upload-filename">
+                        </div>
                             <div class="col-lg-12"><hr/></div>
                             <div class="col-md-12">
                                 <label class="">Date Of Birth *</label>
@@ -278,12 +282,14 @@
                             <input type="text" placeholder="NIC Number *" name="nic" id="nic" required pattern="^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$" title="Should match NIC format">
                         </div><!-- /.col-md-6 -->
                         <div class="col-md-12">
-                            <label class="">Upload NIC *</label>
+                            <label class="">Upload NIC (Attach a png, jpg or jpeg)*</label>
                         </div>
                         <div class="col-md-12">
                             <input type="file" accept="image/png, image/jpg, image/jpeg" class="custom-file-input" id="nicPhoto" name="nicPhoto" required/>
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div><!-- /.col-md-12 -->
+                    <div class="col-md-12" id="file-upload-filename3">
+                        </div>
                     <div class="col-md-12">
                         <textarea placeholder="Academic Qualifications in Aquatic Sports (Add all separated by commas)" name="qualification" id="qualification"></textarea>
                     </div><!-- /.col-md-12 -->
@@ -440,5 +446,30 @@
     <!-- Custom Scripts -->
     <script src="assets/js/theme.js"></script>
 </body>
-
+<script type="text/javascript">
+    var input = document.getElementById( 'application' );
+    var infoArea = document.getElementById( 'file-upload-filename' );
+    var input2 = document.getElementById( 'photo' );
+    var infoArea2 = document.getElementById( 'file-upload-filename2' );
+    var input3 = document.getElementById( 'nicPhoto' );
+    var infoArea3 = document.getElementById( 'file-upload-filename3' );
+    input.addEventListener( 'change', showFileName );
+    input2.addEventListener( 'change', showFileName2 );
+    input3.addEventListener( 'change', showFileName3 );
+    function showFileName( event ) {
+      var input = event.srcElement;
+      var fileName = input.files[0].name;
+      infoArea.textContent = 'Attached File Name: ' + fileName;
+    }
+    function showFileName2( event ) {
+      var input2 = event.srcElement;
+      var fileName2 = input2.files[0].name;
+      infoArea2.textContent = 'Attached File Name: ' + fileName2;
+    }
+    function showFileName3( event ) {
+      var input3 = event.srcElement;
+      var fileName3 = input3.files[0].name;
+      infoArea3.textContent = 'Attached File Name: ' + fileName3;
+    }
+</script>
 </html>

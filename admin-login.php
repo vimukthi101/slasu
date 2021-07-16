@@ -103,7 +103,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-6">
-
+                        <div class="about-two__image wow fadeInRight" data-wow-duration="1500ms">
+                            <div class="contact-one__content">
+                                <h4>Forgot Your Password</h4>
+                                <p><a href="php/adminForgot.php">Reset From Here</a></p><br/>
+                                <h4>Operator Login</h4>
+                                <p><a href="login.php">Login</a></p>
+                            </div><!-- /.contact-one__content -->
+                        </div><!-- /.about-two__image -->
                     </div><!-- /.col-lg-6 -->
                     <div class="col-xl-6">
                         <?php
