@@ -43,15 +43,15 @@
                     $status = "Inactive";
                 }
                 if($affiliationCat == 1){
-                    $affiliationCat = "Swimming";
+                    $affiliationCat = "Ordinary Member (Colombo District)";
                 } else if($affiliationCat == 2) {
-                    $affiliationCat = "Artistic Swimming";
+                    $affiliationCat = "Ordinary Member (Other Districts) ";
                 } else if($affiliationCat == 3) {
-                    $affiliationCat = "Water Polo";
+                    $affiliationCat = "Novice Members";
                 } else if($affiliationCat == 4) {
-                    $affiliationCat = "Diving";
+                    $affiliationCat = "Participant Members (Govt./ Semi Govt. Schools)";
                 } else if($affiliationCat == 5) {
-                    $affiliationCat = "All";
+                    $affiliationCat = "Participant Members (International Schools and Ancillary Clubs)";
                 }
             }
         } else {

@@ -46,6 +46,19 @@
                         } else if($affiliationCat == 5) {
                             $affiliationCat = "All";
                         }
+                        $paymentStatus = $row['paymentStatus'];
+                        $paymentRef = "SLASU/C/00".$row['paymentRef'];
+                        if($paymentStatus == 1){
+                            $paymentStatus = "Send For Payment";
+                        } else if($paymentStatus == 2) {
+                            $paymentStatus = "Approved";
+                        } else if($paymentStatus == 3) {
+                            $paymentStatus = "Rejected";
+                        } else if($paymentStatus == 4) {
+                            $paymentStatus = "To Be Renewed";
+                        }else {
+                            $paymentStatus = "Not Paid";
+                        }
 	            	}
 	            } else {
 	                //card exists
@@ -333,7 +346,12 @@
                                                 </div>
                                             </div>
                                             <label class="">NIC : '.$nic.'</label><br/><br/>
-                                            <label class="">Passport Number : '.$ppNo.'</label>';
+                                            <label class="">Passport Number : '.$ppNo.'</label><div class="form-group col-md-12">
+                                            <label class="">Payment Information</label>
+                                            <hr/>
+                                        </div>
+                                            <label class="">Payment Status : '.$paymentStatus.'</label><br/><br/>
+                                            <label class="">Payment Reference : '.$paymentRef.'</label><br/><br/>';
                                         $_SESSION['html'] = $html;
                             ?>
                             <div class="card-body row">
@@ -471,7 +489,24 @@
 		                                    <div class="">
 		                                    	<img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($nicPhoto).'"/>
 		                                    </div>
-		                                </div>
+		                                </div><div class="form-group col-md-12">
+                                            <label class="">Payment Information</label>
+                                            <hr/>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Payment Status</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$paymentStatus.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Payment Reference</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$paymentRef.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
 		                                ';
 		                        ?>
                         	</div>	

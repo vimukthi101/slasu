@@ -223,6 +223,27 @@ echo '<p>Club Type : '.$_SESSION["optradio"].'</p>
 <div class="col-lg-12"><hr/></div>
                                 
                                     <div class="col-md-12 checkbox">
+                                        <?php
+                                        if($_SESSION["regRadio"] == "New"){
+                                            echo '<label><b>Enrollment Fee : Rs.10,000</b></label><br/>';
+                                        }
+                                        if($_SESSION["category"] == "Ordinary Member (Colombo District)"){
+                                            echo '<label><b>Affiliation Fee : Rs.15,000</b></label>';
+                                        } else if($_SESSION["category"] == "Ordinary Member (Other Districts)"){
+                                            echo '<label><b>Affiliation Fee : Rs.8,000</b></label>';
+                                        } else if($_SESSION["category"] == "Novice Members"){
+                                            echo '<label><b>Affiliation Fee : Rs.6,000</b></label>';
+                                        } else if($_SESSION["category"] == "Participant Members (Govt./ Semi Govt. Schools)"){
+                                            echo '<label><b>Affiliation Fee : Rs.4,000</b></label>';
+                                        } else if($_SESSION["category"] == "Participant Members (International Schools and Ancillary Clubs)"){
+                                            echo '<label><b>Affiliation Fee : Rs.7,500</b></label>';
+                                        }
+                                        ?>
+                                        <br/><label><b>Please do the payment to following bank account.</b></label>
+                                    </div>
+<div class="col-lg-12"><hr/></div>
+                                
+                                    <div class="col-md-12 checkbox">
                                         <label><input type="checkbox" id="conditions" name="conditions" value="conditions" required=""> I certify that above details are correct</label>
                                       </div>
                                     <div class="col-lg-12"><hr/></div>

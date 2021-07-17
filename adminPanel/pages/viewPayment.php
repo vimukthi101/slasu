@@ -3,7 +3,7 @@
 	if(!isset($_SESSION[''])){
         session_start();
     }
-    if(isset($_SESSION["adminId"])){
+    if(isset($_SESSION["clubId"])){
 	    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) && isset($_POST['id'])){
 	        if(!empty($_POST['id'])){
 	        	$id = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['id'])));
@@ -12,9 +12,9 @@
 	            if(mysqli_num_rows($resultCard) != 0){
 	            	while($row = mysqli_fetch_array($resultCard)){
 	                    $athleteId = $row['paymentId'];
+                        $paymentType = $row['paymentType'];
                         $athleteCode = $row['paymentCode'];
                         $clubId = $row['clubId'];
-                        $paymentType = $row['paymentType'];
                         $clubIdCode = $athleteCode.$athleteId;
                         $amount = $row['amount'];
                         $notes = $row['notes'];
@@ -26,13 +26,11 @@
                         $subjectVal = "";
                         if($paymentType == 1){
                             $myCode = 'SLASU/A/00';
-                            $paymentType = "Athlete Payment";
                         } else if($paymentType == 2){
                             $myCode = 'SLASU/C/00';
-                            $paymentType = "Coach Payment";
                         }
                         for($x=0;$x<count($array);$x++){
-                           $subjectVal .= $myCode.$array[$x].',';
+                            $subjectVal .= $myCode.$array[$x].',';
                         }
                         if($status == 1){
                             $status = "Send For Payment";
@@ -40,7 +38,7 @@
                             $status = "Approved";
                         } else if($status == 3) {
                             $status = "Rejected";
-                        } else if($paymentStatus == 4) {
+                        } else if($status == 4) {
                             $status = "To Be Renewed";
                         }
                         $queryP = 'SELECT * FROM `club` WHERE clubId='.$clubId;
@@ -195,20 +193,6 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="admin.php"
-                                aria-expanded="false">
-                                <i class="mdi mdi-key"></i>
-                                <span class="hide-menu">Admins</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="club.php"
-                                aria-expanded="false">
-                                <i class="mdi mdi-home "></i>
-                                <span class="hide-menu">Clubs</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="athlete.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-human-child"></i>
@@ -248,15 +232,16 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        
+                        <h4 class="page-title" style="text-transform:uppercase;"><?php echo $_SESSION["clubName"] ?></h4>
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class=""><a href="dashboard.php">Home</a></li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page"><a href="payments.php">Payment Status</a></li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">View</li>
+                                    <li class="">
+                                        <a href="dashboard.php">Home</a>
+                                    </li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Payment Status</li>
                                 </ol>
                             </nav>
                         </div>
@@ -277,6 +262,24 @@
                             <div class="card-body">
                                 <h4 class="card-title">Payment Information</h4>
                             </div>
+                            <div class="row">
+
+                            </div>
+                            <?php
+                            $html = '<div class="form-group col-md-12">
+                                            <label class="">Payment Information</label>
+                                            <hr/>
+                                        </div>
+                                            <label class="">Payment REF : '.$clubIdCode.'</label><br/><br/>
+                                            <label class="">Club Name : '.$clubName.'</label><br/><br/>
+                                            <label class="">Amount : '.$amount.'</label><br/><br/>
+                                            <label class="">Notes : '.$notes.'</label><br/><br/>
+                                            <label class="">Date : '.$date.'</label><br/><br/>
+                                            <label class="">Status : '.$status.'</label><br/><br/>
+                                            <label class="">Athlete List : '.$subjectVal.'</label><br/><br/>
+                                            <label class="">Admin Comment : '.$adminComment.'</label><br/><br/>';
+                                            $_SESSION['html'] = $html;
+                            ?>
                             <div class="card-body row">
 		                        <?php
 		                         echo '<div class="form-group col-md-12">
@@ -319,38 +322,25 @@
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
-		                                    <label class="">Current Status</label>
+		                                    <label class="">Status</label>
 		                                    <div class="">
 		                                        <input type="text" placeholder="'.$status.'"
 		                                            class="form-control form-control-line" disabled>
 		                                    </div>
 		                                </div>
-                                        <div class="form-group col-md-5">
-                                            <label class="">Payment Type</label>
-                                            <div class="">
-                                                <input type="text" placeholder="'.$paymentType.'"
-                                                    class="form-control form-control-line" disabled>
-                                            </div>
-                                        </div>
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Athlete List</label>
 		                                    <div class="">
 		                                        <textarea class="form-control form-control-line" disabled>'.$subjectVal.'</textarea>
 		                                    </div>
 		                                </div>
-                                        <form role="form" action="approvePayment.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Admin Comment</label>
 		                                    <div class="">
-		                                        <textarea class="form-control form-control-line" id="comment" name="comment">'.$adminComment.'</textarea>
+		                                        <input type="text" placeholder="'.$adminComment.'"
+		                                            class="form-control form-control-line" disabled>
 		                                    </div>
-		                                </div>
-                                        <div class="col-lg-12"><hr/></div>
-                                        <div class="col-md-6" style="text-align: center;">
-                                                <input type="text" value="'.$id.'" name="athleteId" id="athleteId" required hidden>
-                                                <input type="submit" name="submit" value="Approve" onclick="return clicked();" id="submit" class="btn btn-success" style="margin: auto;"></input>
-                                        </div>
-                                        </form>';
+		                                </div>';
 		                        ?>
                         	</div>	
                         </div>
@@ -392,15 +382,7 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
-<script type="text/javascript">
-    function clicked() {
-       if (confirm('Do you want to update the details?')) {
-           yourformelement.submit();
-       } else {
-           return false;
-       }
-    }
-</script>
+
 </html>
 <?php
 } else {

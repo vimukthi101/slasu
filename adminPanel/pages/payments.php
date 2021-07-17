@@ -87,22 +87,7 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <!-- <li class="nav-item search-box">
-                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
-                                <div class="d-flex align-items-center">
-                                    <i class="mdi mdi-magnify font-20 me-1"></i>
-                                    <div class="ms-1 d-none d-sm-block">
-                                        <span>Search</span>
-                                    </div>
-                                </div>
-                            </a>
-                            <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter">
-                                <a class="srh-btn">
-                                    <i class="ti-close"></i>
-                                </a>
-                            </form>
-                        </li> -->
+
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -236,6 +221,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-5">
+                                    <div class="card">
+                                        <div class="card-body">                                                
+                                            <label class="" for="inputGroupSelect02">Type</label>
+                                            <select class="custom-select form-control" name="multi_search_filter2" id="multi_search_filter2">
+                                                <option selected disabled>Select Type...</option>
+                                                <option value="1">Athlete Payment</option>
+                                                <option value="2">Coach Payment</option>                                          
+                                            </select>
+                                            <input type="hidden" name="hidden_country2" id="hidden_country2" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
@@ -245,6 +243,7 @@
                                             <th class="border-top-0">AMOUNT</th>
                                             <th class="border-top-0">NOTES</th>
                                             <th class="border-top-0">DATE</th>
+                                            <th class="border-top-0">TYPE</th>
                                             <th class="border-top-0">STATUS</th>
                                             <th class="border-top-0"></th>
                                         </tr>
@@ -313,6 +312,32 @@ $(document).ready(function(){
  $('#multi_search_filter').change(function(){
   $('#hidden_country').val($('#multi_search_filter').val());
   var query = $('#hidden_country').val();
+  load_data(query);
+ });
+ 
+});
+</script>
+<script>
+$(document).ready(function(){
+
+ load_data();
+ 
+ function load_data(query='')
+ {
+  $.ajax({
+   url:"fetchPaymentType.php",
+   method:"POST",
+   data:{query:query},
+   success:function(data)
+   {
+    $('tbody').html(data);
+   }
+  })
+ }
+
+ $('#multi_search_filter2').change(function(){
+  $('#hidden_country2').val($('#multi_search_filter2').val());
+  var query = $('#hidden_country2').val();
   load_data(query);
  });
  

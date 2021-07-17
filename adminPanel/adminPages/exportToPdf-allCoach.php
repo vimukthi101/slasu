@@ -64,6 +64,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 		                } else if($fromList == 5) {
 		                    $html .= '<td class="border-top-0">All</td>';
 		                }
+				 	} else if($aDoor[$i] == "paymentStatus"){
+ 		                if($fromList == 1){
+		                    $html .= '<td class="border-top-0">Send For Payment</td>';
+		                } else if($fromList == 2) {
+		                    $html .= '<td class="border-top-0">Approved</td>';
+		                } else if($fromList == 3) {
+		                    $html .= '<td class="border-top-0">Rejected</td>';
+		                } else if($fromList == 4) {
+		                    $html .= '<td class="border-top-0">To Be Renewed</td>';
+		                } else if($fromList == 5) {
+		                    $html .= '<td class="border-top-0">Not Paid</td>';
+		                }
+				 	} else if($aDoor[$i] == "paymentRef"){
+				 		$html .= '<td class="border-top-0">SLASU/C/00'.$fromList.'</td>';
 				 	} else {
 				 		$html .= '<td class="border-top-0">'.$fromList.'</td>';
 				 	}

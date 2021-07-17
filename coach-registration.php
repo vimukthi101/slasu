@@ -201,7 +201,7 @@
                               </select>
                         </div><!-- /.col-md-12 -->
                             <div class="col-md-6">
-                                <label class="input-group-text" for="inputGroupSelect01">Affiliation Category *</label>
+                                <label class="input-group-text" for="inputGroupSelect01">Select Aquatic Category *</label>
                               <select class="custom-select form-select form-control" id="category" name="category" required>
                                 <option selected disabled>Select Type...</option>
                                 <option value="Swimming">Swimming</option>

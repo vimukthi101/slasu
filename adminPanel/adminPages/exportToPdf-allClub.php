@@ -50,15 +50,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 				 		$html .= '<td class="border-top-0"><a href="http://localhost:1234/slasu/adminPanel/adminPages/download.php?id='.$clubId.'">Download The Application</a></td>';
 				 	} else if($aDoor[$i] == "affiliationCat"){
  		                if($fromList == 1){
-		                    $html .= '<td class="border-top-0">Swimming</td>';
+		                    $html .= '<td class="border-top-0">Ordinary Member (Colombo District)</td>';
 		                } else if($fromList == 2) {
-		                    $html .= '<td class="border-top-0">Artistic Swimming</td>';
+		                    $html .= '<td class="border-top-0">Ordinary Member (Other Districts) </td>';
 		                } else if($fromList == 3) {
-		                    $html .= '<td class="border-top-0">Water Polo</td>';
+		                    $html .= '<td class="border-top-0">Novice Members</td>';
 		                } else if($fromList == 4) {
-		                    $html .= '<td class="border-top-0">Diving</td>';
+		                    $html .= '<td class="border-top-0">Participant Members (Govt./ Semi Govt. Schools)</td>';
 		                } else if($fromList == 5) {
-		                    $html .= '<td class="border-top-0">All</td>';
+		                    $html .= '<td class="border-top-0">Participant Members (International Schools and Ancillary Clubs)</td>';
 		                }
 				 	} else {
 				 		$html .= '<td class="border-top-0">'.$fromList.'</td>';

@@ -212,6 +212,7 @@
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
+            <form role="form" action="sendForPaymentCoach.php" method="POST">
             <div class="container-fluid">
                 <div class="row">
                     <!-- column -->
@@ -219,6 +220,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Registered Coaches</h4>
+                                <input style="float:right;" type="submit" name="submit" value="Send For Payment" id="submit" class="btn btn-warning" style="margin: auto;"></input>
                             </div>
                             <?php
                                 if(isset($_GET['er'])){
@@ -244,6 +246,11 @@
                                                 <span style="color:red;margin-left:20px;">Only jpg,png,jpeg are supportrd for photo.</span>
                                                 <div class="col-lg-12"><hr/></div>
                                             </div>';
+                                        } else if ($error == "nd"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Select at least one Atlete for payment.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
                                         }
                                     }
                                 }
@@ -266,16 +273,28 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="card">
+                                        <div class="card-body">                                                
+                                            <input type="checkbox" class="form-check-input" onClick="toggle(this)" />
+                                            <label class="form-check-label" for="inputGroupSelect01">Select All Coaches To Send For Payment</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
+                                            <th class="border-top-0"></th>
                                             <th class="border-top-0">ID</th>
                                             <th class="border-top-0">NAME</th>
                                             <th class="border-top-0">NIC</th>
                                             <th class="border-top-0">MOBILE</th>
                                             <th class="border-top-0">EMAIL</th>
                                             <th class="border-top-0">CATEGORY</th>
+                                            <th class="border-top-0">PAYMENT</th>
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>
@@ -288,6 +307,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </form>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
@@ -358,6 +379,14 @@ $(document).ready(function(){
  });
  
 });
+</script>
+<script type="text/javascript">
+function toggle(source) {
+    checkboxes = document.getElementsByName('editAthlete[]');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
 </script>
 </html>
 <?php

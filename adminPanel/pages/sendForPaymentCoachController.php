@@ -10,19 +10,19 @@ if(isset($_SESSION["clubId"])){
 			$notes = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['notes'])));
 		}
 		$list = implode(",",$_SESSION["athleteArray"]);
-		$query = "INSERT INTO `payment`(`clubId`, `amount`, `notes`, `athleteList`, `paymentType`) VALUES ('".$_SESSION["clubId"]."','".$money."','".$notes."','".$list."','1')";
+		$query = "INSERT INTO `payment`(`clubId`, `amount`, `notes`, `athleteList`, `paymentType`) VALUES ('".$_SESSION["clubId"]."','".$money."','".$notes."','".$list."','2')";
 		if(mysqli_query($con, $query)){
 			$last_id = mysqli_insert_id($con);
 			for($i=0;$i<count($_SESSION["athleteArray"]);$i++){
-				$update = "UPDATE `athlete` SET `paymentStatus`='1',`paymentRef`='".$last_id."' WHERE athleteId='".$_SESSION["athleteArray"][$i]."'";
+				$update = "UPDATE `coach` SET `paymentStatus`='1',`paymentRef`='".$last_id."' WHERE coachId='".$_SESSION["athleteArray"][$i]."'";
 				mysqli_query($con, $update);
 				header('Location:payments.php?er=su');
 			}
         } else {
-            header('Location:athlete.php?er=er');
+            header('Location:coach.php?er=er');
         }
 	} else {
-		header('Location:athlete.php?er=nd');
+		header('Location:coach.php?er=nd');
 	}
 } else {
     session_destroy();

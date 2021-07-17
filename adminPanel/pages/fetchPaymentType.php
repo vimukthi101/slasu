@@ -9,7 +9,7 @@ if(!isset($_SESSION[''])){
 
 if($_POST["query"] != '') {
  $search_text = $_POST["query"];
- $query = 'SELECT * FROM `payment` WHERE status="'.$search_text.'" AND clubId='.$_SESSION["clubId"];
+ $query = 'SELECT * FROM `payment` WHERE paymentType="'.$search_text.'" AND clubId='.$_SESSION["clubId"];
 } else {
  $query = 'SELECT * FROM `payment` WHERE clubId='.$_SESSION["clubId"];
 }

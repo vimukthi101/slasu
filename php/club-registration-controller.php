@@ -18,20 +18,28 @@
                 }
                 if($_SESSION["regRadio"] == "New"){
                     $_SESSION["regRadio"] = 1;
+                    $regAmount = 10000;
                 } else {
                     $_SESSION["regRadio"] = 2;
+                    $regAmount = 0;
                 }
-                if($_SESSION["category"] == "Swimming"){
+                if($_SESSION["category"] == "Ordinary Member (Colombo District)"){
                     $_SESSION["category"] = 1;
-                } else if($_SESSION["category"] == "Artistic Swimming") {
+                    $affAmount = 15000;
+                } else if($_SESSION["category"] == "Ordinary Member (Other Districts) ") {
                     $_SESSION["category"] = 2;
-                } else if($_SESSION["category"] == "Water Polo") {
+                    $affAmount = 8000;
+                } else if($_SESSION["category"] == "Novice Members") {
                     $_SESSION["category"] = 3;
-                } else if($_SESSION["category"] == "Diving") {
+                    $affAmount = 6000;
+                } else if($_SESSION["category"] == "Participant Members (Govt./ Semi Govt. Schools)") {
                     $_SESSION["category"] = 4;
-                } else if($_SESSION["category"] == "All") {
+                    $affAmount = 4000;
+                } else if($_SESSION["category"] == "Participant Members (International Schools and Ancillary Clubs)") {
                     $_SESSION["category"] = 5;
+                    $affAmount = 7500;
                 }
+                $totalAmount = $regAmount + $affAmount;
                 $addCard = "INSERT INTO club (clubCode,clubType,clubName,district,operatorName,operatorEmail,operatorMobile,operatorPassword,operatorWhatsapp,operatorNic,regType,requestLetter,affiliationCat,postalAddress,clubContactOne,clubContactTwo,clubEmailOne,clubEmailTwo,inchargeName,inchargeMobile,inchargeEmail) VALUES('".$_SESSION["clubCode"]."','".$_SESSION["optradio"]."','".$_SESSION["name"]."','".$_SESSION["district"]."','".$_SESSION["operatorName"]."','".$_SESSION["operatorEmail"]."','".$_SESSION["phone"]."','".$password."','".$_SESSION["whatsapp"]."','".$_SESSION["operatorNic"]."','".$_SESSION["regRadio"]."','".$_SESSION["requestLetter"]."','".$_SESSION["category"]."','".$_SESSION["clubAddress"]."','".$_SESSION["clubPhone1"]."','".$_SESSION["clubPhone2"]."','".$_SESSION["clubEmail1"]."','".$_SESSION["clubEmail2"]."','".$_SESSION["inchargeName"]."','".$_SESSION["inchargePhone"]."','".$_SESSION["inchargeEmail"]."')";
                 if(mysqli_query($con, $addCard)){
                     //success
@@ -48,6 +56,11 @@ Use following credentails to login to the system.
 Link : http://localhost:1234/slasu/login.php
 User Name : ".$_SESSION["phone"]."
 Password : ".$password."
+
+To get the account activated please do the following payment to the mentioned bank account.
+
+Total to pay : ".$totalAmount."
+Bank Account Details :  
 
 Please change your password after login to the system.
 

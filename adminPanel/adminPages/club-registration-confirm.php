@@ -16,15 +16,15 @@
                 $status = 3;
             }
             $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
-            if($_SESSION["category"] == "Swimming"){
+            if($_SESSION["category"] == "Ordinary Member (Colombo District)"){
                 $_SESSION["category"] = 1;
-            } else if($_SESSION["category"] == "Artistic Swimming") {
+            } else if($_SESSION["category"] == "Ordinary Member (Other Districts)") {
                 $_SESSION["category"] = 2;
-            } else if($_SESSION["category"] == "Water Polo") {
+            } else if($_SESSION["category"] == "Novice Members") {
                 $_SESSION["category"] = 3;
-            } else if($_SESSION["category"] == "Diving") {
+            } else if($_SESSION["category"] == "Participant Members (Govt./ Semi Govt. Schools)") {
                 $_SESSION["category"] = 4;
-            } else if($_SESSION["category"] == "All") {
+            } else if($_SESSION["category"] == "Participant Members (International Schools and Ancillary Clubs)") {
                 $_SESSION["category"] = 5;
             }
             $district = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['district'])));

@@ -14,6 +14,7 @@
 	                    $athleteId = $row['paymentId'];
                         $athleteCode = $row['paymentCode'];
                         $clubId = $row['clubId'];
+                        $paymentType = $row['paymentType'];
                         $clubIdCode = $athleteCode.$athleteId;
                         $amount = $row['amount'];
                         $notes = $row['notes'];
@@ -23,8 +24,15 @@
                         $adminComment = $row['adminComment'];
                         $array = explode(",",$athleteList);
                         $subjectVal = "";
+                        if($paymentType == 1){
+                            $myCode = 'SLASU/A/00';
+                            $paymentType = "Athlete Payment";
+                        } else if($paymentType == 2){
+                            $myCode = 'SLASU/C/00';
+                            $paymentType = "Coach Payment";
+                        }
                         for($x=0;$x<count($array);$x++){
-                            $subjectVal .= 'SLASU/A/00'.$array[$x].',';
+                           $subjectVal .= $myCode.$array[$x].',';
                         }
                         if($status == 1){
                             $status = "Send For Payment";
@@ -317,6 +325,13 @@
 		                                            class="form-control form-control-line" disabled>
 		                                    </div>
 		                                </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Payment Type</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$paymentType.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Athlete List</label>
 		                                    <div class="">

@@ -258,9 +258,34 @@
                                 <div class="col-5">
                                     <div class="card">
                                         <div class="card-body">                                                
+                                            <label class="">Athletes List</label>
+                                            <div>
+                                            <?php
+                                                if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+                                                    if(!empty($_POST['editAthlete'])) {
+                                                        $array = $_POST['editAthlete'];
+                                                        $_SESSION['athleteArray'] = $array;
+                                                        $totalAmout = 500 * count($array);
+                                                        for($i=0;$i<count($array);$i++){
+                                                            echo '<label class="">SLASU/A/00'.$array[$i].'</label><br/>';
+                                                        }
+                                                    } else {
+                                                        header('Location:athlete.php?er=nd');
+                                                    }
+                                                }
+                                            ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="card">
+                                        <div class="card-body">                                                
                                             <label class="">Payment Amount</label>
                                             <div class="">
-                                                <input type="number" step="any" class="form-control form-control-line" name="money" id="money" required title="Only Numbers">
+                                                <input type="number" value="<?php echo $totalAmout; ?>" step="any" class="form-control form-control-line" name="money" id="money" required title="Only Numbers" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -273,30 +298,6 @@
                                             <label class="">Additional Notes</label>
                                             <div class="">
                                                 <textarea class="form-control" name="notes" id="notes"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="card">
-                                        <div class="card-body">                                                
-                                            <label class="">Athletes List</label>
-                                            <div>
-                                            <?php
-                                                if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
-                                                    if(!empty($_POST['editAthlete'])) {
-                                                        $array = $_POST['editAthlete'];
-                                                        $_SESSION['athleteArray'] = $array;
-                                                        for($i=0;$i<count($array);$i++){
-                                                            echo '<label class="">SLASU/A/00'.$array[$i].'</label><br/>';
-                                                        }
-                                                    } else {
-                                                        header('Location:athlete.php?er=nd');
-                                                    }
-                                                }
-                                            ?>
                                             </div>
                                         </div>
                                     </div>

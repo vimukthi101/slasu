@@ -50,16 +50,16 @@
                         } else if($regType == 2) {
                             $regType = "Existing";
                         } 
-	                    if($affiliationCat == 1){
-                            $affiliationCat = "Swimming";
+                        if($affiliationCat == 1){
+                            $affiliationCat = "Ordinary Member (Colombo District)";
                         } else if($affiliationCat == 2) {
-                            $affiliationCat = "Artistic Swimming";
+                            $affiliationCat = "Ordinary Member (Other Districts)";
                         } else if($affiliationCat == 3) {
-                            $affiliationCat = "Water Polo";
+                            $affiliationCat = "Novice Members";
                         } else if($affiliationCat == 4) {
-                            $affiliationCat = "Diving";
+                            $affiliationCat = "Participant Members (Govt./ Semi Govt. Schools)";
                         } else if($affiliationCat == 5) {
-                            $affiliationCat = "All";
+                            $affiliationCat = "Participant Members (International Schools and Ancillary Clubs)";
                         }
                         $getP = "SELECT * FROM payment WHERE clubId='".$id."'";
                         $resultP = mysqli_query($con, $getP);

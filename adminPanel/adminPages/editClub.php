@@ -49,15 +49,15 @@
                             $regType = "Existing";
                         } 
                         if($affiliationCat == 1){
-                            $affiliationCat = "Swimming";
+                            $affiliationCat = "Ordinary Member (Colombo District)";
                         } else if($affiliationCat == 2) {
-                            $affiliationCat = "Artistic Swimming";
+                            $affiliationCat = "Ordinary Member (Other Districts)";
                         } else if($affiliationCat == 3) {
-                            $affiliationCat = "Water Polo";
+                            $affiliationCat = "Novice Members";
                         } else if($affiliationCat == 4) {
-                            $affiliationCat = "Diving";
+                            $affiliationCat = "Participant Members (Govt./ Semi Govt. Schools)";
                         } else if($affiliationCat == 5) {
-                            $affiliationCat = "All";
+                            $affiliationCat = "Participant Members (International Schools and Ancillary Clubs)";
                         }
 	            	}
 	            } else {
@@ -323,11 +323,11 @@
 		                                    <div class="">
 		                                        <select class="form-select form-control" id="category" name="category" required>
                                                     <option selected value="'.$affiliationCat.'">'.$affiliationCat.'</option>
-                                                    <option value="Swimming">Swimming</option>
-                                                    <option value="Artistic Swimming">Artistic Swimming</option>
-                                                    <option value="Water Polo">Water Polo</option>
-                                                    <option value="Diving">Diving</option>
-                                                    <option value="All">All</option>
+                                                    <option value="1">Ordinary Member (Colombo District)</option>
+                                                    <option value="2">Ordinary Member (Other Districts)</option>
+                                                    <option value="3">Novice Members</option>
+                                                    <option value="4">Participant Members (Govt./ Semi Govt. Schools)</option>
+                                                    <option value="5">Participant Members (International Schools and Ancillary Clubs)</option>
                                                   </select>
 		                                    </div>
 		                                </div>

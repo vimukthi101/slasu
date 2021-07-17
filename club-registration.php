@@ -251,7 +251,7 @@
                                     </div>
                                 </div>
                             <div class="col-md-6" style="display:none" id="enrollmentFee">
-                                <p>Enrollment Fee : 500</p>
+                                <p>Enrollment Fee : Rs.10,000</p>
                             </div> 
                             <div class="col-md-12" style="display:none;" id="rLtr">
                                 <div class="col-md-12">
@@ -270,15 +270,15 @@
                                 <label class="input-group-text" for="inputGroupSelect01">Affiliation Category *</label>
                               <select class="custom-select form-select form-control" id="category" name="category" required>
                                 <option selected disabled>Select Type...</option>
-                                <option value="Swimming">Swimming</option>
-                                <option value="Artistic Swimming">Artistic Swimming</option>
-                                <option value="Water Polo">Water Polo</option>
-                                <option value="Diving">Diving</option>
-                                <option value="All">All</option>
+                                <option name="category" value="Ordinary Member (Colombo District)">Ordinary Member (Colombo District)</option>
+                                <option name="category" value="Ordinary Member (Other Districts)">Ordinary Member (Other Districts)</option>
+                                <option name="category" value="Novice Members">Novice Members</option>
+                                <option name="category" value="Participant Members (Govt./ Semi Govt. Schools)">Participant Members (Govt./ Semi Govt. Schools)</option>
+                                <option name="category" value="Participant Members (International Schools and Ancillary Clubs)">Participant Members (International Schools and Ancillary Clubs)</option>
                               </select>
                         </div><!-- /.col-md-12 -->
                         <div class="col-md-6">
-                            <p>Affiliation Fee : 500</p>
+                            <p id="p1"></p>
                         </div>
                         <div class="col-lg-12"><hr/></div>
                         
@@ -475,5 +475,28 @@
       // use fileName however fits your app best, i.e. add it into a div
       infoArea.textContent = 'Attached File Name: ' + fileName;
     }
+</script>
+<script type="text/javascript">
+$(function(){
+
+$('#category').change(function(){
+var a = $(this).val();
+if(a == "Ordinary Member (Colombo District)"){
+    var msg = 'Affiliation Fee : Rs.15,000';
+} else if(a == "Ordinary Member (Other Districts)"){
+    var msg = 'Affiliation Fee : Rs.8,000';
+} else if(a == "Novice Members"){
+    var msg = 'Affiliation Fee : Rs.6,000';
+} else if(a == "Participant Members (Govt./ Semi Govt. Schools)"){
+    var msg = 'Affiliation Fee : Rs.4,000';
+} else if(a == "Participant Members (International Schools and Ancillary Clubs)"){
+    var msg = 'Affiliation Fee : Rs.7,500';
+}
+$('#p1').html(msg); // selector for div
+
+});
+
+});
+</script>
 </script>
 </html>

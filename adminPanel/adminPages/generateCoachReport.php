@@ -295,7 +295,7 @@
                                         <div class="card">
                                             <div class="card-body">               
                                                 <input type="checkbox" class="form-check-input" name="fieldList[]" value="affiliationCat">
-                                                <label class="form-check-label" for="clubCode">Affiliation Category</label>
+                                                <label class="form-check-label" for="clubCode">Aquatic Category</label>
                                             </div>
                                         </div>
                                     </div>
@@ -424,6 +424,22 @@
                                             <div class="card-body">               
                                                 <input type="checkbox" class="form-check-input" name="fieldList[]" value="ppNo">
                                                 <label class="form-check-label" for="clubCode">Passport No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                        <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="paymentStatus">
+                                                <label class="form-check-label" for="clubCode">Payment Status</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="paymentRef">
+                                                <label class="form-check-label" for="clubCode">Payment Reference</label>
                                             </div>
                                         </div>
                                     </div>

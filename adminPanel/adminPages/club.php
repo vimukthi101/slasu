@@ -291,14 +291,14 @@
                                 <div class="col-5">
                                     <div class="card">
                                         <div class="card-body">                                                
-                                            <label class="" for="inputGroupSelect01">Aquatic Category</label>
+                                            <label class="" for="inputGroupSelect01">Affiliation Category</label>
                                             <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
                                                 <option selected disabled>Select Type...</option>
-                                                <option value="1">Swimming</option>
-                                                <option value="2">Artistic Swimming</option>
-                                                <option value="3">Water Polo</option>
-                                                <option value="4">Diving</option>
-                                                <option value="5">All</option>
+                                                <option value="1">Ordinary Member (Colombo District)</option>
+                                                <option value="2">Ordinary Member (Other Districts)</option>
+                                                <option value="3">Novice Members</option>
+                                                <option value="4">Participant Members (Govt./ Semi Govt. Schools)</option>
+                                                <option value="5">Participant Members (International Schools and Ancillary Clubs)</option>
                                             </select>
                                             <input type="hidden" name="hidden_country" id="hidden_country" />
                                         </div>
