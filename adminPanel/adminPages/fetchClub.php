@@ -37,12 +37,16 @@ if(mysqli_num_rows($result) != 0){
     } else if($affiliationCat == 5) {
         $affiliationCat = "All";
     }
-    $queryClub = "SELECT clubName FROM `club` WHERE clubId='".$clubId."'";
-    $resultClub = mysqli_query($con, $queryClub);
-    if(mysqli_num_rows($resultClub) != 0){
-        while($rowClub = mysqli_fetch_array($resultClub)){
-            $clubName = $rowClub['clubName'];
+    if($clubId != 0){
+        $queryClub = "SELECT clubName FROM `club` WHERE clubId='".$clubId."'";
+        $resultClub = mysqli_query($con, $queryClub);
+        if(mysqli_num_rows($resultClub) != 0){
+            while($rowClub = mysqli_fetch_array($resultClub)){
+                $clubName = $rowClub['clubName'];
+            }
         }
+    } else {
+        $clubName = "Unattached";
     }
     $output .= '<tr>
     <td class="txt-oflo">'.$clubIdCode.'</td>

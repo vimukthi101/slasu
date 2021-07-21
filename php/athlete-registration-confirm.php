@@ -20,6 +20,15 @@
                     header('Location:../athlete-registration.php?er=wi');
                 }
                 $optradio   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['optradio'])));
+                if($optradio == "Unattached"){
+                    $clubList = "";
+                } else {
+                    if(!empty($_POST['clubList'])){
+                        $clubList = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubList'])));
+                    } else {
+                        $clubList = "";
+                    }
+                }
                 $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
                 $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
                 $gender = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['gender'])));
@@ -30,11 +39,6 @@
                 $postal = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['postal'])));
                 $district = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['district'])));
                 $bbdate = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['bbdate'])));
-                if(!empty($_POST['clubList'])){
-                    $clubList = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubList'])));
-                } else {
-                    $clubList = "";
-                }
                 if(!empty($_POST['phone2'])){
                     $phone2 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['phone2'])));
                 } else {

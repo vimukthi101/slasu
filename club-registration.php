@@ -54,7 +54,7 @@
             background-color: var(--thm-gray);
             padding-left: 30px;
             font-size: 18px;
-            color: #838a93;
+            color: blue;
             margin-bottom: 30px;
         }
 

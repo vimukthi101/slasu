@@ -86,7 +86,7 @@
             background-color: var(--thm-gray);
             padding-left: 30px;
             font-size: 18px;
-            color: #838a93;
+            color: blue;
             margin-bottom: 30px;
         }
 
@@ -229,7 +229,7 @@
                             <div class="col-md-12"><hr/></div>
                             <div class="col-md-6" style="margin-top: 10px;display:none" id="ifAll">
                                 <label class="input-group-text" for="inputGroupSelect01">School / Club List *</label>
-                              <select class="custom-select" id="clubList" name="clubList" required>
+                              <select class="custom-select" id="clubList" name="clubList">
                               </select>
                         </div><!-- /.col-md-12 -->
                             <div class="col-md-6" style="margin-top: 10px;">
