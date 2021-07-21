@@ -243,10 +243,15 @@
                                         <label><input type="checkbox" id="conditions" name="conditions" value="conditions" required=""> I certify that above details are correct</label>
                                       </div>
                                     <div class="col-lg-12"><hr/></div>
-                                      <div class="col-md-12" style="text-align: center;">
-                                        <input type="submit" name="submit" value="SUBMIT" id="submit" class="thm-btn contact-one__btn" style="margin: auto;"></input>
-                                    </div><!-- /.col-md-12 -->
-                                
+                                      <div class="row">
+                                        <div class="col-md-4" >
+                                            <input type="button" name="back" value="BACK" onclick="history.back()" id="back" class="thm-btn contact-one__btn" style="margin: auto;"></input>
+                                        </div><!-- /.col-md-12 -->
+                                        <div class="col-md-4"></div>
+                                          <div class="col-md-4" >
+                                            <input type="submit" name="submit" value="SUBMIT" id="submit" class="thm-btn contact-one__btn" style="margin: auto;"></input>
+                                        </div><!-- /.col-md-12 -->
+                                    </div>
                             </div><!-- /.row -->
                         </form><!-- /.contact-one__form -->
                         <div class="result"></div><!-- /.result -->

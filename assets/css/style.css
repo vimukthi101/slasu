@@ -2244,8 +2244,6 @@ a:focus {
 	padding-left: 30px;
 	font-size: 18px;
 	color: #838a93;
-	border: none;
-	outline: none;
 	margin-bottom: 30px;
 }
 
@@ -2254,10 +2252,6 @@ a:focus {
 	padding-top: 25px;
 }
 
-.contact-one__form textarea.error,
-.contact-one__form input.error:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
-	color: red;
-}
 
 .contact-one__form ::-webkit-input-placeholder {
 	opacity: 1;
@@ -2282,31 +2276,6 @@ a:focus {
 .contact-one__form ::placeholder {
 	opacity: 1;
 	color: #838a93;
-}
-
-.contact-one__form .error::-webkit-input-placeholder {
-	opacity: 1;
-	color: red;
-}
-
-.contact-one__form .error::-moz-placeholder {
-	opacity: 1;
-	color: red;
-}
-
-.contact-one__form .error:-ms-input-placeholder {
-	opacity: 1;
-	color: red;
-}
-
-.contact-one__form .error::-ms-input-placeholder {
-	opacity: 1;
-	color: red;
-}
-
-.contact-one__form .error::placeholder {
-	opacity: 1;
-	color: red;
 }
 
 .contact-one__form .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
@@ -2338,15 +2307,6 @@ a:focus {
 	-webkit-box-align: center;
 	align-items: center;
 }
-
-.contact-one__form label.error {
-	color: red;
-	margin-top: -15px;
-	font-size: 18px;
-	display: block;
-}
-
-
 
 .contact-one__form-home-two textarea,
 .contact-one__form-home-two input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {

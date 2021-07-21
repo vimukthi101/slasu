@@ -26,7 +26,7 @@
                 if($_SESSION["category"] == "Ordinary Member (Colombo District)"){
                     $_SESSION["category"] = 1;
                     $affAmount = 15000;
-                } else if($_SESSION["category"] == "Ordinary Member (Other Districts) ") {
+                } else if($_SESSION["category"] == "Ordinary Member (Other Districts)") {
                     $_SESSION["category"] = 2;
                     $affAmount = 8000;
                 } else if($_SESSION["category"] == "Novice Members") {
@@ -46,21 +46,26 @@
                     $from = "info@thestory.host";
                     $headers = "From:" . $from;
                     $to = $_SESSION["operatorEmail"];
-                    $subject = "Account Created Successfully at SLASU";
+                    $subject = $_SESSION["name"]." - Account Created Successfully at SLASU";
 $message = "Hi ".$_SESSION["operatorName"].",
 
 Your account was created successfully at Sri Lanka Aquatic Sports Union.
 
-Use following credentails to login to the system.
+You'll be able to login to the system once the account is activated by the admin. Please use following credentails to login to the system once approved.
+
+Club Name : ".$_SESSION["name"]."
 
 Link : http://localhost:1234/slasu/login.php
 User Name : ".$_SESSION["phone"]."
 Password : ".$password."
 
-To get the account activated please do the following payment to the mentioned bank account.
+Payment Information
 
 Total to pay : ".$totalAmount."
 Bank Account Details :  
+Name of the bank - Peoples Bank, Duke street branch
+Account Name - Sri Lanka Aquatic Sports Union (SLASU)
+Account number - 001100120003449
 
 Please change your password after login to the system.
 

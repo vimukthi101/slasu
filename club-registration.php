@@ -45,6 +45,23 @@
         }
         
     </script>
+    <style type="text/css">
+        textarea,
+        input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+            display: block;
+            width: 100%;
+            height: 84px;
+            background-color: var(--thm-gray);
+            padding-left: 30px;
+            font-size: 18px;
+            color: #838a93;
+            margin-bottom: 30px;
+        }
+
+        input:invalid{
+            border-color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -117,7 +134,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
-                        <form role="form" action="php/club-registration-confirm.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
+                        <form role="form" action="php/club-registration-confirm.php" method="POST" class="" enctype="multipart/form-data">
                             <div class="row">
                                 <?php
                                     if(isset($_GET['er'])){
@@ -178,7 +195,7 @@
                                 </div>
                                 <div class="col-lg-12"><hr/></div>
                                 <div class="col-md-6">
-                                    <input type="text" placeholder="School / Club Name *" id="name" name="name" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+                                    <input type="text" placeholder="School / Club Name *" id="name" name="name" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*) *$" title="Only Letters">
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6">
                                     <label class="input-group-text" for="inputGroupSelect01">Select District *</label>
@@ -215,7 +232,7 @@
                                 
                                 <div class="col-md-12"><h4>Account Operator's Contact Details</h4></div>
                                 <div class="col-md-6">
-                                    <input type="text" placeholder="Operator's Name *" name="operatorName" id="operatorName" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+                                    <input type="text" placeholder="Operator's Name *" name="operatorName" id="operatorName" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*) *$" title="Only Letters">
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
                                     <input type="email" placeholder="Operator's Email Address *" name="operatorEmail" id="operatorEmail" required>
@@ -302,7 +319,7 @@
                                 
                                 <div class="col-md-12"><h4>Incharge's Contact Details</h4></div>
                                 <div class="col-md-6">
-                                    <input type="text" placeholder="Name *" name="inchargeName" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+                                    <input type="text" placeholder="Name *" name="inchargeName" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*) *$" title="Only Letters">
                                 </div><!-- /.col-md-12 -->
                                 <div class="col-md-6">
                                     <input type="tel" placeholder="Mobile Number *" name="inchargePhone" maxlength="10" pattern="[0-9]{10}" title="Only 10 numbers" required>

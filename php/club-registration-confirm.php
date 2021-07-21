@@ -239,7 +239,10 @@ echo '<p>Club Type : '.$_SESSION["optradio"].'</p>
                                             echo '<label><b>Affiliation Fee : Rs.7,500</b></label>';
                                         }
                                         ?>
-                                        <br/><label><b>Please do the payment to following bank account.</b></label>
+                                        <br/><label><b>Please do the payment to following bank account.</b></label><br/>
+                                        <label>Name of the bank : Peoples Bank, Duke street branch<br/>
+Account Name : Sri Lanka Aquatic Sports Union (SLASU)<br/>
+Account number : 001100120003449</label>
                                     </div>
 <div class="col-lg-12"><hr/></div>
                                 
@@ -247,9 +250,15 @@ echo '<p>Club Type : '.$_SESSION["optradio"].'</p>
                                         <label><input type="checkbox" id="conditions" name="conditions" value="conditions" required=""> I certify that above details are correct</label>
                                       </div>
                                     <div class="col-lg-12"><hr/></div>
-                                      <div class="col-md-12" style="text-align: center;">
-                                        <input type="submit" name="submit" value="SUBMIT" id="submit" class="thm-btn contact-one__btn" style="margin: auto;"></input>
-                                    </div><!-- /.col-md-12 -->
+                                    <div class="row">
+                                        <div class="col-md-4" >
+                                            <input type="button" name="back" value="BACK" onclick="history.back()" id="back" class="thm-btn contact-one__btn" style="margin: auto;"></input>
+                                        </div><!-- /.col-md-12 -->
+                                        <div class="col-md-4"></div>
+                                          <div class="col-md-4" >
+                                            <input type="submit" name="submit" value="SUBMIT" id="submit" class="thm-btn contact-one__btn" style="margin: auto;"></input>
+                                        </div><!-- /.col-md-12 -->
+                                    </div>
                                 
                             </div><!-- /.row -->
                         </form><!-- /.contact-one__form -->

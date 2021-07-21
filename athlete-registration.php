@@ -77,6 +77,23 @@
             $('#clubList').html(selectHTML);
         }
     </script>
+        <style type="text/css">
+        textarea,
+        input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]) {
+            display: block;
+            width: 100%;
+            height: 84px;
+            background-color: var(--thm-gray);
+            padding-left: 30px;
+            font-size: 18px;
+            color: #838a93;
+            margin-bottom: 30px;
+        }
+
+        input:invalid{
+            border-color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -149,7 +166,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
-                        <form role="form" action="php/athlete-registration-confirm.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
+                        <form role="form" action="php/athlete-registration-confirm.php" method="POST" class="" enctype="multipart/form-data">
                             <div class="row">
                                 <?php
                                     if(isset($_GET['er'])){
@@ -228,7 +245,7 @@
                         </div><!-- /.col-md-12 -->
                             <div class="col-md-12"><hr/></div>
                                 <div class="col-md-6">
-                                    <input type="text" placeholder="Name in Full *" name="name" id="name" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters"> 
+                                    <input type="text" placeholder="Name in Full *" name="name" id="name" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*) *$" title="Only Letters"> 
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6" style="margin-bottom: 10px;">
                                     <label class="input-group-text" for="inputGroupSelect01">Gender *</label>
@@ -270,7 +287,7 @@
                                 
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input type="text" placeholder="Preffered Name for Certificate *" name="nameForId" id="nameForId" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+                                            <input type="text" placeholder="Preffered Name for Certificate *" name="nameForId" id="nameForId" required pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*) *$" title="Only Letters">
                                         </div><!-- /.col-md-6 -->
                                         <div class="col-md-6">
                                             <p>(Two Words Only. &nbsp; E.g. :- &nbsp;&nbsp; R.K.John Doe)</p>

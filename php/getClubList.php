@@ -3,9 +3,9 @@
 	$radio=$_REQUEST['radioval'];
 	$selectArray=array();
 	if($radio=='School'){
-		$query = "SELECT clubName FROM `club` WHERE clubType=1";
+		$query = "SELECT clubName FROM `club` WHERE clubType=1 AND status=2";
 	}else if($radio=='Club'){
-		$query = "SELECT clubName FROM `club` WHERE clubType=2";
+		$query = "SELECT clubName FROM `club` WHERE clubType=2 AND status=2";
 	}
 	$coachR = mysqli_query($con, $query);
 	$rowCount = mysqli_num_rows($coachR);
