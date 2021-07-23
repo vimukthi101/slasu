@@ -165,6 +165,13 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayment.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-cash-multiple"></i>
+                                <span class="hide-menu">Send For Payment</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="payments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash"></i>
@@ -220,7 +227,6 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Registered Coaches</h4>
-                                <input style="float:right;" type="submit" name="submit" value="Send For Payment" id="submit" class="btn btn-warning" style="margin: auto;"></input>
                             </div>
                             <?php
                                 if(isset($_GET['er'])){
@@ -273,21 +279,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="card">
-                                        <div class="card-body">                                                
-                                            <input type="checkbox" class="form-check-input" onClick="toggle(this)" />
-                                            <label class="form-check-label" for="inputGroupSelect01">Select All Coaches To Send For Payment</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0"></th>
                                             <th class="border-top-0">ID</th>
                                             <th class="border-top-0">NAME</th>
                                             <th class="border-top-0">NIC</th>
@@ -379,14 +374,6 @@ $(document).ready(function(){
  });
  
 });
-</script>
-<script type="text/javascript">
-function toggle(source) {
-    checkboxes = document.getElementsByName('editAthlete[]');
-    for(var i=0, n=checkboxes.length;i<n;i++) {
-        checkboxes[i].checked = source.checked;
-    }
-}
 </script>
 </html>
 <?php

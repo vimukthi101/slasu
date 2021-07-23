@@ -283,6 +283,21 @@
                                                 <span style="color:green;margin-left:20px;">Activated Succesfully.</span>
                                                 <div class="col-lg-12"><hr/></div>
                                             </div>';
+                                        } else if ($error == "af"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:green;margin-left:20px;">Activated Succesfully. Couldn\'t send the email to Operator.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "af"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:green;margin-left:20px;">Disabled Succesfully. Couldn\'t send the email to Operator.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "suf"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:green;margin-left:20px;">Club record deleted successfully. Couldn\'t send the email to Operator.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
                                         }
                                     }
                                 }

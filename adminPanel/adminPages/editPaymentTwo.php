@@ -12,27 +12,27 @@
 	            if(mysqli_num_rows($resultCard) != 0){
 	            	while($row = mysqli_fetch_array($resultCard)){
 	                    $athleteId = $row['paymentId'];
+                        $affiliationFeeStatus = $row['affiliationFeeStatus'];
+                        $enrollmentFeeStatus = $row['enrollmentFeeStatus'];
+                        $athleteList = $row['athleteList'];
+                        $coachList = $row['coachList'];
                         $athleteCode = $row['paymentCode'];
                         $clubId = $row['clubId'];
-                        $paymentType = $row['paymentType'];
                         $clubIdCode = $athleteCode.$athleteId;
                         $amount = $row['amount'];
                         $notes = $row['notes'];
                         $date = $row['date'];
                         $status = $row['status'];
-                        $athleteList = $row['athleteList'];
                         $adminComment = $row['adminComment'];
                         $array = explode(",",$athleteList);
+                        $array2 = explode(",",$coachList);
                         $subjectVal = "";
-                        if($paymentType == 1){
-                            $myCode = 'SLASU/A/00';
-                            $paymentType = "Athlete Payment";
-                        } else if($paymentType == 2){
-                            $myCode = 'SLASU/C/00';
-                            $paymentType = "Coach Payment";
-                        }
                         for($x=0;$x<count($array);$x++){
-                           $subjectVal .= $myCode.$array[$x].',';
+                            $subjectVal .= 'SLASU/A/00'.$array[$x].',';
+                        }
+                        $subjectVal2 = "";
+                        for($x=0;$x<count($array);$x++){
+                            $subjectVal2 .= 'SLASU/C/00'.$array2[$x].',';
                         }
                         if($status == 1){
                             $status = "Send For Payment";
@@ -40,7 +40,7 @@
                             $status = "Approved";
                         } else if($status == 3) {
                             $status = "Rejected";
-                        } else if($paymentStatus == 4) {
+                        } else if($status == 4) {
                             $status = "To Be Renewed";
                         }
                         $queryP = 'SELECT * FROM `club` WHERE clubId='.$clubId;
@@ -256,7 +256,7 @@
                                 <ol class="breadcrumb">
                                     <li class=""><a href="dashboard.php">Home</a></li>
                                     <li class="mdi mdi-arrow-right-bold" aria-current="page"><a href="payments.php">Payment Status</a></li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">View</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Reject</li>
                                 </ol>
                             </nav>
                         </div>
@@ -279,80 +279,96 @@
                             </div>
                             <div class="card-body row">
 		                        <?php
-		                         echo '<div class="form-group col-md-12">
-		                                    <label class="">Payment Information</label>
-		                                    <hr/>
-		                                </div>
+                                 echo '<div class="form-group col-md-12">
+                                            <label class="">Payment Information</label>
+                                            <hr/>
+                                        </div>
                                         <div class="form-group col-md-5">
-                                            <label class="">Payment REF</label>
+                                            <label class="">Invoice No</label>
                                             <div class="">
                                                 <input type="text" placeholder="'.$clubIdCode.'"
                                                     class="form-control form-control-line" disabled>
                                             </div>
                                         </div>
-		                         		<div class="form-group col-md-5">
-		                                    <label class="">Club Name</label>
-		                                    <div class="">
-		                                        <input type="text" placeholder="'.$clubName.'"
-		                                            class="form-control form-control-line" disabled>
-		                                    </div>
-		                                </div>
-		                                <div class="form-group col-md-5">
-		                                    <label class="">Amount</label>
-		                                    <div class="">
-		                                        <input type="text" placeholder="'.$amount.'"
-		                                            class="form-control form-control-line" disabled>
-		                                    </div>
-		                                </div>
-		                                <div class="form-group col-md-5">
-		                                    <label class="">Notes</label>
-		                                    <div class="">
-		                                        <input type="text" placeholder="'.$notes.'"
-		                                            class="form-control form-control-line" disabled>
-		                                    </div>
-		                                </div>
-		                                <div class="form-group col-md-5">
-		                                    <label class="">Date</label>
-		                                    <div class="">
-		                                        <input type="text" placeholder="'.$date.'"
-		                                            class="form-control form-control-line" disabled>
-		                                    </div>
-		                                </div>
-		                                <div class="form-group col-md-5">
-		                                    <label class="">Current Status</label>
-		                                    <div class="">
-		                                        <input type="text" placeholder="'.$status.'"
-		                                            class="form-control form-control-line" disabled>
-		                                    </div>
-		                                </div>
                                         <div class="form-group col-md-5">
-                                            <label class="">Payment Type</label>
+                                            <label class="">Club Name</label>
                                             <div class="">
-                                                <input type="text" placeholder="'.$paymentType.'"
+                                                <input type="text" placeholder="'.$clubName.'"
                                                     class="form-control form-control-line" disabled>
                                             </div>
                                         </div>
-		                                <div class="form-group col-md-5">
-		                                    <label class="">Athlete List</label>
-		                                    <div class="">
-		                                        <textarea class="form-control form-control-line" disabled>'.$subjectVal.'</textarea>
-		                                    </div>
-		                                </div>
-                                        <form role="form" action="rejectPayment.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
-		                                <div class="form-group col-md-5">
-		                                    <label class="">Admin Comment</label>
-		                                    <div class="">
-		                                        <textarea class="form-control form-control-line" id="comment" name="comment">'.$adminComment.'</textarea>
-		                                    </div>
-		                                </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Amount</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$amount.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Notes</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$notes.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Date</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$date.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Current Status</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$status.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Athlete List</label>
+                                            <div class="">
+                                                <textarea class="form-control form-control-line" disabled>'.$subjectVal.'</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Coach List</label>
+                                            <div class="">
+                                                <textarea class="form-control form-control-line" disabled>'.$subjectVal2.'</textarea>
+                                            </div>
+                                        </div>';
+                                        if($affiliationFeeStatus == 1){
+                                            echo '<div class="form-group col-md-5">
+                                                    <label class="">Affiliation Fee</label>
+                                                    <div class="">
+                                                        <input type="text" placeholder="Affiliation Fee : Included"
+                                                            class="form-control form-control-line" disabled>
+                                                    </div>
+                                                </div>';
+                                        }
+                                        if($enrollmentFeeStatus == 1){
+                                            echo '<div class="form-group col-md-5">
+                                                    <label class="">Enrollment Fee</label>
+                                                    <div class="">
+                                                        <input type="text" placeholder="Enrollment Fee : Included"
+                                                            class="form-control form-control-line" disabled>
+                                                    </div>
+                                                </div>';
+                                        }    
+                                        echo '<form role="form" action="rejectPayment.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
+                                        <div class="form-group col-md-5">
+                                            <label class="">Admin Comment</label>
+                                            <div class="">
+                                                <textarea class="form-control form-control-line" id="comment" name="comment">'.$adminComment.'</textarea>
+                                            </div>
+                                        </div>
                                         <div class="col-lg-12"><hr/></div>
                                         <div class="col-md-6" style="text-align: center;">
-                                                
                                                 <input type="text" value="'.$id.'" name="athleteId" id="athleteId" required hidden>
-                                                <input type="submit" name="submit" value="Reject" onclick="return clicked();" id="submit" class="btn btn-warning" style="margin: auto;"></input>
-                                            
-                                        </div></form>';
-		                        ?>
+                                                <input type="submit" name="submit" value="Reject" onclick="return clicked();" id="submit" class="btn btn-danger" style="margin: auto;"></input>
+                                        </div>
+                                        </form>';
+                                ?>
                         	</div>	
                         </div>
                     </div>

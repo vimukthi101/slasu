@@ -19,17 +19,11 @@ if(mysqli_num_rows($result) != 0){
   while($row = mysqli_fetch_array($result)){
     $athleteId = $row['paymentId'];
     $athleteCode = $row['paymentCode'];
-    $paymentType = $row['paymentType'];
     $clubIdCode = $athleteCode.$athleteId;
     $amount = $row['amount'];
     $notes = $row['notes'];
     $date = $row['date'];
     $status = $row['status'];
-    if($paymentType == 1){
-        $paymentType = "Athlete Payment";
-    } else if($paymentType == 2) {
-        $paymentType = "Coach Payment";
-    }
     if($status == 1){
         $status = "Send For Payment";
     } else if($status == 2) {
@@ -44,7 +38,6 @@ if(mysqli_num_rows($result) != 0){
                 <td class="txt-oflo">'.$amount.'</td>
                 <td class="txt-oflo">'.$notes.'</td>
                 <td class="txt-oflo">'.$date.'</td>
-                <td class="txt-oflo">'.$paymentType.'</td>
                 <td class="txt-oflo">'.$status.'</td>
                 <td class="txt-oflo">
                     <form role="form" method="post" action="viewPayment.php">

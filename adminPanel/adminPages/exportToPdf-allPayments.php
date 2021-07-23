@@ -44,6 +44,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 				 			$subjectVal .= 'SLASU/A/00'.$array[$x].'<br/>';
 				 		}
 				 		$html .= '<td class="border-top-0">'.$subjectVal.'</td>';
+				 	} else if($aDoor[$i] == "coachList"){
+				 		$str2 = $fromList;
+				 		$array2 = explode(",",$str2);
+				 		$subjectVal2 = "";
+				 		for($x2=0;$x2<count($array2);$x2++){
+				 			$subjectVal2 .= 'SLASU/C/00'.$array2[$x2].'<br/>';
+				 		}
+				 		$html .= '<td class="border-top-0">'.$subjectVal2.'</td>';
 				 	} else if($aDoor[$i] == "paymentType"){
 			 		    if($fromList == 1){
 			 		    	$html .= '<td class="border-top-0">Athlete Payment</td>';
@@ -60,7 +68,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 					    } else if($fromList == 4) {
 					    	$html .= '<td class="border-top-0">To Be Renewed</td>';
 					    }
-				 	}  else {
+				 	} else if($aDoor[$i] == "affiliationFeeStatus"){
+			 		    if($fromList == 0){
+			 		    	$html .= '<td class="border-top-0">Not Included</td>';
+					    } else if($fromList == 1) {
+					    	$html .= '<td class="border-top-0">Included</td>';
+					    }
+				 	} else if($aDoor[$i] == "enrollmentFeeStatus"){
+			 		    if($fromList == 0){
+			 		    	$html .= '<td class="border-top-0">Not Included</td>';
+					    } else if($fromList == 1) {
+					    	$html .= '<td class="border-top-0">Included</td>';
+					    }
+				 	}   else {
 				 		$html .= '<td class="border-top-0">'.$fromList.'</td>';
 				 	}
 				}

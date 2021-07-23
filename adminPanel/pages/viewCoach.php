@@ -218,6 +218,13 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayment.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-cash-multiple"></i>
+                                <span class="hide-menu">Send For Payment</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="payments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash"></i>

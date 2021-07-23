@@ -49,7 +49,6 @@ if(mysqli_num_rows($result) != 0){
         $affiliationCat = "All";
     }
     $output .= '<tr>
-                <td class="txt-oflo"><input type="checkbox" id="editAthlete[]" name="editAthlete[]" value="'.$athleteId.'"></td>
                 <td class="txt-oflo">'.$clubIdCode.'</td>
                 <td class="txt-oflo">'.$athleteName.'</td>
                 <td class="txt-oflo">'.$nic.'</td>

@@ -4,7 +4,7 @@
         session_start();
     }
     if(isset($_SESSION["clubId"])){
-        if(!empty($_POST['editAthlete'])){
+        if(!empty($_POST['editAthlete']) || !empty($_POST['editCoach']) || !empty($_POST['enorollmentPayment']) || !empty($_POST['affiliationPayment'])){
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -166,6 +166,13 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayment.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-cash-multiple"></i>
+                                <span class="hide-menu">Send For Payment</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="payments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash"></i>
@@ -200,7 +207,7 @@
                                     <li class="">
                                         <a href="dashboard.php">Home</a>
                                     </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Athlete</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Send For Payment</li>
                                 </ol>
                             </nav>
                         </div>
@@ -258,19 +265,77 @@
                                 <div class="col-5">
                                     <div class="card">
                                         <div class="card-body">                                                
-                                            <label class="">Athletes List</label>
+                                            <label class="">Club Registration Payment List</label>
+                                            <div>
+                                            <?php
+                                                if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+                                                    if(!empty($_POST['enorollmentPayment']) || !empty($_POST['affiliationPayment'])) {
+                                                        if(empty($_POST['enorollmentPayment'])){
+                                                            $totalAmout = $_POST['affiliationPayment'];
+                                                            $_SESSION['affiliationPayment'] = $_POST['affiliationPayment'];
+                                                             echo '<label class="">Affiliation Fee : '.$_POST['affiliationPayment'].'</label><br/>';
+                                                        } else if(empty($_POST['affiliationPayment'])){
+                                                            $totalAmout = $_POST['enorollmentPayment'];
+                                                            $_SESSION['enorollmentPayment'] = $_POST['enorollmentPayment'];
+                                                             echo '<label class="">Enrollment Fee : '.$_POST['enorollmentPayment'].'</label><br/>';
+                                                        } else {
+                                                            $totalAmout = $_POST['enorollmentPayment'] + $_POST['affiliationPayment'];
+                                                            $_SESSION['affiliationPayment'] = $_POST['affiliationPayment'];
+                                                            $_SESSION['enorollmentPayment'] = $_POST['enorollmentPayment'];
+                                                             echo '<label class="">Affiliation Fee : '.$_POST['affiliationPayment'].'</label><br/><label class="">Enrollment Fee : '.$_POST['enorollmentPayment'].'</label><br/>';
+                                                        }
+                                                    } else {
+                                                        $totalAmout = 0;
+                                                    }
+                                                }
+                                            ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="card">
+                                        <div class="card-body">                                                
+                                            <label class="">Athletes List (Rs.500 per each Athlete)</label>
                                             <div>
                                             <?php
                                                 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
                                                     if(!empty($_POST['editAthlete'])) {
                                                         $array = $_POST['editAthlete'];
                                                         $_SESSION['athleteArray'] = $array;
-                                                        $totalAmout = 500 * count($array);
+                                                        $totalAmout1 = 500 * count($array);
                                                         for($i=0;$i<count($array);$i++){
                                                             echo '<label class="">SLASU/A/00'.$array[$i].'</label><br/>';
                                                         }
                                                     } else {
-                                                        header('Location:athlete.php?er=nd');
+                                                        $totalAmout1 = 0;
+                                                    }
+                                                }
+                                            ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="card">
+                                        <div class="card-body">                                                
+                                            <label class="">Coaches List (Rs.2,500 per each Coach)</label>
+                                            <div>
+                                            <?php
+                                                if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+                                                    if(!empty($_POST['editCoach'])) {
+                                                        $array2 = $_POST['editCoach'];
+                                                        $_SESSION['coachArray'] = $array2;
+                                                        $totalAmout2 = 2500 * count($array2);
+                                                        for($i=0;$i<count($array2);$i++){
+                                                            echo '<label class="">SLASU/C/00'.$array2[$i].'</label><br/>';
+                                                        }
+                                                    } else {
+                                                        $totalAmout2 = 0;
                                                     }
                                                 }
                                             ?>
@@ -285,7 +350,7 @@
                                         <div class="card-body">                                                
                                             <label class="">Payment Amount</label>
                                             <div class="">
-                                                <input type="number" value="<?php echo $totalAmout; ?>" step="any" class="form-control form-control-line" name="money" id="money" required title="Only Numbers" readonly>
+                                                <input type="number" value="<?php echo $totalAmout + $totalAmout1 + $totalAmout2; ?>" step="any" class="form-control form-control-line" name="money" id="money" required title="Only Numbers" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -366,7 +431,7 @@
 </html>
 <?php
     } else {
-        header('Location:athlete.php');
+        header('Location:sendPayment.php');
     }
 } else {
     session_destroy();

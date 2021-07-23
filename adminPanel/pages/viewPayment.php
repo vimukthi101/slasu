@@ -12,7 +12,10 @@
 	            if(mysqli_num_rows($resultCard) != 0){
 	            	while($row = mysqli_fetch_array($resultCard)){
 	                    $athleteId = $row['paymentId'];
-                        $paymentType = $row['paymentType'];
+                        $affiliationFeeStatus = $row['affiliationFeeStatus'];
+                        $enrollmentFeeStatus = $row['enrollmentFeeStatus'];
+                        $athleteList = $row['athleteList'];
+                        $coachList = $row['coachList'];
                         $athleteCode = $row['paymentCode'];
                         $clubId = $row['clubId'];
                         $clubIdCode = $athleteCode.$athleteId;
@@ -20,17 +23,16 @@
                         $notes = $row['notes'];
                         $date = $row['date'];
                         $status = $row['status'];
-                        $athleteList = $row['athleteList'];
                         $adminComment = $row['adminComment'];
                         $array = explode(",",$athleteList);
+                        $array2 = explode(",",$coachList);
                         $subjectVal = "";
-                        if($paymentType == 1){
-                            $myCode = 'SLASU/A/00';
-                        } else if($paymentType == 2){
-                            $myCode = 'SLASU/C/00';
-                        }
                         for($x=0;$x<count($array);$x++){
-                            $subjectVal .= $myCode.$array[$x].',';
+                            $subjectVal .= 'SLASU/A/00'.$array[$x].',';
+                        }
+                        $subjectVal2 = "";
+                        for($x=0;$x<count($array);$x++){
+                            $subjectVal2 .= 'SLASU/C/00'.$array2[$x].',';
                         }
                         if($status == 1){
                             $status = "Send For Payment";
@@ -71,7 +73,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title style="text-transform:uppercase;"><?php echo $_SESSION["firstName"] ?></title>
+    <title style="text-transform:uppercase;"><?php echo $_SESSION["clubName"] ?></title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon.png">
     <!-- Custom CSS -->
@@ -207,10 +209,17 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayment.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-cash-multiple"></i>
+                                <span class="hide-menu">Send For Payment</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="payments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash"></i>
-                                <span class="hide-menu">Payment Status</span>
+                                <span class="hide-menu">View Payments</span>
                             </a>
                         </li>
                     </ul>
@@ -263,21 +272,35 @@
                                 <h4 class="card-title">Payment Information</h4>
                             </div>
                             <div class="row">
-
+                                <div class="col-8 align-self-center">
+                            
+                                </div>
+                                <div class="col-2 align-self-center">
+                                    <div>
+                                        <form role="form" action="exportToPdf-Payment.php" method="POST">
+                                            <input type="submit" class="form-control btn btn-success" value="Export To PDF">
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                             <?php
-                            $html = '<div class="form-group col-md-12">
-                                            <label class="">Payment Information</label>
-                                            <hr/>
-                                        </div>
-                                            <label class="">Payment REF : '.$clubIdCode.'</label><br/><br/>
-                                            <label class="">Club Name : '.$clubName.'</label><br/><br/>
-                                            <label class="">Amount : '.$amount.'</label><br/><br/>
-                                            <label class="">Notes : '.$notes.'</label><br/><br/>
+                            $html = '<div class="form-group col-md-12"><br/>
+                                            <label class="">Invoice No : '.$clubIdCode.'</label><br/><br/>
                                             <label class="">Date : '.$date.'</label><br/><br/>
+                                            <hr/><br/><br/>
+                                            <label class="">Club Name : '.$clubName.'</label><br/><br/>
+                                            <label class="">Notes : '.$notes.'</label><br/><br/>
                                             <label class="">Status : '.$status.'</label><br/><br/>
+                                            <hr/><br/><br/>
                                             <label class="">Athlete List : '.$subjectVal.'</label><br/><br/>
-                                            <label class="">Admin Comment : '.$adminComment.'</label><br/><br/>';
+                                            <label class="">Coach List : '.$subjectVal2.'</label><br/><br/>';
+                            if($affiliationFeeStatus == 1){
+                                $html .=  '<label class="">Affiliation Fee : Included</label><br/><br/>';
+                            }
+                            if($enrollmentFeeStatus == 1){
+                                $html .=  '<label class="">Enrollment Fee : Included</label><br/><br/>';
+                            }
+                            $html .= '<label class="">Admin Comment : '.$adminComment.'</label><br/><br/><hr/><br/><br/><label class="">Total Amount : '.$amount.'</label><br/><br/></div>';
                                             $_SESSION['html'] = $html;
                             ?>
                             <div class="card-body row">
@@ -287,7 +310,7 @@
 		                                    <hr/>
 		                                </div>
                                         <div class="form-group col-md-5">
-                                            <label class="">Payment REF</label>
+                                            <label class="">Invoice No</label>
                                             <div class="">
                                                 <input type="text" placeholder="'.$clubIdCode.'"
                                                     class="form-control form-control-line" disabled>
@@ -334,7 +357,31 @@
 		                                        <textarea class="form-control form-control-line" disabled>'.$subjectVal.'</textarea>
 		                                    </div>
 		                                </div>
-		                                <div class="form-group col-md-5">
+                                        <div class="form-group col-md-5">
+                                            <label class="">Coach List</label>
+                                            <div class="">
+                                                <textarea class="form-control form-control-line" disabled>'.$subjectVal2.'</textarea>
+                                            </div>
+                                        </div>';
+                                        if($affiliationFeeStatus == 1){
+                                            echo '<div class="form-group col-md-5">
+                                                    <label class="">Affiliation Fee</label>
+                                                    <div class="">
+                                                        <input type="text" placeholder="Affiliation Fee : Included"
+                                                            class="form-control form-control-line" disabled>
+                                                    </div>
+                                                </div>';
+                                        }
+                                        if($enrollmentFeeStatus == 1){
+                                            echo '<div class="form-group col-md-5">
+                                                    <label class="">Enrollment Fee</label>
+                                                    <div class="">
+                                                        <input type="text" placeholder="Enrollment Fee : Included"
+                                                            class="form-control form-control-line" disabled>
+                                                    </div>
+                                                </div>';
+                                        }		                               
+                                        echo '<div class="form-group col-md-5">
 		                                    <label class="">Admin Comment</label>
 		                                    <div class="">
 		                                        <input type="text" placeholder="'.$adminComment.'"
