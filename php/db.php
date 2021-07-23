@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost';
-$db = 'slasu';
-$user = 'root';
-$password = '';
+$db = 'u527331572_slasu';
+$user = 'u527331572_slasu';
+$password = 'Root123slasu';
 
 //no errors will be shown
 //error_reporting(0);
