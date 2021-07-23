@@ -10,38 +10,32 @@
 				$gettt = "SELECT * FROM club WHERE clubId='".$tId."'";
 				$resulttt = mysqli_query($con, $gettt);
 				if(mysqli_num_rows($resulttt) != 0){
+					while($row = mysqli_fetch_array($resulttt)){
+                        $to = $row['operatorEmail'];
+                        $operatorName = $row['operatorName'];
+                        $clubName = $row['clubName'];
+                    }
 					$deletett = "DELETE FROM club WHERE clubId='".$tId."'";
 					$deleteta = "DELETE FROM athlete WHERE clubId='".$tId."'";
 					$deletetc = "DELETE FROM coach WHERE clubId='".$tId."'";
 					if(mysqli_query($con, $deletett)){
 						if(mysqli_query($con, $deleteta)){
 							if(mysqli_query($con, $deletetc)){
-								$gettt = "SELECT clubName,operatorName,operatorEmail FROM club WHERE clubId='".$tId."'";
-				                $resulttt = mysqli_query($con, $gettt);
-				                if(mysqli_num_rows($resulttt) != 0){
-				                    while($row = mysqli_fetch_array($resulttt)){
-				                        $to = $row['operatorEmail'];
-				                        $operatorName = $row['operatorEmail'];
-				                        $clubName = $row['clubName'];
-				                        $from = "info@thestory.host";
-				                        $headers = "From:" . $from;
-				                        $subject = $clubName." - Account Deleted at SLASU";
-				    $message = "Hi ".$operatorName.",
+		                        $from = "info@thestory.host";
+		                        $headers = "From:" . $from;
+                    			$subject = $clubName." - Account Deleted at SLASU";
+$message = "Hi ".$operatorName.",
 
-				    Your account was deleted at Sri Lanka Aquatic Sports Union. Please contact the admin if you think this was done by a mistake.
+Your account was deleted at Sri Lanka Aquatic Sports Union. Please contact the admin if you think this was done by a mistake.
 
-				    Thank You
-				    Admin,
-				    SLASU";
-				                        if (mail($to, $subject, $message, $headers)){
-				                            header('Location:club.php?er=su');
-				                        } else {
-				                            header('Location:club.php?er=suf');
-				                        }
-				                    }
-				                } else{
-				                    header('Location:club.php?er=suf');
-				                }
+Thank You
+Admin,
+SLASU";
+		                        if (mail($to, $subject, $message, $headers)){
+		                            header('Location:club.php?er=su');
+		                        } else {
+		                            header('Location:club.php?er=suf');
+		                        }
 							} else {
 								//query failed
 								header('Location:club.php?er=ed');

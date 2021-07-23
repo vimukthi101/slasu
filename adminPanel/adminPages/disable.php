@@ -13,7 +13,7 @@
                 if(mysqli_num_rows($resulttt) != 0){
                     while($row = mysqli_fetch_array($resulttt)){
                         $to = $row['operatorEmail'];
-                        $operatorName = $row['operatorEmail'];
+                        $operatorName = $row['operatorName'];
                         $clubName = $row['clubName'];
                         $from = "info@thestory.host";
                         $headers = "From:" . $from;
