@@ -11,7 +11,7 @@
 	$rowCount = mysqli_num_rows($coachR);
     if($rowCount != 0){
         while($rowR = mysqli_fetch_array($coachR)){
-        	$selectArray[0] = $rowR['clubName'];
+        	array_push($selectArray, $rowR['clubName']);
         }
     }
 	echo json_encode($selectArray);
