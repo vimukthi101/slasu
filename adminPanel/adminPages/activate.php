@@ -8,7 +8,7 @@
             $id   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['id'])));
             $updateEmployeeAll = "UPDATE `club` SET `status`='2' WHERE clubId=".$id;
             if(mysqli_query($con, $updateEmployeeAll)){ 
-                $gettt = "SELECT clubName,operatorName,operatorEmail FROM club WHERE clubId='".$tId."'";
+                $gettt = "SELECT clubName,operatorName,operatorEmail FROM club WHERE clubId='".$id."'";
                 $resulttt = mysqli_query($con, $gettt);
                 if(mysqli_num_rows($resulttt) != 0){
                     while($row = mysqli_fetch_array($resulttt)){
