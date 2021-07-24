@@ -230,7 +230,7 @@
                         </div><!-- /.col-md-12 -->
                             <div class="col-md-12"><hr/></div>
                                 <div class="col-md-6">
-                                    <input type="text" placeholder="Name in Full *" name="name" id="name" required pattern="^[a-z ,.'-]+$" title="Only Letters">
+                                    <input type="text" placeholder="Name in Full *" name="name" id="name" required pattern="^[a-z ,.'-]*$" title="Only Letters">
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6" style="margin-bottom: 10px;">
                                     <label class="input-group-text" for="inputGroupSelect01">Gender *</label>
@@ -256,7 +256,7 @@
                             <div class="col-xl-12">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input type="text" placeholder="Preffered Name for ID *" name="nameForId" id="nameForId" required pattern="^[a-z ,.'-]+$" title="Only Letters">
+                                            <input type="text" placeholder="Preffered Name for ID *" name="nameForId" id="nameForId" required pattern="^[a-z ,.'-]*$" title="Only Letters">
                                         </div><!-- /.col-md-6 -->
                                         <div class="col-md-6">
                                             <p>(Two Words Only. &nbsp; E.g. :- &nbsp;&nbsp; R.K.John Doe)</p>
@@ -292,7 +292,7 @@
                             </div><!-- /.col-md-6 -->
                             
                             <div class="col-md-6">
-                                <input type="text" placeholder="Designation" name="designation" id="designation" pattern="^[a-z ,.'-]+$" title="Only Letters">
+                                <input type="text" placeholder="Designation" name="designation" id="designation" pattern="^[a-z ,.'-]*$" title="Only Letters">
                             </div><!-- /.col-md-12 -->
                             
                         <div class="col-md-6">
