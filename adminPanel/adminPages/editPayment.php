@@ -31,7 +31,7 @@
                             $subjectVal .= 'SLASU/A/00'.$array[$x].',';
                         }
                         $subjectVal2 = "";
-                        for($x=0;$x<count($array);$x++){
+                        for($x=0;$x<count($array2);$x++){
                             $subjectVal2 .= 'SLASU/C/00'.$array2[$x].',';
                         }
                         if($status == 1){
