@@ -8,9 +8,19 @@ if(isset($_SESSION["clubId"])){
 		$money = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['money'])));
 		if(!empty($_POST["notes"])){
 			$notes = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['notes'])));
+		} else {
+			$notes = "";
 		}
-		$list1 = implode(",",$_SESSION["athleteArray"]);
-		$list2 = implode(",",$_SESSION["coachArray"]);
+		if(isset($_SESSION["athleteArray"])){
+			$list1 = implode(",",$_SESSION["athleteArray"]);
+		} else {
+			$list1 = "";
+		}
+		if(isset($_SESSION["coachArray"])){
+			$list2 = implode(",",$_SESSION["coachArray"]);
+		} else {
+			$list2 = "";
+		}
 		if(!empty($_SESSION['enorollmentPayment'])){
 			$enorollmentPayment = 1;
 		} else {
@@ -24,13 +34,34 @@ if(isset($_SESSION["clubId"])){
 		$query = "INSERT INTO `payment`(`clubId`, `amount`, `notes`, `athleteList`, `coachList`, `affiliationFeeStatus`, `enrollmentFeeStatus`) VALUES ('".$_SESSION["clubId"]."','".$money."','".$notes."','".$list1."','".$list2."', '".$affiliationPayment."', '".$enorollmentPayment."')";
 		if(mysqli_query($con, $query)){
 			$last_id = mysqli_insert_id($con);
-			for($i=0;$i<count($_SESSION["athleteArray"]);$i++){
-				$update = "UPDATE `athlete` SET `paymentStatus`='1',`paymentRef`='".$last_id."' WHERE athleteId='".$_SESSION["athleteArray"][$i]."'";
-				mysqli_query($con, $update);
-				$update2 = "UPDATE `coach` SET `paymentStatus`='1',`paymentRef`='".$last_id."' WHERE coachId='".$_SESSION["coachArray"][$i]."'";
-				mysqli_query($con, $update2);
-				$update3 = "UPDATE `club` SET `affiliationFeeStatus`='".$affiliationPayment."',`enrollmentFeeStatus`='".$enorollmentPayment."' WHERE clubId='".$_SESSION["clubId"]."'";
-				mysqli_query($con, $update3);
+			if(isset($_SESSION["athleteArray"])){
+				for($i=0;$i<count($_SESSION["athleteArray"]);$i++){
+					$update = "UPDATE `athlete` SET `paymentStatus`='1',`paymentRef`='".$last_id."' WHERE athleteId='".$_SESSION["athleteArray"][$i]."'";
+					mysqli_query($con, $update);
+				}
+			}
+			if(isset($_SESSION["coachArray"])){
+				for($i2=0;$i2<count($_SESSION["coachArray"]);$i2++){
+					$update2 = "UPDATE `coach` SET `paymentStatus`='1',`paymentRef`='".$last_id."' WHERE coachId='".$_SESSION["coachArray"][$i2]."'";
+					mysqli_query($con, $update2);
+				}
+			}
+			if($enorollmentPayment == 1 && $affiliationPayment == 1) {
+				$update3 = "UPDATE `club` SET `enrollmentFeeStatus`='".$enorollmentPayment."', `affiliationFeeStatus`='".$affiliationPayment."' WHERE clubId='".$_SESSION["clubId"]."'";
+				unset($_SESSION['affiliationPayment']);
+				unset($_SESSION['enorollmentPayment']);
+				unset($_SESSION['athleteArray']);	
+				unset($_SESSION['coachArray']);
+				if(mysqli_query($con, $update3)){
+					header('Location:payments.php?er=su');
+				} else {
+					header('Location:payments.php?er=er');
+				}
+			} else {
+				unset($_SESSION['affiliationPayment']);
+				unset($_SESSION['enorollmentPayment']);
+				unset($_SESSION['athleteArray']);	
+				unset($_SESSION['coachArray']);
 				header('Location:payments.php?er=su');
 			}
         } else {
