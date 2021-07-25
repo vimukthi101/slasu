@@ -43,8 +43,6 @@
                             $affiliationCat = "Water Polo";
                         } else if($affiliationCat == 4) {
                             $affiliationCat = "Diving";
-                        } else if($affiliationCat == 5) {
-                            $affiliationCat = "All";
                         }
                         $paymentStatus = $row['paymentStatus'];
                         $paymentRef = "SLASU/P/00".$row['paymentRef'];

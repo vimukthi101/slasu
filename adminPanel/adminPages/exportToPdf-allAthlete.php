@@ -61,8 +61,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 		                    $html .= '<td class="border-top-0">Water Polo</td>';
 		                } else if($fromList == 4) {
 		                    $html .= '<td class="border-top-0">Diving</td>';
-		                } else if($fromList == 5) {
-		                    $html .= '<td class="border-top-0">All</td>';
 		                }
 				 	} else if($aDoor[$i] == "paymentStatus"){
  		                if($fromList == 1){

@@ -37,7 +37,7 @@ Your account was created successfully at Sri Lanka Aquatic Sports Union.
 
 Use following credentails to login to the system.
 
-Link : http://localhost:1234/slasu/admin-login.php
+Link : https://www.aquatics.lk/admin-login.php
 User Name : ".$uName."
 Password : ".$password."
 

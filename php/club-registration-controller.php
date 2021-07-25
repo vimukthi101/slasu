@@ -55,7 +55,7 @@ You'll be able to login to the system once the account is activated by the admin
 
 Club Name : ".$_SESSION["name"]."
 
-Link : http://localhost:1234/slasu/login.php
+Link : https://www.aquatics.lk/login.php
 User Name : ".$_SESSION["phone"]."
 Password : ".$password."
 

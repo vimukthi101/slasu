@@ -8,10 +8,14 @@ if(!isset($_SESSION[''])){
 }
 
 if($_POST["query"] != '') {
- $search_text = $_POST["query"];
- $query = 'SELECT * FROM `athlete` WHERE affiliationCat="'.$search_text.'" AND paymentStatus IN (0,3,4) AND clubId='.$_SESSION["clubId"];
+    $search_text = $_POST["query"];
+    if($search_text != 5){
+        $query = 'SELECT * FROM `athlete` WHERE affiliationCat="'.$search_text.'" AND paymentStatus IN (0,3,4) AND clubId='.$_SESSION["clubId"];
+    } else {
+        $query = 'SELECT * FROM `athlete` WHERE paymentStatus IN (0,3,4) AND clubId='.$_SESSION["clubId"];
+    }
 } else {
- $query = 'SELECT * FROM `athlete` WHERE paymentStatus IN (0,3,4) AND clubId='.$_SESSION["clubId"];
+    $query = 'SELECT * FROM `athlete` WHERE paymentStatus IN (0,3,4) AND clubId='.$_SESSION["clubId"];
 }
 $result = mysqli_query($con, $query);
 $output = '';
@@ -45,8 +49,6 @@ if(mysqli_num_rows($result) != 0){
         $affiliationCat = "Water Polo";
     } else if($affiliationCat == 4) {
         $affiliationCat = "Diving";
-    } else if($affiliationCat == 5) {
-        $affiliationCat = "All";
     }
     $output .= '<tr>
                 <td class="txt-oflo"><input type="checkbox" id="editAthlete[]" name="editAthlete[]" value="'.$athleteId.'"></td>

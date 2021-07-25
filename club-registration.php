@@ -273,15 +273,15 @@
                             <div class="col-md-12" style="display:none;" id="rLtr">
                                 <div class="col-md-12">
                                 <label class="">Request Letter (Attach a PDF file) *</label>
-                            </div>
+                            </div><div class="col-md-12" id="file-upload-filename">
+                        </div>
                                     <div class="col-md-12">
                                         <input type="file" accept="application/pdf" class="custom-file-input" id="requestLetter" name="requestLetter"/>
                                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                 </div>
                                 <!-- /.col-md-12 -->
                             </div>
-                                                <div class="col-md-12" id="file-upload-filename">
-                        </div>
+                                                
                             <div class="col-lg-12"><hr/></div>
                             <div class="col-md-6">
                                 <label class="input-group-text" for="inputGroupSelect01">Affiliation Category *</label>

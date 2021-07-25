@@ -21,8 +21,6 @@
                     $_SESSION["category"] = 3;
                 } else if($_SESSION["category"] == "Diving") {
                     $_SESSION["category"] = 4;
-                } else if($_SESSION["category"] == "All") {
-                    $_SESSION["category"] = 5;
                 }
                 if($_SESSION["gender"] == "Male"){
                     $_SESSION["gender"] = 1;

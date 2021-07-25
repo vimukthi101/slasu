@@ -9,7 +9,11 @@ if(!isset($_SESSION[''])){
 
 if($_POST["query"] != '') {
  $search_text = $_POST["query"];
+ if($search_text != 5){
  $query = 'SELECT * FROM `athlete` WHERE affiliationCat="'.$search_text.'"';
+} else {
+    $query = 'SELECT * FROM `athlete`';
+}
 } else {
  $query = 'SELECT * FROM `athlete`';
 }
@@ -34,8 +38,6 @@ if(mysqli_num_rows($result) != 0){
         $affiliationCat = "Water Polo";
     } else if($affiliationCat == 4) {
         $affiliationCat = "Diving";
-    } else if($affiliationCat == 5) {
-        $affiliationCat = "All";
     }
     if($clubId != 0){
         $queryClub = "SELECT clubName FROM `club` WHERE clubId='".$clubId."'";

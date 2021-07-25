@@ -225,7 +225,6 @@
                                 <option value="Artistic Swimming">Artistic Swimming</option>
                                 <option value="Water Polo">Water Polo</option>
                                 <option value="Diving">Diving</option>
-                                <option value="All">All</option>
                               </select>
                         </div><!-- /.col-md-12 -->
                             <div class="col-md-12"><hr/></div>
@@ -263,22 +262,22 @@
                                         </div><!-- /.col-md-6 -->
                                         <div class="col-md-12">
                                             <label class="">Upload Passport Size Photo for ID (Attach a png, jpg or jpeg)*</label>
-                                        </div>
+                                        </div><div class="col-md-12" id="file-upload-filename2">
+                        </div>
                                         <div class="col-md-12">
                                             <input type="file" accept="image/png, image/jpg, image/jpeg" class="custom-file-input" id="photo" name="photo" required/>
                                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                                     </div><!-- /.col-md-12 -->
-                                    <div class="col-md-12" id="file-upload-filename2">
-                        </div>
+                                    
                             <div class="col-md-12">
                                 <label class="">Upload Application (Attach a PDF file)</label>
-                            </div>
+                            </div><div class="col-md-12" id="file-upload-filename">
+                        </div>
                             <div class="col-md-12">
                                 <input type="file" accept="application/pdf" class="custom-file-input" id="application" name="application" required/>
                                 <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                         </div><!-- /.col-md-12 -->
-                                                                        <div class="col-md-12" id="file-upload-filename">
-                        </div>
+                                                                        
                             <div class="col-lg-12"><hr/></div>
                             <div class="col-md-12">
                                 <label class="">Date Of Birth *</label>
@@ -300,13 +299,13 @@
                         </div><!-- /.col-md-6 -->
                         <div class="col-md-12">
                             <label class="">Upload NIC (Attach a png, jpg or jpeg)*</label>
+                        </div><div class="col-md-12" id="file-upload-filename3">
                         </div>
                         <div class="col-md-12">
                             <input type="file" accept="image/png, image/jpg, image/jpeg" class="custom-file-input" id="nicPhoto" name="nicPhoto" required/>
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div><!-- /.col-md-12 -->
-                    <div class="col-md-12" id="file-upload-filename3">
-                        </div>
+                    
                     <div class="col-md-12">
                         <textarea placeholder="Academic Qualifications in Aquatic Sports (Add all separated by commas)" name="qualification" id="qualification"></textarea>
                     </div><!-- /.col-md-12 -->

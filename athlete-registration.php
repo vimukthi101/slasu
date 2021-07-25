@@ -240,7 +240,6 @@
                                 <option value="Artistic Swimming">Artistic Swimming</option>
                                 <option value="Water Polo">Water Polo</option>
                                 <option value="Diving">Diving</option>
-                                <option value="All">All</option>
                               </select>
                         </div><!-- /.col-md-12 -->
                             <div class="col-md-12"><hr/></div>
@@ -339,13 +338,13 @@
                         </div>
                         <div class="col-md-12">
                             <label class="">Upload Birth Certficate (Attach a PDF file)*</label>
+                        </div><div class="col-md-12" id="file-upload-filename">
                         </div>
                         <div class="col-md-12">
                             <input type="file" accept="application/pdf" class="custom-file-input" id="bbPhoto" name="bbPhoto" required/>
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div><!-- /.col-md-12 -->
-                    <div class="col-md-12" id="file-upload-filename">
-                        </div>
+                    
                     <div class="col-lg-12"><hr/></div>
                     <div class="col-md-6">
                         <input type="text" placeholder="Postal ID Number" name="postalId" id="postalId">
