@@ -195,7 +195,7 @@
                                 </div>
                                 <div class="col-lg-12"><hr/></div>
                                 <div class="col-md-6">
-                                    <input type="text" placeholder="School / Club Name *" id="name" name="name" required pattern="^[a-zA-Z ,.'-]*$" title="Only Letters">
+                                    <input type="text" placeholder="School / Club Name *" id="name" name="name" required pattern="^[a-zA-Z ,.-]*$" title="Only Letters">
                                 </div><!-- /.col-md-6 -->
                                 <div class="col-md-6">
                                     <label class="input-group-text" for="inputGroupSelect01">Select District *</label>
