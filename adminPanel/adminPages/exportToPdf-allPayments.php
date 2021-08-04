@@ -21,12 +21,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 				$html .= '<tr>';
 				for($i=0; $i < $N; $i++) {
 					$clubIdAth = $row['clubId'];
-					$queryClub = 'SELECT clubName FROM `club` where clubId='.$clubIdAth;
-					$resultClub = mysqli_query($con, $queryClub);
-					if(mysqli_num_rows($resultClub) != 0){
-						while($rowClub = mysqli_fetch_array($resultClub)){
-							$clubName = $rowClub['clubName'];
+					if(!empty($clubIdAth)){
+						$queryClub = 'SELECT clubName FROM `club` where clubId='.$clubIdAth;
+						$resultClub = mysqli_query($con, $queryClub);
+						if(mysqli_num_rows($resultClub) != 0){
+							while($rowClub = mysqli_fetch_array($resultClub)){
+								$clubName = $rowClub['clubName'];
+							}
 						}
+					} else {
+						$clubName = "";
 					}
 				 	$fromList = $row[$aDoor[$i]];
 				 	$clubId = $row['paymentId'];

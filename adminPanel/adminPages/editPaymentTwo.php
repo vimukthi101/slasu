@@ -43,12 +43,16 @@
                         } else if($status == 4) {
                             $status = "To Be Renewed";
                         }
-                        $queryP = 'SELECT * FROM `club` WHERE clubId='.$clubId;
-                        $resultP = mysqli_query($con, $queryP);
-                        if(mysqli_num_rows($resultP) != 0){
-                            while($rowP = mysqli_fetch_array($resultP)){
-                                $clubName = $rowP['clubName'];
-                            }
+                        if(!empty($clubId)){
+                            $queryP = 'SELECT * FROM `club` WHERE clubId='.$clubId;
+                            $resultP = mysqli_query($con, $queryP);
+                            if(mysqli_num_rows($resultP) != 0){
+                                while($rowP = mysqli_fetch_array($resultP)){
+                                    $clubName = $rowP['clubName'];
+                                }
+                            }   
+                        } else {
+                            $clubName = "";
                         }
 	            	}
 	            } else {
@@ -223,6 +227,13 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayments.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-cash-multiple"></i>
+                                <span class="hide-menu">Send For Payment</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="payments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash"></i>
@@ -355,11 +366,29 @@
                                                     </div>
                                                 </div>';
                                         }    
-                                        echo '<form role="form" action="rejectPayment.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
+                                        echo '<div class="form-group col-md-12">
+                                            <label class="">For Admin Use</label>
+                                            <hr/><form role="form" action="rejectPayment.php" method="POST" class="contact-one__form" enctype="multipart/form-data">
+                                        <div class="form-group col-md-5">
+                                            <label class="">Payment Type</label>
+                                            <div class="">
+                                                <select class="custom-select form-control" name="paymentMode" id="paymentMode">
+                                                    <option selected disabled>Select Type...</option>
+                                                    <option value="1">Checque Payment</option>
+                                                    <option value="2">Bank Deposit</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Checque/ Receipt No.</label>
+                                            <div class="">
+                                                <input type="text" class="form-control form-control-line" name="chequeNo" id="chequeNo">
+                                            </div>
+                                        </div>
                                         <div class="form-group col-md-5">
                                             <label class="">Admin Comment</label>
                                             <div class="">
-                                                <textarea class="form-control form-control-line" id="comment" name="comment">'.$adminComment.'</textarea>
+                                                <textarea class="form-control form-control-line" id="comment" name="comment" required></textarea>
                                             </div>
                                         </div>
                                         <div class="col-lg-12"><hr/></div>

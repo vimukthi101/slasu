@@ -8,7 +8,17 @@
 			if(!empty($_POST['athleteId'])){
 				$tId = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['athleteId'])));
 				$comment = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['comment'])));
-				$deletett = "UPDATE `payment` SET `status`='3',`adminComment`='".$comment."' WHERE paymentId=".$tId;
+				if(!empty($_POST['chequeNo'])){
+					$chequeNo = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['chequeNo'])));
+				} else {
+					$chequeNo = "";
+				}
+				if(!empty($_POST['paymentMode'])){
+					$paymentMode = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['paymentMode'])));
+				} else {
+					$paymentMode = "";
+				}
+				$deletett = "UPDATE `payment` SET `status`='3',`chequeNo`='".$chequeNo."',`paymentMode`='".$paymentMode."',`adminComment`='".$comment."' WHERE paymentId=".$tId;
 				$deleteat = "UPDATE `athlete` SET `paymentStatus`='3' WHERE paymentRef=".$tId;
 				if(mysqli_query($con, $deletett) && mysqli_query($con, $deleteat)){
 					header('Location:payments.php?er=su');

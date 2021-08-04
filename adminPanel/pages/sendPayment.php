@@ -346,8 +346,6 @@
                                             <th class="border-top-0">CATEGORY</th>
                                             <th class="border-top-0">PAYMENT</th>
                                             <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
                                         </tr>
                                     </thead>
                                     <tbody class="result" id="athleteBody" name="athleteBody">
@@ -413,8 +411,6 @@
                                             <th class="border-top-0">EMAIL</th>
                                             <th class="border-top-0">CATEGORY</th>
                                             <th class="border-top-0">PAYMENT</th>
-                                            <th class="border-top-0"></th>
-                                            <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>
                                         </tr>
                                     </thead>

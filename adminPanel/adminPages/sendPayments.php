@@ -19,54 +19,18 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon.png">
     <!-- Custom CSS -->
     <link href="../dist/css/style.min.css" rel="stylesheet">
-    <style type="text/css">
-        .card {
-  /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  background-color: rgb(174, 214, 241);
-}
-
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-/* Add some padding inside the card container */
-.container {
-  padding: 2px 16px;
-}
-
-.footer {
+        <style type="text/css">
+        .footer {
   position: inherit;
   left: 0;
   bottom: 0;
   width: 100%;
 }
-    </style>
-    <script>
-            function startTime() {
-                var today=new Date();
-                var day = today.getDate();
-                var month = today.getMonth();
-                var year = today.getFullYear();
-                var h=today.getHours();
-                var m=today.getMinutes();
-                var s=today.getSeconds();
-                m = checkTime(m);
-                s = checkTime(s);
-                document.getElementById('txt').innerHTML = "Date: " + day + "/" + month + "/" + year + "<br>" + "Clock: " + h+":"+m+":"+s;
-                var t = setTimeout(function(){startTime()},500);
-            }
 
-            function checkTime(i) {
-                if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
-                return i;
-            }
-        </script>
+    </style>
 </head>
 
-<body onload="startTime()">
+<body>
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -120,7 +84,25 @@
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-start me-auto">
-                        
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <!-- <li class="nav-item search-box">
+                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
+                                <div class="d-flex align-items-center">
+                                    <i class="mdi mdi-magnify font-20 me-1"></i>
+                                    <div class="ms-1 d-none d-sm-block">
+                                        <span>Search</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <form class="app-search position-absolute">
+                                <input type="text" class="form-control" placeholder="Search &amp; enter">
+                                <a class="srh-btn">
+                                    <i class="ti-close"></i>
+                                </a>
+                            </form>
+                        </li> -->
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -238,7 +220,7 @@
                                     <li class="">
                                         <a href="dashboard.php">Home</a>
                                     </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Dashboard</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Send For Payment</li>
                                 </ol>
                             </nav>
                         </div>
@@ -251,138 +233,88 @@
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
+            <form role="form" action="sendForPayment.php" method="POST">
             <div class="container-fluid">
                 <div class="row">
-                    <!-- column -->
-                    <div class="col-4">
-                        <div class="col-9">
-                            <div class="card">
-                                <div class="container">
-                                    <br/>
-                                    <h4 class="page-title" style="text-transform:uppercase;color: black;"><?php echo $_SESSION["firstName"] ?></h4>
-                                    <label class="label label-success" style="text-transform:uppercase;font-size: 15px;">Status : Active</label>
-                                    <br/>
-                                  </div>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <div class="card">
-                                <div class="container">
-                                    <br/>
-                                    <?php
-                                        $pDate = 'SELECT date FROM `payment` WHERE status=1 order by date desc limit 1';
-                                        $dateR = mysqli_query($con, $pDate);
-                                        if(mysqli_num_rows($dateR) != 0){
-                                            while($rowDateP = mysqli_fetch_array($dateR)){
-                                                $datePayment = $rowDateP['date'];
-                                            }
-                                        } else {
-                                            $datePayment = "No Pending Payments";
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                            <?php
+                                if(isset($_GET['er'])){
+                                    if(!empty($_GET['er'])){
+                                        $error = $_GET['er'];
+                                        if($error == "su"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Athlete record deleted successfully.</span>
+                                                <div class="col-lg-12"></div>
+                                            </div>';
+                                        } else if($error == "er"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Couldn\'t save the changes, try again.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "us"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:green;margin-left:20px;">Updated succesfully.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "wi"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Only jpg,png,jpeg are supportrd for photo.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "nd"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Select at least one Atlete for payment.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
                                         }
-                                    ?>
-                                    <h4 class="page-title" style="text-transform:uppercase;color: black;">Last Pending Payment</h4>
-                                    <label class="label label-info" style="text-transform:uppercase;font-size: 15px;"><?php echo $datePayment; ?></label>
-                                    <br/>
-                                  </div>
+                                    }
+                                }
+                            ?>
+                                <input style="float:right;" type="submit" name="submit" value="Send For Payment" id="submit" class="btn btn-warning" style="margin: auto;"></input>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="row" style="overflow:auto; height:400px;">
+                    <!-- column -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="card">
+                                        <div class="card-body">                                                
+                                            <input type="checkbox" class="form-check-input" onClick="toggle(this)" />
+                                            <label class="form-check-label" for="inputGroupSelect01">Select All Athletes To Send For Payment</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0"></th>
+                                            <th class="border-top-0">ID</th>
+                                            <th class="border-top-0">NAME</th>
+                                            <th class="border-top-0">NIC</th>
+                                            <th class="border-top-0">MOBILE</th>
+                                            <th class="border-top-0">EMAIL</th>
+                                            <th class="border-top-0">CATEGORY</th>
+                                            <th class="border-top-0">PAYMENT</th>
+                                            <th class="border-top-0"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="result" id="athleteBody" name="athleteBody">
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <?php
-                        $athlete = 'SELECT count(*) FROM `club`';
-                        $athleteR = mysqli_query($con, $athlete);
-                        if(mysqli_num_rows($athleteR) != 0){
-                            while($rowA = mysqli_fetch_array($athleteR)){
-                                $countA = $rowA['count(*)'];
-                                if($countA < 9){
-                                    $countA = "0".$countA;
-                                }
-                            }
-                        }
-                        echo '<div class="col-3">
-                                <div class="card">
-                                    <div class="container" style="text-align: center;">
-                                        <h4 style="font-size: 130px;color: black;">'.$countA.'</h4>
-                                        <p>Registered Schools/ Clubs</p>
-                                    </div>
-                                </div>
-                             </div>';
-                    ?>
-                    <?php
-                        $athlete = 'SELECT count(*) FROM `athlete`';
-                        $athleteR = mysqli_query($con, $athlete);
-                        if(mysqli_num_rows($athleteR) != 0){
-                            while($rowA = mysqli_fetch_array($athleteR)){
-                                $countA = $rowA['count(*)'];
-                                if($countA < 9){
-                                    $countA = "0".$countA;
-                                }
-                            }
-                        }
-                        echo '<div class="col-3">
-                                <div class="card">
-                                    <div class="container" style="text-align: center;">
-                                        <h4 style="font-size: 130px;color: black;">'.$countA.'</h4>
-                                        <p>Registered Athletes</p>
-                                    </div>
-                                </div>
-                             </div>';
-                    ?>
-                    
-                    
                 </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="col-9">
-                            <div class="card">
-                                <div class="container">
-                                    <br/>
-                                    <h4 style="font-size: 20px;color: black;" id="txt"></h4>
-                                    <br/>
-                                  </div>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                        $pay = 'SELECT count(*) FROM `payment` WHERE status=1';
-                        $payR = mysqli_query($con, $pay);
-                        if(mysqli_num_rows($payR) != 0){
-                            while($rowPay = mysqli_fetch_array($payR)){
-                                $countPay = $rowPay['count(*)'];
-                                if($countPay < 9){
-                                    $countPay = "0".$countPay;
-                                }
-                            }
-                        }
-                        echo '<div class="col-3">
-                                <div class="card">
-                                    <div class="container" style="text-align: center;">
-                                        <h4 style="font-size: 130px;color: black;">'.$countPay.'</h4>
-                                        <p>All Pending Payments</p>
-                                      </div>
-                                </div>
-                            </div>';
-                    ?>
-                    <?php
-                        $coach = 'SELECT count(*) FROM `coach`';
-                        $coachR = mysqli_query($con, $coach);
-                        if(mysqli_num_rows($coachR) != 0){
-                            while($rowR = mysqli_fetch_array($coachR)){
-                                $countR = $rowR['count(*)'];
-                                if($countR < 9){
-                                    $countR = "0".$countR;
-                                }
-                            }
-                        }
-                        echo '<div class="col-3">
-                                <div class="card">
-                                    <div class="container" style="text-align: center;">
-                                        <h4 style="font-size: 130px;color: black;">'.$countR.'</h4>
-                                        <p>Registered Coaches</p>
-                                      </div>
-                                </div>
-                            </div>';
-                    ?>
-                </div>
+            </div>
+        </form>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
@@ -419,7 +351,33 @@
     <!--This page JavaScript -->
     <script src="../dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
+<script>
+$(document).ready(function(){
 
+ load_data();
+ 
+ function load_data(query='')
+ {
+  $.ajax({
+   url:"fetchPaymentAthlete.php",
+   method:"POST",
+   data:{query:query},
+   success:function(data)
+   {
+    $('tbody').html(data);
+   }
+  })
+ }
+});
+</script>
+<script type="text/javascript">
+function toggle(source) {
+    checkboxes = document.getElementsByName('editAthlete[]');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
+</script>
 </html>
 <?php
 } else {

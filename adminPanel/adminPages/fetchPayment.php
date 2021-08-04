@@ -34,12 +34,16 @@ if(mysqli_num_rows($result) != 0){
     } else if($status == 4) {
         $status = "To Be Renewed";
     }
-    $queryP = 'SELECT * FROM `club` WHERE clubId='.$clubId;
-    $resultP = mysqli_query($con, $queryP);
-    if(mysqli_num_rows($resultP) != 0){
-        while($rowP = mysqli_fetch_array($resultP)){
-            $clubName = $rowP['clubName'];
+    if(!empty($clubId)){
+        $queryP = 'SELECT * FROM `club` WHERE clubId='.$clubId;
+        $resultP = mysqli_query($con, $queryP);
+        if(mysqli_num_rows($resultP) != 0){
+            while($rowP = mysqli_fetch_array($resultP)){
+                $clubName = $rowP['clubName'];
+            }
         }
+    } else {
+        $clubName = "";
     }
     $output .= '<tr>
                 <td class="txt-oflo">'.$clubIdCode.'</td>

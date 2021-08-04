@@ -179,6 +179,13 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayments.php"
+                                aria-expanded="false">
+                                <i class="mdi mdi-cash-multiple"></i>
+                                <span class="hide-menu">Send For Payment</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="payments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash"></i>
@@ -272,6 +279,11 @@
                                         } else if($error == "msu"){
                                             echo '<div class="col-md-12">
                                                 <span style="color:red;margin-left:20px;">Master Reset Successful.</span>
+                                                <div class="col-lg-12"><hr/></div>
+                                            </div>';
+                                        } else if ($error == "nd"){
+                                            echo '<div class="col-md-12">
+                                                <span style="color:red;margin-left:20px;">Select at least one Atlete for payment.</span>
                                                 <div class="col-lg-12"><hr/></div>
                                             </div>';
                                         }
