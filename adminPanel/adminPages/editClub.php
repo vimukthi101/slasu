@@ -431,8 +431,8 @@
 		                                <div class="form-group col-md-5">
 		                                    <label class="">Operator Mobile</label>
 		                                    <div class="">
-		                                        <input type="text" placeholder="'.$operatorMobile.'"
-		                                            class="form-control form-control-line" disabled>
+		                                        <input type="tel" maxlength="10" value="'.$operatorMobile.'"
+		                                            class="form-control form-control-line" name="oMobile" id="oMobile" required>
 		                                    </div>
 		                                </div>
                                         <div class="form-group col-md-5">

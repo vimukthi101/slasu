@@ -4,7 +4,7 @@
         session_start();
     }
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
-        if(!empty($_POST['name']) && !empty($_POST['clubId']) && !empty($_POST['status']) && !empty($_POST['category']) && !empty($_POST['district']) && !empty($_POST['clubAddress']) && !empty($_POST['clubPhone1']) && !empty($_POST['operatorName']) && !empty($_POST['operatorEmail']) && !empty($_POST['operatorNic']) && !empty($_POST['inchargeName']) && !empty($_POST['inchargePhone'])){
+        if(!empty($_POST['name']) && !empty($_POST['clubId']) && !empty($_POST['status']) && !empty($_POST['category']) && !empty($_POST['district']) && !empty($_POST['clubAddress']) && !empty($_POST['clubPhone1']) && !empty($_POST['operatorName']) && !empty($_POST['oMobile']) && !empty($_POST['operatorEmail']) && !empty($_POST['operatorNic']) && !empty($_POST['inchargeName']) && !empty($_POST['inchargePhone'])){
             $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
             $clubId = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubId'])));
             $status = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['status'])));
@@ -16,20 +16,21 @@
                 $status = 3;
             }
             $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
-            if($_SESSION["category"] == "Ordinary Member (Colombo District)"){
-                $_SESSION["category"] = 1;
-            } else if($_SESSION["category"] == "Ordinary Member (Other Districts)") {
-                $_SESSION["category"] = 2;
-            } else if($_SESSION["category"] == "Novice Members") {
-                $_SESSION["category"] = 3;
-            } else if($_SESSION["category"] == "Participant Members (Govt./ Semi Govt. Schools)") {
-                $_SESSION["category"] = 4;
-            } else if($_SESSION["category"] == "Participant Members (International Schools and Ancillary Clubs)") {
-                $_SESSION["category"] = 5;
+            if($category == "Ordinary Member (Colombo District)"){
+                $category = 1;
+            } else if($category == "Ordinary Member (Other Districts)") {
+                $category = 2;
+            } else if($category == "Novice Members") {
+                $category = 3;
+            } else if($category == "Participant Members (Govt./ Semi Govt. Schools)") {
+                $category = 4;
+            } else if($category == "Participant Members (International Schools and Ancillary Clubs)") {
+                $category = 5;
             }
             $district = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['district'])));
             $clubPhone1 = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubPhone1'])));
             $operatorName = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['operatorName'])));
+            $oMobile = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['oMobile'])));
             $operatorEmail = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['operatorEmail'])));
             $operatorNic = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['operatorNic'])));
             $inchargeName = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['inchargeName'])));
@@ -74,12 +75,12 @@
                     $content = fread($fp, filesize($tmpName));
                     $applicationContent = addslashes($content);
                     fclose($fp);
-                    $query = "UPDATE `club` SET `clubName`='".$name."',`status`='".$status."',`affiliationCat`='".$category."',`district`='".$district."',`postalAddress`='".$clubAddress."',`clubContactOne`='".$clubPhone1."',`clubContactTwo`='".$clubPhone2."',`clubEmailOne`='".$clubEmail1."',`clubEmailTwo`='".$clubEmail2."',`operatorName`='".$operatorName."',`operatorEmail`='".$operatorEmail."',`operatorWhatsapp`='".$whatsapp."',`operatorNic`='".$operatorNic."',`inchargeName`='".$inchargeName."',`inchargeMobile`='".$inchargePhone."',`inchargeEmail`='".$inchargeEmail."',`requestLetter`='".$applicationContent."' WHERE clubId=".$clubId;
+                    $query = "UPDATE `club` SET `clubName`='".$name."',`status`='".$status."',`affiliationCat`='".$category."',`district`='".$district."',`postalAddress`='".$clubAddress."',`clubContactOne`='".$clubPhone1."',`clubContactTwo`='".$clubPhone2."',`clubEmailOne`='".$clubEmail1."',`clubEmailTwo`='".$clubEmail2."',`operatorName`='".$operatorName."',`operatorMobile`='".$oMobile."',`operatorEmail`='".$operatorEmail."',`operatorWhatsapp`='".$whatsapp."',`operatorNic`='".$operatorNic."',`inchargeName`='".$inchargeName."',`inchargeMobile`='".$inchargePhone."',`inchargeEmail`='".$inchargeEmail."',`requestLetter`='".$applicationContent."' WHERE clubId=".$clubId;
                 }else{ 
                     header('Location:club.php?er=wi');
                 } 
             } else {
-                $query = "UPDATE `club` SET `clubName`='".$name."',`status`='".$status."',`affiliationCat`='".$category."',`district`='".$district."',`postalAddress`='".$clubAddress."',`clubContactOne`='".$clubPhone1."',`clubContactTwo`='".$clubPhone2."',`clubEmailOne`='".$clubEmail1."',`clubEmailTwo`='".$clubEmail2."',`operatorName`='".$operatorName."',`operatorEmail`='".$operatorEmail."',`operatorWhatsapp`='".$whatsapp."',`operatorNic`='".$operatorNic."',`inchargeName`='".$inchargeName."',`inchargeMobile`='".$inchargePhone."',`inchargeEmail`='".$inchargeEmail."' WHERE clubId=".$clubId;
+                $query = "UPDATE `club` SET `clubName`='".$name."',`status`='".$status."',`affiliationCat`='".$category."',`district`='".$district."',`postalAddress`='".$clubAddress."',`clubContactOne`='".$clubPhone1."',`clubContactTwo`='".$clubPhone2."',`clubEmailOne`='".$clubEmail1."',`clubEmailTwo`='".$clubEmail2."',`operatorName`='".$operatorName."',`operatorMobile`='".$oMobile."',`operatorEmail`='".$operatorEmail."',`operatorWhatsapp`='".$whatsapp."',`operatorNic`='".$operatorNic."',`inchargeName`='".$inchargeName."',`inchargeMobile`='".$inchargePhone."',`inchargeEmail`='".$inchargeEmail."' WHERE clubId=".$clubId;
             }
             if(mysqli_query($con, $query)){ 
                 header('Location:club.php?er=us');
