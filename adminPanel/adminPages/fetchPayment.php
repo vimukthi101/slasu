@@ -43,7 +43,7 @@ if(mysqli_num_rows($result) != 0){
             }
         }
     } else {
-        $clubName = "";
+        $clubName = "Unattached";
     }
     $output .= '<tr>
                 <td class="txt-oflo">'.$clubIdCode.'</td>

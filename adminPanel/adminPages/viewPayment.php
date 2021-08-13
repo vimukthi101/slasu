@@ -43,6 +43,12 @@
                         for($x=0;$x<count($array);$x++){
                             $subjectVal2 .= 'SLASU/C/00'.$array2[$x].',';
                         }
+                        if($subjectVal == "SLASU/A/00,"){
+                            $subjectVal = "N/A";
+                        }
+                        if($subjectVal2 == "SLASU/C/00,"){
+                            $subjectVal2 = "N/A";
+                        }
                         if($status == 1){
                             $status = "Send For Payment";
                         } else if($status == 2) {
@@ -61,7 +67,14 @@
                                 }
                             }   
                         } else {
-                            $clubName = "";
+                            $clubName = "Unattached";
+                            $queryTwo = 'SELECT athleteName FROM `athlete` WHERE athleteId='.$athleteList;
+                            $resultTwo = mysqli_query($con, $queryTwo);
+                            if(mysqli_num_rows($resultTwo) != 0){
+                                while($rowTwo = mysqli_fetch_array($resultTwo)){
+                                    $athleteName = $rowTwo['athleteName'];
+                                }
+                            }
                         }
 	            	}
 	            } else {
@@ -239,7 +252,7 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash-multiple"></i>
-                                <span class="hide-menu">Send For Payment</span>
+                                <span class="hide-menu">Unattached Payments</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -317,8 +330,11 @@
                                             <label class="">Invoice No : '.$clubIdCode.'</label><br/><br/>
                                             <label class="">Date : '.$date.'</label><br/><br/>
                                             <hr/><br/><br/>
-                                            <label class="">Club Name : '.$clubName.'</label><br/><br/>
-                                            <label class="">Notes : '.$notes.'</label><br/><br/>
+                                            <label class="">Club Name : '.$clubName.'</label><br/><br/>';
+                            if(empty($clubId)){
+                                $html .= '<label class="">Athlete Name : '.$athleteName.'</label><br/><br/>';
+                            }
+                            $html .= '<label class="">Notes : '.$notes.'</label><br/><br/>
                                             <label class="">Status : '.$status.'</label><br/><br/>
                                             <hr/><br/><br/>
                                             <label class="">Athlete List : '.$subjectVal.'</label><br/><br/>
@@ -330,7 +346,7 @@
                                 $html .=  '<label class="">Enrollment Fee : Included</label><br/><br/>';
                             }
                             $html .= '<hr/><br/><br/><label class="">Payment Mode : '.$paymentMode.'</label><br/><br/>
-                            <label class="">Cheque/ Receipt No : '.$chequeNo.'</label><br/><br/>
+                            <label class="">Receipt No : '.$chequeNo.'</label><br/><br/>
                             <label class="">Admin Comment : '.$adminComment.'</label><br/><br/><hr/><br/><br/><label class="">Total Amount : '.$amount.'</label><br/><br/></div>';
                                             $_SESSION['html'] = $html;
                             ?>
@@ -343,8 +359,11 @@
                                         <div class="form-group col-md-5">
                                             <label class="">Date : '.$date.'</label> <br/>
                                             <label class="">Invoice No : '.$clubIdCode.'</label><br/>
-                                            <label class="">Club Name : '.$clubName.'</label><br/>
-                                        </div>
+                                            <label class="">Club Name : '.$clubName.'</label><br/>';
+                                 if(empty($clubId)){
+                                    echo '<label class="">Athlete Name : '.$athleteName.'</label><br/>';
+                                 }
+                                 echo '</div>
                                         <hr/>';
                                         if($affiliationFeeStatus == 1){
                                             echo '<label class="">Affiliation Fee : Included</label>';
@@ -360,7 +379,7 @@
                                             <label class="">Status : '.$status.'</label>
                                             <hr/>
                                             <label class="">Payment Mode : '.$paymentMode.'</label><br/>
-                                            <label class="">Cheque/ Receipt No : '.$chequeNo.'</label><br/>
+                                            <label class="">Receipt No : '.$chequeNo.'</label><br/>
                                             <label class="">Amount : '.$amount.'</label>';
                                 ?>
                         	</div>	

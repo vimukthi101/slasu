@@ -182,7 +182,7 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash-multiple"></i>
-                                <span class="hide-menu">Send For Payment</span>
+                                <span class="hide-menu">Unattached Payments</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -284,10 +284,10 @@
                             <div class="row">
                                 <div class="col-5">
                                     <div class="card">
-                                        <div class="card-body">                                                
+                                        <!-- <div class="card-body">                                                
                                             <input type="checkbox" class="form-check-input" onClick="toggle(this)" />
                                             <label class="form-check-label" for="inputGroupSelect01">Select All Athletes To Send For Payment</label>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -370,14 +370,14 @@ $(document).ready(function(){
  }
 });
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 function toggle(source) {
     checkboxes = document.getElementsByName('editAthlete[]');
     for(var i=0, n=checkboxes.length;i<n;i++) {
         checkboxes[i].checked = source.checked;
     }
 }
-</script>
+</script> -->
 </html>
 <?php
 } else {

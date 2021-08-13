@@ -182,7 +182,7 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash-multiple"></i>
-                                <span class="hide-menu">Send For Payment</span>
+                                <span class="hide-menu">Unattached Payments</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -359,6 +359,22 @@
                                             <div class="card-body">               
                                                 <input type="checkbox" class="form-check-input" name="fieldList[]" value="enrollmentFeeStatus">
                                                 <label class="form-check-label" for="clubCode">Enrollment Fee Status</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="paymentMode">
+                                                <label class="form-check-label" for="clubCode">Payment Mode</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="chequeNo">
+                                                <label class="form-check-label" for="clubCode">Receipt No.</label>
                                             </div>
                                         </div>
                                     </div>

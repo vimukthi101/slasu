@@ -34,6 +34,12 @@
                         for($x=0;$x<count($array2);$x++){
                             $subjectVal2 .= 'SLASU/C/00'.$array2[$x].',';
                         }
+                        if($subjectVal == "SLASU/A/00,"){
+                            $subjectVal = "N/A";
+                        }
+                        if($subjectVal2 == "SLASU/C/00,"){
+                            $subjectVal2 = "N/A";
+                        }
                         if($status == 1){
                             $status = "Send For Payment";
                         } else if($status == 2) {
@@ -52,7 +58,14 @@
                                 }
                             }   
                         } else {
-                            $clubName = "";
+                            $clubName = "Unattached";
+                            $queryTwo = 'SELECT athleteName FROM `athlete` WHERE athleteId='.$athleteList;
+                            $resultTwo = mysqli_query($con, $queryTwo);
+                            if(mysqli_num_rows($resultTwo) != 0){
+                                while($rowTwo = mysqli_fetch_array($resultTwo)){
+                                    $athleteName = $rowTwo['athleteName'];
+                                }
+                            }
                         }
 	            	}
 	            } else {
@@ -230,7 +243,7 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash-multiple"></i>
-                                <span class="hide-menu">Send For Payment</span>
+                                <span class="hide-menu">Unattached Payments</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -307,8 +320,17 @@
                                                 <input type="text" placeholder="'.$clubName.'"
                                                     class="form-control form-control-line" disabled>
                                             </div>
-                                        </div>
-                                        <div class="form-group col-md-5">
+                                        </div>';
+                                    if(empty($clubId)){
+                                        echo '<div class="form-group col-md-5">
+                                            <label class="">Athlete Name</label>
+                                            <div class="">
+                                                <input type="text" placeholder="'.$athleteName.'"
+                                                    class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>';
+                                    }
+                                    echo '<div class="form-group col-md-5">
                                             <label class="">Amount</label>
                                             <div class="">
                                                 <input type="text" placeholder="'.$amount.'"
@@ -380,7 +402,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-5">
-                                            <label class="">Checque/ Receipt No.</label>
+                                            <label class="">Receipt No.</label>
                                             <div class="">
                                                 <input type="text" class="form-control form-control-line" name="chequeNo" id="chequeNo">
                                             </div>

@@ -182,7 +182,7 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash-multiple"></i>
-                                <span class="hide-menu">Send For Payment</span>
+                                <span class="hide-menu">Unattached Payments</span>
                             </a>
                         </li>
                         <li class="sidebar-item">

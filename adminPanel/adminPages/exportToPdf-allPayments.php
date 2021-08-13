@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 							}
 						}
 					} else {
-						$clubName = "";
+						$clubName = "Unattached";
 					}
 				 	$fromList = $row[$aDoor[$i]];
 				 	$clubId = $row['paymentId'];
@@ -84,7 +84,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 					    } else if($fromList == 1) {
 					    	$html .= '<td class="border-top-0">Included</td>';
 					    }
-				 	}   else {
+				 	} else if($aDoor[$i] == "paymentMode"){
+			 		    if($fromList == 0){
+			 		    	$html .= '<td class="border-top-0">Cheque Payment</td>';
+					    } else if($fromList == 1) {
+					    	$html .= '<td class="border-top-0">Bank Transfer</td>';
+					    }
+				 	}  else {
 				 		$html .= '<td class="border-top-0">'.$fromList.'</td>';
 				 	}
 				}
