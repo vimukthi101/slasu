@@ -1,10 +1,10 @@
 <?php
 $host = 'localhost';
-$db = 'u527331572_slasu';
-$user = 'u527331572_slasu';
-$password = 'Root123slasu';
+$db = 'slasu';
+$user = 'root';
+$password = '';
 
-//no errors will be shown
+//no errors will be shownz
 //error_reporting(0);
 
 //db connection creation

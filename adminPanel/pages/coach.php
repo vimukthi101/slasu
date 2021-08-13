@@ -228,6 +228,16 @@
                             <div class="card-body">
                                 <h4 class="card-title">Registered Coaches</h4>
                             </div>
+                            <div class="row">
+                                <div class="col-9 align-self-center">
+                            
+                                </div>
+                                <div class="col-2 align-self-center">
+                                    <div>
+                                        <input type="button" class="form-control btn btn-success" onclick="location.href='generateCoachReport.php';" value="Generate Report">
+                                    </div>
+                                </div>
+                            </div>
                             <?php
                                 if(isset($_GET['er'])){
                                     if(!empty($_GET['er'])){

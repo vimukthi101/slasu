@@ -335,6 +335,59 @@
                         </div>
                     </div>
                     <?php
+                        $payCo = 'SELECT count(*) FROM `coach` WHERE paymentStatus IN (0,3,4) AND clubId='.$_SESSION["clubId"];
+                        $payRCo = mysqli_query($con, $payCo);
+                        if(mysqli_num_rows($payRCo) != 0){
+                            while($rowPayCo = mysqli_fetch_array($payRCo)){
+                                $countPayCo = $rowPayCo['count(*)'];
+                                if($countPayCo < 9){
+                                    $countPayCo = "0".$countPayCo;
+                                }
+                            }
+                        }
+                        echo '<div class="col-3">
+                                <div class="card">
+                                    <div class="container" style="text-align: center;">
+                                        <h4 style="font-size: 130px;color: black;">'.$countPayCo.'</h4>
+                                        <p>Coaches Remaining For Payment</p>
+                                      </div>
+                                </div>
+                            </div>';
+                    ?>
+                    <?php
+                        $payC = 'SELECT count(*) FROM `athlete` WHERE paymentStatus IN (0,3,4) AND clubId='.$_SESSION["clubId"];
+                        $payRC = mysqli_query($con, $payC);
+                        if(mysqli_num_rows($payRC) != 0){
+                            while($rowPayC = mysqli_fetch_array($payRC)){
+                                $countPayC = $rowPayC['count(*)'];
+                                if($countPayC < 9){
+                                    $countPayC = "0".$countPayC;
+                                }
+                            }
+                        }
+                        echo '<div class="col-3">
+                                <div class="card">
+                                    <div class="container" style="text-align: center;">
+                                        <h4 style="font-size: 130px;color: black;">'.$countPayC.'</h4>
+                                        <p>Athletes Remaining For Payment</p>
+                                      </div>
+                                </div>
+                            </div>';
+                    ?>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="col-9">
+                            <div class="">
+                                <div class="">
+                                    <br/>
+                                    
+                                    <br/>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
                         $pay = 'SELECT count(*) FROM `payment` where status != "4" AND clubId='.$_SESSION["clubId"];
                         $payR = mysqli_query($con, $pay);
                         if(mysqli_num_rows($payR) != 0){

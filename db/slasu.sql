@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2021 at 11:14 AM
+-- Generation Time: Aug 13, 2021 at 07:48 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.34
 
@@ -28,8 +28,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
-  `adminId` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin` (
+  `adminId` int(11) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `secondName` varchar(50) DEFAULT NULL,
   `userName` varchar(50) NOT NULL,
@@ -37,10 +38,16 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `mobile` varchar(10) DEFAULT NULL,
   `nic` varchar(15) NOT NULL,
   `password` varchar(40) NOT NULL,
-  `role` varchar(6) NOT NULL,
-  PRIMARY KEY (`nic`,`adminId`),
-  KEY `adminId` (`adminId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `role` varchar(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`adminId`, `firstName`, `secondName`, `userName`, `email`, `mobile`, `nic`, `password`, `role`) VALUES
+(1, 'vimukthis', 'vsaranga', 'vs', 'sv@g.lkl', '0711798375', '931340034v', '966134', 'sadmin'),
+(4, 'sacchini', 'bawanthi', 'sachi', 'sv@g.lkl', '0711790372', '931340035v', '554641', 'admin');
 
 -- --------------------------------------------------------
 
@@ -48,8 +55,9 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- Table structure for table `athlete`
 --
 
-CREATE TABLE IF NOT EXISTS `athlete` (
-  `athleteId` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `athlete`;
+CREATE TABLE `athlete` (
+  `athleteId` int(11) NOT NULL,
   `athleteCode` varchar(12) NOT NULL DEFAULT 'SLASU/A/00',
   `regType` int(1) NOT NULL,
   `clubId` int(11) DEFAULT NULL,
@@ -71,9 +79,8 @@ CREATE TABLE IF NOT EXISTS `athlete` (
   `nic` varchar(12) DEFAULT NULL,
   `ppNo` varchar(20) DEFAULT NULL,
   `paymentStatus` int(11) DEFAULT '0',
-  `paymentRef` int(11) DEFAULT NULL,
-  PRIMARY KEY (`athleteId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+  `paymentRef` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -81,8 +88,9 @@ CREATE TABLE IF NOT EXISTS `athlete` (
 -- Table structure for table `club`
 --
 
-CREATE TABLE IF NOT EXISTS `club` (
-  `clubId` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `club`;
+CREATE TABLE `club` (
+  `clubId` int(11) NOT NULL,
   `clubCode` varchar(11) NOT NULL DEFAULT 'SLASU/CL/00',
   `clubType` int(1) NOT NULL,
   `clubName` varchar(100) NOT NULL,
@@ -106,9 +114,8 @@ CREATE TABLE IF NOT EXISTS `club` (
   `inchargeEmail` varchar(100) DEFAULT NULL,
   `status` int(1) NOT NULL DEFAULT '1',
   `affiliationFeeStatus` int(11) NOT NULL DEFAULT '0',
-  `enrollmentFeeStatus` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`clubId`,`operatorMobile`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+  `enrollmentFeeStatus` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -116,8 +123,9 @@ CREATE TABLE IF NOT EXISTS `club` (
 -- Table structure for table `coach`
 --
 
-CREATE TABLE IF NOT EXISTS `coach` (
-  `coachId` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `coach`;
+CREATE TABLE `coach` (
+  `coachId` int(11) NOT NULL,
   `coachCode` varchar(12) NOT NULL DEFAULT 'SLASU/C/00',
   `regType` int(1) NOT NULL,
   `clubId` int(11) NOT NULL,
@@ -140,8 +148,8 @@ CREATE TABLE IF NOT EXISTS `coach` (
   `ppNo` varchar(20) DEFAULT NULL,
   `paymentStatus` int(11) DEFAULT '0',
   `paymentRef` int(11) DEFAULT NULL,
-  PRIMARY KEY (`coachId`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  `adminRemarks` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -149,8 +157,9 @@ CREATE TABLE IF NOT EXISTS `coach` (
 -- Table structure for table `payment`
 --
 
-CREATE TABLE IF NOT EXISTS `payment` (
-  `paymentId` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `payment`;
+CREATE TABLE `payment` (
+  `paymentId` int(11) NOT NULL,
   `paymentCode` varchar(10) NOT NULL DEFAULT 'SLASU/P/00',
   `clubId` int(11) DEFAULT NULL,
   `amount` double NOT NULL,
@@ -163,9 +172,77 @@ CREATE TABLE IF NOT EXISTS `payment` (
   `affiliationFeeStatus` int(1) DEFAULT NULL,
   `enrollmentFeeStatus` int(1) DEFAULT NULL,
   `chequeNo` varchar(30) DEFAULT NULL,
-  `paymentMode` int(1) DEFAULT NULL,
-  PRIMARY KEY (`paymentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+  `paymentMode` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`nic`,`adminId`),
+  ADD KEY `adminId` (`adminId`);
+
+--
+-- Indexes for table `athlete`
+--
+ALTER TABLE `athlete`
+  ADD PRIMARY KEY (`athleteId`);
+
+--
+-- Indexes for table `club`
+--
+ALTER TABLE `club`
+  ADD PRIMARY KEY (`clubId`,`operatorMobile`);
+
+--
+-- Indexes for table `coach`
+--
+ALTER TABLE `coach`
+  ADD PRIMARY KEY (`coachId`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`paymentId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `adminId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `athlete`
+--
+ALTER TABLE `athlete`
+  MODIFY `athleteId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `club`
+--
+ALTER TABLE `club`
+  MODIFY `clubId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `coach`
+--
+ALTER TABLE `coach`
+  MODIFY `coachId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `paymentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -272,8 +272,10 @@
                                                             $enrollmentFeeStatus = $row['enrollmentFeeStatus'];
                                                             $affiliationCat = $row['affiliationCat'];
                                                             $regType = $row['regType'];
-                                                            if(($enrollmentFeeStatus == 0 || $enrollmentFeeStatus == 3) && $regType == 1){
+                                                            if($regType == 1){
+                                                                if(($enrollmentFeeStatus == 0 || $enrollmentFeeStatus == 3) && $regType == 1){
                                                                 echo '<input class="form-check-input" type="checkbox" id="enorollmentPayment" name="enorollmentPayment" value="10000" checked onclick="return false;"><label class="form-check-label"> Enrollment Fee : Rs.10000</label><br/>';
+                                                                }
                                                             }
                                                             if($affiliationCat == 1){
                                                                 $affiliationCat = "15000";

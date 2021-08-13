@@ -295,7 +295,12 @@
                            
                             <div class="col-lg-12"><hr/></div>
                             <div class="col-md-12"><h4>Birth Certificate Details</h4></div>
-                            
+                            <div class="col-md-6">
+                            <input type="date" name="bbdate" id="bbdate" required>
+                        </div><!-- /.col-md-12 -->
+                        <div class="col-md-6">
+                            <label class="">Birth Certificate Issued Date *</label>
+                        </div>
                             <div class="col-md-6">
                                 <input type="text" placeholder="Birth Certificate Number *" name="bbno" id="bbno" required>
                             </div><!-- /.col-md-6 -->
@@ -330,12 +335,6 @@
                                 <option value="Vavuniya">Vavuniya</option>
                               </select>
                         </div><!-- /.col-md-12 -->
-                        <div class="col-md-6">
-                            <input type="date" name="bbdate" id="bbdate" required>
-                        </div><!-- /.col-md-12 -->
-                        <div class="col-md-6">
-                            <label class="">Birth Certificate Issued Date *</label>
-                        </div>
                         <div class="col-md-12">
                             <label class="">Upload Birth Certficate (Attach a PDF file)*</label>
                         </div><div class="col-md-12" id="file-upload-filename">

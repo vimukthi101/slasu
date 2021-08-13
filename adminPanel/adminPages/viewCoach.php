@@ -22,6 +22,7 @@
 	                    $phone2 = $row['coachMobileTwo'];
 	                    $whatsapp = $row['coachWhatsapp'];
 	                    $email = $row['coachEmail'];
+                        $adminRemarks = $row['adminRemarks'];
 	                    $nameForCert = $row['coachNameForId'];
 	                    $application = $row['application'];
 	                    $designation = $row['designation'];
@@ -356,7 +357,8 @@
                                             <hr/>
                                         </div>
                                             <label class="">Payment Status : '.$paymentStatus.'</label><br/><br/>
-                                            <label class="">Payment Reference : '.$paymentRef.'</label><br/><br/>';
+                                            <label class="">Payment Reference : '.$paymentRef.'</label><br/><br/>
+                                            <hr/><br/><br/><label class="">Admin Remarks : '.$adminRemarks.'</label><br/><br/>';
                                         $_SESSION['html'] = $html;
                             ?>
                             <div class="card-body row">
@@ -510,6 +512,16 @@
                                             <div class="">
                                                 <input type="text" placeholder="'.$paymentRef.'"
                                                     class="form-control form-control-line" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label class="">Admin Remarks</label>
+                                            <hr/>
+                                        </div>
+                                        <div class="form-group col-md-5">
+                                            <label class="">Remarks</label>
+                                            <div class="">
+                                                <textarea class="form-control form-control-line" disabled>'.$adminRemarks.'</textarea>
                                             </div>
                                         </div>
 		                                ';

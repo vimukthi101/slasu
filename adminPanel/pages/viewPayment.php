@@ -311,7 +311,7 @@
                             }
                             $html .= '<hr/><br/><br/><label class="">Payment Mode : '.$paymentMode.'</label><br/><br/>
                             <label class="">Cheque/ Receipt No : '.$chequeNo.'</label><br/><br/>
-                            <label class="">Admin Comment : '.$adminComment.'</label><br/><br/><hr/><br/><br/><label class="">Total Amount : '.$amount.'</label><br/><br/></div>';
+                            <label class="">Total Amount : '.$amount.'</label><br/><br/></div>';
                                             $_SESSION['html'] = $html;
                             ?>
                             <div class="card-body row">
@@ -336,9 +336,7 @@
                                         <label class="">Coach List : '.$subjectVal2.'</label><br/>
                                         <label class="">Operator Note : '.$notes.'</label><br/>
                                         <hr/>
-                                            <label class="">Admin Remarks : '.$adminComment.'</label>
                                             <label class="">Status : '.$status.'</label>
-                                            <hr/>
                                             <label class="">Payment Mode : '.$paymentMode.'</label><br/>
                                             <label class="">Cheque/ Receipt No : '.$chequeNo.'</label><br/>
                                             <label class="">Amount : '.$amount.'</label>';

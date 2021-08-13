@@ -8,7 +8,7 @@
 			$deletett = "UPDATE `payment` SET `status`='4'";
 			$deleteat = "UPDATE `athlete` SET `paymentStatus`='4', paymentRef='SLASU/P/00'";
 			$deleteco = "UPDATE `coach` SET `paymentStatus`='4', paymentRef='SLASU/P/00'";
-			$deletecl = "UPDATE `club` SET `affiliationFeeStatus`='4'";
+			$deletecl = "UPDATE `club` SET `affiliationFeeStatus`='4', regType='2'";
 			if(mysqli_query($con, $deletett) && mysqli_query($con, $deleteat) && mysqli_query($con, $deleteco) && mysqli_query($con, $deletecl)){
 				header('Location:payments.php?er=msu');
 			} else {

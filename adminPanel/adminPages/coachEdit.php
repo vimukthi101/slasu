@@ -32,6 +32,11 @@
             } else {
                 $emailAd = "";
             }
+            if(!empty($_POST['adminRemarks'])){
+                $adminRemarks = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['adminRemarks'])));
+            } else {
+                $adminRemarks = "";
+            }
             $nameForId = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['nameForId'])));
             $dob = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['dob'])));
             $address = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['address'])));
@@ -80,7 +85,7 @@
                     header('Location:coach.php?er=wi');
                 } 
             }
-            $query3 = "UPDATE `coach` SET `coachName`='".$name."',`gender`='".$gender."',`coachMobileOne`='".$phone1."',`coachMobileTwo`='".$phone2."',`coachWhatsapp`='".$whatsapp."',`coachEmail`='".$emailAd."',`coachNameForId`='".$nameForId."',`dob`='".$dob."',`homeAddress`='".$address."',`designation`='".$designation."',`nic`='".$nic."',`qualifications`='".$qualification."',`ppNo`='".$ppno."' WHERE coachId=".$athleteId;
+            $query3 = "UPDATE `coach` SET `coachName`='".$name."',`gender`='".$gender."',`coachMobileOne`='".$phone1."',`coachMobileTwo`='".$phone2."',`coachWhatsapp`='".$whatsapp."',`coachEmail`='".$emailAd."',`coachNameForId`='".$nameForId."',`dob`='".$dob."',`homeAddress`='".$address."',`designation`='".$designation."',`nic`='".$nic."',`qualifications`='".$qualification."',`ppNo`='".$ppno."',`adminRemarks`='".$adminRemarks."' WHERE coachId=".$athleteId;
             if(!mysqli_query($con, $query3)){ 
                 $su3 = 1;
             } 

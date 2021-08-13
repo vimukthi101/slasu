@@ -27,6 +27,7 @@
 	                    $photoForId = $row['photoForId'];
 	                    $ppNo = $row['ppNo'];
 	                    $nic = $row['nic'];
+                        $adminRemarks = $row['adminRemarks'];
 	                    $nicPhoto = $row['nicPhoto'];
 	                    if($gender == 1){
 	                        $gender = "Male";
@@ -402,7 +403,11 @@
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div>
 		                                </div>                    <div class="col-lg-12"><hr/></div>
-                                    
+                                    <div class="col-md-12">
+                                        <label>Admin Remarks</label>
+                                        <div class="col-md-12">
+                        <textarea name="adminRemarks" id="adminRemarks" class="form-control">'.$adminRemarks.'</textarea>
+                        </div><hr/>
                                 <div class="col-md-12" style="text-align: center;">
                                 <input type="text" value="'.$id.'" name="athleteId" id="athleteId" required hidden>
                                     <input type="submit" name="submit" value="Edit" onclick="return clicked();" id="submit" class="btn btn-success" style="margin: auto;"></input>
