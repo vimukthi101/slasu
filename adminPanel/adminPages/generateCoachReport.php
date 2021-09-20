@@ -450,6 +450,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-3">
+                                        <div class="card">
+                                            <div class="card-body">               
+                                                <input type="checkbox" class="form-check-input" name="fieldList[]" value="adminRemarks">
+                                                <label class="form-check-label" for="clubCode">Admin Remarks</label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-12">
                                         <div class="card">
                                             <div class="card-body">               

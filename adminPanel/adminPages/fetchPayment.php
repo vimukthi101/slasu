@@ -26,7 +26,7 @@ if(mysqli_num_rows($result) != 0){
     $date = $row['date'];
     $status = $row['status'];
     if($status == 1){
-        $status = "Send For Payment";
+        $status = "Pending";
     } else if($status == 2) {
         $status = "Approved";
     } else if($status == 3) {

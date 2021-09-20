@@ -19,7 +19,7 @@ if(mysqli_num_rows($result) != 0){
     $phone1 = $row['phone1'];
     $paymentStatus = $row['paymentStatus'];
     if($paymentStatus == 1){
-        $paymentStatus = "Send For Payment";
+        $paymentStatus = "Pending";
     } else if($paymentStatus == 2) {
         $paymentStatus = "Approved";
     } else if($paymentStatus == 3) {

@@ -273,11 +273,8 @@
                                 <div class="col-md-6">
                                     <input type="tel" placeholder="WhatsApp Number" maxlength="10" name="whatsapp" id="whatsapp">
                                 </div><!-- /.col-md-6 -->
-                                <div class="col-md-6" id="ifNo" style="display:none">
-                                    <input type="email"  placeholder="Email Address *" name="emailAd" id="emailAd">
-                                </div><!-- /.col-md-6 -->
-                                <div class="col-md-6" id="ifYes" style="display:none">
-                                    <input type="email"  placeholder="Email Address" name="emailAd" id="emailAd">
+                                <div class="col-md-6">
+                                    <input type="email"  placeholder="Email Address (mandatory for unattached athletes)" name="emailAd" id="emailAd">
                                 </div><!-- /.col-md-6 -->
 
                                 
@@ -295,12 +292,11 @@
                            
                             <div class="col-lg-12"><hr/></div>
                             <div class="col-md-12"><h4>Birth Certificate Details</h4></div>
-                            <div class="col-md-6">
-                            <input type="date" name="bbdate" id="bbdate" required>
-                        </div><!-- /.col-md-12 -->
-                        <div class="col-md-6">
+                            <!-- <div class="col-md-6">
                             <label class="">Birth Certificate Issued Date *</label>
-                        </div>
+                        </div> -->
+                            <!-- /.col-md-12 -->
+                        
                             <div class="col-md-6">
                                 <input type="text" placeholder="Birth Certificate Number *" name="bbno" id="bbno" required>
                             </div><!-- /.col-md-6 -->
@@ -335,6 +331,10 @@
                                 <option value="Vavuniya">Vavuniya</option>
                               </select>
                         </div><!-- /.col-md-12 -->
+                        <div class="col-md-6">
+                                <label class="">Birth Certificate Issued Date *</label>
+                            <input type="date" name="bbdate" id="bbdate" required>
+                        </div>
                         <div class="col-md-12">
                             <label class="">Upload Birth Certficate (Attach a PDF file)*</label>
                         </div><div class="col-md-12" id="file-upload-filename">

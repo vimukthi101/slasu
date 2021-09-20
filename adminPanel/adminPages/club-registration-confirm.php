@@ -82,8 +82,44 @@
             } else {
                 $query = "UPDATE `club` SET `clubName`='".$name."',`status`='".$status."',`affiliationCat`='".$category."',`district`='".$district."',`postalAddress`='".$clubAddress."',`clubContactOne`='".$clubPhone1."',`clubContactTwo`='".$clubPhone2."',`clubEmailOne`='".$clubEmail1."',`clubEmailTwo`='".$clubEmail2."',`operatorName`='".$operatorName."',`operatorMobile`='".$oMobile."',`operatorEmail`='".$operatorEmail."',`operatorWhatsapp`='".$whatsapp."',`operatorNic`='".$operatorNic."',`inchargeName`='".$inchargeName."',`inchargeMobile`='".$inchargePhone."',`inchargeEmail`='".$inchargeEmail."' WHERE clubId=".$clubId;
             }
-            if(mysqli_query($con, $query)){ 
-                header('Location:club.php?er=us');
+            $getCard = "SELECT * FROM club WHERE clubId='".$clubId."'";
+            $resultCard = mysqli_query($con, $getCard);
+            if(mysqli_num_rows($resultCard) != 0){
+                while($row = mysqli_fetch_array($resultCard)){
+                    $operatorPassword = $row['operatorPassword'];
+                    $operatorMobileNum = $row['operatorMobile'];
+                }
+            }
+            if(mysqli_query($con, $query)){      
+                if($operatorMobileNum != $oMobile){
+                    //success
+                    $from = "info@thestory.host";
+                    $headers = "From:" . $from;
+                    $to = $operatorEmail;
+                    $subject = $name." - Account Updated Successfully at SLASU";
+$message = "Hi ".$operatorName.",
+
+Your account was updated successfully at Sri Lanka Aquatic Sports Union by an Admin.
+
+You'll be able to login to the system once the account is activated by the admin. Please use following credentails to login to the system.
+
+Club Name : ".$name."
+
+Link : https://www.aquatics.lk/login.php
+User Name : ".$oMobile."
+Password : ".$operatorPassword."
+
+Thank You
+Admin,
+SLASU";
+                    if (mail($to, $subject, $message, $headers)){
+                        header('Location:club.php?er=us');
+                    } else {
+                        header('Location:club.php?er=er');
+                    }
+                } else {
+                    header('Location:club.php?er=us');
+                }
             } else {
                 header('Location:club.php?er=er');
             }

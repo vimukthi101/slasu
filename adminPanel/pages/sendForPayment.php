@@ -169,7 +169,7 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayment.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash-multiple"></i>
-                                <span class="hide-menu">Send For Payment</span>
+                                <span class="hide-menu">Registration</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -207,7 +207,7 @@
                                     <li class="">
                                         <a href="dashboard.php">Home</a>
                                     </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Send For Payment</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Register</li>
                                 </ol>
                             </nav>
                         </div>
@@ -226,7 +226,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Send For Payment</h4>
+                                <h4 class="card-title">Register</h4>
                             </div>
                             <?php
                                 if(isset($_GET['er'])){
@@ -378,7 +378,7 @@
                                 <div class="col-4">
                                     <div class="card">
                                         <div class="card-body">                                                
-                                            <input type="submit" name="submit" value="Send For Payment" id="submit" class="btn btn-warning" style="margin: auto;"></input>
+                                            <input type="submit" name="submit" value="Register" id="submit" class="btn btn-warning" style="margin: auto;"></input>
                                         </div>
                                     </div>
                                 </div>

@@ -168,7 +168,7 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayment.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash-multiple"></i>
-                                <span class="hide-menu">Send For Payment</span>
+                                <span class="hide-menu">Registration</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -206,7 +206,7 @@
                                     <li class="">
                                         <a href="dashboard.php">Home</a>
                                     </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Send For Payment</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Register</li>
                                 </ol>
                             </nav>
                         </div>
@@ -258,7 +258,7 @@
                                 }
                             ?>
                                 <h4 class="card-title">Club Registration Payments</h4>
-                                <input style="float:right;" type="submit" name="submit" value="Send For Payment" id="submit" class="btn btn-warning" style="margin: auto;"></input>
+                                <input style="float:right;" type="submit" name="submit" value="Register" id="submit" class="btn btn-warning" style="margin: auto;"></input>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card">
@@ -330,7 +330,7 @@
                                     <div class="card">
                                         <div class="card-body">                                                
                                             <input type="checkbox" class="form-check-input" onClick="toggle(this)" />
-                                            <label class="form-check-label" for="inputGroupSelect01">Select All Athletes To Send For Payment</label>
+                                            <label class="form-check-label" for="inputGroupSelect01">Select All Athletes for Registration</label>
                                         </div>
                                     </div>
                                 </div>
@@ -396,7 +396,7 @@
                                     <div class="card">
                                         <div class="card-body">                                                
                                             <input type="checkbox" class="form-check-input" onClick="toggleCoach(this)" />
-                                            <label class="form-check-label" for="inputGroupSelect01">Select All Coaches To Send For Payment</label>
+                                            <label class="form-check-label" for="inputGroupSelect01">Select All Coaches for Registration</label>
                                         </div>
                                     </div>
                                 </div>

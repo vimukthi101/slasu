@@ -46,24 +46,31 @@ if(isset($_SESSION["clubId"])){
 					mysqli_query($con, $update2);
 				}
 			}
-			if($enorollmentPayment == 1 && $affiliationPayment == 1) {
+			if($enorollmentPayment == 1) {
 				$update3 = "UPDATE `club` SET `enrollmentFeeStatus`='".$enorollmentPayment."', `affiliationFeeStatus`='".$affiliationPayment."' WHERE clubId='".$_SESSION["clubId"]."'";
-				unset($_SESSION['affiliationPayment']);
-				unset($_SESSION['enorollmentPayment']);
-				unset($_SESSION['athleteArray']);	
-				unset($_SESSION['coachArray']);
-				if(mysqli_query($con, $update3)){
-					header('Location:payments.php?er=su');
-				} else {
+				if(!mysqli_query($con, $update3)){
+					unset($_SESSION['affiliationPayment']);
+					unset($_SESSION['enorollmentPayment']);
+					unset($_SESSION['athleteArray']);	
+					unset($_SESSION['coachArray']);
 					header('Location:payments.php?er=er');
 				}
-			} else {
-				unset($_SESSION['affiliationPayment']);
-				unset($_SESSION['enorollmentPayment']);
-				unset($_SESSION['athleteArray']);	
-				unset($_SESSION['coachArray']);
-				header('Location:payments.php?er=su');
-			}
+			} 
+			if($affiliationPayment == 1){
+				$update4 = "UPDATE `club` SET `enrollmentFeeStatus`='".$enorollmentPayment."', `affiliationFeeStatus`='".$affiliationPayment."' WHERE clubId='".$_SESSION["clubId"]."'";
+				if(!mysqli_query($con, $update4)){
+					unset($_SESSION['affiliationPayment']);
+					unset($_SESSION['enorollmentPayment']);
+					unset($_SESSION['athleteArray']);	
+					unset($_SESSION['coachArray']);
+					header('Location:payments.php?er=er');
+				}
+			} 
+			unset($_SESSION['affiliationPayment']);
+			unset($_SESSION['enorollmentPayment']);
+			unset($_SESSION['athleteArray']);	
+			unset($_SESSION['coachArray']);
+			header('Location:payments.php?er=su');
         } else {
             header('Location:athlete.php?er=er');
         }

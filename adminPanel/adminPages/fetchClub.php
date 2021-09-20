@@ -8,14 +8,10 @@ if(!isset($_SESSION[''])){
 }
 
 if($_POST["query"] != '') {
- $search_text = $_POST["query"];
- if($search_text != 5){
- $query = 'SELECT * FROM `athlete` WHERE clubId="'.$search_text.'"';
+    $search_text = $_POST["query"];
+    $query = 'SELECT * FROM `athlete` WHERE clubId="'.$search_text.'"';
 } else {
     $query = 'SELECT * FROM `athlete`';
-}
-} else {
- $query = 'SELECT * FROM `athlete`';
 }
 $result = mysqli_query($con, $query);
 $output = '';

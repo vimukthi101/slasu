@@ -302,6 +302,7 @@
                                             <label class="" for="inputGroupSelect01">Club</label>
                                             <select class="custom-select form-control" name="multi_search_filter_club" id="multi_search_filter_club">
                                                 <option selected disabled>Choose...</option>
+                                                <option value="0">UnAttached</option>
                                                 <?php
                                                     $query = "SELECT clubId, clubName FROM `club`";
                                                     $coachR = mysqli_query($con, $query);

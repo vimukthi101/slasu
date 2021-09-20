@@ -168,7 +168,7 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayment.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash-multiple"></i>
-                                <span class="hide-menu">Send For Payment</span>
+                                <span class="hide-menu">Registration</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
