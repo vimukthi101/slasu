@@ -1,6 +1,6 @@
+<?php include_once('./php/db.php'); ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,133 +89,91 @@
             <div class="container">
                 <ul class="list-unstyled thm-breadcrumb">
                     <li><a href="index.html">Home</a></li>
-                    <li class="active"><a href="#">News</a></li>
+                    <li class="active"><a href="#">Registered List</a></li>
                 </ul><!-- /.list-unstyled -->
-                <h2 class="page-header__title">Latest News</h2><!-- /.page-header__title -->
+                <h2 class="page-header__title">Registered Coaches List</h2><!-- /.page-header__title -->
             </div><!-- /.container -->
         </section><!-- /.page-header -->
 
-        <section class="blog-one">
+        <section class="gallery-one">
             <div class="container">
+                <h2><?php echo date("Y");?>  Registered Coaches</h2>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-one__single">
-                            <div class="blog-one__image">
-                                <a href="news-details.html" class="blog-one__date">02 Jan, 2020</a>
-                                <div class="blog-one__image-inner">
-                                    <img src="assets/images/blog/blog-1-1.jpg" alt="">
-                                    <a href="news-details.html"><i class="scubo-icon-plus-symbol"></i></a>
-                                </div><!-- /.blog-one__image-inner -->
-                            </div><!-- /.blog-one__image -->
-                            <div class="blog-one__content">
-                                <h3><a href="news-details.html">Learn how to do Scuba diving in Island</a></h3>
-                                <p>Pellentesque auctor tristique orna Ut porta ut magna in cursus.</p>
-                                <div class="blog-one__meta">
-                                    <a href="news-details.html"><i class="far fa-user-circle"></i> Admin</a>
-                                </div><!-- /.blog-one__meta -->
-                            </div><!-- /.blog-one__content -->
-                        </div><!-- /.blog-one__single -->
-                    </div><!-- /.col-lg-4 col-md-6 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-one__single">
-                            <div class="blog-one__image">
-                                <a href="news-details.html" class="blog-one__date">02 Jan, 2020</a>
-                                <div class="blog-one__image-inner">
-                                    <img src="assets/images/blog/blog-1-2.jpg" alt="">
-                                    <a href="news-details.html"><i class="scubo-icon-plus-symbol"></i></a>
-                                </div><!-- /.blog-one__image-inner -->
-                            </div><!-- /.blog-one__image -->
-                            <div class="blog-one__content">
-                                <h3><a href="news-details.html">Bring to the table win-win survival</a></h3>
-                                <p>Pellentesque auctor tristique orna Ut porta ut magna in cursus.</p>
-                                <div class="blog-one__meta">
-                                    <a href="news-details.html"><i class="far fa-user-circle"></i> Admin</a>
-                                </div><!-- /.blog-one__meta -->
-                            </div><!-- /.blog-one__content -->
-                        </div><!-- /.blog-one__single -->
-                    </div><!-- /.col-lg-4 col-md-6 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-one__single">
-                            <div class="blog-one__image">
-                                <a href="news-details.html" class="blog-one__date">02 Jan, 2020</a>
-                                <div class="blog-one__image-inner">
-                                    <img src="assets/images/blog/blog-1-3.jpg" alt="">
-                                    <a href="news-details.html"><i class="scubo-icon-plus-symbol"></i></a>
-                                </div><!-- /.blog-one__image-inner -->
-                            </div><!-- /.blog-one__image -->
-                            <div class="blog-one__content">
-                                <h3><a href="news-details.html">At the end of the day, going forward</a></h3>
-                                <p>Pellentesque auctor tristique orna Ut porta ut magna in cursus.</p>
-                                <div class="blog-one__meta">
-                                    <a href="news-details.html"><i class="far fa-user-circle"></i> Admin</a>
-                                </div><!-- /.blog-one__meta -->
-                            </div><!-- /.blog-one__content -->
-                        </div><!-- /.blog-one__single -->
-                    </div><!-- /.col-lg-4 col-md-6 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-one__single">
-                            <div class="blog-one__image">
-                                <a href="news-details.html" class="blog-one__date">02 Jan, 2020</a>
-                                <div class="blog-one__image-inner">
-                                    <img src="assets/images/blog/blog-1-2.jpg" alt="">
-                                    <a href="news-details.html"><i class="scubo-icon-plus-symbol"></i></a>
-                                </div><!-- /.blog-one__image-inner -->
-                            </div><!-- /.blog-one__image -->
-                            <div class="blog-one__content">
-                                <h3><a href="news-details.html"> User generated content in real-time</a></h3>
-                                <p>Pellentesque auctor tristique orna Ut porta ut magna in cursus.</p>
-                                <div class="blog-one__meta">
-                                    <a href="news-details.html"><i class="far fa-user-circle"></i> Admin</a>
-                                </div><!-- /.blog-one__meta -->
-                            </div><!-- /.blog-one__content -->
-                        </div><!-- /.blog-one__single -->
-                    </div><!-- /.col-lg-4 col-md-6 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-one__single">
-                            <div class="blog-one__image">
-                                <a href="news-details.html" class="blog-one__date">02 Jan, 2020</a>
-                                <div class="blog-one__image-inner">
-                                    <img src="assets/images/blog/blog-1-3.jpg" alt="">
-                                    <a href="news-details.html"><i class="scubo-icon-plus-symbol"></i></a>
-                                </div><!-- /.blog-one__image-inner -->
-                            </div><!-- /.blog-one__image -->
-                            <div class="blog-one__content">
-                                <h3><a href="news-details.html">Capitalize on low hanging fruit to</a></h3>
-                                <p>Pellentesque auctor tristique orna Ut porta ut magna in cursus.</p>
-                                <div class="blog-one__meta">
-                                    <a href="news-details.html"><i class="far fa-user-circle"></i> Admin</a>
-                                </div><!-- /.blog-one__meta -->
-                            </div><!-- /.blog-one__content -->
-                        </div><!-- /.blog-one__single -->
-                    </div><!-- /.col-lg-4 col-md-6 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-one__single">
-                            <div class="blog-one__image">
-                                <a href="news-details.html" class="blog-one__date">02 Jan, 2020</a>
-                                <div class="blog-one__image-inner">
-                                    <img src="assets/images/blog/blog-1-1.jpg" alt="">
-                                    <a href="news-details.html"><i class="scubo-icon-plus-symbol"></i></a>
-                                </div><!-- /.blog-one__image-inner -->
-                            </div><!-- /.blog-one__image -->
-                            <div class="blog-one__content">
-                                <h3><a href="news-details.html">Override the digital divide with additional</a></h3>
-                                <p>Pellentesque auctor tristique orna Ut porta ut magna in cursus.</p>
-                                <div class="blog-one__meta">
-                                    <a href="news-details.html"><i class="far fa-user-circle"></i> Admin</a>
-                                </div><!-- /.blog-one__meta -->
-                            </div><!-- /.blog-one__content -->
-                        </div><!-- /.blog-one__single -->
-                    </div><!-- /.col-lg-4 col-md-6 -->
-                </div><!-- /.row -->
-                <div class="post-pagination">
-                    <a href="#" class="post-pagination__prev"><i class="fa fa-angle-left"></i></a>
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#" class="post-pagination__next"><i class="fa fa-angle-right"></i></a>
-                </div><!-- /.post-pagination -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Reg No</th>
+                                <th>Coach Name</th>
+                                <th>Gender</th>
+                                <th>Category</th>
+                                <th>Mobile No.</th>
+                                <th>School/ Club Name</th>
+                                <th>Photo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                                $query2 = 'SELECT * FROM `coach` WHERE paymentStatus="2"';
+                                $result2 = mysqli_query($con, $query2);
+                                if(mysqli_num_rows($result2) != 0){
+                                    $i=0;
+                                    while($row2 = mysqli_fetch_array($result2)){
+                                        $i++;
+                                        $athleteId = $row2['coachId'];
+                                        $clubId = $row2['clubId'];
+                                        $coachCode = $row2['coachCode'];
+                                        $clubIdCode = $coachCode.$athleteId;
+                                        $affiliationCat = $row2['affiliationCat'];
+                                        $athleteName = $row2['coachName'];
+                                        $nic = $row2['nic'];
+                                        $email = $row2['coachEmail'];
+                                        $phone1 = $row2['coachMobileOne'];
+                                        $gender = $row2['gender'];
+                                        $photoForId = $row2['photoForId'];
+                                        if($gender == 1){
+                                            $gender = "Male";
+                                        } else {
+                                            $gender = "Female";
+                                        }
+                                        if($affiliationCat == 1){
+                                            $affiliationCat = "Swimming";
+                                        } else if($affiliationCat == 2) {
+                                            $affiliationCat = "Artistic Swimming";
+                                        } else if($affiliationCat == 3) {
+                                            $affiliationCat = "Water Polo";
+                                        } else if($affiliationCat == 4) {
+                                            $affiliationCat = "Diving";
+                                        }
+                                        $queryClub = "SELECT clubName FROM `club` WHERE clubId='".$clubId."'";
+                                        $resultClub = mysqli_query($con, $queryClub);
+                                        if(mysqli_num_rows($resultClub) != 0){
+                                            while($rowClub = mysqli_fetch_array($resultClub)){
+                                                $clubName = $rowClub['clubName'];
+                                            }
+                                        }
+                                        echo '<tr>
+                                                <td>'.$i.'</td>
+                                                <td>'.$clubIdCode.'</td>
+                                                <td>'.$athleteName.'</td>
+                                                <td>'.$gender.'</td>
+                                                <td>'.$affiliationCat.'</td>
+                                                <td>'.$phone1.'</td>
+                                                <td>'.$clubName.'</td>
+                                                <td><img width="100" height="100" src="data:image/jpeg;base64,'.base64_encode($photoForId).'"/></td>
+                                            </tr>';
+                                    }
+                                } else {
+                                    echo ' <tr>
+                                          <td colspan="12" align="center">No Data Found</td>
+                                         </tr>';
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div><!-- /.container -->
-        </section><!-- /.blog-one -->
+        </section><!-- /.gallery-one -->
 
         <footer class="site-footer-one" style="margin-top: 50px;">
 
@@ -353,5 +311,4 @@
     <!-- Custom Scripts -->
     <script src="assets/js/theme.js"></script>
 </body>
-
 </html>

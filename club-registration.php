@@ -103,7 +103,7 @@
                     <div class="main-nav__main-navigation">
                         <ul class="main-nav__navigation-box">
                             <li><a href="index.html">Home</a></li>
-                            <li><a href="news.html">News</a></li>
+                            <li><a href="regList.html">Reg List</a></li>
                             <li><a href="gallery.html">Gallery</a></li>
                             <li><a href="download.html">Downloads</a></li>
                             <li><a href="about.html">About Us</a></li>
