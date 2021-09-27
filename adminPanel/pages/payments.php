@@ -219,7 +219,7 @@
                                             <label class="" for="inputGroupSelect01">Status</label>
                                             <select class="custom-select form-control" name="multi_search_filter" id="multi_search_filter">
                                                 <option selected disabled>Select Type...</option>
-                                                <option value="1">Send For Payment</option>
+                                                <option value="1">Pending</option>
                                                 <option value="2">Approved</option>
                                                 <option value="3">Rejected</option> 
                                                 <option value="4">To Be Renewed</option>                                            

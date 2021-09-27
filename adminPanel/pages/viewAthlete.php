@@ -33,7 +33,7 @@
                         $paymentStatus = $row['paymentStatus'];
                         $paymentRef = "SLASU/P/00".$row['paymentRef'];
                         if($paymentStatus == 1){
-                            $paymentStatus = "Send For Payment";
+                            $paymentStatus = "Pending";
                         } else if($paymentStatus == 2) {
                             $paymentStatus = "Approved";
                         } else if($paymentStatus == 3) {

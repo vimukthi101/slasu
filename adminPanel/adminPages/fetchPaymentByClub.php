@@ -15,7 +15,7 @@ if($_POST["query"] != '') {
 } else {
     $query = 'SELECT clubName,clubId FROM `club`';
 }
-if($search_text != "0" || $_POST["query"] == '') {
+if($_POST["query"] != "0" || $_POST["query"] == '') {
     $result = mysqli_query($con, $query);
     if(mysqli_num_rows($result) != 0){
       while($row = mysqli_fetch_array($result)){
@@ -57,7 +57,7 @@ if($search_text != "0" || $_POST["query"] == '') {
                             </input>
                         </form>
                     </td>';
-                if($status == "Send For Payment"){
+                if($status == "Pending"){
                     $output .= '<td class="txt-oflo">
                                 <form role="form" method="post" action="editPayment.php">
                                     <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>
@@ -121,7 +121,7 @@ if($search_text != "0" || $_POST["query"] == '') {
                             </input>
                         </form>
                     </td>';
-                if($status == "Send For Payment"){
+                if($status == "Pending"){
                     $output .= '<td class="txt-oflo">
                                 <form role="form" method="post" action="editPayment.php">
                                     <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>

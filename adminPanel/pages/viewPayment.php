@@ -44,7 +44,7 @@
                             $subjectVal2 .= 'SLASU/C/00'.$array2[$x].',';
                         }
                         if($status == 1){
-                            $status = "Send For Payment";
+                            $status = "Pending";
                         } else if($status == 2) {
                             $status = "Approved";
                         } else if($status == 3) {

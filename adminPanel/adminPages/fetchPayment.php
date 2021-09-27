@@ -59,7 +59,7 @@ if(mysqli_num_rows($result) != 0){
                         </input>
                     </form>
                 </td>';
-    if($status == "Send For Payment"){
+    if($status == "Pending"){
         $output .= '<td class="txt-oflo">
                     <form role="form" method="post" action="editPayment.php">
                         <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>

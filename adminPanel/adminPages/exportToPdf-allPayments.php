@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 					    }
 				 	} else if($aDoor[$i] == "status"){
 			 		    if($fromList == 1){
-			 		    	$html .= '<td class="border-top-0">Send For Payment</td>';
+			 		    	$html .= '<td class="border-top-0">Pending</td>';
 					    } else if($fromList == 2) {
 					    	$html .= '<td class="border-top-0">Approved</td>';
 					    } else if($fromList == 3) {
