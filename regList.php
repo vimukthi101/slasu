@@ -103,6 +103,7 @@
                         School/ Club Name
                         <select class="form-control form-control-line" name="multi_search_filter_club" id="multi_search_filter_club">
                             <option disabled="" selected="">Select School/ Club</option>
+                            <option value="-1">All</option>
                             <option value="0">UnAttached</option>
                             <?php
                                 $getCard = "SELECT clubId,clubName,clubCode FROM `club` WHERE status=2";

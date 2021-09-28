@@ -7,35 +7,35 @@ if(!isset($_SESSION[''])){
 if($_POST["query"] != '') {
     $search_text = $_POST["query"];
     if($search_text == -1){
-        $query = 'SELECT * FROM `athlete` WHERE paymentStatus="2"';
+        $query = 'SELECT * FROM `coach` WHERE paymentStatus="2"';
     } else {
-        $query = 'SELECT * FROM `athlete` WHERE paymentStatus="2" AND clubId="'.$search_text.'"';
+        $query = 'SELECT * FROM `coach` WHERE paymentStatus="2" AND clubId="'.$search_text.'"';
     }
 } else {
-    $query = 'SELECT * FROM `athlete` WHERE paymentStatus="2"';
+    $query = 'SELECT * FROM `coach` WHERE paymentStatus="2"';
 }
 $result = mysqli_query($con, $query);
 $output = '';
 $i=0;
 if(mysqli_num_rows($result) != 0){
   while($row = mysqli_fetch_array($result)){
-  	$i++;
-    $athleteId = $row['athleteId'];
+    $i++;
+    $athleteId = $row['coachId'];
     $clubId = $row['clubId'];
-    $athleteCode = $row['athleteCode'];
-    $clubIdCode = $athleteCode.$athleteId;
+    $coachCode = $row['coachCode'];
+    $clubIdCode = $coachCode.$athleteId;
     $affiliationCat = $row['affiliationCat'];
-    $athleteName = $row['athleteName'];
+    $athleteName = $row['coachName'];
     $nic = $row['nic'];
-    $dob = $row['dob'];
+    $email = $row['coachEmail'];
+    $phone1 = $row['coachMobileOne'];
     $gender = $row['gender'];
+    $photoForId = $row['photoForId'];
     if($gender == 1){
-    	$gender = "Male";
+        $gender = "Male";
     } else {
-    	$gender = "Female";
+        $gender = "Female";
     }
-    $email = $row['email'];
-    $phone1 = $row['phone1'];
     if($affiliationCat == 1){
         $affiliationCat = "Swimming";
     } else if($affiliationCat == 2) {
@@ -57,13 +57,14 @@ if(mysqli_num_rows($result) != 0){
         $clubName = "Unattached";
     }
     $output .= '<tr>
-    			<td class="txt-oflo">'.$i.'</td>
-    			<td class="txt-oflo">'.$clubIdCode.'</td>
-                <td class="txt-oflo">'.$athleteName.'</td>
-                <td class="txt-oflo">'.$gender.'</td>
-                <td class="txt-oflo">'.$affiliationCat.'</td>
-                <td class="txt-oflo">'.$dob.'</td>
-                <td class="txt-oflo">'.$clubName.'</td>
+                <td>'.$i.'</td>
+                <td>'.$clubIdCode.'</td>
+                <td>'.$athleteName.'</td>
+                <td>'.$gender.'</td>
+                <td>'.$affiliationCat.'</td>
+                <td>'.$phone1.'</td>
+                <td>'.$clubName.'</td>
+                <td><img width="100" height="100" src="data:image/jpeg;base64,'.base64_encode($photoForId).'"/></td>
             </tr>';
   }
 } else {

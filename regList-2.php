@@ -99,6 +99,35 @@
             <div class="container">
                 <h2><?php echo date("Y");?>  Registered Coaches</h2>
                 <div class="row">
+                    <div class="col-md-5">
+                        School/ Club Name
+                        <select class="form-control form-control-line" name="multi_search_filter_club" id="multi_search_filter_club">
+                            <option disabled="" selected="">Select School/ Club</option>
+                            <option value="-1">All</option>
+                            <?php
+                                $getCard = "SELECT clubId,clubName,clubCode FROM `club` WHERE status=2";
+                                $resultCard = mysqli_query($con, $getCard);
+                                if(mysqli_num_rows($resultCard) != 0){
+                                    while($row = mysqli_fetch_array($resultCard)){
+                                        $clubId = $row['clubId'];
+                                        $clubName = $row['clubName'];
+                                        $clubCode = $row['clubCode'];
+                                        $clubIdCode = $clubCode.$clubId;
+                                        echo '<option value="'.$clubId.'">'.$clubName.' - '.$clubIdCode.'</option>';
+                                    }
+                                }
+                            ?>
+                        </select>
+                        <input type="hidden" name="hidden_club" id="hidden_club" />
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5">
+                        Search By Name
+                        <input type="text" class="form-control form-control-line" name="search" id="search">
+                    </div>
+                </div><!-- /.row -->
+                <br/>
+                <div class="row">
                     <table class="table">
                         <thead>
                             <tr>
@@ -112,63 +141,7 @@
                                 <th>Photo</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php
-                                $query2 = 'SELECT * FROM `coach` WHERE paymentStatus="2"';
-                                $result2 = mysqli_query($con, $query2);
-                                if(mysqli_num_rows($result2) != 0){
-                                    $i=0;
-                                    while($row2 = mysqli_fetch_array($result2)){
-                                        $i++;
-                                        $athleteId = $row2['coachId'];
-                                        $clubId = $row2['clubId'];
-                                        $coachCode = $row2['coachCode'];
-                                        $clubIdCode = $coachCode.$athleteId;
-                                        $affiliationCat = $row2['affiliationCat'];
-                                        $athleteName = $row2['coachName'];
-                                        $nic = $row2['nic'];
-                                        $email = $row2['coachEmail'];
-                                        $phone1 = $row2['coachMobileOne'];
-                                        $gender = $row2['gender'];
-                                        $photoForId = $row2['photoForId'];
-                                        if($gender == 1){
-                                            $gender = "Male";
-                                        } else {
-                                            $gender = "Female";
-                                        }
-                                        if($affiliationCat == 1){
-                                            $affiliationCat = "Swimming";
-                                        } else if($affiliationCat == 2) {
-                                            $affiliationCat = "Artistic Swimming";
-                                        } else if($affiliationCat == 3) {
-                                            $affiliationCat = "Water Polo";
-                                        } else if($affiliationCat == 4) {
-                                            $affiliationCat = "Diving";
-                                        }
-                                        $queryClub = "SELECT clubName FROM `club` WHERE clubId='".$clubId."'";
-                                        $resultClub = mysqli_query($con, $queryClub);
-                                        if(mysqli_num_rows($resultClub) != 0){
-                                            while($rowClub = mysqli_fetch_array($resultClub)){
-                                                $clubName = $rowClub['clubName'];
-                                            }
-                                        }
-                                        echo '<tr>
-                                                <td>'.$i.'</td>
-                                                <td>'.$clubIdCode.'</td>
-                                                <td>'.$athleteName.'</td>
-                                                <td>'.$gender.'</td>
-                                                <td>'.$affiliationCat.'</td>
-                                                <td>'.$phone1.'</td>
-                                                <td>'.$clubName.'</td>
-                                                <td><img width="100" height="100" src="data:image/jpeg;base64,'.base64_encode($photoForId).'"/></td>
-                                            </tr>';
-                                    }
-                                } else {
-                                    echo ' <tr>
-                                          <td colspan="12" align="center">No Data Found</td>
-                                         </tr>';
-                                }
-                            ?>
+                        <tbody id="athlete" name="athlete">
                         </tbody>
                     </table>
                 </div>
@@ -311,4 +284,55 @@
     <!-- Custom Scripts -->
     <script src="assets/js/theme.js"></script>
 </body>
+<script>
+$(document).ready(function(){
+
+ load_data_club();
+ 
+ function load_data_club(query='')
+ {
+  $.ajax({
+   url:"./php/fetchClub2.php",
+   method:"POST",
+   data:{query:query},
+   success:function(data)
+   {
+    $('tbody#athlete').html(data);
+   }
+  })
+ }
+
+ $('#multi_search_filter_club').change(function(){
+  $('#hidden_club').val($('#multi_search_filter_club').val());
+  var query = $('#hidden_club').val();
+  load_data_club(query);
+ });
+ 
+});
+</script>
+<script type="text/javascript">
+function fill(Value) {
+   $('#search').val(Value);
+}
+$(document).ready(function() {
+   $("#search").keyup(function() {
+       var name = $('#search').val();
+       if (name == "") {
+           $("tbody#athlete").html("");
+       }
+       else {
+           $.ajax({
+               type: "POST",
+               url: "./php/ajax2.php",
+               data: {
+                   search: name
+               },
+               success: function(html) {
+                   $("tbody#athlete").html(html).show();
+               }
+           });
+       }
+   });
+});
+</script>
 </html>

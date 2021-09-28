@@ -410,7 +410,7 @@
                                         <div class="form-group col-md-5">
                                             <label class="">Admin Comment</label>
                                             <div class="">
-                                                <textarea class="form-control form-control-line" id="comment" name="comment" required></textarea>
+                                                <textarea class="form-control form-control-line" id="comment" name="comment"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-lg-12"><hr/></div>

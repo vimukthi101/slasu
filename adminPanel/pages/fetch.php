@@ -29,6 +29,7 @@ if(mysqli_num_rows($result) != 0){
     $nic = $row['nic'];
     $email = $row['email'];
     $phone1 = $row['phone1'];
+    $dob = $row['dob'];
     $paymentStatus = $row['paymentStatus'];
     if($paymentStatus == 1){
         $paymentStatus = "Pending";
@@ -53,7 +54,7 @@ if(mysqli_num_rows($result) != 0){
     $output .= '<tr>
                 <td class="txt-oflo">'.$clubIdCode.'</td>
                 <td class="txt-oflo">'.$athleteName.'</td>
-                <td class="txt-oflo">'.$nic.'</td>
+                <td class="txt-oflo">'.$dob.'</td>
                 <td class="txt-oflo">'.$phone1.'</td>
                 <td class="txt-oflo">'.$email.'</td>
                 <td class="txt-oflo">'.$affiliationCat.'</td>

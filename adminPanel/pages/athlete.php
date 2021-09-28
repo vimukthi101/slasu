@@ -295,7 +295,7 @@
                                         <tr>
                                             <th class="border-top-0">ID</th>
                                             <th class="border-top-0">NAME</th>
-                                            <th class="border-top-0">NIC</th>
+                                            <th class="border-top-0">BIRTHDAY</th>
                                             <th class="border-top-0">MOBILE</th>
                                             <th class="border-top-0">EMAIL</th>
                                             <th class="border-top-0">CATEGORY</th>

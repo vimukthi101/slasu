@@ -9,7 +9,11 @@ if(!isset($_SESSION[''])){
 
 if($_POST["query"] != '') {
  $search_text = $_POST["query"];
- $query = 'SELECT * FROM `payment` WHERE status="'.$search_text.'"';
+ if($search_text == 0){
+    $query = 'SELECT * FROM `payment`';
+ } else {
+    $query = 'SELECT * FROM `payment` WHERE status="'.$search_text.'"';
+ }
 } else {
  $query = 'SELECT * FROM `payment` WHERE status IN (1,2,3)';
 }

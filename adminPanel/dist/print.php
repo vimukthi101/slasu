@@ -3,6 +3,9 @@ require_once('TCPDF-master/tcpdf.php');
 class MYPDF extends TCPDF {
 	//Page header
 	public function Header() {
+		// Logo
+		$img = file_get_contents('../../assets/images/logo-1-1.png');
+		$this->Image('@' . $img, 10, 10, 50, '', 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		// Set font
 		$this->SetFont('helvetica', 'B', 20);
 		// Title

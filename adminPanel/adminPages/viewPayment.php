@@ -347,7 +347,10 @@
                             }
                             $html .= '<hr/><br/><br/><label class="">Payment Mode : '.$paymentMode.'</label><br/><br/>
                             <label class="">Receipt No : '.$chequeNo.'</label><br/><br/>
-                            <label class="">Admin Comment : '.$adminComment.'</label><br/><br/><hr/><br/><br/><label class="">Total Amount : '.$amount.'</label><br/><br/></div>';
+                            <label class="">Admin Comment : '.$adminComment.'</label><br/><br/><hr/><br/><br/><label class="">Total Amount : '.$amount.'</label><br/><br/><label>Bank Account Details :  <br/>
+Name of the bank - Peoples Bank, Duke street branch<br/>
+Account Name - Sri Lanka Aquatic Sports Union (SLASU)<br/>
+Account number - 001100120003449<br/></label></div>';
                                             $_SESSION['html'] = $html;
                             ?>
                             <div class="card-body row">

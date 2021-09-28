@@ -5,6 +5,7 @@ if(!isset($_SESSION[''])){
 include_once('../dist/print.php');
 if(isset($_SESSION['html'])){
     $pdf->AddPage('P', 'A4');
+    
     $pdf->Cell(0, 0, 'View Payment Details', 1, 1, 'C');
     $pdf->writeHTML($_SESSION['html'], true, false, true, false, '');
     $pdf->lastPage();
