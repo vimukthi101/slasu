@@ -67,11 +67,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 				$html .= '</tr>';
 			}
 			$html .= '</table>';
-			$pdf->AddPage('L', 'A4');
-			$pdf->Cell(0, 0, 'View All Club Details', 1, 1, 'C');
-			$pdf->writeHTML($html, true, false, true, false, '');
-			$pdf->lastPage();
-			$pdf->Output('all-club-report.pdf', 'D');
+			if($reportType == "pdf"){
+				$pdf->AddPage('L', 'A4');
+				$pdf->Cell(0, 0, 'View All Club Details', 1, 1, 'C');
+				$pdf->writeHTML($html, true, false, true, false, '');
+				$pdf->lastPage();
+				$pdf->Output('all-club-report.pdf', 'D');
+			} else {
+				header('Location:excel.php?file=all-club-report&html='.$html);
+			}
 		}
 	} else {
 	    header('Location:club.php');
