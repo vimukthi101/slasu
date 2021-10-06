@@ -20,7 +20,8 @@
 				}
 				$deletett = "UPDATE `payment` SET `status`='3',`chequeNo`='".$chequeNo."',`paymentMode`='".$paymentMode."',`adminComment`='".$comment."' WHERE paymentId=".$tId;
 				$deleteat = "UPDATE `athlete` SET `paymentStatus`='3' WHERE paymentRef=".$tId;
-				if(mysqli_query($con, $deletett) && mysqli_query($con, $deleteat)){
+				$deletect = "UPDATE `coach` SET `paymentStatus`='3' WHERE paymentRef=".$tId;
+				if(mysqli_query($con, $deletett) && mysqli_query($con, $deleteat) && mysqli_query($con, $deletect)){
 					header('Location:payments.php?er=su');
 				} else {
 					//query failed

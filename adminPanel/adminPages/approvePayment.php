@@ -12,7 +12,8 @@
 				$paymentMode = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['paymentMode'])));
 				$deletett = "UPDATE `payment` SET `status`='2',`chequeNo`='".$chequeNo."',`paymentMode`='".$paymentMode."',`adminComment`='".$comment."' WHERE paymentId=".$tId;
 				$deleteat = "UPDATE `athlete` SET `paymentStatus`='2' WHERE paymentRef=".$tId;
-				if(mysqli_query($con, $deletett) && mysqli_query($con, $deleteat)){
+				$deletect = "UPDATE `coach` SET `paymentStatus`='2' WHERE paymentRef=".$tId;
+				if(mysqli_query($con, $deletett) && mysqli_query($con, $deleteat) && mysqli_query($con, $deletect)){
 					header('Location:payments.php?er=su');
 				} else {
 					//query failed
