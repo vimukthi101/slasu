@@ -73,10 +73,10 @@ if($_POST["query"] != "0" || $_POST["query"] == '') {
                                 </form>
                             </td>
                         </tr>';
+                }
             }
         }
         }
-      }
     } else {
      $output .= '
      <tr>

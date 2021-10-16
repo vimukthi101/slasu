@@ -287,7 +287,7 @@
                                 <div class="col-2 align-self-center">
                                     <div>
                                         <form role="form" action="exportToPdf-Payment.php" method="POST">
-                                            <input type="submit" class="form-control btn btn-success" value="Export To PDF">
+                                            <input type="submit" class="form-control btn btn-success" value="Print Invoice">
                                         </form>
                                     </div>
                                 </div>

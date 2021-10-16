@@ -182,14 +182,14 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash-multiple"></i>
-                                <span class="hide-menu">Unattached Payments</span>
+                                <span class="hide-menu">Unattached Registration</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="payments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash"></i>
-                                <span class="hide-menu">Payment Status</span>
+                                <span class="hide-menu">Approve Payment</span>
                             </a>
                         </li>
                     </ul>
@@ -220,7 +220,7 @@
                                     <li class="">
                                         <a href="dashboard.php">Home</a>
                                     </li>
-                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Payment Status</li>
+                                    <li class="mdi mdi-arrow-right-bold" aria-current="page">Approve Payment</li>
                                 </ol>
                             </nav>
                         </div>
@@ -239,7 +239,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Payment Status</h4>
+                                <h4 class="card-title">Approve Payment</h4>
                             </div>
                             <div class="row">
                                 <div class="col-7 align-self-center">

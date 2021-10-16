@@ -111,7 +111,7 @@
                                 <p><a href="php/forgot.php">Reset From Here</a></p><br/>
                                 <h4>For Any Other Issue</h4>
                                 <p><a href="contact.html">Contact Us</a></p><br/>
-                                <h4>Admin Login</h4>
+                                <h4>Admin Login (SLASU Office Use Only)</h4>
                                 <p><a href="admin-login.php">Login</a></p>
                             </div><!-- /.contact-one__content -->
                         </div><!-- /.about-two__image -->

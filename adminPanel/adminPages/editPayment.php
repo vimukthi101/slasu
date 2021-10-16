@@ -242,14 +242,14 @@
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sendPayments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash-multiple"></i>
-                                <span class="hide-menu">Unattached Payments</span>
+                                <span class="hide-menu">Unattached Registration</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="payments.php"
                                 aria-expanded="false">
                                 <i class="mdi mdi-cash"></i>
-                                <span class="hide-menu">Payment Status</span>
+                                <span class="hide-menu">Approve Payment</span>
                             </a>
                         </li>
                     </ul>

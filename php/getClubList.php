@@ -4,7 +4,7 @@
 	$selectArray=array();
 	if($radio=='School'){
 		$query = "SELECT clubName FROM `club` WHERE clubType=1 AND status=2";
-	}else if($radio=='Club'){
+	} else if($radio=='Club'){
 		$query = "SELECT clubName FROM `club` WHERE clubType=2 AND status=2";
 	}
 	$coachR = mysqli_query($con, $query);

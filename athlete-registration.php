@@ -37,12 +37,8 @@
 
         function yesnoCheck() {
             if (document.getElementById('unattached').checked) {
-                document.getElementById('ifNo').style.display = 'block';
-                document.getElementById('ifYes').style.display = 'none';
                 document.getElementById('ifAll').style.display = 'none';
             } else {
-                document.getElementById('ifYes').style.display = 'block';
-                document.getElementById('ifNo').style.display = 'none';
                 document.getElementById('ifAll').style.display = 'block';
             }
         }
@@ -227,7 +223,7 @@
                                 </div>
                                 
                             <div class="col-md-12"><hr/></div>
-                            <div class="col-md-6" style="margin-top: 10px;display:none" id="ifAll">
+                            <div class="col-md-6" style="margin-top: 10px;display:block;" id="ifAll">
                                 <label class="input-group-text" for="inputGroupSelect01">School / Club List *</label>
                               <select class="custom-select" id="clubList" name="clubList">
                               </select>
