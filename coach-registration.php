@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION[''])){
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -52,6 +57,7 @@
         }
 
         function updateSelect(data) {
+            sessionStorage.clear();
             var json = $.parseJSON(data);
             console.log(json);
             var selectHTML;
@@ -215,6 +221,9 @@
                             <div class="col-md-6" style="margin-top: 10px;">
                                 <label class="input-group-text" for="inputGroupSelect01">School / Club List *</label>
                               <select class="custom-select" id="clubList" name="clubList" required>
+                                <?php
+                                echo '<option value="'.$_SESSION["clubList"].'">'.$_SESSION["clubList"].'</option>';
+                                ?>
                               </select>
                         </div><!-- /.col-md-12 -->
                             <div class="col-md-6">

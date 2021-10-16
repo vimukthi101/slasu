@@ -208,8 +208,11 @@ echo '<p>Club Type : '.$_SESSION["optradio"].'</p>
                       <p>Phone : '.$_SESSION["phone"].'</p>
                       <p>WhatsApp : '.$_SESSION["whatsapp"].'</p>
                       <p>Operator NIC : '.$_SESSION["operatorNic"].'</p>
-                      <p>Registration Type : '.$_SESSION["regRadio"].'</p>
-                      <p>Category : '.$_SESSION["category"].'</p>
+                      <p>Registration Type : '.$_SESSION["regRadio"].'</p>';
+                      if(!empty($_FILES["requestLetter"]["name"])){
+                        echo '<p>Request Letter : '.$fileName.'</p>';
+                      }
+                      echo '<p>Category : '.$_SESSION["category"].'</p>
                       <p>Club Address : '.$_SESSION["clubAddress"].'</p>
                       <p>Club Primary Phone : '.$_SESSION["clubPhone1"].'</p>
                       <p>Club Secondary Phone : '.$_SESSION["clubPhone2"].'</p>
