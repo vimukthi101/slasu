@@ -281,7 +281,7 @@
                         </div>
                     </div>
                     <?php
-                        $athlete = 'SELECT count(*) FROM `athlete` where clubId='.$_SESSION["clubId"];
+                        $athlete = 'SELECT count(*) FROM `athlete` where paymentStatus=`2` AND clubId='.$_SESSION["clubId"];
                         $athleteR = mysqli_query($con, $athlete);
                         if(mysqli_num_rows($athleteR) != 0){
                             while($rowA = mysqli_fetch_array($athleteR)){
@@ -295,13 +295,13 @@
                                 <div class="card">
                                     <div class="container" style="text-align: center;">
                                         <h4 style="font-size: 130px;color: black;">'.$countA.'</h4>
-                                        <p>Registered Athletes</p>
+                                        <p>Total Athletes</p>
                                     </div>
                                 </div>
                              </div>';
                     ?>
                     <?php
-                        $coach = 'SELECT count(*) FROM `coach` where clubId='.$_SESSION["clubId"];
+                        $coach = 'SELECT count(*) FROM `coach` where paymentStatus=`2` AND clubId='.$_SESSION["clubId"];
                         $coachR = mysqli_query($con, $coach);
                         if(mysqli_num_rows($coachR) != 0){
                             while($rowR = mysqli_fetch_array($coachR)){
@@ -315,7 +315,7 @@
                                 <div class="card">
                                     <div class="container" style="text-align: center;">
                                         <h4 style="font-size: 130px;color: black;">'.$countR.'</h4>
-                                        <p>Registered Coaches</p>
+                                        <p>Total Coaches</p>
                                       </div>
                                 </div>
                             </div>';
