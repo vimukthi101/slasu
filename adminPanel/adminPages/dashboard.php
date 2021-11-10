@@ -308,7 +308,7 @@
                              </div>';
                     ?>
                     <?php
-                        $athlete = 'SELECT count(*) FROM `athlete` WHERE paymentStatus=`2`';
+                        $athlete = 'SELECT count(*) FROM `athlete` WHERE paymentStatus=2';
                         $athleteR = mysqli_query($con, $athlete);
                         if(mysqli_num_rows($athleteR) != 0){
                             while($rowA = mysqli_fetch_array($athleteR)){
@@ -363,7 +363,7 @@
                             </div>';
                     ?>
                     <?php
-                        $coach = 'SELECT count(*) FROM `coach` WHERE paymentStatus=`2`';
+                        $coach = 'SELECT count(*) FROM `coach` WHERE paymentStatus=2';
                         $coachR = mysqli_query($con, $coach);
                         if(mysqli_num_rows($coachR) != 0){
                             while($rowR = mysqli_fetch_array($coachR)){
