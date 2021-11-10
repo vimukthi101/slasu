@@ -50,7 +50,7 @@ if(mysqli_num_rows($result) != 0){
                 <td class="txt-oflo">
                     <form role="form" method="post" action="viewAthlete.php">
                         <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>
-                        <input style="float:right;" type="submit" name="submit" value="View" id="submit" class="btn btn-info" style="margin: auto;">
+                        <input style="float:right;" type="submit" name="submit" value="Invoice" id="submit" class="btn btn-info" style="margin: auto;">
                         </input>
                     </form>
                 </td>
