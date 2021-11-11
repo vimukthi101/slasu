@@ -5,7 +5,7 @@
 	include_once('../../php/db.php');
 	if(isset($_SESSION['adminId'])){
 		if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
-			$deletett = "UPDATE `payment` SET `status`='4'";
+			$deletett = "DELETE FROM `payment`";
 			$deleteat = "UPDATE `athlete` SET `paymentStatus`='4', paymentRef='SLASU/P/00'";
 			$deleteco = "UPDATE `coach` SET `paymentStatus`='4', paymentRef='SLASU/P/00'";
 			$deletecl = "UPDATE `club` SET `affiliationFeeStatus`='4', regType='2'";

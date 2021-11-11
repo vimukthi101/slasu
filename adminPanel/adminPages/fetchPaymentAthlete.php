@@ -4,7 +4,7 @@ if(!isset($_SESSION[''])){
     session_start();
 }
 
-$query = 'SELECT * FROM `athlete` WHERE paymentStatus IN (0,3,4) AND regType=3';
+$query = 'SELECT * FROM `athlete` WHERE paymentStatus IN (0,3,4) AND clubId=0';
 $result = mysqli_query($con, $query);
 $output = '';
 if(mysqli_num_rows($result) != 0){
