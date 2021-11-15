@@ -299,7 +299,7 @@
                                             <th class="border-top-0">MOBILE</th>
                                             <th class="border-top-0">EMAIL</th>
                                             <th class="border-top-0">CATEGORY</th>
-                                            <th class="border-top-0">PAYMENT</th>
+                                            <th class="border-top-0">REG STATUS</th>
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>

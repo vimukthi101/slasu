@@ -238,7 +238,7 @@
                                             <th class="border-top-0">AMOUNT</th>
                                             <th class="border-top-0">NOTES</th>
                                             <th class="border-top-0">DATE</th>
-                                            <th class="border-top-0">STATUS</th>
+                                            <th class="border-top-0">PAYMENT STATUS</th>
                                             <th class="border-top-0"></th>
                                         </tr>
                                     </thead>

@@ -328,10 +328,10 @@
                                             <th class="border-top-0">ID</th>
                                             <th class="border-top-0">CLUB</th>
                                             <th class="border-top-0">NAME</th>
-                                            <th class="border-top-0">NIC</th>
                                             <th class="border-top-0">MOBILE</th>
                                             <th class="border-top-0">EMAIL</th>
                                             <th class="border-top-0">CATEGORY</th>
+                                            <th class="border-top-0">REG STATUS</th>
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>

@@ -357,7 +357,7 @@
                                 <div class="card">
                                     <div class="container" style="text-align: center;">
                                         <h4 style="font-size: 130px;color: black;">'.$countPay.'</h4>
-                                        <p>All Pending Payments</p>
+                                        <p>Total Pending Invoices</p>
                                       </div>
                                 </div>
                             </div>';
