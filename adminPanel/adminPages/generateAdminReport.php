@@ -249,14 +249,14 @@
                                             </div>
                                         </div>
                                     </div>   
-                                    <div class="col-3">
+                                    <!-- <div class="col-3">
                                         <div class="card">
                                             <div class="card-body">               
                                                 <label class="form-check-label">
                                                     <input type="radio" value="excel" class="form-check-input" id="excel" name="regRadio" required>Excel</label>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>  -->
                                     <div class="col-3">
                                         <div class="card">
                                             <div class="card-body">               
