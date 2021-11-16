@@ -39,6 +39,18 @@ if(mysqli_num_rows($result) != 0){
     } else if($affiliationCat == 4) {
         $affiliationCat = "Diving";
     }
+    $paymentStatus = $row['paymentStatus'];
+    if($paymentStatus == 1){
+        $paymentStatus = "Pending";
+    } else if($paymentStatus == 2) {
+        $paymentStatus = "Approved";
+    } else if($paymentStatus == 3) {
+        $paymentStatus = "Rejected";
+    } else if($paymentStatus == 4) {
+        $paymentStatus = "To Be Renewed";
+    }else {
+        $paymentStatus = "Not Paid";
+    }
     $queryClub = "SELECT clubName FROM `club` WHERE clubId='".$clubId."'";
     $resultClub = mysqli_query($con, $queryClub);
     if(mysqli_num_rows($resultClub) != 0){
@@ -50,10 +62,10 @@ if(mysqli_num_rows($result) != 0){
                                     <td class="txt-oflo">'.$clubIdCode.'</td>
                 <td class="txt-oflo">'.$athleteName.'</td>
                 <td class="txt-oflo">'.$clubName.'</td>
-                <td class="txt-oflo">'.$nic.'</td>
                 <td class="txt-oflo">'.$phone1.'</td>
                 <td class="txt-oflo">'.$email.'</td>
                 <td class="txt-oflo">'.$affiliationCat.'</td>
+                <td class="txt-oflo">'.$paymentStatus.'</td>
                 <td class="txt-oflo">
                     <form role="form" method="post" action="viewCoach.php">
                         <input type="hidden" name="id" id="id" value="'.$athleteId.'"></input>
