@@ -329,7 +329,7 @@
                                 <div class="col-5">
                                     <div class="card">
                                         <div class="card-body">                                                
-                                            <label class="" for="inputGroupStatus">Registration Status</label>
+                                            <label class="" for="inputGroupStatus">Activation Status</label>
                                             <select class="custom-select form-control" name="multi_status_filter" id="multi_status_filter">
                                                 <option selected disabled>Choose...</option>
                                                 <option value="1">Pending</option>
