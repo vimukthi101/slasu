@@ -438,7 +438,7 @@
                                         <div class="card">
                                             <div class="card-body">               
                                                 <input type="checkbox" class="form-check-input" name="fieldList[]" value="paymentStatus">
-                                                <label class="form-check-label" for="clubCode">Payment Status</label>
+                                                <label class="form-check-label" for="clubCode">Reg Status</label>
                                             </div>
                                         </div>
                                     </div>
