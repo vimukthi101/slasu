@@ -351,7 +351,7 @@
                                             <th class="border-top-0">OPERATOR NAME</th>
                                             <th class="border-top-0">OPERAOTR MOBILE</th>
                                             <th class="border-top-0">CLUB CONTACT</th>
-                                            <th class="border-top-0">DISTRICT</th>
+                                            <th class="border-top-0">REG STATUS</th>
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>
                                             <th class="border-top-0"></th>

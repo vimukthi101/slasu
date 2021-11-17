@@ -38,6 +38,18 @@ if(mysqli_num_rows($result) != 0){
     } else if($affiliationCat == 5) {
         $affiliationCat = "Participant Members (International Schools and Ancillary Clubs)";
     }
+    $paymentStatus = $row['affiliationFeeStatus'];
+    if($paymentStatus == 1){
+        $paymentStatus = "Pending";
+    } else if($paymentStatus == 2) {
+        $paymentStatus = "Approved";
+    } else if($paymentStatus == 3) {
+        $paymentStatus = "Rejected";
+    } else if($paymentStatus == 4) {
+        $paymentStatus = "To Be Renewed";
+    }else {
+        $paymentStatus = "Not Paid";
+    }
     $output .= '<tr>
                 <td class="txt-oflo">'.$clubIdCode.'</td>
                 <td class="txt-oflo">'.$clubName.'</td>
@@ -45,7 +57,7 @@ if(mysqli_num_rows($result) != 0){
                 <td class="txt-oflo">'.$athleteName.'</td>
                 <td class="txt-oflo">'.$operatorMobile.'</td>
                 <td class="txt-oflo">'.$clubContactOne.'</td>
-                <td class="txt-oflo">'.$district.'</td>';
+                <td class="txt-oflo">'.$paymentStatus.'</td>';
     if($status != 2){
         $output .= '<td class="txt-oflo">
             <form role="form" method="post" action="activate.php">

@@ -60,6 +60,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 		                } else if($fromList == 5) {
 		                    $html .= '<td class="border-top-0">Participant Members (International Schools and Ancillary Clubs)</td>';
 		                }
+				 	} else if($aDoor[$i] == "affiliationFeeStatus"){
+				 		if($fromList == 1){
+				 			$html .= '<td class="border-top-0">Pending</td>';
+					    } else if($fromList == 2) {
+					    	$html .= '<td class="border-top-0">Approved</td>';
+					    } else if($fromList == 3) {
+					    	$html .= '<td class="border-top-0">Rejected</td>';
+					    } else if($fromList == 4) {
+					    	$html .= '<td class="border-top-0">To Be Renewed</td>';
+					    }else {
+					    	$html .= '<td class="border-top-0">Not Paid</td>';
+					    }
+				 	} else if($aDoor[$i] == "enrollmentFeeStatus"){
+				 		if($fromList == 1){
+				 			$html .= '<td class="border-top-0">Pending</td>';
+					    } else if($fromList == 2) {
+					    	$html .= '<td class="border-top-0">Approved</td>';
+					    } else if($fromList == 3) {
+					    	$html .= '<td class="border-top-0">Rejected</td>';
+					    } else if($fromList == 4) {
+					    	$html .= '<td class="border-top-0">To Be Renewed</td>';
+					    }else {
+					    	$html .= '<td class="border-top-0">Not Paid</td>';
+					    }
 				 	} else {
 				 		$html .= '<td class="border-top-0">'.$fromList.'</td>';
 				 	}
