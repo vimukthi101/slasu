@@ -13,7 +13,25 @@
 				$deletett = "UPDATE `payment` SET `status`='2',`chequeNo`='".$chequeNo."',`paymentMode`='".$paymentMode."',`adminComment`='".$comment."' WHERE paymentId=".$tId;
 				$deleteat = "UPDATE `athlete` SET `paymentStatus`='2' WHERE paymentRef=".$tId;
 				$deletect = "UPDATE `coach` SET `paymentStatus`='2' WHERE paymentRef=".$tId;
-				if(mysqli_query($con, $deletett) && mysqli_query($con, $deleteat) && mysqli_query($con, $deletect)){
+				$query = 'SELECT * FROM `payment` WHERE paymentId='.$tId;
+				$result = mysqli_query($con, $query);
+				if(mysqli_num_rows($result) != 0){
+			  		while($row = mysqli_fetch_array($result)){
+			    		$affiliationFeeStatus = $row['affiliationFeeStatus'];
+			    		$enrollmentFeeStatus = $row['enrollmentFeeStatus'];clubId
+			    		$clubId = $row['clubId'];
+					}
+				}
+				if($affiliationFeeStatus == 1 && $enrollmentFeeStatus == 0){
+					$updateClub = "UPDATE `club` SET `affiliationFeeStatus`='2' WHERE clubId=".$clubId;
+				} else if($affiliationFeeStatus == 0 && $enrollmentFeeStatus == 1){
+					$updateClub = "UPDATE `club` SET `enrollmentFeeStatus`='2' WHERE clubId=".$clubId;
+				} else if($affiliationFeeStatus == 1 && $enrollmentFeeStatus == 1){
+					$updateClub = "UPDATE `club` SET `affiliationFeeStatus`='2',`enrollmentFeeStatus`='2' WHERE clubId=".$clubId;
+				} else if($affiliationFeeStatus == 0 && $enrollmentFeeStatus == 0){
+					$updateClub = "";
+				}
+				if(mysqli_query($con, $deletett) && mysqli_query($con, $deleteat) && mysqli_query($con, $deletect) && mysqli_query($con, $updateClub)){
 					header('Location:payments.php?er=su');
 				} else {
 					//query failed
