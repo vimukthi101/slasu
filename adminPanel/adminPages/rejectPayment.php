@@ -26,7 +26,7 @@
 				if(mysqli_num_rows($result) != 0){
 			  		while($row = mysqli_fetch_array($result)){
 			    		$affiliationFeeStatus = $row['affiliationFeeStatus'];
-			    		$enrollmentFeeStatus = $row['enrollmentFeeStatus'];clubId
+			    		$enrollmentFeeStatus = $row['enrollmentFeeStatus'];
 			    		$clubId = $row['clubId'];
 					}
 				}
