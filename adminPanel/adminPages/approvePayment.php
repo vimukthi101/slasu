@@ -29,7 +29,7 @@
 				} else if($affiliationFeeStatus == 1 && $enrollmentFeeStatus == 1){
 					$updateClub = "UPDATE `club` SET `affiliationFeeStatus`='2',`enrollmentFeeStatus`='2' WHERE clubId=".$clubId;
 				} else if($affiliationFeeStatus == 0 && $enrollmentFeeStatus == 0){
-					$updateClub = "";
+					$updateClub = "SELECT 1 FROM DUAL WHERE false";
 				}
 				if(mysqli_query($con, $deletett) && mysqli_query($con, $deleteat) && mysqli_query($con, $deletect) && mysqli_query($con, $updateClub)){
 					header('Location:payments.php?er=su');
