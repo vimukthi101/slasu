@@ -181,7 +181,7 @@ if(!isset($_SESSION[''])){
                                                 </div>';
                                             } else if ($error == "ce"){
                                                 echo '<div class="col-md-12">
-                                                    <span style="color:red;">Record with same Phone1 already exists. If it\'s not you please contact Admin.</span>
+                                                    <span style="color:red;">Record with same Phone number already exists in the school/club you selected. If it\'s not you please contact Admin.</span>
                                                     <div class="col-lg-12"><hr/></div>
                                                 </div>';
                                             } else if ($error == "qf"){
@@ -291,7 +291,7 @@ if(!isset($_SESSION[''])){
                                             <input type="text" placeholder="Preffered Name for Certificate *" name="nameForId" id="nameForId" required pattern="^[a-zA-Z ,.'-]*$" title="Only Letters">
                                         </div><!-- /.col-md-6 -->
                                         <div class="col-md-6">
-                                            <p>(Two Words Only. &nbsp; E.g. :- &nbsp;&nbsp; R.K.John Doe)</p>
+                                            
                                         </div><!-- /.col-md-6 -->
                                         
                            
