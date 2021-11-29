@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 13, 2021 at 07:48 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 5.6.34
+-- Host: 127.0.0.1:3306
+-- Generation Time: Nov 29, 2021 at 04:09 AM
+-- Server version: 10.5.12-MariaDB-cll-lve
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `slasu`
+-- Database: `u527331572_slasu`
 --
 
 -- --------------------------------------------------------
@@ -28,7 +28,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `adminId` int(11) NOT NULL,
   `firstName` varchar(50) NOT NULL,
@@ -41,21 +40,12 @@ CREATE TABLE `admin` (
   `role` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`adminId`, `firstName`, `secondName`, `userName`, `email`, `mobile`, `nic`, `password`, `role`) VALUES
-(1, 'vimukthis', 'vsaranga', 'vs', 'sv@g.lkl', '0711798375', '931340034v', '966134', 'sadmin'),
-(4, 'sacchini', 'bawanthi', 'sachi', 'sv@g.lkl', '0711790372', '931340035v', '554641', 'admin');
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `athlete`
 --
 
-DROP TABLE IF EXISTS `athlete`;
 CREATE TABLE `athlete` (
   `athleteId` int(11) NOT NULL,
   `athleteCode` varchar(12) NOT NULL DEFAULT 'SLASU/A/00',
@@ -78,7 +68,7 @@ CREATE TABLE `athlete` (
   `postalId` varchar(20) DEFAULT NULL,
   `nic` varchar(12) DEFAULT NULL,
   `ppNo` varchar(20) DEFAULT NULL,
-  `paymentStatus` int(11) DEFAULT '0',
+  `paymentStatus` int(11) DEFAULT 0,
   `paymentRef` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -88,7 +78,6 @@ CREATE TABLE `athlete` (
 -- Table structure for table `club`
 --
 
-DROP TABLE IF EXISTS `club`;
 CREATE TABLE `club` (
   `clubId` int(11) NOT NULL,
   `clubCode` varchar(11) NOT NULL DEFAULT 'SLASU/CL/00',
@@ -102,7 +91,7 @@ CREATE TABLE `club` (
   `operatorWhatsapp` varchar(10) DEFAULT NULL,
   `operatorNic` varchar(12) NOT NULL,
   `regType` int(1) NOT NULL,
-  `requestLetter` longblob,
+  `requestLetter` longblob DEFAULT NULL,
   `affiliationCat` int(1) NOT NULL,
   `postalAddress` varchar(150) NOT NULL,
   `clubContactOne` varchar(10) NOT NULL,
@@ -112,9 +101,9 @@ CREATE TABLE `club` (
   `inchargeName` varchar(100) NOT NULL,
   `inchargeMobile` varchar(10) NOT NULL,
   `inchargeEmail` varchar(100) DEFAULT NULL,
-  `status` int(1) NOT NULL DEFAULT '1',
-  `affiliationFeeStatus` int(11) NOT NULL DEFAULT '0',
-  `enrollmentFeeStatus` int(11) NOT NULL DEFAULT '0'
+  `status` int(1) NOT NULL DEFAULT 1,
+  `affiliationFeeStatus` int(11) NOT NULL DEFAULT 0,
+  `enrollmentFeeStatus` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -123,7 +112,6 @@ CREATE TABLE `club` (
 -- Table structure for table `coach`
 --
 
-DROP TABLE IF EXISTS `coach`;
 CREATE TABLE `coach` (
   `coachId` int(11) NOT NULL,
   `coachCode` varchar(12) NOT NULL DEFAULT 'SLASU/C/00',
@@ -138,15 +126,15 @@ CREATE TABLE `coach` (
   `coachEmail` varchar(100) DEFAULT NULL,
   `coachNameForId` varchar(100) NOT NULL,
   `photoForId` blob NOT NULL,
-  `application` longblob,
+  `application` longblob DEFAULT NULL,
   `dob` date NOT NULL,
   `homeAddress` varchar(200) NOT NULL,
   `designation` varchar(100) DEFAULT NULL,
   `nic` varchar(12) NOT NULL,
-  `nicPhoto` blob NOT NULL,
+  `nicPhoto` longblob NOT NULL,
   `qualifications` varchar(1000) DEFAULT NULL,
   `ppNo` varchar(20) DEFAULT NULL,
-  `paymentStatus` int(11) DEFAULT '0',
+  `paymentStatus` int(11) DEFAULT 0,
   `paymentRef` int(11) DEFAULT NULL,
   `adminRemarks` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -157,17 +145,16 @@ CREATE TABLE `coach` (
 -- Table structure for table `payment`
 --
 
-DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
   `paymentId` int(11) NOT NULL,
   `paymentCode` varchar(10) NOT NULL DEFAULT 'SLASU/P/00',
   `clubId` int(11) DEFAULT NULL,
   `amount` double NOT NULL,
   `notes` varchar(300) DEFAULT NULL,
-  `athleteList` mediumtext,
-  `coachList` mediumtext,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` int(11) NOT NULL DEFAULT '1',
+  `athleteList` mediumtext DEFAULT NULL,
+  `coachList` mediumtext DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` int(11) NOT NULL DEFAULT 1,
   `adminComment` varchar(300) DEFAULT NULL,
   `affiliationFeeStatus` int(1) DEFAULT NULL,
   `enrollmentFeeStatus` int(1) DEFAULT NULL,
@@ -218,31 +205,31 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `adminId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `athlete`
 --
 ALTER TABLE `athlete`
-  MODIFY `athleteId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `athleteId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `club`
 --
 ALTER TABLE `club`
-  MODIFY `clubId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `clubId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `coach`
 --
 ALTER TABLE `coach`
-  MODIFY `coachId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `coachId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `paymentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `paymentId` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
