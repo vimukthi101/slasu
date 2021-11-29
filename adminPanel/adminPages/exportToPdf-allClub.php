@@ -47,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 		                    $html .= '<td class="border-top-0">Existing</td>';
 		                } 
 				 	} else if($aDoor[$i] == "requestLetter"){
-				 		$html .= '<td class="border-top-0"><a href="http://localhost:1234/slasu/adminPanel/adminPages/download.php?id='.$clubId.'">Download The Application</a></td>';
+				 		$html .= '<td class="border-top-0"><a href="https://www.aquatics.lk/adminPanel/adminPages/download.php?id='.$clubId.'">Download The Application</a></td>';
 				 	} else if($aDoor[$i] == "affiliationCat"){
  		                if($fromList == 1){
 		                    $html .= '<td class="border-top-0">Ordinary Member (Colombo District)</td>';

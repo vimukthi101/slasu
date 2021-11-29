@@ -185,12 +185,12 @@ if(!isset($_SESSION[''])){
                                                 </div>';
                                             } else if ($error == "wi"){
                                                 echo '<div class="col-md-12">
-                                                    <span style="color:red;">Only jpg, jpeg, png is supported for NIC and ID photo.</span>
+                                                    <span style="color:red;">Only jpg, jpeg, png is supported for ID photo.</span>
                                                     <div class="col-lg-12"><hr/></div>
                                                 </div>';
                                             } else if ($error == "pdf"){
                                                 echo '<div class="col-md-12">
-                                                    <span style="color:red;">Only PDF is supported for Application.</span>
+                                                    <span style="color:red;">Only PDF is supported for Application and NIC.</span>
                                                     <div class="col-lg-12"><hr/></div>
                                                 </div>';
                                             }

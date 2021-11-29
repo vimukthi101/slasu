@@ -51,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 				 	} else if($aDoor[$i] == "photoForId" || $aDoor[$i] == "nicPhoto"){
 				 		$html .= '<td class="border-top-0"><img width="180" height="180" src="data:image/jpeg;base64,'.base64_encode($fromList).'"/></td>';
 				 	} else if($aDoor[$i] == "application"){
-				 		$html .= '<td class="border-top-0"><a href="http://localhost:1234/slasu/adminPanel/adminPages/downloadCoach.php?id='.$clubId.'">Download The Application</a></td>';
+				 		$html .= '<td class="border-top-0"><a href="https://www.aquatics.lk/adminPanel/adminPages/downloadCoach.php?id='.$clubId.'">Download The Application</a></td>';
 				 	} else if($aDoor[$i] == "affiliationCat"){
  		                if($fromList == 1){
 		                    $html .= '<td class="border-top-0">Swimming</td>';

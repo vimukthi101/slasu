@@ -311,7 +311,7 @@
                             $html = '<div class="form-group col-md-4">
                                                 <label class="">Application</label>
                                                 <div class="">
-                                                    <a href="http://localhost:1234/slasu/adminPanel/adminPages/downloadCoach.php?id='.$id.'">Download The Application</a>
+                                                    <a href="https://www.aquatics.lk/adminPanel/adminPages/downloadCoach.php?id='.$id.'">Download The Application</a>
                                                 </div>
                                             </div>
                                             <div class="form-group col-md-12">
@@ -348,7 +348,7 @@
                                         <div class="form-group col-md-4">
                                                 <label class="">NIC Photo</label>
                                                 <div class="">
-                                                    <a href="http://localhost:1234/slasu/adminPanel/adminPages/downloadCoachNic.php?id='.$id.'">Download The NIC</a>
+                                                    <a href="https://www.aquatics.lk/adminPanel/adminPages/downloadCoachNic.php?id='.$id.'">Download The NIC</a>
                                                 </div>
                                             </div>
                                             <label class="">NIC : '.$nic.'</label><br/><br/>
@@ -494,8 +494,8 @@
 		                                <div class="form-group col-md-12">
 		                                    <label class="">NIC Photo</label>
 		                                    <div class="">
-		                                    	<img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($nicPhoto).'"/>
-		                                    </div>
+                                                <a href="downloadCoachNic.php?id='.$id.'">Download The NIC</a>
+                                            </div>
 		                                </div><div class="form-group col-md-12">
                                             <label class="">Payment Information</label>
                                             <hr/>

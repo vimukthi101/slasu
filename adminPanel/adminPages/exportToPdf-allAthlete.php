@@ -51,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
 		                    $html .= '<td class="border-top-0">FeMale</td>';
 		                }
 				 	} else if($aDoor[$i] == "bbPhoto"){
-				 		$html .= '<td class="border-top-0"><a href="http://localhost:1234/slasu/adminPanel/adminPages/downloadAthlete.php?id='.$clubId.'">Download The Application</a></td>';
+				 		$html .= '<td class="border-top-0"><a href="https://www.aquatics.lk/adminPanel/adminPages/downloadAthlete.php?id='.$clubId.'">Download The Application</a></td>';
 				 	} else if($aDoor[$i] == "affiliationCat"){
  		                if($fromList == 1){
 		                    $html .= '<td class="border-top-0">Swimming</td>';
