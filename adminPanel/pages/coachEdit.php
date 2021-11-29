@@ -67,12 +67,16 @@
                 } 
             }
             if(!empty($_FILES["nicPhoto"]["name"])){
-                $fileNameNic = basename($_FILES["nicPhoto"]["name"]); 
-                $fileTypeNic = pathinfo($fileNameNic, PATHINFO_EXTENSION);
-                if(in_array($fileTypeNic, $allowTypes)){ 
-                    $imageNic = $_FILES['nicPhoto']['tmp_name']; 
-                    $imgContentNic = addslashes(file_get_contents($imageNic));
-                    $query2 = "UPDATE `coach` SET `nicPhoto`='".$imgContentNic."' WHERE coachId=".$athleteId;
+                $allowTypesPdf = array('application/pdf');
+                $fileNameNic = $_FILES['nicPhoto']['name'];
+                $tmpNameNic  = $_FILES['nicPhoto']['tmp_name'];
+                $fileTypeNic = $_FILES['nicPhoto']['type'];
+                if(in_array($fileTypeNic, $allowTypesPdf)){
+                    $fpNic     = fopen($tmpNameNic, 'r');
+                    $contentNic = fread($fpNic, filesize($tmpNameNic));
+                    $applicationContentNic = addslashes($contentNic);
+                    fclose($fpNic);
+                    $query2 = "UPDATE `coach` SET `nicPhoto`='".$applicationContentNic."' WHERE coachId=".$athleteId;
                     if(!mysqli_query($con, $query2)){
                         $su2 = 1;
                     }

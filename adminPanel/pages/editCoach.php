@@ -27,7 +27,7 @@
 	                    $photoForId = $row['photoForId'];
 	                    $ppNo = $row['ppNo'];
 	                    $nic = $row['nic'];
-	                    $nicPhoto = $row['nicPhoto'];
+	                       
 	                    if($gender == 1){
 	                        $gender = "Male";
 	                    } else if($gender == 2) {
@@ -382,9 +382,9 @@
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-12">
-		                                    <label class="">NIC Photo</label>
+		                                    <label class="">Upload NIC (Attach PDF)</label>
 		                                    <div class="col-md-5">
-                            <input type="file" accept="image/png, image/jpg, image/jpeg" class="custom-file-input form-control" id="nicPhoto" name="nicPhoto"/>
+                            <input type="file" accept="application/pdf" class="custom-file-input form-control" id="nicPhoto" name="nicPhoto"/>
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div>
 		                                </div>    <div class="col-lg-12"><hr/></div>

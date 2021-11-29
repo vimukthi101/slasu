@@ -307,11 +307,11 @@ if(!isset($_SESSION[''])){
                             <input type="text" placeholder="NIC Number *" name="nic" id="nic" required pattern="^(?:19|20)?\d{2}[0-9]{10}|[0-9]{9}[x|X|v|V]$" title="Should match NIC format">
                         </div><!-- /.col-md-6 -->
                         <div class="col-md-12">
-                            <label class="">Upload NIC (Attach a png, jpg or jpeg)*</label>
+                            <label class="">Upload NIC (Attach a PDF file)*</label>
                         </div><div class="col-md-12" id="file-upload-filename3">
                         </div>
                         <div class="col-md-12">
-                            <input type="file" accept="image/png, image/jpg, image/jpeg" class="custom-file-input" id="nicPhoto" name="nicPhoto" required/>
+                            <input type="file" accept="application/pdf" class="custom-file-input" id="nicPhoto" name="nicPhoto" required/>
                             <label class="custom-file-label" for="inputGroupFile01">Choose File</label>
                     </div><!-- /.col-md-12 -->
                     

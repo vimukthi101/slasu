@@ -14,8 +14,8 @@
 	                    $affiliationCat = $row['affiliationCat'];
 	                    $athleteName = $row['coachName'];
 	                    $gender = $row['gender'];
-                         $coachCode = $row['coachCode'];
-    $clubIdCode = $coachCode.$id;
+                        $coachCode = $row['coachCode'];
+                        $clubIdCode = $coachCode.$id;
 	                    $dob = $row['dob'];
 	                    $address = $row['homeAddress'];
 	                    $phone1 = $row['coachMobileOne'];
@@ -348,7 +348,7 @@
                                         <div class="form-group col-md-4">
                                                 <label class="">NIC Photo</label>
                                                 <div class="">
-                                                    <img width="200" height="200" src="data:image/jpeg;base64,'.base64_encode($nicPhoto).'"/>
+                                                    <a href="http://localhost:1234/slasu/adminPanel/adminPages/downloadCoachNic.php?id='.$id.'">Download The NIC</a>
                                                 </div>
                                             </div>
                                             <label class="">NIC : '.$nic.'</label><br/><br/>

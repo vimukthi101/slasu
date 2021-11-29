@@ -22,16 +22,24 @@
                 } else {
                     $requestLetter = "";
                 }
+                $fileNameNic = $_FILES['nicPhoto']['name'];
+                $tmpNameNic  = $_FILES['nicPhoto']['tmp_name'];
+                $fileTypeNic = $_FILES['nicPhoto']['type'];
+                if(in_array($fileTypeNic, $allowTypes)){
+                    $fpNic     = fopen($tmpNameNic, 'r');
+                    $contentNic = fread($fpNic, filesize($tmpNameNic));
+                    $applicationContentNic = addslashes($contentNic);
+                    fclose($fpNic);
+                    $_SESSION["nicPhoto"] = $applicationContentNic;
+                } else {
+                    header('Location:../coach-registration.php?er=pdf');
+                }
                 $fileNamePhoto = basename($_FILES["photo"]["name"]); 
                 $fileTypePhoto = pathinfo($fileNamePhoto, PATHINFO_EXTENSION);
-                $fileNameNic = basename($_FILES["nicPhoto"]["name"]); 
-                $fileTypeNic = pathinfo($fileNameNic, PATHINFO_EXTENSION);
                 $allowTypesPhoto = array('png', 'jpg', 'jpeg'); 
-                if(in_array($fileTypePhoto, $allowTypesPhoto) && in_array($fileTypeNic, $allowTypesPhoto)){ 
+                if(in_array($fileTypePhoto, $allowTypesPhoto)){ 
                     $photo = $_FILES['photo']['tmp_name']; 
                     $photoContent = addslashes(file_get_contents($photo));
-                    $nicPhoto = $_FILES['nicPhoto']['tmp_name']; 
-                    $nicPhotoContent = addslashes(file_get_contents($nicPhoto));
                     $optradio   = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['optradio'])));
                     $clubList = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['clubList'])));
                     $category = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['category'])));
@@ -87,7 +95,6 @@
                     $_SESSION["address"] = $address;
                     $_SESSION["nic"] = $nic;
                     $_SESSION["designation"] = $designation;
-                    $_SESSION["nicPhoto"] = $nicPhotoContent;
                     $_SESSION["qualification"] = $qualification;
                     $_SESSION["ppno"] = $ppno;
                 } else {
