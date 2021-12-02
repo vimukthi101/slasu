@@ -304,7 +304,7 @@
 		                                    <label class="">Club Name</label>
 		                                    <div class="">
 		                                        <input type="text" value="'.$clubName.'"
-		                                            class="form-control form-control-line" id="name" name="name" required pattern="^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$" title="Only Letters">
+		                                            class="form-control form-control-line" id="name" name="name" required pattern="^[a-zA-Z ,.\'-]*$" title="Only Letters">
 		                                    </div>
 		                                </div>
 		                                <div class="form-group col-md-5">
