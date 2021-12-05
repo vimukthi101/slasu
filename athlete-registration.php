@@ -341,7 +341,7 @@ if(!isset($_SESSION[''])){
                             <input type="date" name="bbdate" id="bbdate" required>
                         </div>
                         <div class="col-md-12">
-                            <label class="">Upload Birth Certficate + Athlete Registration Form A (Attach one PDF file)*</label>
+                            <label class="">Upload Birth Certficate + Athlete Declaration Form (Attach one PDF file)*</label>
                         </div><div class="col-md-12" id="file-upload-filename">
                         </div>
                         <div class="col-md-12">
