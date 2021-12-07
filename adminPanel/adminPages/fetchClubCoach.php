@@ -9,11 +9,7 @@ if(!isset($_SESSION[''])){
 
 if($_POST["query"] != '') {
  $search_text = $_POST["query"];
- if($search_text != 5){
  $query = 'SELECT * FROM `coach` WHERE clubId="'.$search_text.'"';
-} else {
-    $query = 'SELECT * FROM `coach`';
-}
 } else {
  $query = 'SELECT * FROM `coach`';
 }
