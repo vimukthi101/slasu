@@ -74,7 +74,7 @@ if(!isset($_SESSION[''])){
             var selectHTML;
             $.each(json, function(key, value) {
                 console.log(value);
-                selectHTML += "<option value='" + value + "'>" + value + "</option>";
+                selectHTML += '<option value="' + value + '">' + value + '</option>';
             });
             $('#clubList').html(selectHTML);
         }
