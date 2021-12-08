@@ -14,7 +14,7 @@
                 $addCard = "UPDATE `club` SET `operatorPassword`='".$password."' WHERE `operatorMobile`=".$username;
                 if(mysqli_query($con, $addCard)){
                     //success
-                    $from = "info@thestory.host";
+                    $from = "info@aquatics.lk";
                     $headers = "From:" . $from;
                     $subject = "Password Reset For SLASU";
 $message = "Hi ".$operatorName.",

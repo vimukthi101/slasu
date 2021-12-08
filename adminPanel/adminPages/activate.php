@@ -15,7 +15,7 @@
                         $to = $row['operatorEmail'];
                         $operatorName = $row['operatorName'];
                         $clubName = $row['clubName'];
-                        $from = "info@thestory.host";
+                        $from = "info@aquatics.lk";
                         $headers = "From:" . $from;
                         $subject = $clubName." - Account Activated Successfully at SLASU";
     $message = "Hi ".$operatorName.",

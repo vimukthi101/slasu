@@ -21,7 +21,7 @@
 					if(mysqli_query($con, $deletett)){
 						if(mysqli_query($con, $deleteta)){
 							if(mysqli_query($con, $deletetc)){
-		                        $from = "info@thestory.host";
+		                        $from = "info@aquatics.lk";
 		                        $headers = "From:" . $from;
                     			$subject = $clubName." - Account Deleted at SLASU";
 $message = "Hi ".$operatorName.",

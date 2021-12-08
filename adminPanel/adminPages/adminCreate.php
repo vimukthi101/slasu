@@ -28,7 +28,7 @@
                 $query = "INSERT INTO `admin`(`firstName`, `secondName`, `userName`, `email`, `mobile`, `nic`, `password`, `role`) VALUES ('".$firstName."','".$secondName."','".$uName."','".$email."','".$mobile."','".$nic."','".$password."','admin')";
                 if(mysqli_query($con, $query)){ 
                 //success
-                    $from = "info@thestory.host";
+                    $from = "info@aquatics.lk";
                     $subject = "Admin Account Created Successfully at SLASU";
                     $headers = "From:" . $from;
 $message = "Hi ".$firstName.",

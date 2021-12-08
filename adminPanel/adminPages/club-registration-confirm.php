@@ -93,7 +93,7 @@
             if(mysqli_query($con, $query)){      
                 if($operatorMobileNum != $oMobile){
                     //success
-                    $from = "info@thestory.host";
+                    $from = "info@aquatics.lk";
                     $headers = "From:" . $from;
                     $to = $operatorEmail;
                     $subject = $name." - Account Updated Successfully at SLASU";

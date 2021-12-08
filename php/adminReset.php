@@ -14,7 +14,7 @@
                 $addCard = "UPDATE `admin` SET `password`='".$password."' WHERE userName='".$username."'";
                 if(mysqli_query($con, $addCard)){
                     //success
-                    $from = "info@thestory.host";
+                    $from = "info@aquatics.lk";
                     $headers = "From:" . $from;
                     $subject = "Password Reset For SLASU";
 $message = "Hi ".$firstName.",
