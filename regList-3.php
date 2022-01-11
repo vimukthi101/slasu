@@ -114,7 +114,7 @@
                         </thead>
                         <tbody id="athlete" name="athlete">
                         <?php
-                            $query = 'SELECT * FROM `club` WHERE status="2"';
+                            $query = 'SELECT * FROM `club` WHERE `affiliationFeeStatus`="2"';
                             $result = mysqli_query($con, $query);
                             $i=0;
                             if(mysqli_num_rows($result) != 0){
