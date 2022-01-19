@@ -1,5 +1,5 @@
 <?php
-
+ini_set('memory_limit', '-1');
 //fetch.php
 
 include_once('../../php/db.php');

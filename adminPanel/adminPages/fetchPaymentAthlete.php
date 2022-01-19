@@ -1,4 +1,5 @@
 <?php
+ini_set('memory_limit', '-1');
 include_once('../../php/db.php');
 if(!isset($_SESSION[''])){
     session_start();
