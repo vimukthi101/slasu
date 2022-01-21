@@ -4,7 +4,8 @@
         session_start();
     }
     if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
-        if(!empty($_POST['name']) && !empty($_POST['athleteId']) && !empty($_POST['gender']) && !empty($_POST['phone1']) && !empty($_POST['nameForId']) && !empty($_POST['bbno']) && !empty($_POST['dob']) && !empty($_POST['postal']) && !empty($_POST['district']) && !empty($_POST['bbdate'])){
+        if(!empty($_POST['name']) && !empty($_POST['athleteId']) && !empty($_POST['gender']) && !empty($_POST['phone1']) && !empty($_POST['nameForId']) && !empty($_POST['bbno']) && !empty($_POST['dob']) && !empty($_POST['postal']) && !empty($_POST['district']) && !empty($_POST['bbdate']) && !empty($_POST['club'])){
+            $club = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['club'])));
             $name = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['name'])));
             $athleteId = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['athleteId'])));
             $gender = htmlspecialchars(mysqli_real_escape_string($con, trim($_POST['gender'])));
@@ -60,12 +61,12 @@
                     $content = fread($fp, filesize($tmpName));
                     $applicationContent = addslashes($content);
                     fclose($fp);
-                    $query = "UPDATE `athlete` SET `athleteName`='".$name."',`gender`='".$gender."',`dob`='".$dob."',`address`='".$postal."',`phone1`='".$phone1."',`phone2`='".$phone2."',`whatsapp`='".$whatsapp."',`email`='".$emailAd."',`nameForCert`='".$nameForId."',`bbNo`='".$bbno."',`bbDistrict`='".$district."',`bbDate`='".$bbdate."',`bbPhoto`='".$applicationContent."',`postalId`='".$postalId."',`nic`='".$nic."',`ppNo`='".$ppno."' WHERE athleteId=".$athleteId;
+                    $query = "UPDATE `athlete` SET `clubId`='".$club."', `athleteName`='".$name."',`gender`='".$gender."',`dob`='".$dob."',`address`='".$postal."',`phone1`='".$phone1."',`phone2`='".$phone2."',`whatsapp`='".$whatsapp."',`email`='".$emailAd."',`nameForCert`='".$nameForId."',`bbNo`='".$bbno."',`bbDistrict`='".$district."',`bbDate`='".$bbdate."',`bbPhoto`='".$applicationContent."',`postalId`='".$postalId."',`nic`='".$nic."',`ppNo`='".$ppno."' WHERE athleteId=".$athleteId;
                 } else {
                     header('Location:athlete.php?er=wi');
                 }
             } else {
-                $query = "UPDATE `athlete` SET `athleteName`='".$name."',`gender`='".$gender."',`dob`='".$dob."',`address`='".$postal."',`phone1`='".$phone1."',`phone2`='".$phone2."',`whatsapp`='".$whatsapp."',`email`='".$emailAd."',`nameForCert`='".$nameForId."',`bbNo`='".$bbno."',`bbDistrict`='".$district."',`bbDate`='".$bbdate."',`postalId`='".$postalId."',`nic`='".$nic."',`ppNo`='".$ppno."' WHERE athleteId=".$athleteId;
+                $query = "UPDATE `athlete` SET `clubId`='".$club."', `athleteName`='".$name."',`gender`='".$gender."',`dob`='".$dob."',`address`='".$postal."',`phone1`='".$phone1."',`phone2`='".$phone2."',`whatsapp`='".$whatsapp."',`email`='".$emailAd."',`nameForCert`='".$nameForId."',`bbNo`='".$bbno."',`bbDistrict`='".$district."',`bbDate`='".$bbdate."',`postalId`='".$postalId."',`nic`='".$nic."',`ppNo`='".$ppno."' WHERE athleteId=".$athleteId;
             }
             if(mysqli_query($con, $query)){ 
                 header('Location:athlete.php?er=us');

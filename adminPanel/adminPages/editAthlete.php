@@ -11,6 +11,18 @@
 	            $resultCard = mysqli_query($con, $getCard);
 	            if(mysqli_num_rows($resultCard) != 0){
 	            	while($row = mysqli_fetch_array($resultCard)){
+                        $clubId = $row['clubId'];
+                        if($clubId != 0){
+                            $queryClub = "SELECT clubName FROM `club` WHERE clubId='".$clubId."'";
+                            $resultClub = mysqli_query($con, $queryClub);
+                            if(mysqli_num_rows($resultClub) != 0){
+                                while($rowClub = mysqli_fetch_array($resultClub)){
+                                    $clubName = $rowClub['clubName'];
+                                }
+                            }
+                        } else {
+                            $clubName = "Unattached";
+                        }
 	                    $affiliationCat = $row['affiliationCat'];
 	                    $athleteName = $row['athleteName'];
 	                    $gender = $row['gender'];
@@ -281,6 +293,25 @@
                             <div class="card-body row">
 		                        <?php
 		                         echo '<div class="form-group col-md-12">
+                                            <label class="">Club Information</label>
+                                            <hr/>
+                                        </div>
+                                        <div class="col-md-6">
+                                <label class="" for="inputGroupSelect01">Club *</label><br/>
+                              <select class="form-select form-control" id="club" name="club" required>
+                                <option selected value='.$clubId.'>'.$clubName.'</option>';
+                                $getClub = "SELECT * FROM club";
+                                $resultClub = mysqli_query($con, $getClub);
+                                if(mysqli_num_rows($resultClub) != 0){
+                                    while($rowClub = mysqli_fetch_array($resultClub)){
+                                        $newClubId = $rowClub['clubId'];
+                                        $newClubName = $rowClub['clubName'];
+                                        echo '<option selected value="'.$clubId.'">'.$clubName.'</option>';
+                                    }
+                                }
+                              echo '</select>
+                        </div><!-- /.col-md-12 -->
+                                        <div class="form-group col-md-12">
 		                                    <label class="">Personal Information</label>
 		                                    <hr/>
 		                                </div>
@@ -384,9 +415,31 @@
                                 <label class="" for="inputGroupSelect01">Select Birth Certificate Issued District *</label><br/>
                               <select class="form-select form-control" id="district" name="district" required>
                                 <option selected value='.$bbDistrict.'>'.$bbDistrict.'</option>
+                                <option value="Ampara">Ampara</option>
+                                <option value="Anuradhapura">Anuradhapura</option>
+                                <option value="Badulla">Badulla</option>
+                                <option value="Batticaloa">Batticaloa</option>
                                 <option value="Colombo">Colombo</option>
-                                    <option value="Galle">Galle</option>
-                                    <option value="Kandy">Kandy</option>
+                                <option value="Galle">Galle</option>
+                                <option value="Gampaha">Gampaha</option>
+                                <option value="Hambantota">Hambantota</option>
+                                <option value="Jaffna">Jaffna</option>
+                                <option value="Kalutara">Kalutara</option>
+                                <option value="Kandy">Kandy</option>
+                                <option value="Kegalle">Kegalle</option>
+                                <option value="Kilinochchi">Kilinochchi</option>
+                                <option value="Kurunegala">Kurunegala</option>
+                                <option value="Mannar">Mannar</option>
+                                <option value="Matale">Matale</option>
+                                <option value="Matara">Matara</option>
+                                <option value="Monaragala">Monaragala</option>
+                                <option value="Mullaitivu">Mullaitivu</option>
+                                <option value="Nuwara Eliya">Nuwara Eliya</option>
+                                <option value="Polonnaruwa">Polonnaruwa</option>
+                                <option value="Puttalam">Puttalam</option>
+                                <option value="Ratnapura">Ratnapura</option>
+                                <option value="Trincomalee">Trincomalee</option>
+                                <option value="Vavuniya">Vavuniya</option>
                               </select>
                         </div><!-- /.col-md-12 -->
 		                                <div class="form-group col-md-5">

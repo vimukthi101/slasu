@@ -14,7 +14,7 @@
 	                    $affiliationCat = $row['affiliationCat'];
 	                    $athleteName = $row['athleteName'];
                         $athleteCode = $row['athleteCode'];
-                                    $clubIdCode = $athleteCode.$id;
+                        $clubIdCode = $athleteCode.$id;
 	                    $gender = $row['gender'];
 	                    $dob = $row['dob'];
 	                    $address = $row['address'];
