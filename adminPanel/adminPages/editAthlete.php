@@ -306,7 +306,7 @@
                                     while($rowClub = mysqli_fetch_array($resultClub)){
                                         $newClubId = $rowClub['clubId'];
                                         $newClubName = $rowClub['clubName'];
-                                        echo '<option selected value="'.$clubId.'">'.$clubName.'</option>';
+                                        echo '<option selected value="'.$newClubId.'">'.$newClubName.'</option>';
                                     }
                                 }
                               echo '</select>
