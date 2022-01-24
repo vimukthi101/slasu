@@ -383,6 +383,39 @@
                             </div>';
                     ?>
                 </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="col-9">
+                            <div class="card">
+                                <div class="container">
+                                    <br/>
+                                    <h4 style="font-size: 20px;color: black;" id="txt"></h4>
+                                    <br/>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                        $payU = 'SELECT count(*) FROM `athlete` WHERE clubId=0';
+                        $payUn = mysqli_query($con, $payU);
+                        if(mysqli_num_rows($payUn) != 0){
+                            while($rowUn = mysqli_fetch_array($payUn)){
+                                $countUn = $rowUn['count(*)'];
+                                if($countUn < 9){
+                                    $countUn = "0".$countUn;
+                                }
+                            }
+                        }
+                        echo '<div class="col-3">
+                                <div class="card">
+                                    <div class="container" style="text-align: center;">
+                                        <h4 style="font-size: 130px;color: black;">'.$countUn.'</h4>
+                                        <p>Total Registered Unattached Athletes</p>
+                                      </div>
+                                </div>
+                            </div>';
+                    ?>
+                </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
