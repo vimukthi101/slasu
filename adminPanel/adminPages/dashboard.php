@@ -385,15 +385,7 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <div class="col-9">
-                            <div class="card">
-                                <div class="container">
-                                    <br/>
-                                    <h4 style="font-size: 20px;color: black;" id="txt"></h4>
-                                    <br/>
-                                  </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <?php
                         $payU = 'SELECT count(*) FROM `athlete` WHERE clubId=0';
