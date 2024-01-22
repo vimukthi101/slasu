@@ -1,7 +1,7 @@
 <?php
-$host = 'localhost';
-$db = 'slasu';
-$user = 'root';
+$host = '';
+$db = '';
+$user = '';
 $password = '';
 
 //no errors will be shownz
